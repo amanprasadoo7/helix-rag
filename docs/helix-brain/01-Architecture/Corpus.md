@@ -19,9 +19,12 @@ into `data/corpus` and writes `data/manifest.json`:
 | GitLab product docs (`doc/*`) | `62815568f76adcf6afd36543a8cb83eafd28d937` | 1,500 | 2,575,510 | 12,878 |
 | **Total** | | **2,500** | **3,984,982** | **19,925** |
 
-The snapshot is about 32 MB of Markdown and about 188 MB on disk including the
-partial Git checkouts. The corpus is gitignored; only the fetcher, manifest
-schema, tests, and `NOTICE` are committed.
+The selected Markdown is about 32 MB. The current checkout is about 1.8 GB on
+disk because it includes non-Markdown assets, whole selected folders, and Git
+objects. The manifest, not the checkout, defines the 2,500-file corpus. A
+Markdown-only materialization is a planned cleanup before M1. The corpus is
+gitignored; only the fetcher, manifest schema, tests, and `NOTICE` are
+committed.
 
 ## Why pin commits
 
@@ -142,6 +145,47 @@ not change unless a quota or the pin changes.
   the golden set before comparing.
 - **Word-count estimate:** frontmatter, tables, and code fences inflate it. The
   real numbers come from the chunker.
+
+## Common doubts
+
+### Is this just data accumulation?
+
+For this checkpoint, yes: we are collecting and freezing the knowledge source.
+The full product also needs parsing, chunking, embeddings, retrieval, generation,
+permissions, and evaluation. In an enterprise, the same step would connect to
+Confluence, Drive, SharePoint, or an internal wiki instead of public GitLab
+repositories.
+
+### Where does the data live?
+
+`data/corpus/` holds the two Git checkouts, `data/manifest.json` is the catalog
+of the selected 2,500 files, and `data/corpus/NOTICE` carries attribution. The
+whole `data/` directory is gitignored.
+
+### How does someone else download it?
+
+Clone the repository, then run:
+
+```bash
+make sync
+make corpus
+```
+
+They need `git`, network access, `uv`, and disk. The repositories are public, so
+no GitLab token or API key is required. The corpus step does not need Docker or
+the API server.
+
+### Why is the checkout larger than 32 MB?
+
+Sparse checkout selects folders, not individual file types. The selected doc
+folders contain images and other assets, and the partial clone keeps Git objects.
+The manifest is the corpus; the checkout is only the working tree. The planned
+cleanup materializes only the 2,500 selected Markdown files into a clean folder.
+
+### How do I trace one file?
+
+See [[Tracing-a-Document]]. It walks from a manifest entry to the pinned commit,
+the Git blob, the raw Markdown, and then to seed questions for the golden set.
 
 ## Alternatives considered
 
