@@ -59,7 +59,7 @@ self-contained `docs/theory.html` study guide from it.
 - [x] `make ci` green
 - [x] Notes: `Study-Guide.md` + journal + roadmap row
 - [x] Commit: `feat(docs): generate study guide from the Obsidian vault`
-- [ ] User verified (user marks only)
+- [x] User verified (user marks only)
 
 ---
 
@@ -73,7 +73,7 @@ Status values: `pending`, `in progress`, `done`, `blocked`.
 | 0.2 | Local stack and readiness | done | [[Compose-Stack]], [[Storage-Layers]] |
 | 0.3 | Corpus fetch and manifest | done | [[Corpus]] |
 | 0.3b | Corpus cleanup (selected-only, no `.git`) | done | 1.8 GB -> 32 MB; [[2026-10-24]] |
-| 0.4 | Vault, note templates, doc generator | in progress | `docs/theory.html` |
+| 0.4 | Vault, note templates, doc generator | done | 11 notes; [[Project-Map]] |
 | 0.5 | CI baseline | pending | ruff, mypy, pytest |
 | 1.1 | Parser | pending | Docling, Markdown |
 | 1.2 | ACL classifier | pending | path to classification |

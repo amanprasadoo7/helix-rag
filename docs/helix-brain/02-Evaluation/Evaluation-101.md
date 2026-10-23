@@ -1,9 +1,9 @@
 ---
 type: concept
-status: seed
+status: active
 day: 2
-tags: [evaluation, golden-set, retrieval, generation, security]
-related: ["[[Tracing-a-Document]]", "[[Checklist]]", "[[2026-10-24]]"]
+tags: [evaluation, golden-set, retrieval, metrics, generation, security]
+related: ["[[Project-Map]]", "[[Tracing-a-Document]]", "[[Checklist]]", "[[2026-10-24]]"]
 ---
 
 # Evaluation 101: how we know RAG is getting better
@@ -50,6 +50,13 @@ Each case should record:
 - `role`: the synthetic role asking, used for ACL tests
 - `notes`: ambiguity, caveats, or why the case exists
 
+Concretely, `zuora-003` asks when an account is "In Collections", points at the
+`Accounts` section of the Zuora page, and marks the asking role as `billing`.
+That one record drives three checks: retrieval must find the `Accounts` chunk,
+generation must include both the balance and days-overdue conditions, and a
+later ACL test can confirm that a role without billing access cannot retrieve
+it.
+
 The current file, `evals/seed_questions.jsonl`, has seven seed cases from the
 Zuora Collect page. It is deliberately small. The goal is to agree on what
 "correct" means before scaling to roughly 110 cases in M5.
@@ -78,42 +85,184 @@ A set with only easy, answerable questions rewards a confident hallucinator.
 Retrieval is measured before generation. If the right passage never reaches the
 model, generation cannot reliably recover.
 
-### Recall@k
+### The setup: relevant chunks, not "the document"
 
-Of all relevant documents or passages, how many appear in the top `k`?
+A retrieval eval needs a **gold answer key**. For each question, a human marks
+which chunks contain the evidence needed to answer it. One question may need one
+chunk; a multi-hop question may need two or three.
+
+- **top-k**: the first `k` results returned by retrieval, for example the top 10
+  child chunks.
+- **relevant item**: a chunk a human marked as required or useful for the answer.
+- **rank**: position 1 is the first result, position 2 the second, and so on.
+
+The unit matters. If you evaluate at document level, a 50-page document counts
+as one hit even if the answer is buried in one section. Helix evaluates at the
+chunk level, then uses parent expansion to restore context. Keep the unit
+consistent when comparing runs.
+
+Label the chunks from the expected answer, not from whatever the system happened
+to retrieve. If you mark every returned chunk as relevant, the metric is grading
+itself.
+
+> [!tip] Real-world analogy
+> Imagine a nurse looking for two facts before giving a drug: the allergy and
+> the current medication. Recall asks, "Did both facts make it into the chart?"
+> MRR asks, "How quickly did the first fact appear?" nDCG asks, "Were the most
+> important facts at the top, not buried under less useful notes?"
+
+### A concrete ranked list
+
+Suppose the question is:
+
+> When is an account considered "In Collections"?
+
+The gold answer key says two chunks are needed:
+
+- `A`: the paragraph with the balance and days-overdue conditions.
+- `B`: the sentence that defines the "In Collections" state.
+
+Both come from the `Accounts` section of the Zuora page. Retrieval returns this
+top 5:
+
+| Rank | Chunk | Relevant? | Why it is in the list |
+|---:|---|---|---|
+| 1 | `X`: Collections dashboard | no | Mentions collections, but not the conditions |
+| 2 | `A`: condition rules | yes | Contains the exact balance and overdue rule |
+| 3 | `Y`: task escalation | no | Related product feature, wrong question |
+| 4 | `B`: definition of the state | yes | Defines what "In Collections" means |
+| 5 | `Z`: invoice comments | no | Same product area, wrong fact |
+
+This one table is enough to calculate all three metrics.
+
+### Recall@k: did we find all the evidence?
 
 ```text
-recall@k = relevant items retrieved in top k / all relevant items
+recall@k = relevant items retrieved in the top k / all relevant items
 ```
 
-If a question has two relevant sections and the top 10 contains one, recall@10
-is 0.5. Recall is the main gate because it measures whether the evidence was
-available at all.
+- `recall@3 = 1 / 2 = 0.50` because only `A` is in the first three.
+- `recall@5 = 2 / 2 = 1.00` because both `A` and `B` are in the first five.
 
-### MRR (mean reciprocal rank)
+The denominator is the number of relevant items in the gold answer key, not the
+number of results returned. A system that returns only one result cannot get
+recall@5 above 0.50 if two items are required.
 
-Where does the first relevant result appear?
+Recall is the primary gate because it measures the **ceiling**: if `B` never
+reaches the model, the model cannot know the second half of the rule. A prompt
+change cannot recover evidence that retrieval never returned.
+
+For a real multi-hop seed case such as `zuora-005`, the gold set needs both the
+`Tasks` section and `How to add an escalation point to a user`. Finding only one
+of the two gives recall@10 = 0.50, even if the one found is ranked first.
+
+### MRR: how high is the first good hit?
 
 ```text
-MRR = average(1 / rank of first relevant result)
+MRR = average over questions of (1 / rank of the first relevant result)
 ```
 
-First place gives 1.0, second gives 0.5, fourth gives 0.25. MRR rewards putting
-one correct result near the top. It says less about questions that need several
-passages.
+For the example above, the first relevant result is `A` at rank 2:
 
-### nDCG
+```text
+reciprocal rank = 1 / 2 = 0.50
+```
 
-Normalized discounted cumulative gain handles graded relevance and multiple
-correct results. Relevant items higher in the list contribute more; the score is
-normalized against the ideal ordering. It is useful when some passages are more
-relevant than others, but it is harder to explain than recall or MRR.
+If `A` were rank 1, the score would be `1.00`; at rank 4 it would be `0.25`.
+If a question has no relevant result at all, it contributes `0`.
+
+MRR rewards putting at least one correct result near the top. It is useful for
+lookup questions where one good chunk is enough.
+
+MRR does not care that `B` was found later. That is why it is not the primary
+gate for multi-hop questions: a system can score well on MRR while still missing
+half the evidence.
+
+### nDCG: did we put the best evidence first?
+
+nDCG handles **graded relevance**: some chunks directly answer the question,
+some only provide background, and some are noise. It also rewards relevant items
+for appearing earlier. The formula is:
+
+```text
+DCG@k  = sum over positions i of relevance_i / log2(i + 1)
+nDCG@k = DCG@k / ideal DCG@k
+```
+
+The ideal DCG is what you would get if the most relevant chunks were sorted
+first. nDCG is always between 0 and 1.
+
+A simple way to read it:
+
+| Rank | Chunk | Grade | Contribution |
+|---:|---|---:|---|
+| 1 | `X`: dashboard | 0 | 0 |
+| 2 | `A`: condition rules | 3 | `3 / log2(3) = 1.89` |
+| 3 | `Y`: escalation | 0 | 0 |
+| 4 | `B`: definition | 1 | `1 / log2(5) = 0.43` |
+| 5 | `Z`: comments | 0 | 0 |
+
+```text
+DCG@5  = 1.89 + 0.43 = 2.32
+IDCG@5 = 3 / log2(2) + 1 / log2(3) = 3.00 + 0.63 = 3.63
+nDCG@5 = 2.32 / 3.63 = 0.64
+```
+
+The exact number matters less than the shape: the grade-3 chunk at rank 2 is
+penalized compared with the ideal order, and the grade-1 chunk at rank 4 is
+discounted heavily. If both relevant chunks were at the top, nDCG would be 1.00.
+
+Use nDCG when "relevant" is not binary. For example, `A` directly answers the
+question, while `B` only provides context. Recall treats them as equal; nDCG
+does not.
+
+### Precision: how much of the top-k is useful?
+
+Precision@k is the share of returned results that are relevant:
+
+```text
+precision@k = relevant items in the top k / k
+```
+
+In the example, `precision@3 = 1 / 3 = 0.33`. Precision is useful for context
+budgeting: a top 10 full of noise wastes tokens and can distract the model. It
+is not the primary gate because Helix deliberately retrieves a wider candidate
+set and then reranks it. A noisy first-stage list can still produce a good final
+answer if the relevant items survive.
+
+### Putting the metrics together
+
+| Pattern | What it usually means | First fix |
+|---|---|---|
+| recall@10 high, MRR high | Evidence is present and near the top | Check generation and citations |
+| recall@10 high, MRR low | Evidence is present but buried | Improve ranking or reranking |
+| recall@10 low, MRR high | One good hit, but missing other required evidence | Improve recall, query expansion, or chunking |
+| recall@10 low, MRR low | Retrieval is failing broadly | Inspect embeddings, filters, and gold labels |
+| nDCG low with recall@10 high | Relevant items are present but poorly ordered | Add or tune the reranker |
+
+For a single-hop question with one required chunk, finding that chunk at rank 3
+gives recall@10 = 1.0 and reciprocal rank = 0.33. That is a retrieval success
+but a ranking warning: the answer is available, yet a reranker should move the
+direct evidence above the dashboard and escalation chunks.
+
+### What recall@10 = 0.80 actually means
+
+It does **not** mean "80% of answers are correct." It means that, across the
+golden set, the top 10 results contain 80% of the evidence marked as required.
+A multi-hop case with two required chunks and one found contributes 0.50 for
+that case. A single-hop case with one required chunk and one found contributes
+1.00.
+
+That is why the report also includes MRR, nDCG, and a per-type breakdown. A
+lookup-heavy set can hide a multi-hop weakness; a single average can hide which
+question type is failing.
 
 ### What we will report
 
 - recall@10 as the primary retrieval gate,
 - MRR@10 for ranking sanity,
 - nDCG@10 when relevance is graded,
+- precision@10 when context budget is the concern,
 - per-type breakdown, so a multi-hop weakness is not hidden by lookup wins.
 
 ## Generation metrics
@@ -147,6 +296,21 @@ citation validity = valid, supporting citations / total citations
 
 A citation that exists but does not support the claim is worse than no citation:
 it creates false confidence. Check both source existence and entailment.
+
+### A worked generation example
+
+Using `zuora-003`, a good answer says the balance must be positive and above the
+configured amount, the days overdue must be above the configured number, and
+both must hold. Its citation points at the `Accounts` section.
+
+A bad answer says "any unpaid invoice is In Collections." That drops the
+days-overdue condition, so answer correctness and faithfulness both fail even if
+the prose sounds plausible.
+
+A third answer has the right conditions but cites the `Collections dashboard`
+chunk. The citation exists, but it does not support the claim, so citation
+validity fails. This is why the metrics are separate: retrieval can be right,
+the answer can be right, and the citation can still be wrong.
 
 ### Answer relevance
 
@@ -255,6 +419,13 @@ small golden set with a fixed command is still imperfect, but it is repeatable.
 Because generation can only use what retrieval returns. If the evidence is not
 in the top 10, the model is either guessing or abstaining. Recall measures the
 ceiling; reranking and generation cannot exceed it.
+
+### If recall@10 is high, is the answer good?
+
+No. Recall only says the evidence reached the model. The model can still ignore
+it, cite the wrong passage, or add an unsupported claim. That is why generation
+metrics exist. The reverse is also true: low recall is a retrieval problem, and
+a better prompt cannot fix evidence that was never returned.
 
 ### Doesn't an LLM judge just add another model to trust?
 

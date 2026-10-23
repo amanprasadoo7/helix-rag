@@ -341,7 +341,7 @@ footer.page-footer {
 <input id="search" class="search" type="search"
   placeholder="Search notes... (press /)" autocomplete="off">
 <nav class="nav" aria-label="Notes">
-<div class="nav-group"><h2>Project</h2><a href="#00-project-checklist" data-target="00-project-checklist">Checkpoint checklist and handoff protocol</a><a href="#00-project-study-guide" data-target="00-project-study-guide">Vault and study-guide pipeline</a></div><div class="nav-group"><h2>Architecture</h2><a href="#01-architecture-compose-stack" data-target="01-architecture-compose-stack">Local stack and readiness</a><a href="#01-architecture-corpus" data-target="01-architecture-corpus">Corpus: pinned GitLab handbook and docs</a><a href="#01-architecture-foundations" data-target="01-architecture-foundations">Foundations: async, Make, environments, logging</a><a href="#01-architecture-storage-layers" data-target="01-architecture-storage-layers">Why four stores? Postgres, Redis, Qdrant, MinIO</a></div><div class="nav-group"><h2>Evaluation</h2><a href="#02-evaluation-evaluation-101" data-target="02-evaluation-evaluation-101">Evaluation 101: how we know RAG is getting better</a><a href="#02-evaluation-tracing-a-document" data-target="02-evaluation-tracing-a-document">Tracing a document and seeding the golden set</a></div><div class="nav-group"><h2>Journal</h2><a href="#03-journal-2026-10-23" data-target="03-journal-2026-10-23">2026-10-23 - Day 1</a><a href="#03-journal-2026-10-24" data-target="03-journal-2026-10-24">2026-10-24 - Day 2</a></div>
+<div class="nav-group"><h2>Project</h2><a href="#00-project-checklist" data-target="00-project-checklist">Checkpoint checklist and handoff protocol</a><a href="#00-project-study-guide" data-target="00-project-study-guide">Vault and study-guide pipeline</a></div><div class="nav-group"><h2>Architecture</h2><a href="#01-architecture-compose-stack" data-target="01-architecture-compose-stack">Local stack and readiness</a><a href="#01-architecture-corpus" data-target="01-architecture-corpus">Corpus: pinned GitLab handbook and docs</a><a href="#01-architecture-foundations" data-target="01-architecture-foundations">Foundations: async, Make, environments, logging</a><a href="#01-architecture-project-map" data-target="01-architecture-project-map">Project map: the repo and the architecture behind it</a><a href="#01-architecture-storage-layers" data-target="01-architecture-storage-layers">Why four stores? Postgres, Redis, Qdrant, MinIO</a></div><div class="nav-group"><h2>Evaluation</h2><a href="#02-evaluation-evaluation-101" data-target="02-evaluation-evaluation-101">Evaluation 101: how we know RAG is getting better</a><a href="#02-evaluation-tracing-a-document" data-target="02-evaluation-tracing-a-document">Tracing a document and seeding the golden set</a></div><div class="nav-group"><h2>Journal</h2><a href="#03-journal-2026-10-23" data-target="03-journal-2026-10-23">2026-10-23 - Day 1</a><a href="#03-journal-2026-10-24" data-target="03-journal-2026-10-24">2026-10-24 - Day 2</a></div>
 </nav>
 </aside>
 <main id="top">
@@ -350,7 +350,7 @@ footer.page-footer {
 <h1>Helix Study Guide</h1>
 <p>Generated from <code>docs/helix-brain</code>.
 Edit the Markdown, then run <code>make docs</code>.</p>
-<p class="stats">10 notes · 4 sections</p>
+<p class="stats">11 notes · 4 sections</p>
 </header>
 <article class="note" id="00-project-checklist"
 data-title="Checkpoint checklist and handoff protocol">
@@ -419,7 +419,7 @@ self-contained <code>docs/theory.html</code> study guide from it.</p>
 <li>[x] <code>make ci</code> green</li>
 <li>[x] Notes: <code>Study-Guide.md</code> + journal + roadmap row</li>
 <li>[x] Commit: <code>feat(docs): generate study guide from the Obsidian vault</code></li>
-<li>[ ] User verified (user marks only)</li>
+<li>[x] User verified (user marks only)</li>
 </ul>
 <hr />
 <h2 id="00-project-checklist--roadmap">Roadmap</h2>
@@ -461,8 +461,8 @@ self-contained <code>docs/theory.html</code> study guide from it.</p>
 <tr>
 <td>0.4</td>
 <td>Vault, note templates, doc generator</td>
-<td>in progress</td>
-<td><code>docs/theory.html</code></td>
+<td>done</td>
+<td>11 notes; <a href="#01-architecture-project-map">Project-Map</a></td>
 </tr>
 <tr>
 <td>0.5</td>
@@ -1800,6 +1800,427 @@ explain and defend".</p>
 </div>
 <div class="related"><strong>Related:</strong> <span class="chip"><a href="#03-journal-2026-10-23">2026-10-23</a></span> <span class="chip"><a href="#01-architecture-corpus">Corpus</a></span></div>
 </article>
+<article class="note" id="01-architecture-project-map"
+data-title="Project map: the repo and the architecture behind it">
+<header class="note-header">
+<p class="kicker">Architecture · architecture · active</p>
+<h2>Project map: the repo and the architecture behind it</h2>
+<span class="chip">architecture</span><span class="chip">repo</span><span class="chip">roadmap</span><span class="chip">retrieval</span><span class="chip">security</span><span class="chip">interview</span>
+</header>
+<div class="toc"><p class="toctitle">On this page</p><ul><li><a href="#01-architecture-project-map--what-lives-where">What lives where</a></li><li><a href="#01-architecture-project-map--the-target-architecture">The target architecture</a><ul><li><a href="#01-architecture-project-map--ingestion-flow">Ingestion flow</a></li><li><a href="#01-architecture-project-map--query-flow">Query flow</a></li></ul></li><li><a href="#01-architecture-project-map--what-exists-now-vs-what-comes-next">What exists now vs what comes next</a></li><li><a href="#01-architecture-project-map--why-these-choices">Why these choices</a></li><li><a href="#01-architecture-project-map--why-not-the-simpler-option">Why not the simpler option?</a></li><li><a href="#01-architecture-project-map--a-future-request-end-to-end">A future request, end to end</a></li><li><a href="#01-architecture-project-map--how-to-read-the-repo">How to read the repo</a></li><li><a href="#01-architecture-project-map--interview-angle">Interview angle</a></li></ul></div>
+<div class="content">
+<p><strong>Short answer:</strong> Helix is a permission-aware RAG service over a pinned snapshot
+of the public GitLab handbook and product docs. The repo is organized around one
+idea: keep the data pipeline, the retrieval logic, the agent, and the evaluation
+harness separate enough to test them independently, but small enough for one
+person to understand and run.</p>
+<p>Think of it as a staffed research library:</p>
+<table>
+<thead>
+<tr>
+<th>Library</th>
+<th>Helix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Books and manuals</td>
+<td>The GitLab corpus</td>
+</tr>
+<tr>
+<td>Catalog and checkout records</td>
+<td>Postgres metadata and ACLs</td>
+</tr>
+<tr>
+<td>Shelf index for finding passages</td>
+<td>Qdrant vectors</td>
+</tr>
+<tr>
+<td>Archive room for original documents</td>
+<td>MinIO object storage</td>
+</tr>
+<tr>
+<td>Work queue at the front desk</td>
+<td>Redis jobs and cache</td>
+</tr>
+<tr>
+<td>Librarian who answers questions</td>
+<td>Retrieval + agent pipeline</td>
+</tr>
+<tr>
+<td>Quality review after an answer</td>
+<td>Evals and security gates</td>
+</tr>
+</tbody>
+</table>
+<div class="callout info">
+<p class="callout-title">Current state</p>
+<p>Checkpoint 0.4. The repo has a working API skeleton, local services, a pinned
+corpus, and a docs/eval seed. It does <strong>not</strong> yet have parsing, chunking,
+embeddings, retrieval, generation, auth, or a UI. This note explains the
+target architecture and marks what exists now.</p>
+</div>
+<h2 id="01-architecture-project-map--what-lives-where">What lives where</h2>
+<table>
+<thead>
+<tr>
+<th>Path</th>
+<th>What it is</th>
+<th>Why it exists</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>apps/api</code></td>
+<td>FastAPI entrypoint and local dev server</td>
+<td>The HTTP boundary: health now, chat and admin later</td>
+</tr>
+<tr>
+<td><code>packages/helix</code></td>
+<td>Shared domain code</td>
+<td>Keeps config, corpus, retrieval, agent, and eval logic out of the web layer</td>
+</tr>
+<tr>
+<td><code>scripts</code></td>
+<td>Reproducible operational tasks</td>
+<td>Corpus fetch, corpus cleanup, docs generation, checklist status</td>
+</tr>
+<tr>
+<td><code>tests</code></td>
+<td>Unit and integration tests</td>
+<td>Unit tests run in CI; integration tests use the real local stack</td>
+</tr>
+<tr>
+<td><code>evals</code></td>
+<td>Golden-set data</td>
+<td>Stores the questions and expected answers used to measure quality</td>
+</tr>
+<tr>
+<td><code>infra</code></td>
+<td>Docker Compose stack</td>
+<td>One command starts Postgres, Redis, Qdrant, and MinIO</td>
+</tr>
+<tr>
+<td><code>docs/helix-brain</code></td>
+<td>Obsidian vault</td>
+<td>The source of truth for explanations, decisions, and the build log</td>
+</tr>
+<tr>
+<td><code>docs/theory.html</code></td>
+<td>Generated study guide</td>
+<td>A portable, searchable, printable view of the vault</td>
+</tr>
+<tr>
+<td><code>data</code></td>
+<td>Local corpus and manifest</td>
+<td>Downloaded data; gitignored because it is large and reproducible</td>
+</tr>
+<tr>
+<td><code>NOTICE</code></td>
+<td>Corpus attribution</td>
+<td>Records the upstream licenses and attribution requirements</td>
+</tr>
+</tbody>
+</table>
+<p>The root files are the interface to the project:</p>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Makefile</code></td>
+<td>The shared command surface: <code>make ci</code>, <code>make docs</code>, <code>make corpus</code>, <code>make up</code></td>
+</tr>
+<tr>
+<td><code>pyproject.toml</code></td>
+<td>Python version, dependencies, Ruff, mypy, and pytest configuration</td>
+</tr>
+<tr>
+<td><code>AGENTS.md</code></td>
+<td>Working instructions for coding agents</td>
+</tr>
+<tr>
+<td><code>README.md</code></td>
+<td>Human quickstart and current status</td>
+</tr>
+<tr>
+<td><code>.env.example</code></td>
+<td>Documented local configuration; <code>.env</code> is ignored</td>
+</tr>
+</tbody>
+</table>
+<h2 id="01-architecture-project-map--the-target-architecture">The target architecture</h2>
+<p>The diagram below is the destination, not the current implementation. Today only
+the API health path and the supporting local services exist.</p>
+<pre><code class="language-text">                    Browser / future Next.js UI
+                              |
+                         HTTP / SSE
+                              |
+                    FastAPI API (apps/api)
+                 auth, chat, admin, health
+                              |
+                 helix domain (packages/helix)
+              ingest, retrieve, agent, evaluate
+                    /          |          \
+             Postgres       Qdrant       MinIO
+             truth          vectors      blobs
+                    \          |          /
+                         Redis
+                  jobs, cache, rate limits
+</code></pre>
+<p>There are two important flows.</p>
+<h3 id="01-architecture-project-map--ingestion-flow">Ingestion flow</h3>
+<pre><code class="language-text">pinned Git repo
+   -&gt; selected Markdown + manifest
+   -&gt; parse
+   -&gt; classify ACLs
+   -&gt; parent/child chunks
+   -&gt; dense + sparse embeddings
+   -&gt; Postgres metadata + Qdrant points + MinIO originals
+</code></pre>
+<p>Ingestion is a batch pipeline. It is allowed to be slower than a chat request,
+so CPU-heavy parsing and embedding belong in a worker, not in the API event
+loop.</p>
+<h3 id="01-architecture-project-map--query-flow">Query flow</h3>
+<pre><code class="language-text">user question
+   -&gt; authenticate and resolve role
+   -&gt; rewrite / expand the query
+   -&gt; hybrid retrieval with ACL pre-filter
+   -&gt; rerank
+   -&gt; expand child chunks to parent context
+   -&gt; assemble a token-budgeted context with citations
+   -&gt; generate an answer
+   -&gt; verify citations and grounding
+   -&gt; answer, or abstain when evidence is missing
+</code></pre>
+<p>The query path is latency-sensitive. The design keeps network-bound work async
+and pushes optional work, such as broad query expansion, behind a bounded budget.</p>
+<h2 id="01-architecture-project-map--what-exists-now-vs-what-comes-next">What exists now vs what comes next</h2>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Now</th>
+<th>Next</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>API</td>
+<td><code>/</code>, <code>/health/live</code>, <code>/health/ready</code></td>
+<td>Chat, streaming, admin ingest</td>
+</tr>
+<tr>
+<td>Ingestion</td>
+<td>Pinned corpus and manifest</td>
+<td>Parser, ACL classifier, chunker, embedder</td>
+</tr>
+<tr>
+<td>Storage</td>
+<td>Four running services, empty</td>
+<td>Schemas, collections, buckets</td>
+</tr>
+<tr>
+<td>Retrieval</td>
+<td>None</td>
+<td>Hybrid dense + sparse, RRF, reranker</td>
+</tr>
+<tr>
+<td>Agent</td>
+<td>None</td>
+<td>LangGraph plan/retrieve/grade loop</td>
+</tr>
+<tr>
+<td>Security</td>
+<td>Localhost-only services</td>
+<td>JWT, RBAC/ABAC, ACL filtering, audit log</td>
+</tr>
+<tr>
+<td>Evaluation</td>
+<td>Seven seed questions</td>
+<td>Larger golden set, metric runner, gates</td>
+</tr>
+<tr>
+<td>Docs</td>
+<td>Vault and generated HTML</td>
+<td>ADRs, final guide, demo script</td>
+</tr>
+</tbody>
+</table>
+<p>This table is deliberately blunt. It prevents the notes from describing a
+system that has not been built yet.</p>
+<h2 id="01-architecture-project-map--why-these-choices">Why these choices</h2>
+<table>
+<thead>
+<tr>
+<th>Decision</th>
+<th>Why</th>
+<th>Trade-off</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Modular monolith, not microservices</td>
+<td>One repo, one API, and clear package boundaries are easier to test and explain; a worker can be split out later</td>
+<td>Less independent scaling than separate services</td>
+</tr>
+<tr>
+<td>FastAPI + async I/O</td>
+<td>Most request time is waiting on databases, search, or an LLM; SSE streaming is naturally async</td>
+<td>CPU-heavy work must move to a worker or threadpool</td>
+</tr>
+<tr>
+<td>Postgres as the source of truth</td>
+<td>Transactions, joins, constraints, ACLs, jobs, conversations, and audit need relational guarantees</td>
+<td>Not the best place for vectors or large blobs</td>
+</tr>
+<tr>
+<td>Qdrant for retrieval</td>
+<td>Dense and sparse vectors plus payload filters; ACL filters can run before ranking</td>
+<td>Another service to operate and back up</td>
+</tr>
+<tr>
+<td>MinIO for blobs</td>
+<td>Keeps originals and parsed artifacts out of the database; S3 API makes cloud migration realistic</td>
+<td>Another dependency; local image is a pinned community mirror</td>
+</tr>
+<tr>
+<td>Redis for jobs and cache</td>
+<td>Fast ephemeral operations, TTLs, counters, and locks</td>
+<td>Not durable truth; jobs must be recoverable from Postgres</td>
+</tr>
+<tr>
+<td>Pinned corpus + manifest</td>
+<td>Same text, same citations, same eval baseline</td>
+<td>Deliberately stale until the pin is refreshed</td>
+</tr>
+<tr>
+<td>Parent/child chunks</td>
+<td>Small children retrieve precisely; larger parents preserve enough context to answer</td>
+<td>More metadata and a parent-expansion step</td>
+</tr>
+<tr>
+<td>Hybrid retrieval + RRF</td>
+<td>Dense vectors catch meaning; sparse vectors catch IDs, versions, and exact terms; RRF combines rankings without score calibration</td>
+<td>More moving parts than dense-only</td>
+</tr>
+<tr>
+<td>Reranker + parent expansion</td>
+<td>Cheap retrieval can return a wide candidate set; a cross-encoder improves the final order, and parents restore context</td>
+<td>Extra latency and compute</td>
+</tr>
+<tr>
+<td>ACL pre-filter</td>
+<td>Security must not depend on the model ignoring forbidden text</td>
+<td>Filtering can reduce recall if ACL metadata is wrong</td>
+</tr>
+<tr>
+<td>Bounded LangGraph loop</td>
+<td>Some questions need rewrite, decomposition, or a corrective retry; a graph makes state and traces explicit</td>
+<td>More complexity than a single prompt</td>
+</tr>
+<tr>
+<td>Offline eval gates</td>
+<td>Retrieval and generation fail differently; measure them separately before release</td>
+<td>A good golden set takes manual effort</td>
+</tr>
+<tr>
+<td>Generated HTML from Markdown</td>
+<td>One source of truth, no Node toolchain, one offline file</td>
+<td>The Markdown subset is intentionally small</td>
+</tr>
+</tbody>
+</table>
+<h2 id="01-architecture-project-map--why-not-the-simpler-option">Why not the simpler option?</h2>
+<table>
+<thead>
+<tr>
+<th>Simpler option</th>
+<th>Why we did not start there</th>
+<th>When it would be reasonable</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>One Postgres with <code>pgvector</code></td>
+<td>Fine at small scale, but filtered hybrid search and quantization are easier in Qdrant</td>
+<td>A small prototype or a team that wants one fewer service</td>
+</tr>
+<tr>
+<td>Dense-only retrieval</td>
+<td>Misses exact error codes, product names, and version strings</td>
+<td>A corpus with mostly natural-language prose</td>
+</tr>
+<tr>
+<td>Fixed-size chunks only</td>
+<td>Splits procedures and headings apart; citations become vague</td>
+<td>A first prototype before structure-aware chunking</td>
+</tr>
+<tr>
+<td>Filter ACLs after retrieval</td>
+<td>A forbidden passage may already be in the prompt or logs</td>
+<td>Never for a security boundary</td>
+</tr>
+<tr>
+<td>A full static-site generator</td>
+<td>Adds a Node toolchain for a small personal vault</td>
+<td>The vault starts using many Obsidian plugins</td>
+</tr>
+<tr>
+<td>Microservices from day one</td>
+<td>Too much operational overhead before the product is understood</td>
+<td>Independent teams, scaling, or deployment constraints</td>
+</tr>
+</tbody>
+</table>
+<h2 id="01-architecture-project-map--a-future-request-end-to-end">A future request, end to end</h2>
+<p>Take the seed question: <strong>"When is an account considered In Collections?"</strong></p>
+<ol>
+<li>The API authenticates the user and resolves their role.</li>
+<li>The query is rewritten to include the terms <code>invoice balance</code>, <code>days
+   overdue</code>, and <code>In Collections</code>.</li>
+<li>Qdrant searches with an ACL filter, so the user only sees allowed documents.</li>
+<li>Dense and sparse rankings are fused; the top candidates are reranked.</li>
+<li>The best child chunk is expanded to its parent section, which contains the
+   full condition.</li>
+<li>The context builder includes the section heading, path, and commit.</li>
+<li>The model answers with a citation to that heading.</li>
+<li>A citation check confirms the cited passage actually supports the answer.</li>
+<li>If no allowed passage supports the answer, the system abstains instead of
+   guessing.</li>
+</ol>
+<p>This is why retrieval metrics and citation validity are separate: a fluent
+answer can still be unsupported, and a perfect citation can still come from a
+passage the user is not allowed to see.</p>
+<h2 id="01-architecture-project-map--how-to-read-the-repo">How to read the repo</h2>
+<ol>
+<li>Start with <a href="#01-architecture-foundations">Foundations</a> for the Python, async, config, and Makefile ideas.</li>
+<li>Read <a href="#01-architecture-compose-stack">Compose-Stack</a> and <a href="#01-architecture-storage-layers">Storage-Layers</a> for the local services.</li>
+<li>Read <a href="#01-architecture-corpus">Corpus</a> for how the source snapshot is pinned and selected.</li>
+<li>Read <a href="#02-evaluation-evaluation-101">Evaluation-101</a> for how quality is measured.</li>
+<li>Read <a href="#02-evaluation-tracing-a-document">Tracing-a-Document</a> for the chain from a manifest entry to a seed
+   question.</li>
+<li>Use <a href="#00-project-checklist">Checklist</a> for what is actually in scope right now.</li>
+</ol>
+<h2 id="01-architecture-project-map--interview-angle">Interview angle</h2>
+<ul>
+<li>"The architecture is a modular monolith with clear package boundaries, not a
+  distributed system pretending to be a product."</li>
+<li>"Each store exists for an access pattern: Postgres for truth, Qdrant for
+  filtered vector search, MinIO for blobs, Redis for ephemeral work."</li>
+<li>"Retrieval quality is a ceiling. If the right passage is not retrieved, no
+  prompt can reliably recover it."</li>
+<li>"ACL filtering happens before ranking because security cannot depend on the
+  model obeying instructions."</li>
+<li>"I add complexity only when an ablation shows a measurable gain."</li>
+</ul>
+</div>
+<div class="related"><strong>Related:</strong> <span class="chip"><a href="#00-project-checklist">Checklist</a></span> <span class="chip"><a href="#01-architecture-foundations">Foundations</a></span> <span class="chip"><a href="#01-architecture-compose-stack">Compose-Stack</a></span> <span class="chip"><a href="#01-architecture-corpus">Corpus</a></span> <span class="chip"><a href="#01-architecture-storage-layers">Storage-Layers</a></span> <span class="chip"><a href="#02-evaluation-evaluation-101">Evaluation-101</a></span> <span class="chip"><a href="#02-evaluation-tracing-a-document">Tracing-a-Document</a></span></div>
+</article>
 <article class="note" id="01-architecture-storage-layers"
 data-title="Why four stores? Postgres, Redis, Qdrant, MinIO">
 <header class="note-header">
@@ -2146,11 +2567,11 @@ would collapse them.</p>
 <article class="note" id="02-evaluation-evaluation-101"
 data-title="Evaluation 101: how we know RAG is getting better">
 <header class="note-header">
-<p class="kicker">Evaluation · concept · seed</p>
+<p class="kicker">Evaluation · concept · active</p>
 <h2>Evaluation 101: how we know RAG is getting better</h2>
-<span class="chip">evaluation</span><span class="chip">golden-set</span><span class="chip">retrieval</span><span class="chip">generation</span><span class="chip">security</span>
+<span class="chip">evaluation</span><span class="chip">golden-set</span><span class="chip">retrieval</span><span class="chip">metrics</span><span class="chip">generation</span><span class="chip">security</span>
 </header>
-<div class="toc"><p class="toctitle">On this page</p><ul><li><a href="#02-evaluation-evaluation-101--test-vs-eval">Test vs eval</a></li><li><a href="#02-evaluation-evaluation-101--the-golden-set">The golden set</a><ul><li><a href="#02-evaluation-evaluation-101--why-manual-first">Why manual first</a></li><li><a href="#02-evaluation-evaluation-101--include-the-negative-cases">Include the negative cases</a></li></ul></li><li><a href="#02-evaluation-evaluation-101--retrieval-metrics">Retrieval metrics</a><ul><li><a href="#02-evaluation-evaluation-101--recall-k">Recall@k</a></li><li><a href="#02-evaluation-evaluation-101--mrr-mean-reciprocal-rank">MRR (mean reciprocal rank)</a></li><li><a href="#02-evaluation-evaluation-101--ndcg">nDCG</a></li><li><a href="#02-evaluation-evaluation-101--what-we-will-report">What we will report</a></li></ul></li><li><a href="#02-evaluation-evaluation-101--generation-metrics">Generation metrics</a><ul><li><a href="#02-evaluation-evaluation-101--faithfulness-groundedness">Faithfulness / groundedness</a></li><li><a href="#02-evaluation-evaluation-101--answer-correctness">Answer correctness</a></li><li><a href="#02-evaluation-evaluation-101--citation-validity">Citation validity</a></li><li><a href="#02-evaluation-evaluation-101--answer-relevance">Answer relevance</a></li></ul></li><li><a href="#02-evaluation-evaluation-101--end-to-end-metrics">End-to-end metrics</a></li><li><a href="#02-evaluation-evaluation-101--security-and-safety-evals">Security and safety evals</a><ul><li><a href="#02-evaluation-evaluation-101--acl-leakage">ACL leakage</a></li><li><a href="#02-evaluation-evaluation-101--prompt-injection">Prompt injection</a></li><li><a href="#02-evaluation-evaluation-101--pii-and-secrets">PII and secrets</a></li><li><a href="#02-evaluation-evaluation-101--abstention">Abstention</a></li></ul></li><li><a href="#02-evaluation-evaluation-101--offline-vs-online">Offline vs online</a></li><li><a href="#02-evaluation-evaluation-101--ablations">Ablations</a></li><li><a href="#02-evaluation-evaluation-101--release-gates">Release gates</a></li><li><a href="#02-evaluation-evaluation-101--common-doubts">Common doubts</a><ul><li><a href="#02-evaluation-evaluation-101--why-not-just-eyeball-a-few-answers">Why not just eyeball a few answers?</a></li><li><a href="#02-evaluation-evaluation-101--why-is-recall-10-the-primary-retrieval-gate">Why is recall@10 the primary retrieval gate?</a></li><li><a href="#02-evaluation-evaluation-101--doesn-t-an-llm-judge-just-add-another-model-to-trust">Doesn&#x27;t an LLM judge just add another model to trust?</a></li><li><a href="#02-evaluation-evaluation-101--isn-t-seven-questions-too-few">Isn&#x27;t seven questions too few?</a></li></ul></li><li><a href="#02-evaluation-evaluation-101--interview-angle">Interview angle</a></li></ul></div>
+<div class="toc"><p class="toctitle">On this page</p><ul><li><a href="#02-evaluation-evaluation-101--test-vs-eval">Test vs eval</a></li><li><a href="#02-evaluation-evaluation-101--the-golden-set">The golden set</a><ul><li><a href="#02-evaluation-evaluation-101--why-manual-first">Why manual first</a></li><li><a href="#02-evaluation-evaluation-101--include-the-negative-cases">Include the negative cases</a></li></ul></li><li><a href="#02-evaluation-evaluation-101--retrieval-metrics">Retrieval metrics</a><ul><li><a href="#02-evaluation-evaluation-101--the-setup-relevant-chunks-not-the-document">The setup: relevant chunks, not &quot;the document&quot;</a></li><li><a href="#02-evaluation-evaluation-101--a-concrete-ranked-list">A concrete ranked list</a></li><li><a href="#02-evaluation-evaluation-101--recall-k-did-we-find-all-the-evidence">Recall@k: did we find all the evidence?</a></li><li><a href="#02-evaluation-evaluation-101--mrr-how-high-is-the-first-good-hit">MRR: how high is the first good hit?</a></li><li><a href="#02-evaluation-evaluation-101--ndcg-did-we-put-the-best-evidence-first">nDCG: did we put the best evidence first?</a></li><li><a href="#02-evaluation-evaluation-101--precision-how-much-of-the-top-k-is-useful">Precision: how much of the top-k is useful?</a></li><li><a href="#02-evaluation-evaluation-101--putting-the-metrics-together">Putting the metrics together</a></li><li><a href="#02-evaluation-evaluation-101--what-recall-10-0-80-actually-means">What recall@10 = 0.80 actually means</a></li><li><a href="#02-evaluation-evaluation-101--what-we-will-report">What we will report</a></li></ul></li><li><a href="#02-evaluation-evaluation-101--generation-metrics">Generation metrics</a><ul><li><a href="#02-evaluation-evaluation-101--faithfulness-groundedness">Faithfulness / groundedness</a></li><li><a href="#02-evaluation-evaluation-101--answer-correctness">Answer correctness</a></li><li><a href="#02-evaluation-evaluation-101--citation-validity">Citation validity</a></li><li><a href="#02-evaluation-evaluation-101--a-worked-generation-example">A worked generation example</a></li><li><a href="#02-evaluation-evaluation-101--answer-relevance">Answer relevance</a></li></ul></li><li><a href="#02-evaluation-evaluation-101--end-to-end-metrics">End-to-end metrics</a></li><li><a href="#02-evaluation-evaluation-101--security-and-safety-evals">Security and safety evals</a><ul><li><a href="#02-evaluation-evaluation-101--acl-leakage">ACL leakage</a></li><li><a href="#02-evaluation-evaluation-101--prompt-injection">Prompt injection</a></li><li><a href="#02-evaluation-evaluation-101--pii-and-secrets">PII and secrets</a></li><li><a href="#02-evaluation-evaluation-101--abstention">Abstention</a></li></ul></li><li><a href="#02-evaluation-evaluation-101--offline-vs-online">Offline vs online</a></li><li><a href="#02-evaluation-evaluation-101--ablations">Ablations</a></li><li><a href="#02-evaluation-evaluation-101--release-gates">Release gates</a></li><li><a href="#02-evaluation-evaluation-101--common-doubts">Common doubts</a><ul><li><a href="#02-evaluation-evaluation-101--why-not-just-eyeball-a-few-answers">Why not just eyeball a few answers?</a></li><li><a href="#02-evaluation-evaluation-101--why-is-recall-10-the-primary-retrieval-gate">Why is recall@10 the primary retrieval gate?</a></li><li><a href="#02-evaluation-evaluation-101--if-recall-10-is-high-is-the-answer-good">If recall@10 is high, is the answer good?</a></li><li><a href="#02-evaluation-evaluation-101--doesn-t-an-llm-judge-just-add-another-model-to-trust">Doesn&#x27;t an LLM judge just add another model to trust?</a></li><li><a href="#02-evaluation-evaluation-101--isn-t-seven-questions-too-few">Isn&#x27;t seven questions too few?</a></li></ul></li><li><a href="#02-evaluation-evaluation-101--interview-angle">Interview angle</a></li></ul></div>
 <div class="content">
 <p>An <strong>eval</strong> is a repeatable measurement: a dataset, a metric, and a threshold.
 It answers "is the system good enough on real questions?" A unit test answers a
@@ -2216,6 +2637,12 @@ wrong, every score is wrong.</p>
 <li><code>role</code>: the synthetic role asking, used for ACL tests</li>
 <li><code>notes</code>: ambiguity, caveats, or why the case exists</li>
 </ul>
+<p>Concretely, <code>zuora-003</code> asks when an account is "In Collections", points at the
+<code>Accounts</code> section of the Zuora page, and marks the asking role as <code>billing</code>.
+That one record drives three checks: retrieval must find the <code>Accounts</code> chunk,
+generation must include both the balance and days-overdue conditions, and a
+later ACL test can confirm that a role without billing access cannot retrieve
+it.</p>
 <p>The current file, <code>evals/seed_questions.jsonl</code>, has seven seed cases from the
 Zuora Collect page. It is deliberately small. The goal is to agree on what
 "correct" means before scaling to roughly 110 cases in M5.</p>
@@ -2237,30 +2664,241 @@ but a human accepts each case.</p>
 <h2 id="02-evaluation-evaluation-101--retrieval-metrics">Retrieval metrics</h2>
 <p>Retrieval is measured before generation. If the right passage never reaches the
 model, generation cannot reliably recover.</p>
-<h3 id="02-evaluation-evaluation-101--recall-k">Recall@k</h3>
-<p>Of all relevant documents or passages, how many appear in the top <code>k</code>?</p>
-<pre><code class="language-text">recall@k = relevant items retrieved in top k / all relevant items
+<h3 id="02-evaluation-evaluation-101--the-setup-relevant-chunks-not-the-document">The setup: relevant chunks, not "the document"</h3>
+<p>A retrieval eval needs a <strong>gold answer key</strong>. For each question, a human marks
+which chunks contain the evidence needed to answer it. One question may need one
+chunk; a multi-hop question may need two or three.</p>
+<ul>
+<li><strong>top-k</strong>: the first <code>k</code> results returned by retrieval, for example the top 10
+  child chunks.</li>
+<li><strong>relevant item</strong>: a chunk a human marked as required or useful for the answer.</li>
+<li><strong>rank</strong>: position 1 is the first result, position 2 the second, and so on.</li>
+</ul>
+<p>The unit matters. If you evaluate at document level, a 50-page document counts
+as one hit even if the answer is buried in one section. Helix evaluates at the
+chunk level, then uses parent expansion to restore context. Keep the unit
+consistent when comparing runs.</p>
+<p>Label the chunks from the expected answer, not from whatever the system happened
+to retrieve. If you mark every returned chunk as relevant, the metric is grading
+itself.</p>
+<div class="callout tip">
+<p class="callout-title">Real-world analogy</p>
+<p>Imagine a nurse looking for two facts before giving a drug: the allergy and
+the current medication. Recall asks, "Did both facts make it into the chart?"
+MRR asks, "How quickly did the first fact appear?" nDCG asks, "Were the most
+important facts at the top, not buried under less useful notes?"</p>
+</div>
+<h3 id="02-evaluation-evaluation-101--a-concrete-ranked-list">A concrete ranked list</h3>
+<p>Suppose the question is:</p>
+<blockquote>
+<p>When is an account considered "In Collections"?</p>
+</blockquote>
+<p>The gold answer key says two chunks are needed:</p>
+<ul>
+<li><code>A</code>: the paragraph with the balance and days-overdue conditions.</li>
+<li><code>B</code>: the sentence that defines the "In Collections" state.</li>
+</ul>
+<p>Both come from the <code>Accounts</code> section of the Zuora page. Retrieval returns this
+top 5:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Rank</th>
+<th>Chunk</th>
+<th>Relevant?</th>
+<th>Why it is in the list</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">1</td>
+<td><code>X</code>: Collections dashboard</td>
+<td>no</td>
+<td>Mentions collections, but not the conditions</td>
+</tr>
+<tr>
+<td style="text-align: right;">2</td>
+<td><code>A</code>: condition rules</td>
+<td>yes</td>
+<td>Contains the exact balance and overdue rule</td>
+</tr>
+<tr>
+<td style="text-align: right;">3</td>
+<td><code>Y</code>: task escalation</td>
+<td>no</td>
+<td>Related product feature, wrong question</td>
+</tr>
+<tr>
+<td style="text-align: right;">4</td>
+<td><code>B</code>: definition of the state</td>
+<td>yes</td>
+<td>Defines what "In Collections" means</td>
+</tr>
+<tr>
+<td style="text-align: right;">5</td>
+<td><code>Z</code>: invoice comments</td>
+<td>no</td>
+<td>Same product area, wrong fact</td>
+</tr>
+</tbody>
+</table>
+<p>This one table is enough to calculate all three metrics.</p>
+<h3 id="02-evaluation-evaluation-101--recall-k-did-we-find-all-the-evidence">Recall@k: did we find all the evidence?</h3>
+<pre><code class="language-text">recall@k = relevant items retrieved in the top k / all relevant items
 </code></pre>
-<p>If a question has two relevant sections and the top 10 contains one, recall@10
-is 0.5. Recall is the main gate because it measures whether the evidence was
-available at all.</p>
-<h3 id="02-evaluation-evaluation-101--mrr-mean-reciprocal-rank">MRR (mean reciprocal rank)</h3>
-<p>Where does the first relevant result appear?</p>
-<pre><code class="language-text">MRR = average(1 / rank of first relevant result)
+<ul>
+<li><code>recall@3 = 1 / 2 = 0.50</code> because only <code>A</code> is in the first three.</li>
+<li><code>recall@5 = 2 / 2 = 1.00</code> because both <code>A</code> and <code>B</code> are in the first five.</li>
+</ul>
+<p>The denominator is the number of relevant items in the gold answer key, not the
+number of results returned. A system that returns only one result cannot get
+recall@5 above 0.50 if two items are required.</p>
+<p>Recall is the primary gate because it measures the <strong>ceiling</strong>: if <code>B</code> never
+reaches the model, the model cannot know the second half of the rule. A prompt
+change cannot recover evidence that retrieval never returned.</p>
+<p>For a real multi-hop seed case such as <code>zuora-005</code>, the gold set needs both the
+<code>Tasks</code> section and <code>How to add an escalation point to a user</code>. Finding only one
+of the two gives recall@10 = 0.50, even if the one found is ranked first.</p>
+<h3 id="02-evaluation-evaluation-101--mrr-how-high-is-the-first-good-hit">MRR: how high is the first good hit?</h3>
+<pre><code class="language-text">MRR = average over questions of (1 / rank of the first relevant result)
 </code></pre>
-<p>First place gives 1.0, second gives 0.5, fourth gives 0.25. MRR rewards putting
-one correct result near the top. It says less about questions that need several
-passages.</p>
-<h3 id="02-evaluation-evaluation-101--ndcg">nDCG</h3>
-<p>Normalized discounted cumulative gain handles graded relevance and multiple
-correct results. Relevant items higher in the list contribute more; the score is
-normalized against the ideal ordering. It is useful when some passages are more
-relevant than others, but it is harder to explain than recall or MRR.</p>
+<p>For the example above, the first relevant result is <code>A</code> at rank 2:</p>
+<pre><code class="language-text">reciprocal rank = 1 / 2 = 0.50
+</code></pre>
+<p>If <code>A</code> were rank 1, the score would be <code>1.00</code>; at rank 4 it would be <code>0.25</code>.
+If a question has no relevant result at all, it contributes <code>0</code>.</p>
+<p>MRR rewards putting at least one correct result near the top. It is useful for
+lookup questions where one good chunk is enough.</p>
+<p>MRR does not care that <code>B</code> was found later. That is why it is not the primary
+gate for multi-hop questions: a system can score well on MRR while still missing
+half the evidence.</p>
+<h3 id="02-evaluation-evaluation-101--ndcg-did-we-put-the-best-evidence-first">nDCG: did we put the best evidence first?</h3>
+<p>nDCG handles <strong>graded relevance</strong>: some chunks directly answer the question,
+some only provide background, and some are noise. It also rewards relevant items
+for appearing earlier. The formula is:</p>
+<pre><code class="language-text">DCG@k  = sum over positions i of relevance_i / log2(i + 1)
+nDCG@k = DCG@k / ideal DCG@k
+</code></pre>
+<p>The ideal DCG is what you would get if the most relevant chunks were sorted
+first. nDCG is always between 0 and 1.</p>
+<p>A simple way to read it:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Rank</th>
+<th>Chunk</th>
+<th style="text-align: right;">Grade</th>
+<th>Contribution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">1</td>
+<td><code>X</code>: dashboard</td>
+<td style="text-align: right;">0</td>
+<td>0</td>
+</tr>
+<tr>
+<td style="text-align: right;">2</td>
+<td><code>A</code>: condition rules</td>
+<td style="text-align: right;">3</td>
+<td><code>3 / log2(3) = 1.89</code></td>
+</tr>
+<tr>
+<td style="text-align: right;">3</td>
+<td><code>Y</code>: escalation</td>
+<td style="text-align: right;">0</td>
+<td>0</td>
+</tr>
+<tr>
+<td style="text-align: right;">4</td>
+<td><code>B</code>: definition</td>
+<td style="text-align: right;">1</td>
+<td><code>1 / log2(5) = 0.43</code></td>
+</tr>
+<tr>
+<td style="text-align: right;">5</td>
+<td><code>Z</code>: comments</td>
+<td style="text-align: right;">0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-text">DCG@5  = 1.89 + 0.43 = 2.32
+IDCG@5 = 3 / log2(2) + 1 / log2(3) = 3.00 + 0.63 = 3.63
+nDCG@5 = 2.32 / 3.63 = 0.64
+</code></pre>
+<p>The exact number matters less than the shape: the grade-3 chunk at rank 2 is
+penalized compared with the ideal order, and the grade-1 chunk at rank 4 is
+discounted heavily. If both relevant chunks were at the top, nDCG would be 1.00.</p>
+<p>Use nDCG when "relevant" is not binary. For example, <code>A</code> directly answers the
+question, while <code>B</code> only provides context. Recall treats them as equal; nDCG
+does not.</p>
+<h3 id="02-evaluation-evaluation-101--precision-how-much-of-the-top-k-is-useful">Precision: how much of the top-k is useful?</h3>
+<p>Precision@k is the share of returned results that are relevant:</p>
+<pre><code class="language-text">precision@k = relevant items in the top k / k
+</code></pre>
+<p>In the example, <code>precision@3 = 1 / 3 = 0.33</code>. Precision is useful for context
+budgeting: a top 10 full of noise wastes tokens and can distract the model. It
+is not the primary gate because Helix deliberately retrieves a wider candidate
+set and then reranks it. A noisy first-stage list can still produce a good final
+answer if the relevant items survive.</p>
+<h3 id="02-evaluation-evaluation-101--putting-the-metrics-together">Putting the metrics together</h3>
+<table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>What it usually means</th>
+<th>First fix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>recall@10 high, MRR high</td>
+<td>Evidence is present and near the top</td>
+<td>Check generation and citations</td>
+</tr>
+<tr>
+<td>recall@10 high, MRR low</td>
+<td>Evidence is present but buried</td>
+<td>Improve ranking or reranking</td>
+</tr>
+<tr>
+<td>recall@10 low, MRR high</td>
+<td>One good hit, but missing other required evidence</td>
+<td>Improve recall, query expansion, or chunking</td>
+</tr>
+<tr>
+<td>recall@10 low, MRR low</td>
+<td>Retrieval is failing broadly</td>
+<td>Inspect embeddings, filters, and gold labels</td>
+</tr>
+<tr>
+<td>nDCG low with recall@10 high</td>
+<td>Relevant items are present but poorly ordered</td>
+<td>Add or tune the reranker</td>
+</tr>
+</tbody>
+</table>
+<p>For a single-hop question with one required chunk, finding that chunk at rank 3
+gives recall@10 = 1.0 and reciprocal rank = 0.33. That is a retrieval success
+but a ranking warning: the answer is available, yet a reranker should move the
+direct evidence above the dashboard and escalation chunks.</p>
+<h3 id="02-evaluation-evaluation-101--what-recall-10-0-80-actually-means">What recall@10 = 0.80 actually means</h3>
+<p>It does <strong>not</strong> mean "80% of answers are correct." It means that, across the
+golden set, the top 10 results contain 80% of the evidence marked as required.
+A multi-hop case with two required chunks and one found contributes 0.50 for
+that case. A single-hop case with one required chunk and one found contributes
+1.00.</p>
+<p>That is why the report also includes MRR, nDCG, and a per-type breakdown. A
+lookup-heavy set can hide a multi-hop weakness; a single average can hide which
+question type is failing.</p>
 <h3 id="02-evaluation-evaluation-101--what-we-will-report">What we will report</h3>
 <ul>
 <li>recall@10 as the primary retrieval gate,</li>
 <li>MRR@10 for ranking sanity,</li>
 <li>nDCG@10 when relevance is graded,</li>
+<li>precision@10 when context budget is the concern,</li>
 <li>per-type breakdown, so a multi-hop weakness is not hidden by lookup wins.</li>
 </ul>
 <h2 id="02-evaluation-evaluation-101--generation-metrics">Generation metrics</h2>
@@ -2281,6 +2919,17 @@ sentence it is attached to?</p>
 </code></pre>
 <p>A citation that exists but does not support the claim is worse than no citation:
 it creates false confidence. Check both source existence and entailment.</p>
+<h3 id="02-evaluation-evaluation-101--a-worked-generation-example">A worked generation example</h3>
+<p>Using <code>zuora-003</code>, a good answer says the balance must be positive and above the
+configured amount, the days overdue must be above the configured number, and
+both must hold. Its citation points at the <code>Accounts</code> section.</p>
+<p>A bad answer says "any unpaid invoice is In Collections." That drops the
+days-overdue condition, so answer correctness and faithfulness both fail even if
+the prose sounds plausible.</p>
+<p>A third answer has the right conditions but cites the <code>Collections dashboard</code>
+chunk. The citation exists, but it does not support the claim, so citation
+validity fails. This is why the metrics are separate: retrieval can be right,
+the answer can be right, and the citation can still be wrong.</p>
 <h3 id="02-evaluation-evaluation-101--answer-relevance">Answer relevance</h3>
 <p>Does the answer address the question asked, without padding or drifting? This is
 usually a judged metric; keep the rubric short and anchored with examples.</p>
@@ -2413,6 +3062,11 @@ small golden set with a fixed command is still imperfect, but it is repeatable.<
 <p>Because generation can only use what retrieval returns. If the evidence is not
 in the top 10, the model is either guessing or abstaining. Recall measures the
 ceiling; reranking and generation cannot exceed it.</p>
+<h3 id="02-evaluation-evaluation-101--if-recall-10-is-high-is-the-answer-good">If recall@10 is high, is the answer good?</h3>
+<p>No. Recall only says the evidence reached the model. The model can still ignore
+it, cite the wrong passage, or add an unsupported claim. That is why generation
+metrics exist. The reverse is also true: low recall is a retrieval problem, and
+a better prompt cannot fix evidence that was never returned.</p>
 <h3 id="02-evaluation-evaluation-101--doesn-t-an-llm-judge-just-add-another-model-to-trust">Doesn't an LLM judge just add another model to trust?</h3>
 <p>Yes. That is why deterministic checks come first, judge prompts are versioned,
 and a sample is human-reviewed. For security gates, do not rely on an LLM judge
@@ -2433,7 +3087,7 @@ the current numbers as smoke tests, not a release decision.</p>
 <li>"Every ablation row is a complexity claim with a measured delta."</li>
 </ul>
 </div>
-<div class="related"><strong>Related:</strong> <span class="chip"><a href="#02-evaluation-tracing-a-document">Tracing-a-Document</a></span> <span class="chip"><a href="#00-project-checklist">Checklist</a></span> <span class="chip"><a href="#03-journal-2026-10-24">2026-10-24</a></span></div>
+<div class="related"><strong>Related:</strong> <span class="chip"><a href="#01-architecture-project-map">Project-Map</a></span> <span class="chip"><a href="#02-evaluation-tracing-a-document">Tracing-a-Document</a></span> <span class="chip"><a href="#00-project-checklist">Checklist</a></span> <span class="chip"><a href="#03-journal-2026-10-24">2026-10-24</a></span></div>
 </article>
 <article class="note" id="02-evaluation-tracing-a-document"
 data-title="Tracing a document and seeding the golden set">
@@ -3056,8 +3710,8 @@ If the vault starts depending on those, adopt a real static-site generator.</p>
 and its <code>[[System-Context]]</code> link pointed at a note that does not exist.</p>
 <h2 id="03-journal-2026-10-24--open">Open</h2>
 <ul>
-<li><code>0.4 User verified</code> is still pending; the agent does not mark it.</li>
-<li>M1 starts only after the user replies <code>pass</code>.</li>
+<li>0.4 is user-verified.</li>
+<li>0.5 (CI baseline) is next; M1 starts after 0.5.</li>
 <li>The next likely checks: <code>make docs</code>, open <code>docs/theory.html</code>, search for
   "corpus", and follow a wikilink across sections.</li>
 </ul>

@@ -2,7 +2,7 @@
 
 Permission-aware agentic RAG over the GitLab public handbook and product docs.
 
-**Status:** Checkpoint 0.4 - vault, note templates, doc generator (in progress).
+**Status:** Checkpoint 0.4 complete; 0.5 - CI baseline (next).
 
 ## Quickstart
 
