@@ -1,0 +1,24 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.env
+.env.local
+node_modules/
+.next/
+dist/
+build/
+*.egg-info/
+.cache/
+data/
+
+# Obsidian / Syncthing local state
+docs/helix-brain/.obsidian/workspace.json
+docs/helix-brain/.obsidian/workspace-mobile.json
+docs/helix-brain/.obsidian/cache/
+docs/helix-brain/.stfolder/
+# Accidental nested vault created while opening the folder in Obsidian
+docs/helix-brain/Helix/
+opencode_sessions/

@@ -1,0 +1,109 @@
+name: helix
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: helix-postgres
+    environment:
+      POSTGRES_USER: ${HELIX_POSTGRES_USER:-helix}
+      POSTGRES_PASSWORD: ${HELIX_POSTGRES_PASSWORD:-helix_dev_password}
+      POSTGRES_DB: ${HELIX_POSTGRES_DB:-helix}
+    ports:
+      - "127.0.0.1:${HELIX_POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+      start_period: 5s
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    container_name: helix-redis
+    command: ["redis-server", "--appendonly", "yes"]
+    ports:
+      - "127.0.0.1:${HELIX_REDIS_PORT:-6379}:6379"
+    volumes:
+      - redisdata:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+    restart: unless-stopped
+
+  qdrant:
+    image: qdrant/qdrant:v1.20.0
+    container_name: helix-qdrant
+    ports:
+      - "127.0.0.1:${HELIX_QDRANT_PORT:-6333}:6333"
+      - "127.0.0.1:${HELIX_QDRANT_GRPC_PORT:-6334}:6334"
+    volumes:
+      - qdrantdata:/qdrant/storage
+    healthcheck:
+      test: ["CMD-SHELL", "bash -c ':> /dev/tcp/127.0.0.1/6333'"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+      start_period: 5s
+    restart: unless-stopped
+
+  minio:
+    # MinIO stopped publishing public images on Docker Hub/Quay in 2026.
+    # This is a pinned community mirror for local development only.
+    image: pgsty/minio:RELEASE.2026-08-04T00-00-00Z
+    container_name: helix-minio
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: ${HELIX_MINIO_USER:-helix}
+      MINIO_ROOT_PASSWORD: ${HELIX_MINIO_PASSWORD:-helix_minio_dev_password}
+    ports:
+      - "127.0.0.1:${HELIX_MINIO_PORT:-9100}:9000"
+      - "127.0.0.1:${HELIX_MINIO_CONSOLE_PORT:-9101}:9001"
+    volumes:
+      - miniodata:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+      start_period: 5s
+    restart: unless-stopped
+
+  # Optional developer GUIs. Start with: make tools
+  adminer:
+    image: adminer:6.1.2
+    container_name: helix-adminer
+    profiles: ["tools"]
+    environment:
+      ADMINER_DEFAULT_SERVER: postgres
+      ADMINER_DEFAULT_DRIVER: pgsql
+    ports:
+      - "127.0.0.1:${HELIX_ADMINER_PORT:-8081}:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+
+  redisinsight:
+    image: redis/redisinsight:3.8.0
+    container_name: helix-redisinsight
+    profiles: ["tools"]
+    ports:
+      - "127.0.0.1:${HELIX_REDISINSIGHT_PORT:-5540}:5540"
+    volumes:
+      - redisinsightdata:/data
+    depends_on:
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  pgdata:
+  redisdata:
+  qdrantdata:
+  miniodata:
+  redisinsightdata:
