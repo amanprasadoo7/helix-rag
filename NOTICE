@@ -1,0 +1,30 @@
+Helix corpus notice
+===================
+
+Helix builds a retrieval corpus from public GitLab sources. The source files
+are not committed to this repository; scripts/fetch_corpus.py downloads them
+into data/corpus at the pinned commits below.
+
+1. GitLab Handbook
+   Source: https://gitlab.com/gitlab-com/content-sites/handbook
+   Commit: 438cdf82c3002b933fba36ba0c3a969d49dc52fe
+   License: MIT (upstream LICENSE)
+   Copyright (c) 2011-present GitLab B.V.
+
+   Some handbook content may incorporate third-party material that carries
+   separate terms. Check the upstream file and LICENSE before redistribution.
+
+2. GitLab product documentation
+   Source: https://gitlab.com/gitlab-org/gitlab
+   Commit: 62815568f76adcf6afd36543a8cb83eafd28d937
+   Paths: doc/user, doc/administration, doc/api, doc/ci, doc/security,
+          doc/topics, doc/auth, doc/install, doc/operations,
+          doc/subscriptions, doc/tutorials
+   License: CC BY-SA 4.0 (all content under doc/ per upstream LICENSE)
+   Copyright (c) 2011-present GitLab Inc.
+
+   License text: https://creativecommons.org/licenses/by-sa/4.0/
+
+If you redistribute the corpus or derived text, keep this notice and attribute
+GitLab. The pinned commits make the snapshot reproducible; if you refresh the
+corpus, update this file and data/manifest.json together.

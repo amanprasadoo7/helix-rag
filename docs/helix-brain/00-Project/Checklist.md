@@ -52,14 +52,14 @@ Goal: download a reproducible snapshot of the GitLab handbook and product docs,
 pin the commit SHAs, and produce a manifest with counts, sizes, and license
 attribution.
 
-- [ ] Implementation: `scripts/fetch_corpus.py` with pinned SHAs and sparse checkout
-- [ ] Manifest: per-path file counts, bytes, source versions, total estimate
-- [ ] License: `NOTICE` with attribution; corpus not committed to git
-- [ ] Tests: path selection and manifest counting (pure functions)
-- [ ] Manual: `make corpus`, inspect `data/manifest.json`, verify counts
-- [ ] `make ci` green
-- [ ] Notes: `Corpus.md` + journal + roadmap row
-- [ ] Commit: `feat(corpus): fetch pinned GitLab handbook and documentation`
+- [x] Implementation: `scripts/fetch_corpus.py` with pinned SHAs and sparse checkout
+- [x] Manifest: per-path file counts, bytes, source versions, total estimate
+- [x] License: `NOTICE` with attribution; corpus not committed to git
+- [x] Tests: path selection and manifest counting (pure functions)
+- [x] Manual: `make corpus`, inspect `data/manifest.json`, verify counts
+- [x] `make ci` green
+- [x] Notes: `Corpus.md` + journal + roadmap row
+- [x] Commit: `feat(corpus): fetch pinned GitLab handbook and documentation`
 - [ ] User verified (user marks only)
 
 ---

@@ -33,6 +33,23 @@ API docs: http://127.0.0.1:8000/docs
 At this checkpoint the stores are empty: the schema, collections, and buckets
 are created during ingestion (M1).
 
+## Corpus
+
+```bash
+make corpus       # pinned handbook + product docs -> data/corpus
+```
+
+`make corpus` performs a partial clone with sparse checkout, caps the snapshot
+at 2,500 Markdown files, and writes `data/manifest.json` with per-path counts,
+sizes, word counts, and estimated chunks. The corpus is gitignored. Licensing
+and attribution are in `NOTICE`; the product docs under `doc/` are CC BY-SA 4.0
+and the handbook repository is MIT.
+
+Current snapshot: 2,500 files, 32.1 MB, ~3.98M words, ~19.9k estimated child
+chunks. See
+[`Corpus.md`](docs/helix-brain/01-Architecture/Corpus.md) for the selection
+strategy and trade-offs.
+
 `make up` waits for healthchecks. `make down` keeps data; `make reset` deletes
 volumes.
 
@@ -55,3 +72,4 @@ counts. A checkpoint moves to `done` only after manual user verification.
 - `tests` - unit, integration, security, eval
 - `docs/helix-brain` - Obsidian vault (source of truth for notes)
 - `docs/theory.html` - generated study guide (added in 0.4)
+- `NOTICE` - corpus attribution and licenses

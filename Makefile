@@ -2,7 +2,7 @@ COMPOSE_FILE := infra/docker-compose.yml
 ENV_FILE := $(if $(wildcard .env),--env-file .env,)
 COMPOSE := docker compose -f $(COMPOSE_FILE) $(ENV_FILE)
 
-.PHONY: sync dev test test-integration lint fmt ci checklist up down reset ps logs ready tools tools-down
+.PHONY: sync dev test test-integration lint fmt ci checklist corpus up down reset ps logs ready tools tools-down
 
 sync:
 	uv sync
@@ -26,6 +26,9 @@ fmt:
 
 checklist:
 	uv run python scripts/checklist.py
+
+corpus:
+	uv run python scripts/fetch_corpus.py
 
 ci: lint test
 
