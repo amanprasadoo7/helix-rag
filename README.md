@@ -2,7 +2,7 @@
 
 Permission-aware agentic RAG over the GitLab public handbook and product docs.
 
-**Status:** Checkpoint 0.3 - corpus fetch and manifest (in progress).
+**Status:** Checkpoint 0.4 - vault, note templates, doc generator (in progress).
 
 ## Quickstart
 
@@ -15,6 +15,7 @@ make tools        # optional Adminer + RedisInsight
 make test
 make lint
 make checklist    # current checkpoint status
+make docs         # regenerate docs/theory.html from the vault
 ```
 
 API docs: http://127.0.0.1:8000/docs
@@ -60,6 +61,22 @@ MinIO's official public images are currently unavailable, so local dev uses a
 pinned community mirror. Use the official MinIO distribution or managed S3 in
 production.
 
+## Study guide
+
+The Obsidian vault under `docs/helix-brain` is the source of truth. Build a
+single self-contained HTML study guide with:
+
+```bash
+make docs
+# then open docs/theory.html in a browser
+```
+
+The guide has sidebar navigation, per-note tables of contents, client-side
+search (press `/`), light/dark themes, and print styles. Note templates live in
+`docs/helix-brain/_templates`. See
+[`Study-Guide.md`](docs/helix-brain/00-Project/Study-Guide.md) for the frontmatter
+contract and supported Markdown subset.
+
 ## Evaluation
 
 `evals/seed_questions.jsonl` contains seven manually verified seed cases from
@@ -83,5 +100,5 @@ counts. A checkpoint moves to `done` only after manual user verification.
 - `tests` - unit, integration, security, eval
 - `evals` - golden-set data, starting with the seed questions
 - `docs/helix-brain` - Obsidian vault (source of truth for notes)
-- `docs/theory.html` - generated study guide (added in 0.4)
+- `docs/theory.html` - generated self-contained study guide
 - `NOTICE` - corpus attribution and licenses

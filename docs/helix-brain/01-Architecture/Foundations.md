@@ -3,7 +3,7 @@ type: concept
 status: verified
 day: 1
 tags: [python, async, tooling, config, logging, interview]
-related: ["[[2026-10-23]]", "[[System-Context]]"]
+related: ["[[2026-10-23]]", "[[Corpus]]"]
 ---
 
 # Foundations: async, Make, environments, logging
@@ -192,23 +192,7 @@ Levels are severity filters. Setting a level shows that level **and above**.
 
 ## 6. Config duplication: `.env` vs the Makefile
 
-**Tfinal doubt 
-
-in HELIX_API_PORT=8000
-and in make file 
-dev:final doubt 
-
-in HELIX_API_PORT=8000
-and in make file 
-dev:
-	uv run uvicorn apps.api.main:app --reload --host 127.0.0.1 --port 8000
-
-but if we chnage in .env HELIX_API_PORT=8010
-but still in our make file its hardcoded 8000 ? wont it cause issue?
-	uv run uvicorn apps.api.main:app --reload --host 127.0.0.1 --port 8000
-
-but if we chnage in .env HELIX_API_PORT=8010
-but still in our make file its hardcoded 8000 ? wont it cause issue?he bug:** `make dev` used to hardcode `--host 127.0.0.1 --port 8000`. Changing
+**The bug:** `make dev` used to hardcode `--host 127.0.0.1 --port 8000`. Changing
 `HELIX_API_PORT=8010` in `.env` had no effect, because the command line is a
 **second source of truth**.
 
