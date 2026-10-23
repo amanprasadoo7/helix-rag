@@ -3,7 +3,7 @@ type: guide
 status: active
 day: 1
 tags: [corpus, tracing, evaluation, golden-set]
-related: ["[[Corpus]]", "[[Checklist]]", "[[2026-10-23]]"]
+related: ["[[Corpus]]", "[[Checklist]]", "[[2026-10-23]]", "[[2026-10-24]]"]
 ---
 
 # Tracing a document and seeding the golden set
@@ -16,6 +16,13 @@ Use this when you want to answer two questions:
 The example is
 `content/handbook/business-technology/enterprise-applications/guides/zuora-collect.md`.
 It is in the selected corpus: **24,786 bytes, 4,011 words**.
+
+> [!warning] The cleaned corpus has no `.git`
+> `make corpus-clean` keeps only the selected Markdown, so the local Git steps
+> below need a full checkout. Run `make corpus` to restore the shallow
+> checkouts, then `make corpus-clean` when finished. If you only need to check
+> the text or citation, use the manifest and the GitLab URLs in
+> [After cleanup](#after-cleanup).
 
 ## The chain to verify
 
@@ -52,10 +59,11 @@ commit: 438cdf82c3002b933fba36ba0c3a969d49dc52fe
 entry: {'path': '.../zuora-collect.md', 'bytes': 24786, 'words': 4011}
 ```
 
-If the file is not in `files`, it is **not** in the selected 2,500, even if it
-exists on disk. The checkout contains more files than the corpus.
+If the file is not in `files`, it is **not** in the selected 2,500. Before
+cleanup, the checkout contained more files than the corpus; now it contains the
+selected Markdown plus `NOTICE`. The manifest is still the source of truth.
 
-## Step 2 - Confirm the snapshot commit
+## Step 2 - Confirm the snapshot commit (full checkout)
 
 ```bash
 git -C data/corpus/handbook rev-parse HEAD
@@ -70,7 +78,7 @@ Expected:
 This is the same SHA as the manifest source. A branch name would move; this SHA
 does not.
 
-## Step 3 - Confirm the file is the Git version
+## Step 3 - Confirm the file is the Git version (full checkout)
 
 ```bash
 git -C data/corpus/handbook ls-tree HEAD -- \
@@ -91,7 +99,7 @@ Expected:
 asks "what is the content hash of the file on disk?" Same hash means the file on
 disk is exactly the committed file.
 
-## Step 4 - Read the raw Markdown
+## Step 4 - Read the raw Markdown (full checkout)
 
 ```bash
 git -C data/corpus/handbook show HEAD:content/handbook/business-technology/enterprise-applications/guides/zuora-collect.md | head -40
@@ -130,15 +138,34 @@ At ~200 words per child chunk, this 4,011-word document will produce roughly
 `ceil(4011 / 200) = 21` child chunks. That is an estimate; the real chunker will
 decide.
 
-## A note on history
+## After cleanup
 
-The checkout is shallow: `git fetch --depth 1` fetched one commit. So
-`git log -- path` only sees the pinned snapshot. To inspect older changes, use
-the GitLab history page or API:
+With no local `.git`, trace against the pinned commit in GitLab. For the Zuora
+example:
 
 ```text
-https://gitlab.com/gitlab-com/content-sites/handbook/-/commits/main/content/handbook/business-technology/enterprise-applications/guides/zuora-collect.md
+Raw Markdown:
+https://gitlab.com/gitlab-com/content-sites/handbook/-/raw/438cdf82c3002b933fba36ba0c3a969d49dc52fe/content/handbook/business-technology/enterprise-applications/guides/zuora-collect.md
+
+Blob and line view:
+https://gitlab.com/gitlab-com/content-sites/handbook/-/blob/438cdf82c3002b933fba36ba0c3a969d49dc52fe/content/handbook/business-technology/enterprise-applications/guides/zuora-collect.md
+
+History:
+https://gitlab.com/gitlab-com/content-sites/handbook/-/commits/438cdf82c3002b933fba36ba0c3a969d49dc52fe/content/handbook/business-technology/enterprise-applications/guides/zuora-collect.md
 ```
+
+Product docs use the same pattern under
+`https://gitlab.com/gitlab-org/gitlab/-/raw/62815568f76adcf6afd36543a8cb83eafd28d937/<path>`.
+
+The manifest already records the source commit, path, bytes, and words. The raw
+URL gives the text; the commit-pinned URL keeps it stable even after `main`
+moves. Use `make corpus` only when you need local Git object checks.
+
+## A note on history
+
+When the full checkout exists, it is shallow: `git fetch --depth 1` fetched one
+commit. So `git log -- path` only sees the pinned snapshot. To inspect older
+changes, use the GitLab history page or API above.
 
 The manifest's job is to pin the snapshot, not to replace Git history.
 

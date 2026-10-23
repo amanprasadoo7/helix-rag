@@ -37,6 +37,7 @@ are created during ingestion (M1).
 
 ```bash
 make corpus       # pinned handbook + product docs -> data/corpus
+make corpus-clean # keep only selected Markdown, remove .git and assets
 ```
 
 `make corpus` performs a partial clone with sparse checkout, caps the snapshot
@@ -45,8 +46,10 @@ sizes, word counts, and estimated chunks. The corpus is gitignored. Licensing
 and attribution are in `NOTICE`; the product docs under `doc/` are CC BY-SA 4.0
 and the handbook repository is MIT.
 
-Current snapshot: 2,500 files, 32.1 MB, ~3.98M words, ~19.9k estimated child
-chunks. See
+Current snapshot: 2,500 files, 32.1 MB of content (41 MB allocated), ~3.98M
+words, ~19.9k estimated child chunks. The initial checkout is about 1.8 GB;
+`make corpus-clean` leaves only the selected Markdown and removes `.git`.
+Re-fetch with `make corpus` when you need local Git-level tracing. See
 [`Corpus.md`](docs/helix-brain/01-Architecture/Corpus.md) for the selection
 strategy and trade-offs.
 
@@ -56,6 +59,14 @@ volumes.
 MinIO's official public images are currently unavailable, so local dev uses a
 pinned community mirror. Use the official MinIO distribution or managed S3 in
 production.
+
+## Evaluation
+
+`evals/seed_questions.jsonl` contains seven manually verified seed cases from
+the Zuora Collect page, including an unanswerable question for abstention. These
+are seeds, not the final golden set. See
+[`Evaluation-101.md`](docs/helix-brain/02-Evaluation/Evaluation-101.md) for the
+metric families, security gates, and ablation plan.
 
 ## Process
 
@@ -70,6 +81,7 @@ counts. A checkpoint moves to `done` only after manual user verification.
 - `packages/helix` - shared library (config, retrieval, agents, eval)
 - `scripts` - reproducible data and maintenance scripts
 - `tests` - unit, integration, security, eval
+- `evals` - golden-set data, starting with the seed questions
 - `docs/helix-brain` - Obsidian vault (source of truth for notes)
 - `docs/theory.html` - generated study guide (added in 0.4)
 - `NOTICE` - corpus attribution and licenses

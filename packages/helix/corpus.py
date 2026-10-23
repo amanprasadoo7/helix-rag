@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import math
+import shutil
 from collections.abc import Sequence
 from dataclasses import dataclass
 from datetime import UTC, datetime
@@ -196,3 +197,48 @@ def write_manifest(manifest: dict[str, Any], path: Path = MANIFEST_PATH) -> None
         json.dumps(manifest, indent=2, ensure_ascii=False) + "\n",
         encoding="utf-8",
     )
+
+
+def prune_source(source_root: Path, selected_paths: Sequence[str]) -> tuple[int, int]:
+    """Keep only selected files and remove the local Git checkout."""
+    selected = {path.replace("\\", "/") for path in selected_paths}
+    missing = [path for path in selected if not (source_root / path).is_file()]
+    if missing:
+        raise FileNotFoundError(f"Selected file missing: {source_root / missing[0]}")
+
+    git_dir = source_root / ".git"
+    if git_dir.exists():
+        shutil.rmtree(git_dir)
+
+    removed = 0
+    for path in sorted(
+        source_root.rglob("*"), key=lambda item: len(item.parts), reverse=True
+    ):
+        if path.is_file() or path.is_symlink():
+            relative = path.relative_to(source_root).as_posix()
+            if relative not in selected:
+                path.unlink()
+                removed += 1
+        elif path.is_dir() and not any(path.iterdir()):
+            path.rmdir()
+
+    return len(selected), removed
+
+
+def prune_corpus(manifest: dict[str, Any], root: Path) -> dict[str, Any]:
+    """Apply ``prune_source`` to every source and record the result."""
+    kept_files = 0
+    removed_files = 0
+    for source in manifest["sources"]:
+        selected = [entry["path"] for entry in source["files"]]
+        kept, removed = prune_source(root / source["name"], selected)
+        kept_files += kept
+        removed_files += removed
+
+    manifest["pruned"] = True
+    manifest["pruned_at"] = datetime.now(UTC).isoformat()
+    manifest["prune"] = {
+        "kept_files": kept_files,
+        "removed_files": removed_files,
+    }
+    return manifest

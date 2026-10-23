@@ -3,7 +3,7 @@ type: process
 status: active
 day: 1
 tags: [process, checklist, roadmap, interviews]
-related: ["[[2026-10-23]]", "[[Foundations]]", "[[Compose-Stack]]"]
+related: ["[[2026-10-23]]", "[[2026-10-24]]", "[[Foundations]]", "[[Compose-Stack]]"]
 ---
 
 # Checkpoint checklist and handoff protocol
@@ -55,8 +55,9 @@ attribution.
 - [x] Implementation: `scripts/fetch_corpus.py` with pinned SHAs and sparse checkout
 - [x] Manifest: per-path file counts, bytes, source versions, total estimate
 - [x] License: `NOTICE` with attribution; corpus not committed to git
-- [x] Tests: path selection and manifest counting (pure functions)
+- [x] Tests: path selection, manifest counting, and cleanup (pure functions)
 - [x] Manual: `make corpus`, inspect `data/manifest.json`, verify counts
+- [x] Cleanup: `make corpus-clean` keeps 2,500 files and removes `.git`/assets
 - [x] `make ci` green
 - [x] Notes: `Corpus.md` + journal + roadmap row
 - [x] Commit: `feat(corpus): fetch pinned GitLab handbook and documentation`
@@ -73,6 +74,7 @@ Status values: `pending`, `in progress`, `done`, `blocked`.
 | 0.1 | Walking skeleton | done | [[Foundations]] |
 | 0.2 | Local stack and readiness | done | [[Compose-Stack]], [[Storage-Layers]] |
 | 0.3 | Corpus fetch and manifest | in progress | [[Corpus]] |
+| 0.3b | Corpus cleanup (selected-only, no `.git`) | done | 1.8 GB -> 32 MB; [[2026-10-24]] |
 | 0.4 | Vault, note templates, doc generator | pending | `docs/theory.html` |
 | 0.5 | CI baseline | pending | ruff, mypy, pytest |
 | 1.1 | Parser | pending | Docling, Markdown |

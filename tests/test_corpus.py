@@ -11,6 +11,8 @@ from helix.corpus import (
     build_manifest,
     discover_markdown,
     estimate_child_chunks,
+    prune_corpus,
+    prune_source,
     select_evenly,
     text_stats,
     write_manifest,
@@ -123,3 +125,59 @@ def test_write_manifest_round_trips(tmp_path: Path) -> None:
 
     assert json.loads(path.read_text(encoding="utf-8")) == manifest
     assert path.read_text(encoding="utf-8").endswith("\n")
+
+
+def test_prune_source_keeps_selected_and_removes_rest(tmp_path: Path) -> None:
+    root = tmp_path / "source"
+    (root / ".git").mkdir(parents=True)
+    (root / ".git" / "config").write_text("git config", encoding="utf-8")
+    selected = root / "docs" / "a.md"
+    selected.parent.mkdir()
+    selected.write_text("a", encoding="utf-8")
+    (root / "docs" / "b.md").write_text("b", encoding="utf-8")
+    images = root / "images"
+    images.mkdir()
+    (images / "x.png").write_bytes(b"x")
+    (root / "empty").mkdir()
+
+    kept, removed = prune_source(root, ["docs/a.md"])
+
+    assert kept == 1
+    assert removed == 2
+    assert selected.exists()
+    assert not (root / ".git").exists()
+    assert not (root / "docs" / "b.md").exists()
+    assert not images.exists()
+    assert not (root / "empty").exists()
+
+
+def test_prune_source_refuses_to_start_when_selected_file_is_missing(
+    tmp_path: Path,
+) -> None:
+    root = tmp_path / "source"
+    (root / ".git").mkdir(parents=True)
+
+    with pytest.raises(FileNotFoundError, match="Selected file missing"):
+        prune_source(root, ["docs/missing.md"])
+
+    assert (root / ".git").exists()
+
+
+def test_prune_corpus_updates_manifest(tmp_path: Path) -> None:
+    source_root = tmp_path / "demo"
+    selected = source_root / "docs" / "a.md"
+    selected.parent.mkdir(parents=True)
+    selected.write_text("a", encoding="utf-8")
+    (source_root / "docs" / "b.md").write_text("b", encoding="utf-8")
+
+    manifest = {
+        "corpus_root": str(tmp_path),
+        "sources": [{"name": "demo", "files": [{"path": "docs/a.md"}]}],
+    }
+
+    prune_corpus(manifest, tmp_path)
+
+    assert manifest["pruned"] is True
+    assert manifest["prune"] == {"kept_files": 1, "removed_files": 1}
+    assert selected.exists()
+    assert not (source_root / "docs" / "b.md").exists()

@@ -3,7 +3,7 @@ type: architecture
 status: implemented
 day: 1
 tags: [corpus, ingestion, reproducibility, licensing]
-related: ["[[Checklist]]", "[[2026-10-23]]", "[[Storage-Layers]]"]
+related: ["[[Checklist]]", "[[2026-10-23]]", "[[2026-10-24]]", "[[Storage-Layers]]"]
 ---
 
 # Corpus: pinned GitLab handbook and docs
@@ -19,12 +19,12 @@ into `data/corpus` and writes `data/manifest.json`:
 | GitLab product docs (`doc/*`) | `62815568f76adcf6afd36543a8cb83eafd28d937` | 1,500 | 2,575,510 | 12,878 |
 | **Total** | | **2,500** | **3,984,982** | **19,925** |
 
-The selected Markdown is about 32 MB. The current checkout is about 1.8 GB on
-disk because it includes non-Markdown assets, whole selected folders, and Git
-objects. The manifest, not the checkout, defines the 2,500-file corpus. A
-Markdown-only materialization is a planned cleanup before M1. The corpus is
-gitignored; only the fetcher, manifest schema, tests, and `NOTICE` are
-committed.
+The selected Markdown is about 32 MB. Before cleanup, the checkout was about
+1.8 GB because it included non-Markdown assets, whole selected folders, and Git
+objects. `make corpus-clean` now keeps only the 2,500 selected Markdown files:
+about 32.1 MB of content, or 41 MB allocated on disk. The manifest, not the
+directory tree, defines the corpus. The corpus is gitignored; only the fetcher,
+cleanup, manifest schema, tests, and `NOTICE` are committed.
 
 ## Why pin commits
 
@@ -114,7 +114,8 @@ not a second copy of the data.
 ## Commands
 
 ```bash
-make corpus
+make corpus        # fetch the pinned checkouts and write the manifest
+make corpus-clean  # keep only selected Markdown, remove .git and assets
 python3 -m json.tool data/manifest.json | less
 ```
 
@@ -131,9 +132,11 @@ Re-fetch from scratch:
 uv run python scripts/fetch_corpus.py --force
 ```
 
-A normal re-run reuses the existing checkout, re-checks out the pinned commit,
-and rewrites the manifest. The selection is deterministic, so the counts should
-not change unless a quota or the pin changes.
+A normal re-run reuses a full checkout, re-checks out the pinned commit, and
+rewrites the manifest. After `make corpus-clean` there is no `.git`, so
+`make corpus` treats the source as incomplete and fetches it again; run
+`make corpus-clean` afterward. The selection is deterministic, so the counts
+should not change unless a quota or the pin changes.
 
 ## What can break
 
@@ -145,6 +148,9 @@ not change unless a quota or the pin changes.
   the golden set before comparing.
 - **Word-count estimate:** frontmatter, tables, and code fences inflate it. The
   real numbers come from the chunker.
+- **Cleaned checkout:** `make corpus-clean` removes `.git` and unselected files.
+  Local trace commands in [[Tracing-a-Document]] then need a fresh `make corpus`.
+  The manifest still pins the source, and GitLab raw/history URLs remain usable.
 
 ## Common doubts
 
@@ -158,9 +164,10 @@ repositories.
 
 ### Where does the data live?
 
-`data/corpus/` holds the two Git checkouts, `data/manifest.json` is the catalog
-of the selected 2,500 files, and `data/corpus/NOTICE` carries attribution. The
-whole `data/` directory is gitignored.
+`data/corpus/` holds the two clean, selected-only Markdown trees (no `.git`),
+`data/manifest.json` is the catalog of the selected 2,500 files, and
+`data/corpus/NOTICE` carries attribution. The whole `data/` directory is
+gitignored.
 
 ### How does someone else download it?
 
@@ -169,6 +176,7 @@ Clone the repository, then run:
 ```bash
 make sync
 make corpus
+make corpus-clean   # optional, but recommended after fetching
 ```
 
 They need `git`, network access, `uv`, and disk. The repositories are public, so
@@ -177,15 +185,19 @@ the API server.
 
 ### Why is the checkout larger than 32 MB?
 
-Sparse checkout selects folders, not individual file types. The selected doc
-folders contain images and other assets, and the partial clone keeps Git objects.
-The manifest is the corpus; the checkout is only the working tree. The planned
-cleanup materializes only the 2,500 selected Markdown files into a clean folder.
+Sparse checkout selects folders, not individual file types. The original
+checkout contained images and other assets, and the partial clone kept Git
+objects. The manifest is the corpus; the checkout is only the working tree.
+`make corpus-clean` now leaves only the 2,500 selected Markdown files, about
+32.1 MB of content (41 MB allocated). The trade-off is that local Git history is
+gone; re-fetch when you need to run the Git-level trace.
 
 ### How do I trace one file?
 
 See [[Tracing-a-Document]]. It walks from a manifest entry to the pinned commit,
 the Git blob, the raw Markdown, and then to seed questions for the golden set.
+The local Git steps need a full checkout (`make corpus`); the cleaned corpus is
+for ingestion, not for Git archaeology.
 
 ## Alternatives considered
 
