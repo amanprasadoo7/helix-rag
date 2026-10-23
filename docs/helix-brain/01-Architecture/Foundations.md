@@ -267,3 +267,28 @@ flow from one typed object.
   run locally."
 - "I annotate context managers with `AsyncGenerator[Yield, Send]` because that
   is what the decorator actually wraps."
+
+---
+
+## 8. Process: definition of done
+
+A checkpoint is not done when the code compiles. It is done when all of these
+are true:
+
+1. The behavior exists and is scoped to one checkpoint.
+2. Automated tests cover it (integration tests when a real dependency is
+   involved).
+3. The manual test is written down with expected output.
+4. `make ci` is green.
+5. The concept note, journal, and roadmap are updated.
+6. The change is committed with a conventional message.
+7. **The user** has run the manual test and replied `pass`.
+
+The last item is deliberately human-only. The agent can verify the machine, but
+it cannot verify that the explanation made sense to the person learning the
+system. That is why [[Checklist]] uses two keys: agent marks the build, user
+marks the verification.
+
+Notes are part of done because an unexamined checkpoint becomes a gap in the
+interview story. The note is where "what I built" turns into "what I can
+explain and defend".

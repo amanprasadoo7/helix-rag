@@ -2,7 +2,7 @@
 
 Permission-aware agentic RAG over the GitLab public handbook and product docs.
 
-**Status:** Checkpoint 0.1 - walking skeleton (liveness endpoint only).
+**Status:** Checkpoint 0.3 - corpus fetch and manifest (in progress).
 
 ## Quickstart
 
@@ -14,6 +14,7 @@ make ready        # checks all four dependencies
 make tools        # optional Adminer + RedisInsight
 make test
 make lint
+make checklist    # current checkpoint status
 ```
 
 API docs: http://127.0.0.1:8000/docs
@@ -39,10 +40,18 @@ MinIO's official public images are currently unavailable, so local dev uses a
 pinned community mirror. Use the official MinIO distribution or managed S3 in
 production.
 
+## Process
+
+The roadmap and per-checkpoint Definition of Done live in
+[`docs/helix-brain/00-Project/Checklist.md`](docs/helix-brain/00-Project/Checklist.md).
+`make checklist` prints the current checkpoint, remaining items, and roadmap
+counts. A checkpoint moves to `done` only after manual user verification.
+
 ## Layout
 
 - `apps/api` - FastAPI backend
 - `packages/helix` - shared library (config, retrieval, agents, eval)
+- `scripts` - reproducible data and maintenance scripts
 - `tests` - unit, integration, security, eval
 - `docs/helix-brain` - Obsidian vault (source of truth for notes)
 - `docs/theory.html` - generated study guide (added in 0.4)
