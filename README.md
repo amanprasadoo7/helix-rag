@@ -2,7 +2,7 @@
 
 Permission-aware agentic RAG over the GitLab public handbook and product docs.
 
-**Status:** Checkpoint 0.4 complete; 0.5 - CI baseline (next).
+**Status:** Checkpoint 0.5 - CI baseline (in progress).
 
 ## Quickstart
 
@@ -14,6 +14,7 @@ make ready        # checks all four dependencies
 make tools        # optional Adminer + RedisInsight
 make test
 make lint
+make ci           # ruff + mypy + pytest
 make checklist    # current checkpoint status
 make docs         # regenerate docs/theory.html from the vault
 ```

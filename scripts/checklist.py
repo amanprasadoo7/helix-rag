@@ -23,7 +23,8 @@ def parse_roadmap(text: str) -> list[tuple[str, str, str]]:
     return [
         (number, name.strip(), status)
         for number, name, status in re.findall(
-            r"^\| (\d+\.\d+[a-z]?) \| ([^|]+?) \| (pending|in progress|done|blocked) \|",
+            r"^\|\s*(\d+\.\d+[a-z]?)\s*\|\s*([^|]+?)\s*\|\s*"
+            r"(pending|in progress|done|blocked)\s*\|",
             block,
             re.MULTILINE,
         )

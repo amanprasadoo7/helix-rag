@@ -341,7 +341,7 @@ footer.page-footer {
 <input id="search" class="search" type="search"
   placeholder="Search notes... (press /)" autocomplete="off">
 <nav class="nav" aria-label="Notes">
-<div class="nav-group"><h2>Project</h2><a href="#00-project-checklist" data-target="00-project-checklist">Checkpoint checklist and handoff protocol</a><a href="#00-project-study-guide" data-target="00-project-study-guide">Vault and study-guide pipeline</a></div><div class="nav-group"><h2>Architecture</h2><a href="#01-architecture-compose-stack" data-target="01-architecture-compose-stack">Local stack and readiness</a><a href="#01-architecture-corpus" data-target="01-architecture-corpus">Corpus: pinned GitLab handbook and docs</a><a href="#01-architecture-foundations" data-target="01-architecture-foundations">Foundations: async, Make, environments, logging</a><a href="#01-architecture-project-map" data-target="01-architecture-project-map">Project map: the repo and the architecture behind it</a><a href="#01-architecture-storage-layers" data-target="01-architecture-storage-layers">Why four stores? Postgres, Redis, Qdrant, MinIO</a></div><div class="nav-group"><h2>Evaluation</h2><a href="#02-evaluation-evaluation-101" data-target="02-evaluation-evaluation-101">Evaluation 101: how we know RAG is getting better</a><a href="#02-evaluation-tracing-a-document" data-target="02-evaluation-tracing-a-document">Tracing a document and seeding the golden set</a></div><div class="nav-group"><h2>Journal</h2><a href="#03-journal-2026-10-23" data-target="03-journal-2026-10-23">2026-10-23 - Day 1</a><a href="#03-journal-2026-10-24" data-target="03-journal-2026-10-24">2026-10-24 - Day 2</a></div>
+<div class="nav-group"><h2>Project</h2><a href="#00-project-ci-baseline" data-target="00-project-ci-baseline">CI baseline: one gate, local and remote</a><a href="#00-project-checklist" data-target="00-project-checklist">Checkpoint checklist and handoff protocol</a><a href="#00-project-study-guide" data-target="00-project-study-guide">Vault and study-guide pipeline</a></div><div class="nav-group"><h2>Architecture</h2><a href="#01-architecture-compose-stack" data-target="01-architecture-compose-stack">Local stack and readiness</a><a href="#01-architecture-corpus" data-target="01-architecture-corpus">Corpus: pinned GitLab handbook and docs</a><a href="#01-architecture-foundations" data-target="01-architecture-foundations">Foundations: async, Make, environments, logging</a><a href="#01-architecture-project-map" data-target="01-architecture-project-map">Project map: the repo and the architecture behind it</a><a href="#01-architecture-storage-layers" data-target="01-architecture-storage-layers">Why four stores? Postgres, Redis, Qdrant, MinIO</a></div><div class="nav-group"><h2>Evaluation</h2><a href="#02-evaluation-evaluation-101" data-target="02-evaluation-evaluation-101">Evaluation 101: how we know RAG is getting better</a><a href="#02-evaluation-tracing-a-document" data-target="02-evaluation-tracing-a-document">Tracing a document and seeding the golden set</a></div><div class="nav-group"><h2>Journal</h2><a href="#03-journal-2026-10-23" data-target="03-journal-2026-10-23">2026-10-23 - Day 1</a><a href="#03-journal-2026-10-24" data-target="03-journal-2026-10-24">2026-10-24 - Day 2</a><a href="#03-journal-2026-10-25" data-target="03-journal-2026-10-25">2026-10-25 - Day 3</a></div>
 </nav>
 </aside>
 <main id="top">
@@ -350,8 +350,190 @@ footer.page-footer {
 <h1>Helix Study Guide</h1>
 <p>Generated from <code>docs/helix-brain</code>.
 Edit the Markdown, then run <code>make docs</code>.</p>
-<p class="stats">11 notes · 4 sections</p>
+<p class="stats">13 notes · 4 sections</p>
 </header>
+<article class="note" id="00-project-ci-baseline"
+data-title="CI baseline: one gate, local and remote">
+<header class="note-header">
+<p class="kicker">Project · process · active</p>
+<h2>CI baseline: one gate, local and remote</h2>
+<span class="chip">ci</span><span class="chip">github-actions</span><span class="chip">quality</span><span class="chip">process</span>
+</header>
+<div class="toc"><p class="toctitle">On this page</p><ul><li><a href="#00-project-ci-baseline--what-runs">What runs</a></li><li><a href="#00-project-ci-baseline--why-one-command-instead-of-three-yaml-steps">Why one command instead of three YAML steps</a></li><li><a href="#00-project-ci-baseline--why-uv-sync-locked">Why uv sync --locked</a></li><li><a href="#00-project-ci-baseline--why-integration-tests-are-not-in-this-job">Why integration tests are not in this job</a></li><li><a href="#00-project-ci-baseline--why-python-3-12-only">Why Python 3.12 only</a></li><li><a href="#00-project-ci-baseline--manual-test">Manual test</a></li><li><a href="#00-project-ci-baseline--what-this-baseline-does-not-cover">What this baseline does not cover</a></li><li><a href="#00-project-ci-baseline--common-doubts">Common doubts</a><ul><li><a href="#00-project-ci-baseline--isn-t-make-ci-just-a-wrapper">Isn&#x27;t make ci just a wrapper?</a></li><li><a href="#00-project-ci-baseline--why-pin-action-versions">Why pin action versions?</a></li><li><a href="#00-project-ci-baseline--why-not-run-on-every-branch-push">Why not run on every branch push?</a></li><li><a href="#00-project-ci-baseline--what-do-i-do-when-ci-fails-but-local-make-ci-passes">What do I do when CI fails but local make ci passes?</a></li></ul></li><li><a href="#00-project-ci-baseline--interview-angle">Interview angle</a></li></ul></div>
+<div class="content">
+<p><strong>Short answer:</strong> GitHub Actions runs the same command we run locally, <code>make ci</code>.
+That command checks formatting/lint with Ruff, types with mypy, and unit tests
+with pytest. CI does not duplicate those commands in YAML, and it does not run
+the integration tests that need Docker Compose.</p>
+<p>The goal is not "a green badge." The goal is to make the merge decision
+repeatable: if <code>make ci</code> passes locally and the same command passes in CI, the
+change has cleared the baseline checks we agreed on.</p>
+<h2 id="00-project-ci-baseline--what-runs">What runs</h2>
+<p><code>.github/workflows/ci.yml</code> runs on:</p>
+<ul>
+<li>pushes to <code>master</code>,</li>
+<li>pull requests,</li>
+<li>manual <code>workflow_dispatch</code>.</li>
+</ul>
+<p>The job is deliberately small:</p>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Command</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Check out</td>
+<td><code>actions/checkout</code></td>
+<td>Get the exact commit under test</td>
+</tr>
+<tr>
+<td>Set up tools</td>
+<td><code>astral-sh/setup-uv</code></td>
+<td>Install uv and Python 3.12; cache by <code>uv.lock</code></td>
+</tr>
+<tr>
+<td>Install</td>
+<td><code>uv sync --locked</code></td>
+<td>Install the locked environment, or fail if the lock is stale</td>
+</tr>
+<tr>
+<td>Gate</td>
+<td><code>make ci</code></td>
+<td>Run Ruff, mypy, and pytest through the local command</td>
+</tr>
+</tbody>
+</table>
+<p>The job also has:</p>
+<ul>
+<li><code>permissions: contents: read</code> because it only reads the repository,</li>
+<li>a concurrency group so a new push cancels an older run on the same ref,</li>
+<li>a 10-minute timeout so a hung test does not hold a runner forever.</li>
+</ul>
+<h2 id="00-project-ci-baseline--why-one-command-instead-of-three-yaml-steps">Why one command instead of three YAML steps</h2>
+<p>It would be easy to write this:</p>
+<pre><code class="language-yaml">- run: ruff check .
+- run: mypy packages/helix apps
+- run: pytest -m &quot;not integration&quot;
+</code></pre>
+<p>That creates a second source of truth. The next time the local gate changes,
+someone has to remember to change both places. Instead, CI calls <code>make ci</code>, and
+the Makefile remains the only definition of the gate.</p>
+<p>This is the same principle as the config work in <a href="#01-architecture-foundations">Foundations</a>: one typed
+source of truth, not a copy that can drift.</p>
+<h2 id="00-project-ci-baseline--why-uv-sync-locked">Why <code>uv sync --locked</code></h2>
+<p><code>uv.lock</code> is part of the build. It records the exact dependency versions that
+were tested. <code>uv sync --locked</code> has two jobs:</p>
+<ol>
+<li>install that environment, and</li>
+<li>fail if <code>pyproject.toml</code> and <code>uv.lock</code> disagree.</li>
+</ol>
+<p>Without <code>--locked</code>, CI could silently resolve newer packages and pass on a
+different environment from the one committed. If the lock is stale, the correct
+fix is to run <code>uv lock</code> locally, review the diff, and commit <code>uv.lock</code> with the
+change.</p>
+<p>The setup action caches uv's downloads using <code>uv.lock</code> as the key. A dependency
+change invalidates the cache; an unrelated code change reuses it.</p>
+<h2 id="00-project-ci-baseline--why-integration-tests-are-not-in-this-job">Why integration tests are not in this job</h2>
+<p><code>make test-integration</code> needs Postgres, Redis, Qdrant, and MinIO. The baseline
+job is meant to be fast and independent of Docker services, so it runs only
+<code>make ci</code>, which uses <code>pytest -m "not integration"</code>.</p>
+<p>That is a deliberate gap, not a claim that integration tests do not matter.
+They still run locally with <code>make up</code> and <code>make test-integration</code>. A later
+checkpoint can add a separate integration job with service containers or a
+Compose startup step.</p>
+<h2 id="00-project-ci-baseline--why-python-3-12-only">Why Python 3.12 only</h2>
+<p>The project declares <code>requires-python = "&gt;=3.12,&lt;3.13"</code> and pins <code>.python-version</code>
+to <code>3.12</code>. A version matrix would add runtime without testing a supported
+configuration. When the project supports another Python version, add a matrix
+then, not before.</p>
+<h2 id="00-project-ci-baseline--manual-test">Manual test</h2>
+<p>Run the local gate first:</p>
+<pre><code class="language-bash">make ci
+</code></pre>
+<p>Expected: Ruff and mypy pass, then pytest reports <code>37 passed, 1 deselected</code>.</p>
+<p>Then verify the remote path:</p>
+<ol>
+<li>Push a branch and open a pull request.</li>
+<li>Open the <strong>Actions</strong> tab.</li>
+<li>Confirm the <code>CI / lint and test</code> check is green.</li>
+<li>Confirm the job used Python 3.12 and ran <code>uv sync --locked</code> and <code>make ci</code>.</li>
+</ol>
+<p>To prove the gate can fail, introduce a deliberate lint error on a scratch
+branch, for example an unused import, push it, and confirm Ruff fails the check.
+Remove the error before merging.</p>
+<h2 id="00-project-ci-baseline--what-this-baseline-does-not-cover">What this baseline does not cover</h2>
+<table>
+<thead>
+<tr>
+<th>Not covered</th>
+<th>Why</th>
+<th>Where it belongs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Integration tests</td>
+<td>Need the four local services</td>
+<td>Later CI job or release gate</td>
+</tr>
+<tr>
+<td>Security scans</td>
+<td>No dependency/image scanning yet</td>
+<td>M4/M5</td>
+</tr>
+<tr>
+<td>Coverage threshold</td>
+<td>No agreed number yet</td>
+<td>M5 evaluation work</td>
+</tr>
+<tr>
+<td>Deployment</td>
+<td>This is a quality gate, not a release pipeline</td>
+<td>Later infrastructure work</td>
+</tr>
+<tr>
+<td>Dependency updates</td>
+<td>No automated update bot yet</td>
+<td>After the baseline is stable</td>
+</tr>
+</tbody>
+</table>
+<h2 id="00-project-ci-baseline--common-doubts">Common doubts</h2>
+<h3 id="00-project-ci-baseline--isn-t-make-ci-just-a-wrapper">Isn't <code>make ci</code> just a wrapper?</h3>
+<p>Yes, and that is the point. A wrapper with one definition is better than three
+copies that drift. It also means the local and remote gates cannot disagree
+about which checks are required.</p>
+<h3 id="00-project-ci-baseline--why-pin-action-versions">Why pin action versions?</h3>
+<p>Actions are code that runs with repository access. Pinning a release tag makes
+the run reproducible and makes upgrades deliberate. A stricter setup would pin
+full commit SHAs and add a dependency updater; that can come later.</p>
+<h3 id="00-project-ci-baseline--why-not-run-on-every-branch-push">Why not run on every branch push?</h3>
+<p>Pull requests already trigger the workflow. Running on every branch push as well
+would duplicate work for branches that are not under review. <code>master</code> is checked
+because it is the merge target.</p>
+<h3 id="00-project-ci-baseline--what-do-i-do-when-ci-fails-but-local-make-ci-passes">What do I do when CI fails but local <code>make ci</code> passes?</h3>
+<p>Check the Python version and lockfile first. CI uses Python 3.12 and
+<code>uv sync --locked</code>; a local environment with a different Python or an outdated
+lock can hide the difference. Then check for untracked files or environment
+variables that the test accidentally depends on.</p>
+<h2 id="00-project-ci-baseline--interview-angle">Interview angle</h2>
+<ul>
+<li>"CI calls the same <code>make ci</code> target I run locally, so the gate has one
+  definition and no YAML drift."</li>
+<li>"I use <code>uv sync --locked</code> so CI fails on a stale lock instead of silently
+  testing a different dependency graph."</li>
+<li>"The baseline job is fast and unit-only; integration tests are a separate
+  concern because they need stateful services."</li>
+<li>"Least privilege, concurrency cancellation, and a timeout are part of the
+  workflow, not afterthoughts."</li>
+</ul>
+</div>
+<div class="related"><strong>Related:</strong> <span class="chip"><a href="#00-project-checklist">Checklist</a></span> <span class="chip"><a href="#01-architecture-project-map">Project-Map</a></span> <span class="chip"><a href="#03-journal-2026-10-25">2026-10-25</a></span></div>
+</article>
 <article class="note" id="00-project-checklist"
 data-title="Checkpoint checklist and handoff protocol">
 <header class="note-header">
@@ -359,7 +541,7 @@ data-title="Checkpoint checklist and handoff protocol">
 <h2>Checkpoint checklist and handoff protocol</h2>
 <span class="chip">process</span><span class="chip">checklist</span><span class="chip">roadmap</span><span class="chip">interviews</span>
 </header>
-<div class="toc"><p class="toctitle">On this page</p><ul><li><a href="#00-project-checklist--the-two-key-rule">The two-key rule</a></li><li><a href="#00-project-checklist--definition-of-done-every-checkpoint">Definition of Done (every checkpoint)</a></li><li><a href="#00-project-checklist--current-checkpoint">Current checkpoint</a><ul><li><a href="#00-project-checklist--0-4-vault-note-templates-doc-generator">0.4 - Vault, note templates, doc generator</a></li></ul></li><li><a href="#00-project-checklist--roadmap">Roadmap</a></li><li><a href="#00-project-checklist--handoff-template-agent-writes-this-every-checkpoint">Handoff template (agent writes this every checkpoint)</a></li><li><a href="#00-project-checklist--commit-convention">Commit convention</a></li><li><a href="#00-project-checklist--release-gates">Release gates</a></li><li><a href="#00-project-checklist--rules-that-prevent-drift">Rules that prevent drift</a></li></ul></div>
+<div class="toc"><p class="toctitle">On this page</p><ul><li><a href="#00-project-checklist--the-two-key-rule">The two-key rule</a></li><li><a href="#00-project-checklist--definition-of-done-every-checkpoint">Definition of Done (every checkpoint)</a></li><li><a href="#00-project-checklist--current-checkpoint">Current checkpoint</a><ul><li><a href="#00-project-checklist--0-5-ci-baseline">0.5 - CI baseline</a></li></ul></li><li><a href="#00-project-checklist--roadmap">Roadmap</a></li><li><a href="#00-project-checklist--handoff-template-agent-writes-this-every-checkpoint">Handoff template (agent writes this every checkpoint)</a></li><li><a href="#00-project-checklist--commit-convention">Commit convention</a></li><li><a href="#00-project-checklist--release-gates">Release gates</a></li><li><a href="#00-project-checklist--rules-that-prevent-drift">Rules that prevent drift</a></li></ul></div>
 <div class="content">
 <p>This is the contract for how we build Helix. It exists so neither the agent nor
 the human forgets a step, and so every checkpoint ends in the same verifiable
@@ -407,19 +589,20 @@ its own <code>fix(...)</code> commit and the DoD is repeated.</p>
 </ul>
 <hr />
 <h2 id="00-project-checklist--current-checkpoint">Current checkpoint</h2>
-<h3 id="00-project-checklist--0-4-vault-note-templates-doc-generator">0.4 - Vault, note templates, doc generator</h3>
-<p>Goal: make the Obsidian vault the source of truth for notes and generate a
-self-contained <code>docs/theory.html</code> study guide from it.</p>
+<h3 id="00-project-checklist--0-5-ci-baseline">0.5 - CI baseline</h3>
+<p>Goal: run the same local quality gate on every pull request and on <code>master</code>.</p>
 <ul>
-<li>[x] Implementation: <code>scripts/build_theory.py</code> + <code>packages/helix/docs.py</code></li>
-<li>[x] Vault: template folder and concept/journal/decision note templates</li>
-<li>[x] Generator: frontmatter, wikilinks, headings, tables, code, callouts, search</li>
-<li>[x] Tests: parsing, link resolution, page discovery, HTML generation</li>
-<li>[x] Manual: <code>make docs</code>, open <code>docs/theory.html</code>, use navigation and search</li>
+<li>[x] Workflow: <code>.github/workflows/ci.yml</code></li>
+<li>[x] Toolchain: Python 3.12 + uv, with <code>uv.lock</code>-keyed caching</li>
+<li>[x] Gate: <code>uv sync --locked</code> then <code>make ci</code></li>
+<li>[x] Scope: unit tests only; integration needs the local Compose stack</li>
+<li>[x] Safety: read-only token, concurrency cancellation, 10-minute timeout</li>
+<li>[x] Manual: push a branch or open a PR and confirm the <code>CI / lint and test</code> check</li>
+<li>[x] Tests: <code>tests/test_checklist.py</code> covers compact and aligned roadmap tables</li>
 <li>[x] <code>make ci</code> green</li>
-<li>[x] Notes: <code>Study-Guide.md</code> + journal + roadmap row</li>
-<li>[x] Commit: <code>feat(docs): generate study guide from the Obsidian vault</code></li>
-<li>[x] User verified (user marks only)</li>
+<li>[x] Notes: <code>CI-Baseline.md</code> + journal + roadmap row</li>
+<li>[x] Commit: <code>ci: add baseline workflow</code></li>
+<li>[ ] User verified (user marks only)</li>
 </ul>
 <hr />
 <h2 id="00-project-checklist--roadmap">Roadmap</h2>
@@ -467,8 +650,8 @@ self-contained <code>docs/theory.html</code> study guide from it.</p>
 <tr>
 <td>0.5</td>
 <td>CI baseline</td>
-<td>pending</td>
-<td>ruff, mypy, pytest</td>
+<td>in progress</td>
+<td><a href="#00-project-ci-baseline">CI-Baseline</a>; ruff, mypy, pytest</td>
 </tr>
 <tr>
 <td>1.1</td>
@@ -823,7 +1006,7 @@ of those two replies.</p>
    big.</li>
 </ol>
 </div>
-<div class="related"><strong>Related:</strong> <span class="chip"><a href="#03-journal-2026-10-23">2026-10-23</a></span> <span class="chip"><a href="#03-journal-2026-10-24">2026-10-24</a></span> <span class="chip"><a href="#01-architecture-foundations">Foundations</a></span> <span class="chip"><a href="#01-architecture-compose-stack">Compose-Stack</a></span></div>
+<div class="related"><strong>Related:</strong> <span class="chip"><a href="#03-journal-2026-10-23">2026-10-23</a></span> <span class="chip"><a href="#03-journal-2026-10-24">2026-10-24</a></span> <span class="chip"><a href="#03-journal-2026-10-25">2026-10-25</a></span> <span class="chip"><a href="#01-architecture-foundations">Foundations</a></span> <span class="chip"><a href="#01-architecture-compose-stack">Compose-Stack</a></span> <span class="chip"><a href="#00-project-ci-baseline">CI-Baseline</a></span></div>
 </article>
 <article class="note" id="00-project-study-guide"
 data-title="Vault and study-guide pipeline">
@@ -3717,6 +3900,55 @@ and its <code>[[System-Context]]</code> link pointed at a note that does not exi
 </ul>
 </div>
 <div class="related"><strong>Related:</strong> <span class="chip"><a href="#03-journal-2026-10-23">2026-10-23</a></span> <span class="chip"><a href="#01-architecture-corpus">Corpus</a></span> <span class="chip"><a href="#02-evaluation-tracing-a-document">Tracing-a-Document</a></span> <span class="chip"><a href="#02-evaluation-evaluation-101">Evaluation-101</a></span> <span class="chip"><a href="#00-project-checklist">Checklist</a></span></div>
+</article>
+<article class="note" id="03-journal-2026-10-25"
+data-title="2026-10-25 - Day 3">
+<header class="note-header">
+<p class="kicker">Journal · journal · in-progress</p>
+<h2>2026-10-25 - Day 3</h2>
+<span class="chip">helix</span><span class="chip">journal</span><span class="chip">ci</span><span class="chip">github-actions</span>
+</header>
+<div class="toc"><p class="toctitle">On this page</p><ul><li><a href="#03-journal-2026-10-25--checkpoint-0-5-ci-baseline">Checkpoint 0.5 - CI baseline</a></li></ul></div>
+<div class="content">
+<p>Previous day: <a href="#03-journal-2026-10-24">2026-10-24</a></p>
+<h2 id="03-journal-2026-10-25--checkpoint-0-5-ci-baseline">Checkpoint 0.5 - CI baseline</h2>
+<p><strong>Goal:</strong> run the same quality gate locally and on GitHub, without duplicating
+the Ruff, mypy, and pytest commands in YAML.</p>
+<p><strong>What was built</strong></p>
+<ul>
+<li><code>.github/workflows/ci.yml</code></li>
+<li>Runs on pushes to <code>master</code>, pull requests, and manual dispatch</li>
+<li>Uses Python 3.12 and uv, with caching keyed by <code>uv.lock</code></li>
+<li>Runs <code>uv sync --locked</code> and then <code>make ci</code></li>
+<li>Read-only token, concurrency cancellation, and a 10-minute timeout</li>
+<li><code>CI-Baseline.md</code>, checklist, README, and <code>AGENTS.md</code> updated</li>
+<li>Fixed <code>scripts/checklist.py</code> to parse both compact and aligned roadmap tables</li>
+<li>Added <code>tests/test_checklist.py</code> for both table shapes</li>
+</ul>
+<p><strong>Verified manually</strong></p>
+<pre><code class="language-bash">make ci
+# Ruff and mypy pass; 37 passed, 1 deselected
+
+docker run --rm -v &quot;$PWD:/repo&quot; -w /repo rhysd/actionlint:latest
+# no output: workflow syntax and expressions are valid
+</code></pre>
+<p><strong>Decisions</strong></p>
+<ul>
+<li>CI calls <code>make ci</code> instead of repeating the commands. One definition means
+  local and remote gates cannot drift.</li>
+<li>The baseline is unit-only. Integration tests need Postgres, Redis, Qdrant, and
+  MinIO, so they stay a separate concern.</li>
+<li>The workflow runs one Python version because the project supports one.</li>
+<li>Action versions are pinned to release tags for now; full SHA pinning and an
+  updater can come later.</li>
+</ul>
+<p><strong>Open</strong></p>
+<ul>
+<li>Push a branch or open a pull request and confirm <code>CI / lint and test</code> is green.</li>
+<li>User verification remains.</li>
+</ul>
+</div>
+<div class="related"><strong>Related:</strong> <span class="chip"><a href="#03-journal-2026-10-24">2026-10-24</a></span> <span class="chip"><a href="#00-project-ci-baseline">CI-Baseline</a></span> <span class="chip"><a href="#00-project-checklist">Checklist</a></span> <span class="chip"><a href="#01-architecture-project-map">Project-Map</a></span></div>
 </article>
 <footer class="page-footer">
 Source of truth: the Obsidian vault. This file is generated; do not edit it by hand.

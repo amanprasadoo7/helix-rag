@@ -3,7 +3,7 @@ type: process
 status: active
 day: 2
 tags: [process, checklist, roadmap, interviews]
-related: ["[[2026-10-23]]", "[[2026-10-24]]", "[[Foundations]]", "[[Compose-Stack]]"]
+related: ["[[2026-10-23]]", "[[2026-10-24]]", "[[2026-10-25]]", "[[Foundations]]", "[[Compose-Stack]]", "[[CI-Baseline]]"]
 ---
 
 # Checkpoint checklist and handoff protocol
@@ -46,20 +46,21 @@ its own `fix(...)` commit and the DoD is repeated.
 
 ## Current checkpoint
 
-### 0.4 - Vault, note templates, doc generator
+### 0.5 - CI baseline
 
-Goal: make the Obsidian vault the source of truth for notes and generate a
-self-contained `docs/theory.html` study guide from it.
+Goal: run the same local quality gate on every pull request and on `master`.
 
-- [x] Implementation: `scripts/build_theory.py` + `packages/helix/docs.py`
-- [x] Vault: template folder and concept/journal/decision note templates
-- [x] Generator: frontmatter, wikilinks, headings, tables, code, callouts, search
-- [x] Tests: parsing, link resolution, page discovery, HTML generation
-- [x] Manual: `make docs`, open `docs/theory.html`, use navigation and search
+- [x] Workflow: `.github/workflows/ci.yml`
+- [x] Toolchain: Python 3.12 + uv, with `uv.lock`-keyed caching
+- [x] Gate: `uv sync --locked` then `make ci`
+- [x] Scope: unit tests only; integration needs the local Compose stack
+- [x] Safety: read-only token, concurrency cancellation, 10-minute timeout
+- [x] Manual: push a branch or open a PR and confirm the `CI / lint and test` check
+- [x] Tests: `tests/test_checklist.py` covers compact and aligned roadmap tables
 - [x] `make ci` green
-- [x] Notes: `Study-Guide.md` + journal + roadmap row
-- [x] Commit: `feat(docs): generate study guide from the Obsidian vault`
-- [x] User verified (user marks only)
+- [x] Notes: `CI-Baseline.md` + journal + roadmap row
+- [x] Commit: `ci: add baseline workflow`
+- [ ] User verified (user marks only)
 
 ---
 
@@ -74,7 +75,7 @@ Status values: `pending`, `in progress`, `done`, `blocked`.
 | 0.3 | Corpus fetch and manifest | done | [[Corpus]] |
 | 0.3b | Corpus cleanup (selected-only, no `.git`) | done | 1.8 GB -> 32 MB; [[2026-10-24]] |
 | 0.4 | Vault, note templates, doc generator | done | 11 notes; [[Project-Map]] |
-| 0.5 | CI baseline | pending | ruff, mypy, pytest |
+| 0.5 | CI baseline | in progress | [[CI-Baseline]]; ruff, mypy, pytest |
 | 1.1 | Parser | pending | Docling, Markdown |
 | 1.2 | ACL classifier | pending | path to classification |
 | 1.3 | Chunker | pending | structure-aware, parent/child |
