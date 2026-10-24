@@ -341,7 +341,7 @@ footer.page-footer {
 <input id="search" class="search" type="search"
   placeholder="Search notes... (press /)" autocomplete="off">
 <nav class="nav" aria-label="Notes">
-<div class="nav-group"><h2>Project</h2><a href="#00-project-ci-baseline" data-target="00-project-ci-baseline">CI baseline: one gate, local and remote</a><a href="#00-project-checklist" data-target="00-project-checklist">Checkpoint checklist and handoff protocol</a><a href="#00-project-study-guide" data-target="00-project-study-guide">Vault and study-guide pipeline</a></div><div class="nav-group"><h2>Architecture</h2><a href="#01-architecture-compose-stack" data-target="01-architecture-compose-stack">Local stack and readiness</a><a href="#01-architecture-corpus" data-target="01-architecture-corpus">Corpus: pinned GitLab handbook and docs</a><a href="#01-architecture-foundations" data-target="01-architecture-foundations">Foundations: async, Make, environments, logging</a><a href="#01-architecture-parsing" data-target="01-architecture-parsing">Parsing: Markdown to a stable document model</a><a href="#01-architecture-project-map" data-target="01-architecture-project-map">Project map: the repo and the architecture behind it</a><a href="#01-architecture-storage-layers" data-target="01-architecture-storage-layers">Why four stores? Postgres, Redis, Qdrant, MinIO</a></div><div class="nav-group"><h2>Evaluation</h2><a href="#02-evaluation-evaluation-101" data-target="02-evaluation-evaluation-101">Evaluation 101: how we know RAG is getting better</a><a href="#02-evaluation-tracing-a-document" data-target="02-evaluation-tracing-a-document">Tracing a document and seeding the golden set</a></div><div class="nav-group"><h2>Journal</h2><a href="#03-journal-2026-10-23" data-target="03-journal-2026-10-23">2026-10-23 - Day 1</a><a href="#03-journal-2026-10-24" data-target="03-journal-2026-10-24">2026-10-24 - Day 2</a><a href="#03-journal-2026-10-25" data-target="03-journal-2026-10-25">2026-10-25 - Day 3</a></div>
+<div class="nav-group"><h2>Project</h2><a href="#00-project-ci-baseline" data-target="00-project-ci-baseline">CI baseline: one gate, local and remote</a><a href="#00-project-checklist" data-target="00-project-checklist">Checkpoint checklist and handoff protocol</a><a href="#00-project-study-guide" data-target="00-project-study-guide">Vault and study-guide pipeline</a></div><div class="nav-group"><h2>Architecture</h2><a href="#01-architecture-compose-stack" data-target="01-architecture-compose-stack">Local stack and readiness</a><a href="#01-architecture-corpus" data-target="01-architecture-corpus">Corpus: pinned GitLab handbook and docs</a><a href="#01-architecture-foundations" data-target="01-architecture-foundations">Foundations: async, Make, environments, logging</a><a href="#01-architecture-ingestion-m1" data-target="01-architecture-ingestion-m1">Ingestion M1: from Markdown to a searchable index</a><a href="#01-architecture-parsing" data-target="01-architecture-parsing">Parsing: Markdown to a stable document model</a><a href="#01-architecture-project-map" data-target="01-architecture-project-map">Project map: the repo and the architecture behind it</a><a href="#01-architecture-storage-layers" data-target="01-architecture-storage-layers">Why four stores? Postgres, Redis, Qdrant, MinIO</a></div><div class="nav-group"><h2>Evaluation</h2><a href="#02-evaluation-evaluation-101" data-target="02-evaluation-evaluation-101">Evaluation 101: how we know RAG is getting better</a><a href="#02-evaluation-tracing-a-document" data-target="02-evaluation-tracing-a-document">Tracing a document and seeding the golden set</a></div><div class="nav-group"><h2>Journal</h2><a href="#03-journal-2026-10-23" data-target="03-journal-2026-10-23">2026-10-23 - Day 1</a><a href="#03-journal-2026-10-24" data-target="03-journal-2026-10-24">2026-10-24 - Day 2</a><a href="#03-journal-2026-10-25" data-target="03-journal-2026-10-25">2026-10-25 - Day 3</a></div>
 </nav>
 </aside>
 <main id="top">
@@ -350,7 +350,7 @@ footer.page-footer {
 <h1>Helix Study Guide</h1>
 <p>Generated from <code>docs/helix-brain</code>.
 Edit the Markdown, then run <code>make docs</code>.</p>
-<p class="stats">14 notes · 4 sections</p>
+<p class="stats">15 notes · 4 sections</p>
 </header>
 <article class="note" id="00-project-ci-baseline"
 data-title="CI baseline: one gate, local and remote">
@@ -1983,6 +1983,381 @@ explain and defend".</p>
 </div>
 <div class="related"><strong>Related:</strong> <span class="chip"><a href="#03-journal-2026-10-23">2026-10-23</a></span> <span class="chip"><a href="#01-architecture-corpus">Corpus</a></span></div>
 </article>
+<article class="note" id="01-architecture-ingestion-m1"
+data-title="Ingestion M1: from Markdown to a searchable index">
+<header class="note-header">
+<p class="kicker">Architecture · architecture · active</p>
+<h2>Ingestion M1: from Markdown to a searchable index</h2>
+<span class="chip">ingestion</span><span class="chip">roadmap</span><span class="chip">parsing</span><span class="chip">acl</span><span class="chip">chunking</span><span class="chip">embeddings</span><span class="chip">qdrant</span><span class="chip">interview</span>
+</header>
+<div class="toc"><p class="toctitle">On this page</p><ul><li><a href="#01-architecture-ingestion-m1--the-library-analogy">The library analogy</a></li><li><a href="#01-architecture-ingestion-m1--the-pipeline-at-a-glance">The pipeline at a glance</a></li><li><a href="#01-architecture-ingestion-m1--1-1-parser">1.1 Parser</a></li><li><a href="#01-architecture-ingestion-m1--1-2-acl-classifier">1.2 ACL classifier</a></li><li><a href="#01-architecture-ingestion-m1--1-3-chunker">1.3 Chunker</a></li><li><a href="#01-architecture-ingestion-m1--1-4-embedder">1.4 Embedder</a></li><li><a href="#01-architecture-ingestion-m1--1-5-qdrant-postgres-metadata">1.5 Qdrant + Postgres metadata</a></li><li><a href="#01-architecture-ingestion-m1--1-6-worker-full-ingest-reconcile">1.6 Worker + full ingest + reconcile</a></li><li><a href="#01-architecture-ingestion-m1--technical-summary">Technical summary</a></li><li><a href="#01-architecture-ingestion-m1--end-to-end-example">End-to-end example</a></li><li><a href="#01-architecture-ingestion-m1--m1-exit-criteria">M1 exit criteria</a></li><li><a href="#01-architecture-ingestion-m1--what-was-built-in-1-1-step-by-step">What was built in 1.1, step by step</a></li><li><a href="#01-architecture-ingestion-m1--common-doubts">Common doubts</a><ul><li><a href="#01-architecture-ingestion-m1--why-not-let-the-chunker-parse-markdown">Why not let the chunker parse Markdown?</a></li><li><a href="#01-architecture-ingestion-m1--why-acl-before-chunking">Why ACL before chunking?</a></li><li><a href="#01-architecture-ingestion-m1--why-parent-and-child-chunks">Why parent and child chunks?</a></li><li><a href="#01-architecture-ingestion-m1--why-use-qdrant-and-postgres">Why use Qdrant and Postgres?</a></li><li><a href="#01-architecture-ingestion-m1--why-must-a-second-ingest-be-a-no-op">Why must a second ingest be a no-op?</a></li></ul></li><li><a href="#01-architecture-ingestion-m1--interview-angle">Interview angle</a></li></ul></div>
+<div class="content">
+<p><strong>Short answer:</strong> M0 built the building and the shelves. M1 fills them. It turns
+the frozen Markdown corpus into structured, permission-labelled, embedded chunks,
+stores those chunks in Qdrant and Postgres, and automates the whole flow with an
+idempotent worker.</p>
+<div class="callout info">
+<p class="callout-title">Status</p>
+<p>Checkpoint 1.1 is implemented and awaiting user verification. Checkpoints
+1.2–1.6 are the plan, not built yet. This note is updated as each one lands.</p>
+</div>
+<h2 id="01-architecture-ingestion-m1--the-library-analogy">The library analogy</h2>
+<p>You have 2,500 books and no librarian.</p>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Book analogy</th>
+<th>Helix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.1 Parser</td>
+<td>Read each book and build a clean table of contents</td>
+<td>Markdown → structured JSON</td>
+</tr>
+<tr>
+<td>1.2 ACL</td>
+<td>Stick a label on each book: HR only, engineers, public</td>
+<td>Path → classification + roles</td>
+</tr>
+<tr>
+<td>1.3 Chunker</td>
+<td>Cut each book into index cards small enough to search</td>
+<td>Sections → parent/child chunks</td>
+</tr>
+<tr>
+<td>1.4 Embedder</td>
+<td>Turn each card into a numeric fingerprint of its meaning</td>
+<td>BGE-M3 dense + sparse vectors</td>
+</tr>
+<tr>
+<td>1.5 Storage</td>
+<td>Put fingerprints in the smart index and card details in the catalog</td>
+<td>Qdrant + Postgres</td>
+</tr>
+<tr>
+<td>1.6 Worker</td>
+<td>Build the assembly line, and remove cards when a book is deleted</td>
+<td>ARQ + reconcile</td>
+</tr>
+</tbody>
+</table>
+<p>The order is deliberate. Permissions must be known before chunks are stored, and
+chunks must exist before they can be embedded or indexed.</p>
+<pre><code class="language-text">raw docs -&gt; structure -&gt; permission labels -&gt; small chunks -&gt; vectors -&gt; stores -&gt; automated pipeline
+</code></pre>
+<h2 id="01-architecture-ingestion-m1--the-pipeline-at-a-glance">The pipeline at a glance</h2>
+<pre><code class="language-text">manifest
+   |
+   v
+1.1 parser ------&gt; parsed JSON (one file per document)
+   |
+   v
+1.2 ACL ---------&gt; classification + allowed roles
+   |
+   v
+1.3 chunker -----&gt; parent section + child chunks
+   |
+   v
+1.4 embedder ----&gt; dense 1024 + learned sparse
+   |
+   v
+1.5 stores ------&gt; Qdrant payload + Postgres chunk map
+   |
+   v
+1.6 worker ------&gt; add/update/delete, rerun is a no-op
+</code></pre>
+<hr />
+<h2 id="01-architecture-ingestion-m1--1-1-parser">1.1 Parser</h2>
+<p><strong>In plain language.</strong> Read one Markdown file and produce a structured outline:
+title, headings, paragraphs, lists, tables, and code blocks. A <code>## Accounts</code>
+heading becomes a section, and the table below it becomes a table block inside
+that section.</p>
+<p><strong>Technically.</strong> Emit one deterministic JSON document per file using <code>Document</code>,
+<code>Section</code>, and <code>Block</code> models. Sections form a tree with breadcrumbs and unique
+ids. Blocks carry normalized <code>text</code> for retrieval and <code>raw</code> for debugging. This
+is the stable interface between raw Markdown and every later stage.</p>
+<p><strong>Why first.</strong> If the structure is wrong here, every chunk and every citation
+inherits the mistake.</p>
+<p><strong>Example.</strong> The Zuora page becomes a root document titled “Zuora Collect
+module”, with child sections such as “Accounts”, and the account-status table
+stored as a typed table block rather than prose.</p>
+<p>More detail: <a href="#01-architecture-parsing">Parsing</a>. The choice of a native parser over Docling is in
+<a href="../../adr/0001-markdown-parser.md">ADR 0001</a>.</p>
+<hr />
+<h2 id="01-architecture-ingestion-m1--1-2-acl-classifier">1.2 ACL classifier</h2>
+<p><strong>In plain language.</strong> Decide who may see each document based on where it came
+from. Examples:</p>
+<table>
+<thead>
+<tr>
+<th>Path</th>
+<th>Classification</th>
+<th>Allowed roles</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>handbook/people-group</code>, <code>people-policies</code>, <code>finance</code>, <code>legal</code></td>
+<td><code>confidential:hr</code></td>
+<td>hr, security, admin</td>
+</tr>
+<tr>
+<td><code>handbook/security</code></td>
+<td><code>restricted:security</code></td>
+<td>security, admin</td>
+</tr>
+<tr>
+<td><code>handbook/engineering</code>, <code>support</code>, <code>it</code></td>
+<td><code>internal:eng</code></td>
+<td>engineer, support, security, admin</td>
+</tr>
+<tr>
+<td><code>doc/**</code></td>
+<td><code>public:docs</code></td>
+<td>all authenticated</td>
+</tr>
+<tr>
+<td>tagged <code>project:atlas</code></td>
+<td><code>project:atlas</code></td>
+<td>contractor, admin</td>
+</tr>
+</tbody>
+</table>
+<p>These permissions are synthetic. The source content is public; the demo layers a
+plausible organisation and sensitivity model on top.</p>
+<p><strong>Technically.</strong> A deterministic path-and-tag rule table maps each parsed
+document to <code>classification</code> and <code>allowed_roles</code>. Unknown paths default to deny,
+never public. Tests cover the full path × role matrix. The result is stored as
+document metadata and later copied into the Qdrant payload, where it becomes a
+<strong>pre-filter applied before vector search</strong>, not a prompt instruction.</p>
+<p><strong>Why here.</strong> Permissions must exist before chunks are written. Retrofitting ACLs
+after indexing means every stored chunk is temporarily unsafe.</p>
+<hr />
+<h2 id="01-architecture-ingestion-m1--1-3-chunker">1.3 Chunker</h2>
+<p><strong>In plain language.</strong> Split a long page into index cards of roughly 200–400
+tokens, but keep related things together. A table or code block should not be
+cut in half. Small child chunks are good for finding; the larger parent section
+is kept so the model gets enough context.</p>
+<p><strong>Technically.</strong> Structure-aware parent/child chunking:</p>
+<ul>
+<li>parent = a section from the parser;</li>
+<li>child = 200–400 tokens with 10–15% overlap;</li>
+<li>breadcrumb (<code>Handbook &gt; Finance &gt; Zuora &gt; Accounts</code>) prepended to embedding text;</li>
+<li>tables and code kept whole;</li>
+<li>deterministic chunk ids and ordinals;</li>
+<li>inspect the chunk-size distribution before moving on.</li>
+</ul>
+<p><strong>Why here.</strong> The parser gives sections; the chunker chooses the actual retrieval
+unit. Parent/child keeps retrieval precise without starving generation of context.</p>
+<hr />
+<h2 id="01-architecture-ingestion-m1--1-4-embedder">1.4 Embedder</h2>
+<p><strong>In plain language.</strong> Turn each chunk into a numeric fingerprint so that “reset
+my password” and “password recovery steps” land near each other even though the
+words differ. Exact terms such as error codes and version numbers also need to
+match, so produce two views: meaning (dense) and exact words (sparse).</p>
+<p><strong>Technically.</strong> BGE-M3 produces a 1024-dimension dense vector plus learned
+sparse weights. Run in batches, cache by content hash, measure throughput on 10
+chunks, and keep it local so there is no per-query API cost.</p>
+<p><strong>Why here.</strong> You can only embed what the chunker produced, and you can only
+store what the embedder produced.</p>
+<hr />
+<h2 id="01-architecture-ingestion-m1--1-5-qdrant-postgres-metadata">1.5 Qdrant + Postgres metadata</h2>
+<p><strong>In plain language.</strong> Put the fingerprints into a smart search index (Qdrant)
+and the catalog information into Postgres. Qdrant answers “which chunks are
+semantically near this question?” Postgres answers “which document is this, what
+section, what hash, what parent, when was it ingested?”</p>
+<p><strong>Technically.</strong></p>
+<ul>
+<li>Qdrant collection <code>chunks_v1</code> with named vectors <code>dense</code> and <code>sparse</code>;</li>
+<li>payload: tenant, document, chunk, parent, classification, roles, source/path,
+  section path, content hash;</li>
+<li>deterministic point ids, for example UUID5 of <code>document:ordinal:content_hash</code>;</li>
+<li>Postgres holds the document/chunk map and parent-child relationships;</li>
+<li>verify counts and fetch 100 chunks by id.</li>
+</ul>
+<p><strong>Why both.</strong> The vector database is an index, not the source of truth. Postgres
+is where you join, audit, and explain.</p>
+<hr />
+<h2 id="01-architecture-ingestion-m1--1-6-worker-full-ingest-reconcile">1.6 Worker + full ingest + reconcile</h2>
+<p><strong>In plain language.</strong> Build the assembly line that runs all six steps over all
+2,500 documents in the background. If nothing changed, a second run should do
+nothing. If a document is deleted upstream, its chunks must disappear.</p>
+<p><strong>Technically.</strong></p>
+<ul>
+<li>ARQ worker backed by Redis;</li>
+<li>job key = source + commit + config hash;</li>
+<li>content-hash diff detects added, changed, and deleted documents;</li>
+<li>add/update/delete, with tombstones for removals;</li>
+<li>idempotent rerun: the second run reports zero work;</li>
+<li>verify counts, sample retrieval, and the ACL invariant after each run;</li>
+<li>integration test against the live stack.</li>
+</ul>
+<p><strong>Why last.</strong> It orchestrates the other five steps, so it is the only checkpoint
+that can prove the whole pipeline is correct and repeatable.</p>
+<hr />
+<h2 id="01-architecture-ingestion-m1--technical-summary">Technical summary</h2>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Input → output</th>
+<th>Main technology</th>
+<th>Main failure to test</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.1</td>
+<td>Markdown → structured document JSON</td>
+<td>Pydantic, native parser</td>
+<td>lost headings, tables, or code</td>
+</tr>
+<tr>
+<td>1.2</td>
+<td>document → classification + roles</td>
+<td>path rule table</td>
+<td>unknown path leaking as public</td>
+</tr>
+<tr>
+<td>1.3</td>
+<td>document → parent/child chunks</td>
+<td>structure-aware chunker</td>
+<td>chunk crosses a heading or splits a table</td>
+</tr>
+<tr>
+<td>1.4</td>
+<td>chunk → dense + sparse vectors</td>
+<td>BGE-M3</td>
+<td>wrong dimensions, slow batches</td>
+</tr>
+<tr>
+<td>1.5</td>
+<td>chunks → Qdrant points + Postgres rows</td>
+<td>Qdrant, Postgres</td>
+<td>id/count drift, missing payload</td>
+</tr>
+<tr>
+<td>1.6</td>
+<td>corpus → indexed, reconciled store</td>
+<td>ARQ, Redis, hashes</td>
+<td>rerun duplicates, deletes not propagating</td>
+</tr>
+</tbody>
+</table>
+<h2 id="01-architecture-ingestion-m1--end-to-end-example">End-to-end example</h2>
+<p>Question: “When does an account move to Collections?”</p>
+<ol>
+<li><strong>Parser</strong> finds the <code>Accounts</code> section and the status table.</li>
+<li><strong>ACL</strong> labels the page <code>public:docs</code>, visible to all authenticated users.</li>
+<li><strong>Chunker</strong> creates a child chunk such as “An account is moved to Collections
+   when the total invoice balance is more than zero and at least one invoice is
+   past due.” The child points to the <code>Accounts</code> parent.</li>
+<li><strong>Embedder</strong> turns the child into one dense vector and one sparse vector.</li>
+<li><strong>Storage</strong> writes the vectors plus ACL, path, section, and hash to Qdrant,
+   and the document/chunk rows to Postgres.</li>
+<li><strong>Worker</strong> performs those steps for the whole corpus, then a second run
+   reports no changes.</li>
+<li><strong>Query time</strong> applies the <code>public:docs</code> filter before search, retrieves the
+   child, expands to the parent, and cites the source path and section.</li>
+</ol>
+<h2 id="01-architecture-ingestion-m1--m1-exit-criteria">M1 exit criteria</h2>
+<ul>
+<li>2,500 documents parsed and indexed.</li>
+<li>Every stored chunk carries classification and allowed roles.</li>
+<li>A second full ingest is a no-op.</li>
+<li>Deleting one upstream document removes its chunks from both stores.</li>
+<li>Qdrant and Postgres counts agree.</li>
+<li>A sample query returns the expected chunks with valid citations.</li>
+<li>Chunk-size distribution is sane and embed throughput is measured.</li>
+</ul>
+<hr />
+<h2 id="01-architecture-ingestion-m1--what-was-built-in-1-1-step-by-step">What was built in 1.1, step by step</h2>
+<ol>
+<li><strong>Decided scope and wrote an ADR.</strong> The corpus is Markdown-only, so a native
+   parser is enough. Docling is deferred until a PDF or HTML source appears.
+   Recorded in <a href="../../adr/0001-markdown-parser.md">ADR 0001</a>.</li>
+<li><strong>Designed the document model</strong> in <code>packages/helix/parsing.py</code>:
+   - <code>Document</code>: source, path, commit, title, frontmatter, root, stats, warnings;
+   - <code>Section</code>: heading level, title, id, breadcrumb, blocks, children;
+   - <code>Block</code>: type, normalized text, raw source, type-specific metadata.</li>
+<li><strong>Parsed frontmatter</strong> with PyYAML and converted values to JSON-safe types.
+   Title fallback: frontmatter title → first H1 → filename. If the first H1
+   supplied the title, it is not duplicated as a child section.</li>
+<li><strong>Built the heading tree.</strong> Headings outside code fences create sections;
+   breadcrumbs and duplicate anchors (<code>install</code>, <code>install-1</code>) are generated.</li>
+<li><strong>Built the block scanner:</strong>
+   - fenced code first, so <code>#</code> inside code is never a heading;
+   - tables with separator detection, escaped pipes, and pipes inside
+     shortcodes or inline code protected;
+   - ordered and unordered lists with nested levels and continuations;
+   - blockquotes and <code>[!warning]</code> callouts;
+   - paragraphs with inline normalization;
+   - HTML flattened to text.</li>
+<li><strong>Normalized inline Markdown:</strong> links become labels, images become alt text,
+   emphasis disappears, inline code is protected from the HTML and emphasis
+   passes, entities are decoded, and spacing around punctuation is cleaned.</li>
+<li><strong>Handled Hugo shortcodes:</strong> remove the <code>{{&lt; ... &gt;}}</code> tokens but keep wrapped
+   content; map <code>yes</code> and <code>no</code> to text; keep tab titles; count what was removed.</li>
+<li><strong>Wrote the CLI</strong> <code>scripts/parse_corpus.py</code> and added <code>make parse</code> and
+   <code>make parse-sample</code>. It reads the manifest, filters or evenly samples entries,
+   writes one JSON file per source document, and a <code>summary.json</code> with failures
+   and warnings.</li>
+<li><strong>Wrote 13 unit tests</strong> covering frontmatter, title fallback, heading tree,
+   duplicate slugs, code fences, code inside lists, tables, lists, callouts,
+   shortcodes, HTML, determinism, warnings, and file reading.</li>
+<li><strong>Ran the full corpus and fixed real bugs found there:</strong><ul>
+<li>false “unclosed fence” warnings because fences inside list items were
+  swallowed by the list parser;</li>
+<li>table pipes inside shortcode attributes split cells;</li>
+<li>a trailing <code>#</code> in a heading such as <code>C#</code> was being eaten.</li>
+</ul>
+</li>
+<li><strong>Final result:</strong> 2,500 documents, 37,614 sections, 113,255 blocks, 12,408
+    code blocks, 7,280 tables, zero failures, 26 warnings for pages whose only
+    content is a dynamic shortcode, about 13 seconds, and about 122 MB of output.</li>
+<li><strong>Updated the notes and process:</strong> <a href="#01-architecture-parsing">Parsing</a>, the ADR, journal, checklist,
+    <a href="#01-architecture-project-map">Project-Map</a>, README, and generated <code>docs/theory.html</code>. <code>make ci</code> is green:
+    50 passed, 1 deselected.</li>
+<li><strong>Committed</strong> as <code>5516156 feat(parser): normalize Markdown into structured JSON</code>.</li>
+</ol>
+<h2 id="01-architecture-ingestion-m1--common-doubts">Common doubts</h2>
+<h3 id="01-architecture-ingestion-m1--why-not-let-the-chunker-parse-markdown">Why not let the chunker parse Markdown?</h3>
+<p>Because then every consumer re-implements fence, table, and heading rules. One
+parsed artifact also makes it possible to inspect exactly what the next stage
+received.</p>
+<h3 id="01-architecture-ingestion-m1--why-acl-before-chunking">Why ACL before chunking?</h3>
+<p>Because chunks are what get stored and retrieved. If permissions are added later,
+there is a window where the index contains chunks with no enforceable label.</p>
+<h3 id="01-architecture-ingestion-m1--why-parent-and-child-chunks">Why parent and child chunks?</h3>
+<p>The child is small enough for precise semantic search. The parent gives the
+generator enough surrounding context. Keeping both avoids choosing between
+precision and answer quality.</p>
+<h3 id="01-architecture-ingestion-m1--why-use-qdrant-and-postgres">Why use Qdrant and Postgres?</h3>
+<p>Qdrant finds nearest vectors; Postgres stores truth, joins, hashes, and audit
+data. Treating the vector store as the database of record makes reconciliation
+and auditing much harder.</p>
+<h3 id="01-architecture-ingestion-m1--why-must-a-second-ingest-be-a-no-op">Why must a second ingest be a no-op?</h3>
+<p>Real pipelines rerun. Without content hashes and idempotent writes, every rerun
+duplicates data, inflates counts, and makes deletion impossible to reason about.</p>
+<h2 id="01-architecture-ingestion-m1--interview-angle">Interview angle</h2>
+<ul>
+<li>“I parse Markdown once into a document model so the chunker and retriever share
+  one interpretation of headings, lists, code, and tables.”</li>
+<li>“ACLs are metadata applied before vector search, not a sentence in the prompt.
+  The security invariant is zero unauthorized chunks in the context.”</li>
+<li>“I use parent/child chunking: small children for retrieval, the parent section
+  for generation, and a breadcrumb for both context and citations.”</li>
+<li>“BGE-M3 gives me dense and sparse vectors from one model, so hybrid retrieval
+  does not need a separate BM25 pipeline.”</li>
+<li>“The ingest worker is hash-based and idempotent: rerunning unchanged data is a
+  no-op, and deletions propagate as tombstones.”</li>
+</ul>
+</div>
+<div class="related"><strong>Related:</strong> <span class="chip"><a href="#01-architecture-parsing">Parsing</a></span> <span class="chip"><a href="#01-architecture-corpus">Corpus</a></span> <span class="chip"><a href="#01-architecture-storage-layers">Storage-Layers</a></span> <span class="chip"><a href="#01-architecture-project-map">Project-Map</a></span> <span class="chip"><a href="#00-project-checklist">Checklist</a></span> <span class="chip"><a href="#03-journal-2026-10-25">2026-10-25</a></span></div>
+</article>
 <article class="note" id="01-architecture-parsing"
 data-title="Parsing: Markdown to a stable document model">
 <header class="note-header">
@@ -2238,7 +2613,7 @@ parser itself does no reconciliation.</p>
   shortcode. I surface that as a warning instead of silently indexing nothing."</li>
 </ul>
 </div>
-<div class="related"><strong>Related:</strong> <span class="chip"><a href="#01-architecture-corpus">Corpus</a></span> <span class="chip"><a href="#01-architecture-project-map">Project-Map</a></span> <span class="chip"><a href="#00-project-checklist">Checklist</a></span> <span class="chip"><a href="#03-journal-2026-10-25">2026-10-25</a></span></div>
+<div class="related"><strong>Related:</strong> <span class="chip"><a href="#01-architecture-corpus">Corpus</a></span> <span class="chip"><a href="#01-architecture-ingestion-m1">Ingestion-M1</a></span> <span class="chip"><a href="#01-architecture-project-map">Project-Map</a></span> <span class="chip"><a href="#00-project-checklist">Checklist</a></span> <span class="chip"><a href="#03-journal-2026-10-25">2026-10-25</a></span></div>
 </article>
 <article class="note" id="01-architecture-project-map"
 data-title="Project map: the repo and the architecture behind it">
@@ -2662,7 +3037,7 @@ passage the user is not allowed to see.</p>
 <li>"I add complexity only when an ablation shows a measurable gain."</li>
 </ul>
 </div>
-<div class="related"><strong>Related:</strong> <span class="chip"><a href="#00-project-checklist">Checklist</a></span> <span class="chip"><a href="#01-architecture-foundations">Foundations</a></span> <span class="chip"><a href="#01-architecture-compose-stack">Compose-Stack</a></span> <span class="chip"><a href="#01-architecture-corpus">Corpus</a></span> <span class="chip"><a href="#01-architecture-parsing">Parsing</a></span> <span class="chip"><a href="#01-architecture-storage-layers">Storage-Layers</a></span> <span class="chip"><a href="#02-evaluation-evaluation-101">Evaluation-101</a></span> <span class="chip"><a href="#02-evaluation-tracing-a-document">Tracing-a-Document</a></span></div>
+<div class="related"><strong>Related:</strong> <span class="chip"><a href="#00-project-checklist">Checklist</a></span> <span class="chip"><a href="#01-architecture-foundations">Foundations</a></span> <span class="chip"><a href="#01-architecture-compose-stack">Compose-Stack</a></span> <span class="chip"><a href="#01-architecture-corpus">Corpus</a></span> <span class="chip"><a href="#01-architecture-parsing">Parsing</a></span> <span class="chip"><a href="#01-architecture-ingestion-m1">Ingestion-M1</a></span> <span class="chip"><a href="#01-architecture-storage-layers">Storage-Layers</a></span> <span class="chip"><a href="#02-evaluation-evaluation-101">Evaluation-101</a></span> <span class="chip"><a href="#02-evaluation-tracing-a-document">Tracing-a-Document</a></span></div>
 </article>
 <article class="note" id="01-architecture-storage-layers"
 data-title="Why four stores? Postgres, Redis, Qdrant, MinIO">

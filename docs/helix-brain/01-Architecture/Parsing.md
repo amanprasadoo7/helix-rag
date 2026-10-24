@@ -3,7 +3,7 @@ type: architecture
 status: implemented
 day: 3
 tags: [parsing, markdown, ingestion, structure]
-related: ["[[Corpus]]", "[[Project-Map]]", "[[Checklist]]", "[[2026-10-25]]"]
+related: ["[[Corpus]]", "[[Ingestion-M1]]", "[[Project-Map]]", "[[Checklist]]", "[[2026-10-25]]"]
 ---
 
 # Parsing: Markdown to a stable document model

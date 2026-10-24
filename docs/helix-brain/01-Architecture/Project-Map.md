@@ -3,7 +3,7 @@ type: architecture
 status: active
 day: 2
 tags: [architecture, repo, roadmap, retrieval, security, interview]
-related: ["[[Checklist]]", "[[Foundations]]", "[[Compose-Stack]]", "[[Corpus]]", "[[Parsing]]", "[[Storage-Layers]]", "[[Evaluation-101]]", "[[Tracing-a-Document]]"]
+related: ["[[Checklist]]", "[[Foundations]]", "[[Compose-Stack]]", "[[Corpus]]", "[[Parsing]]", "[[Ingestion-M1]]", "[[Storage-Layers]]", "[[Evaluation-101]]", "[[Tracing-a-Document]]"]
 ---
 
 # Project map: the repo and the architecture behind it
