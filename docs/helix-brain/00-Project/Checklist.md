@@ -46,20 +46,20 @@ its own `fix(...)` commit and the DoD is repeated.
 
 ## Current checkpoint
 
-### 0.5 - CI baseline
+### 1.1 - Parser
 
-Goal: run the same local quality gate on every pull request and on `master`.
+Goal: turn each pinned Markdown file into a stable document model (metadata,
+heading tree, typed blocks) that the ACL classifier and chunker can consume
+without re-reading the source.
 
-- [x] Workflow: `.github/workflows/ci.yml`
-- [x] Toolchain: Python 3.12 + uv, with `uv.lock`-keyed caching
-- [x] Gate: `uv sync --locked` then `make ci`
-- [x] Scope: unit tests only; integration needs the local Compose stack
-- [x] Safety: read-only token, concurrency cancellation, 10-minute timeout
-- [x] Manual: push a branch or open a PR and confirm the `CI / lint and test` check
-- [x] Tests: `tests/test_checklist.py` covers compact and aligned roadmap tables
-- [x] `make ci` green
-- [x] Notes: `CI-Baseline.md` + journal + roadmap row
-- [x] Commit: `ci: add baseline workflow`
+- [ ] Module: `packages/helix/parsing.py` parses frontmatter, heading tree, and blocks
+- [ ] Normalize: fenced code, tables, lists, quotes/callouts, HTML, Hugo shortcodes
+- [ ] CLI: `make parse` writes normalized JSON under `data/parsed`; `--limit` for samples
+- [ ] Tests: frontmatter, heading tree, fences, tables, shortcodes/HTML, determinism
+- [ ] Manual: parse five real documents and inspect the JSON
+- [ ] `make ci` green
+- [ ] Notes: `Parsing.md`, ADR on Docling scope, journal, roadmap row
+- [ ] Commit: `feat(parser): normalize Markdown into structured JSON`
 - [ ] User verified (user marks only)
 
 ---
@@ -75,8 +75,8 @@ Status values: `pending`, `in progress`, `done`, `blocked`.
 | 0.3 | Corpus fetch and manifest | done | [[Corpus]] |
 | 0.3b | Corpus cleanup (selected-only, no `.git`) | done | 1.8 GB -> 32 MB; [[2026-10-24]] |
 | 0.4 | Vault, note templates, doc generator | done | 11 notes; [[Project-Map]] |
-| 0.5 | CI baseline | in progress | [[CI-Baseline]]; ruff, mypy, pytest |
-| 1.1 | Parser | pending | Docling, Markdown |
+| 0.5 | CI baseline | done | [[CI-Baseline]]; ruff, mypy, pytest |
+| 1.1 | Parser | in progress | Markdown -> JSON; Docling deferred (ADR) |
 | 1.2 | ACL classifier | pending | path to classification |
 | 1.3 | Chunker | pending | structure-aware, parent/child |
 | 1.4 | Embedder | pending | BGE-M3 dense + sparse |

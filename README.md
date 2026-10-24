@@ -2,7 +2,7 @@
 
 Permission-aware agentic RAG over the GitLab public handbook and product docs.
 
-**Status:** Checkpoint 0.5 - CI baseline (in progress).
+**Status:** Checkpoint 1.1 - Markdown parser (in progress).
 
 ## Quickstart
 
