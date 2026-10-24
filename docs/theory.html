@@ -341,7 +341,7 @@ footer.page-footer {
 <input id="search" class="search" type="search"
   placeholder="Search notes... (press /)" autocomplete="off">
 <nav class="nav" aria-label="Notes">
-<div class="nav-group"><h2>Project</h2><a href="#00-project-ci-baseline" data-target="00-project-ci-baseline">CI baseline: one gate, local and remote</a><a href="#00-project-checklist" data-target="00-project-checklist">Checkpoint checklist and handoff protocol</a><a href="#00-project-study-guide" data-target="00-project-study-guide">Vault and study-guide pipeline</a></div><div class="nav-group"><h2>Architecture</h2><a href="#01-architecture-compose-stack" data-target="01-architecture-compose-stack">Local stack and readiness</a><a href="#01-architecture-corpus" data-target="01-architecture-corpus">Corpus: pinned GitLab handbook and docs</a><a href="#01-architecture-foundations" data-target="01-architecture-foundations">Foundations: async, Make, environments, logging</a><a href="#01-architecture-project-map" data-target="01-architecture-project-map">Project map: the repo and the architecture behind it</a><a href="#01-architecture-storage-layers" data-target="01-architecture-storage-layers">Why four stores? Postgres, Redis, Qdrant, MinIO</a></div><div class="nav-group"><h2>Evaluation</h2><a href="#02-evaluation-evaluation-101" data-target="02-evaluation-evaluation-101">Evaluation 101: how we know RAG is getting better</a><a href="#02-evaluation-tracing-a-document" data-target="02-evaluation-tracing-a-document">Tracing a document and seeding the golden set</a></div><div class="nav-group"><h2>Journal</h2><a href="#03-journal-2026-10-23" data-target="03-journal-2026-10-23">2026-10-23 - Day 1</a><a href="#03-journal-2026-10-24" data-target="03-journal-2026-10-24">2026-10-24 - Day 2</a><a href="#03-journal-2026-10-25" data-target="03-journal-2026-10-25">2026-10-25 - Day 3</a></div>
+<div class="nav-group"><h2>Project</h2><a href="#00-project-ci-baseline" data-target="00-project-ci-baseline">CI baseline: one gate, local and remote</a><a href="#00-project-checklist" data-target="00-project-checklist">Checkpoint checklist and handoff protocol</a><a href="#00-project-study-guide" data-target="00-project-study-guide">Vault and study-guide pipeline</a></div><div class="nav-group"><h2>Architecture</h2><a href="#01-architecture-compose-stack" data-target="01-architecture-compose-stack">Local stack and readiness</a><a href="#01-architecture-corpus" data-target="01-architecture-corpus">Corpus: pinned GitLab handbook and docs</a><a href="#01-architecture-foundations" data-target="01-architecture-foundations">Foundations: async, Make, environments, logging</a><a href="#01-architecture-parsing" data-target="01-architecture-parsing">Parsing: Markdown to a stable document model</a><a href="#01-architecture-project-map" data-target="01-architecture-project-map">Project map: the repo and the architecture behind it</a><a href="#01-architecture-storage-layers" data-target="01-architecture-storage-layers">Why four stores? Postgres, Redis, Qdrant, MinIO</a></div><div class="nav-group"><h2>Evaluation</h2><a href="#02-evaluation-evaluation-101" data-target="02-evaluation-evaluation-101">Evaluation 101: how we know RAG is getting better</a><a href="#02-evaluation-tracing-a-document" data-target="02-evaluation-tracing-a-document">Tracing a document and seeding the golden set</a></div><div class="nav-group"><h2>Journal</h2><a href="#03-journal-2026-10-23" data-target="03-journal-2026-10-23">2026-10-23 - Day 1</a><a href="#03-journal-2026-10-24" data-target="03-journal-2026-10-24">2026-10-24 - Day 2</a><a href="#03-journal-2026-10-25" data-target="03-journal-2026-10-25">2026-10-25 - Day 3</a></div>
 </nav>
 </aside>
 <main id="top">
@@ -350,7 +350,7 @@ footer.page-footer {
 <h1>Helix Study Guide</h1>
 <p>Generated from <code>docs/helix-brain</code>.
 Edit the Markdown, then run <code>make docs</code>.</p>
-<p class="stats">13 notes · 4 sections</p>
+<p class="stats">14 notes · 4 sections</p>
 </header>
 <article class="note" id="00-project-ci-baseline"
 data-title="CI baseline: one gate, local and remote">
@@ -541,7 +541,7 @@ data-title="Checkpoint checklist and handoff protocol">
 <h2>Checkpoint checklist and handoff protocol</h2>
 <span class="chip">process</span><span class="chip">checklist</span><span class="chip">roadmap</span><span class="chip">interviews</span>
 </header>
-<div class="toc"><p class="toctitle">On this page</p><ul><li><a href="#00-project-checklist--the-two-key-rule">The two-key rule</a></li><li><a href="#00-project-checklist--definition-of-done-every-checkpoint">Definition of Done (every checkpoint)</a></li><li><a href="#00-project-checklist--current-checkpoint">Current checkpoint</a><ul><li><a href="#00-project-checklist--0-5-ci-baseline">0.5 - CI baseline</a></li></ul></li><li><a href="#00-project-checklist--roadmap">Roadmap</a></li><li><a href="#00-project-checklist--handoff-template-agent-writes-this-every-checkpoint">Handoff template (agent writes this every checkpoint)</a></li><li><a href="#00-project-checklist--commit-convention">Commit convention</a></li><li><a href="#00-project-checklist--release-gates">Release gates</a></li><li><a href="#00-project-checklist--rules-that-prevent-drift">Rules that prevent drift</a></li></ul></div>
+<div class="toc"><p class="toctitle">On this page</p><ul><li><a href="#00-project-checklist--the-two-key-rule">The two-key rule</a></li><li><a href="#00-project-checklist--definition-of-done-every-checkpoint">Definition of Done (every checkpoint)</a></li><li><a href="#00-project-checklist--current-checkpoint">Current checkpoint</a><ul><li><a href="#00-project-checklist--1-1-parser">1.1 - Parser</a></li></ul></li><li><a href="#00-project-checklist--roadmap">Roadmap</a></li><li><a href="#00-project-checklist--handoff-template-agent-writes-this-every-checkpoint">Handoff template (agent writes this every checkpoint)</a></li><li><a href="#00-project-checklist--commit-convention">Commit convention</a></li><li><a href="#00-project-checklist--release-gates">Release gates</a></li><li><a href="#00-project-checklist--rules-that-prevent-drift">Rules that prevent drift</a></li></ul></div>
 <div class="content">
 <p>This is the contract for how we build Helix. It exists so neither the agent nor
 the human forgets a step, and so every checkpoint ends in the same verifiable
@@ -589,19 +589,19 @@ its own <code>fix(...)</code> commit and the DoD is repeated.</p>
 </ul>
 <hr />
 <h2 id="00-project-checklist--current-checkpoint">Current checkpoint</h2>
-<h3 id="00-project-checklist--0-5-ci-baseline">0.5 - CI baseline</h3>
-<p>Goal: run the same local quality gate on every pull request and on <code>master</code>.</p>
+<h3 id="00-project-checklist--1-1-parser">1.1 - Parser</h3>
+<p>Goal: turn each pinned Markdown file into a stable document model (metadata,
+heading tree, typed blocks) that the ACL classifier and chunker can consume
+without re-reading the source.</p>
 <ul>
-<li>[x] Workflow: <code>.github/workflows/ci.yml</code></li>
-<li>[x] Toolchain: Python 3.12 + uv, with <code>uv.lock</code>-keyed caching</li>
-<li>[x] Gate: <code>uv sync --locked</code> then <code>make ci</code></li>
-<li>[x] Scope: unit tests only; integration needs the local Compose stack</li>
-<li>[x] Safety: read-only token, concurrency cancellation, 10-minute timeout</li>
-<li>[x] Manual: push a branch or open a PR and confirm the <code>CI / lint and test</code> check</li>
-<li>[x] Tests: <code>tests/test_checklist.py</code> covers compact and aligned roadmap tables</li>
+<li>[x] Module: <code>packages/helix/parsing.py</code> parses frontmatter, heading tree, and blocks</li>
+<li>[x] Normalize: fenced code, tables, lists, quotes/callouts, HTML, Hugo shortcodes</li>
+<li>[x] CLI: <code>make parse</code> writes normalized JSON under <code>data/parsed</code>; <code>--limit</code> for samples</li>
+<li>[x] Tests: frontmatter, heading tree, fences, tables, shortcodes/HTML, determinism</li>
+<li>[x] Manual: parse five real documents and inspect the JSON</li>
 <li>[x] <code>make ci</code> green</li>
-<li>[x] Notes: <code>CI-Baseline.md</code> + journal + roadmap row</li>
-<li>[x] Commit: <code>ci: add baseline workflow</code></li>
+<li>[x] Notes: <code>Parsing.md</code>, ADR on Docling scope, journal, roadmap row</li>
+<li>[x] Commit: <code>feat(parser): normalize Markdown into structured JSON</code></li>
 <li>[ ] User verified (user marks only)</li>
 </ul>
 <hr />
@@ -650,14 +650,14 @@ its own <code>fix(...)</code> commit and the DoD is repeated.</p>
 <tr>
 <td>0.5</td>
 <td>CI baseline</td>
-<td>in progress</td>
+<td>done</td>
 <td><a href="#00-project-ci-baseline">CI-Baseline</a>; ruff, mypy, pytest</td>
 </tr>
 <tr>
 <td>1.1</td>
 <td>Parser</td>
-<td>pending</td>
-<td>Docling, Markdown</td>
+<td>in progress</td>
+<td>Markdown -&gt; JSON; Docling deferred (ADR)</td>
 </tr>
 <tr>
 <td>1.2</td>
@@ -1983,6 +1983,263 @@ explain and defend".</p>
 </div>
 <div class="related"><strong>Related:</strong> <span class="chip"><a href="#03-journal-2026-10-23">2026-10-23</a></span> <span class="chip"><a href="#01-architecture-corpus">Corpus</a></span></div>
 </article>
+<article class="note" id="01-architecture-parsing"
+data-title="Parsing: Markdown to a stable document model">
+<header class="note-header">
+<p class="kicker">Architecture · architecture · implemented</p>
+<h2>Parsing: Markdown to a stable document model</h2>
+<span class="chip">parsing</span><span class="chip">markdown</span><span class="chip">ingestion</span><span class="chip">structure</span>
+</header>
+<div class="toc"><p class="toctitle">On this page</p><ul><li><a href="#01-architecture-parsing--why-parse-at-all">Why parse at all?</a></li><li><a href="#01-architecture-parsing--the-model">The model</a><ul><li><a href="#01-architecture-parsing--block-types">Block types</a></li></ul></li><li><a href="#01-architecture-parsing--what-the-parser-handles">What the parser handles</a></li><li><a href="#01-architecture-parsing--what-it-does-not-handle">What it does not handle</a></li><li><a href="#01-architecture-parsing--commands">Commands</a></li><li><a href="#01-architecture-parsing--current-result">Current result</a></li><li><a href="#01-architecture-parsing--decisions-and-trade-offs">Decisions and trade-offs</a><ul><li><a href="#01-architecture-parsing--native-parser-instead-of-docling">Native parser instead of Docling</a></li><li><a href="#01-architecture-parsing--heading-tree-instead-of-a-flat-list">Heading tree instead of a flat list</a></li><li><a href="#01-architecture-parsing--raw-plus-normalized-text">Raw plus normalized text</a></li><li><a href="#01-architecture-parsing--deterministic-json">Deterministic JSON</a></li></ul></li><li><a href="#01-architecture-parsing--common-doubts">Common doubts</a><ul><li><a href="#01-architecture-parsing--why-not-let-the-chunker-parse-markdown">Why not let the chunker parse Markdown?</a></li><li><a href="#01-architecture-parsing--why-is-the-output-larger-than-the-corpus">Why is the output larger than the corpus?</a></li><li><a href="#01-architecture-parsing--why-do-some-documents-have-no-blocks">Why do some documents have no blocks?</a></li><li><a href="#01-architecture-parsing--why-keep-list-levels-in-metadata-if-text-is-flat">Why keep list levels in metadata if text is flat?</a></li><li><a href="#01-architecture-parsing--what-happens-when-the-corpus-pin-changes">What happens when the corpus pin changes?</a></li></ul></li><li><a href="#01-architecture-parsing--interview-angle">Interview angle</a></li></ul></div>
+<div class="content">
+<p><strong>Short answer:</strong> the parser reads one Markdown file once and writes one JSON
+document with metadata, a heading tree, and typed blocks. Later stages stop
+thinking about Markdown and start thinking about sections, text, and structure.</p>
+<h2 id="01-architecture-parsing--why-parse-at-all">Why parse at all?</h2>
+<p>The corpus is already text, so it is tempting to hand raw Markdown to the
+chunker. That breaks in predictable ways:</p>
+<ul>
+<li>a <code>#</code> inside a code fence is not a heading;</li>
+<li>a table row is not a paragraph;</li>
+<li>a list item is not a sentence to split in half;</li>
+<li>Hugo shortcodes and inline HTML are markup, not content;</li>
+<li>a citation needs a heading and a path, not a byte offset in a large file.</li>
+</ul>
+<p>Parsing is where those decisions happen. If the parser gets them wrong, the
+chunker and retriever inherit the mistake.</p>
+<h2 id="01-architecture-parsing--the-model">The model</h2>
+<p><code>packages/helix/parsing.py</code> defines four types:</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>What it holds</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Document</code></td>
+<td>source, path, commit, title, frontmatter, root section, stats, warnings</td>
+</tr>
+<tr>
+<td><code>Section</code></td>
+<td>level, title, anchor-style id, breadcrumb, blocks, child sections</td>
+</tr>
+<tr>
+<td><code>Block</code></td>
+<td>type, normalized <code>text</code>, source <code>raw</code>, type-specific <code>meta</code></td>
+</tr>
+<tr>
+<td><code>DocumentStats</code></td>
+<td>counts for sections, blocks, words, code, tables, shortcodes</td>
+</tr>
+</tbody>
+</table>
+<p>The root section has level 0 and holds content before the first heading. When an
+H1 supplies the document title, the parser uses it as the root title instead of
+creating a duplicate child section.</p>
+<h3 id="01-architecture-parsing--block-types">Block types</h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Examples</th>
+<th>Useful metadata</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>paragraph</code></td>
+<td>prose</td>
+<td>none</td>
+</tr>
+<tr>
+<td><code>list</code></td>
+<td>ordered/unordered, nested</td>
+<td><code>ordered</code>, <code>items[{text, level}]</code></td>
+</tr>
+<tr>
+<td><code>code</code></td>
+<td>fenced code</td>
+<td><code>language</code></td>
+</tr>
+<tr>
+<td><code>table</code></td>
+<td>GFM tables</td>
+<td><code>headers</code>, <code>rows</code></td>
+</tr>
+<tr>
+<td><code>quote</code></td>
+<td>blockquote</td>
+<td>none</td>
+</tr>
+<tr>
+<td><code>callout</code></td>
+<td><code>&gt; [!warning]</code></td>
+<td><code>callout</code></td>
+</tr>
+<tr>
+<td><code>html</code></td>
+<td><code>&lt;details&gt;</code>, <code>&lt;dl&gt;</code></td>
+<td>text is flattened</td>
+</tr>
+</tbody>
+</table>
+<p>Two fields look redundant but are not. <code>text</code> is normalized for retrieval:
+links become their labels, emphasis disappears, HTML tags are stripped, and
+whitespace is collapsed. <code>raw</code> keeps the original excerpt so a parser bug or a
+citation can be traced back to the source.</p>
+<h2 id="01-architecture-parsing--what-the-parser-handles">What the parser handles</h2>
+<ul>
+<li>YAML frontmatter, converted to JSON-safe values (dates become ISO strings).</li>
+<li>ATX headings (<code>## Like this</code>), a heading tree, breadcrumbs, and duplicate
+  anchors (<code>install</code>, <code>install-1</code>).</li>
+<li>Fenced code with any indent, including fences inside list items. Code content
+  is never normalized.</li>
+<li>GFM tables, including escaped pipes and pipes inside shortcodes or inline code.</li>
+<li>Ordered and unordered lists, with nested item levels and continuation lines.</li>
+<li>Blockquotes and <code>[!note]</code> / <code>[!warning]</code> callouts.</li>
+<li>Hugo shortcodes: container tags are removed but their content stays; <code>yes</code> and
+  <code>no</code> become text; a tab title becomes a label.</li>
+<li>Inline HTML (<code>&lt;kbd&gt;</code>, <code>&lt;br&gt;</code>, <code>&lt;dl&gt;</code>, <code>&lt;details&gt;</code>) and Markdown links, images,
+  inline code, emphasis, and entities.</li>
+<li>Documents whose content is only a dynamic shortcode. They parse successfully
+  with an empty-document warning instead of crashing the run.</li>
+</ul>
+<h2 id="01-architecture-parsing--what-it-does-not-handle">What it does not handle</h2>
+<ul>
+<li>Setext headings (<code>Title</code> underlined with <code>===</code>). The pinned corpus has none.</li>
+<li>Four-space indented code blocks that use no fence. The corpus uses fences.</li>
+<li>Dynamic shortcodes such as team lists. There is no static text to extract, so
+  the page is empty by design.</li>
+<li>Perfect CommonMark. Nested lists are flattened in <code>text</code> (levels remain in
+  <code>meta</code>), and complex HTML tables are flattened rather than reconstructed.</li>
+<li>Cross-document links. Resolving <code>../other.md</code> is a later concern.</li>
+</ul>
+<h2 id="01-architecture-parsing--commands">Commands</h2>
+<pre><code class="language-bash">make parse          # all manifest files -&gt; data/parsed
+make parse-sample   # five evenly spaced files, one line each
+</code></pre>
+<p>Inspect one document:</p>
+<pre><code class="language-bash">python3 -m json.tool \
+  data/parsed/handbook/content/handbook/business-technology/enterprise-applications/guides/zuora-collect.json \
+  | less
+</code></pre>
+<p>Small queries without <code>jq</code>:</p>
+<pre><code class="language-bash">python3 -c 'import json; d=json.load(open(&quot;data/parsed/...json&quot;)); print(d[&quot;stats&quot;])'
+python3 -c 'import json; d=json.load(open(&quot;data/parsed/...json&quot;)); print([s[&quot;title&quot;] for s in d[&quot;root&quot;][&quot;children&quot;]])'
+</code></pre>
+<h2 id="01-architecture-parsing--current-result">Current result</h2>
+<table>
+<thead>
+<tr>
+<th>Measure</th>
+<th style="text-align: right;">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Documents</td>
+<td style="text-align: right;">2,500</td>
+</tr>
+<tr>
+<td>Sections</td>
+<td style="text-align: right;">37,614</td>
+</tr>
+<tr>
+<td>Blocks</td>
+<td style="text-align: right;">113,255</td>
+</tr>
+<tr>
+<td>Words</td>
+<td style="text-align: right;">3,565,493</td>
+</tr>
+<tr>
+<td>Code blocks</td>
+<td style="text-align: right;">12,408</td>
+</tr>
+<tr>
+<td>Tables</td>
+<td style="text-align: right;">7,280</td>
+</tr>
+<tr>
+<td>Shortcodes removed</td>
+<td style="text-align: right;">14,523</td>
+</tr>
+<tr>
+<td>Parse time</td>
+<td style="text-align: right;">~13 s</td>
+</tr>
+<tr>
+<td>Output size</td>
+<td style="text-align: right;">~122 MB</td>
+</tr>
+<tr>
+<td>Failures</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td>Warnings</td>
+<td style="text-align: right;">26 (empty pages whose only content is a dynamic shortcode)</td>
+</tr>
+</tbody>
+</table>
+<p>The word count is lower than the manifest's estimate because frontmatter, link
+URLs, and shortcode arguments are not content.</p>
+<h2 id="01-architecture-parsing--decisions-and-trade-offs">Decisions and trade-offs</h2>
+<h3 id="01-architecture-parsing--native-parser-instead-of-docling">Native parser instead of Docling</h3>
+<p>Docling is for layout-heavy formats. The corpus is Markdown. Running Docling
+here would add models and runtime without improving structure. See
+<a href="../../adr/0001-markdown-parser.md">ADR 0001</a>. Docling becomes an adapter behind
+the same document model when a PDF or scanned source appears.</p>
+<h3 id="01-architecture-parsing--heading-tree-instead-of-a-flat-list">Heading tree instead of a flat list</h3>
+<p>A tree gives the chunker a parent section for free. Breadcrumbs make citations
+readable (<code>Handbook &gt; Engineering &gt; ...</code>) and give the embedder context that the
+child text alone lacks.</p>
+<h3 id="01-architecture-parsing--raw-plus-normalized-text">Raw plus normalized text</h3>
+<p>Keeping both doubles output size, but it separates "what the model sees" from
+"what the source said". That distinction is hard to reconstruct later.</p>
+<h3 id="01-architecture-parsing--deterministic-json">Deterministic JSON</h3>
+<p>The same input produces byte-identical JSON. There are no timestamps, UUIDs, or
+set iteration in a document. This makes re-parsing a no-op for review and gives
+the later content-hash cache a stable input.</p>
+<h2 id="01-architecture-parsing--common-doubts">Common doubts</h2>
+<h3 id="01-architecture-parsing--why-not-let-the-chunker-parse-markdown">Why not let the chunker parse Markdown?</h3>
+<p>Because then every consumer re-implements fence, table, and heading rules. A
+single parsed artifact also makes it possible to inspect exactly what the next
+stage received.</p>
+<h3 id="01-architecture-parsing--why-is-the-output-larger-than-the-corpus">Why is the output larger than the corpus?</h3>
+<p>It is pretty-printed JSON carrying both <code>raw</code> and <code>text</code>. Storage is cheap; the
+point is inspectability. If size matters, write compact JSON or drop <code>raw</code> for
+<code>code</code> and <code>table</code> blocks.</p>
+<h3 id="01-architecture-parsing--why-do-some-documents-have-no-blocks">Why do some documents have no blocks?</h3>
+<p>Their body is a single dynamic shortcode, for example a generated team roster.
+The content exists only at build time on the upstream site. The parser records a
+warning rather than inventing text.</p>
+<h3 id="01-architecture-parsing--why-keep-list-levels-in-metadata-if-text-is-flat">Why keep list levels in metadata if text is flat?</h3>
+<p>The chunker may want to split a long list or repeat the parent bullet. Flattening
+only the retrieval text keeps embedding simple without throwing structure away.</p>
+<h3 id="01-architecture-parsing--what-happens-when-the-corpus-pin-changes">What happens when the corpus pin changes?</h3>
+<p>The parser is deterministic, so re-running <code>make parse</code> produces a new tree for
+changed files. Ingestion will compare content hashes in a later checkpoint; the
+parser itself does no reconciliation.</p>
+<h2 id="01-architecture-parsing--interview-angle">Interview angle</h2>
+<ul>
+<li>"I parse Markdown once into a document model so the chunker and retriever share
+  one interpretation of headings, lists, code, and tables."</li>
+<li>"Normalized text is for retrieval; raw text is for debugging and citations.
+  Keeping both avoids a lossy handoff."</li>
+<li>"I chose a native Markdown parser because the corpus has no PDFs; Docling is
+  deferred behind the same interface rather than paying for unused layout
+  inference."</li>
+<li>"The parser is deterministic, so re-ingesting an unchanged corpus is a no-op
+  at the file level."</li>
+<li>"Twenty-six pages are empty because their content is generated by a dynamic
+  shortcode. I surface that as a warning instead of silently indexing nothing."</li>
+</ul>
+</div>
+<div class="related"><strong>Related:</strong> <span class="chip"><a href="#01-architecture-corpus">Corpus</a></span> <span class="chip"><a href="#01-architecture-project-map">Project-Map</a></span> <span class="chip"><a href="#00-project-checklist">Checklist</a></span> <span class="chip"><a href="#03-journal-2026-10-25">2026-10-25</a></span></div>
+</article>
 <article class="note" id="01-architecture-project-map"
 data-title="Project map: the repo and the architecture behind it">
 <header class="note-header">
@@ -2038,10 +2295,11 @@ person to understand and run.</p>
 </table>
 <div class="callout info">
 <p class="callout-title">Current state</p>
-<p>Checkpoint 0.4. The repo has a working API skeleton, local services, a pinned
-corpus, and a docs/eval seed. It does <strong>not</strong> yet have parsing, chunking,
-embeddings, retrieval, generation, auth, or a UI. This note explains the
-target architecture and marks what exists now.</p>
+<p>Checkpoint 1.1. The repo has a working API skeleton, local services, a pinned
+corpus, a Markdown parser that emits structured JSON, and a docs/eval seed. It
+does <strong>not</strong> yet have ACL classification, chunking, embeddings, retrieval,
+generation, auth, or a UI. This note explains the target architecture and
+marks what exists now.</p>
 </div>
 <h2 id="01-architecture-project-map--what-lives-where">What lives where</h2>
 <table>
@@ -2137,8 +2395,9 @@ target architecture and marks what exists now.</p>
 </tbody>
 </table>
 <h2 id="01-architecture-project-map--the-target-architecture">The target architecture</h2>
-<p>The diagram below is the destination, not the current implementation. Today only
-the API health path and the supporting local services exist.</p>
+<p>The diagram below is the destination, not the current implementation. Today the
+API health path, the local services, the corpus, and the parser exist; the
+retrieval and agent layers do not.</p>
 <pre><code class="language-text">                    Browser / future Next.js UI
                               |
                          HTTP / SSE
@@ -2199,8 +2458,8 @@ and pushes optional work, such as broad query expansion, behind a bounded budget
 </tr>
 <tr>
 <td>Ingestion</td>
-<td>Pinned corpus and manifest</td>
-<td>Parser, ACL classifier, chunker, embedder</td>
+<td>Pinned corpus, manifest, Markdown parser</td>
+<td>ACL classifier, chunker, embedder</td>
 </tr>
 <tr>
 <td>Storage</td>
@@ -2383,7 +2642,8 @@ passage the user is not allowed to see.</p>
 <ol>
 <li>Start with <a href="#01-architecture-foundations">Foundations</a> for the Python, async, config, and Makefile ideas.</li>
 <li>Read <a href="#01-architecture-compose-stack">Compose-Stack</a> and <a href="#01-architecture-storage-layers">Storage-Layers</a> for the local services.</li>
-<li>Read <a href="#01-architecture-corpus">Corpus</a> for how the source snapshot is pinned and selected.</li>
+<li>Read <a href="#01-architecture-corpus">Corpus</a> for how the source snapshot is pinned and selected, then
+   <a href="#01-architecture-parsing">Parsing</a> for how Markdown becomes structured JSON.</li>
 <li>Read <a href="#02-evaluation-evaluation-101">Evaluation-101</a> for how quality is measured.</li>
 <li>Read <a href="#02-evaluation-tracing-a-document">Tracing-a-Document</a> for the chain from a manifest entry to a seed
    question.</li>
@@ -2402,7 +2662,7 @@ passage the user is not allowed to see.</p>
 <li>"I add complexity only when an ablation shows a measurable gain."</li>
 </ul>
 </div>
-<div class="related"><strong>Related:</strong> <span class="chip"><a href="#00-project-checklist">Checklist</a></span> <span class="chip"><a href="#01-architecture-foundations">Foundations</a></span> <span class="chip"><a href="#01-architecture-compose-stack">Compose-Stack</a></span> <span class="chip"><a href="#01-architecture-corpus">Corpus</a></span> <span class="chip"><a href="#01-architecture-storage-layers">Storage-Layers</a></span> <span class="chip"><a href="#02-evaluation-evaluation-101">Evaluation-101</a></span> <span class="chip"><a href="#02-evaluation-tracing-a-document">Tracing-a-Document</a></span></div>
+<div class="related"><strong>Related:</strong> <span class="chip"><a href="#00-project-checklist">Checklist</a></span> <span class="chip"><a href="#01-architecture-foundations">Foundations</a></span> <span class="chip"><a href="#01-architecture-compose-stack">Compose-Stack</a></span> <span class="chip"><a href="#01-architecture-corpus">Corpus</a></span> <span class="chip"><a href="#01-architecture-parsing">Parsing</a></span> <span class="chip"><a href="#01-architecture-storage-layers">Storage-Layers</a></span> <span class="chip"><a href="#02-evaluation-evaluation-101">Evaluation-101</a></span> <span class="chip"><a href="#02-evaluation-tracing-a-document">Tracing-a-Document</a></span></div>
 </article>
 <article class="note" id="01-architecture-storage-layers"
 data-title="Why four stores? Postgres, Redis, Qdrant, MinIO">
@@ -3908,7 +4168,7 @@ data-title="2026-10-25 - Day 3">
 <h2>2026-10-25 - Day 3</h2>
 <span class="chip">helix</span><span class="chip">journal</span><span class="chip">ci</span><span class="chip">github-actions</span>
 </header>
-<div class="toc"><p class="toctitle">On this page</p><ul><li><a href="#03-journal-2026-10-25--checkpoint-0-5-ci-baseline">Checkpoint 0.5 - CI baseline</a></li></ul></div>
+<div class="toc"><p class="toctitle">On this page</p><ul><li><a href="#03-journal-2026-10-25--checkpoint-0-5-ci-baseline">Checkpoint 0.5 - CI baseline</a></li><li><a href="#03-journal-2026-10-25--checkpoint-1-1-parser">Checkpoint 1.1 - Parser</a></li></ul></div>
 <div class="content">
 <p>Previous day: <a href="#03-journal-2026-10-24">2026-10-24</a></p>
 <h2 id="03-journal-2026-10-25--checkpoint-0-5-ci-baseline">Checkpoint 0.5 - CI baseline</h2>
@@ -3942,9 +4202,68 @@ docker run --rm -v &quot;$PWD:/repo&quot; -w /repo rhysd/actionlint:latest
 <li>Action versions are pinned to release tags for now; full SHA pinning and an
   updater can come later.</li>
 </ul>
+<p><strong>Verified</strong></p>
+<ul>
+<li>Local <code>make ci</code> green: Ruff, mypy on 10 files, 37 passed / 1 deselected.</li>
+<li>Remote run <code>CI / lint and test</code> succeeded on <code>master</code>
+  (<a href="https://github.com/amanprasadoo7/helix-rag/actions/runs/40125057288">run 40125057288</a>).</li>
+<li>User replied <code>pass</code>, so the checkpoint is closed and the roadmap row moved to
+  <code>done</code>.</li>
+</ul>
 <p><strong>Open</strong></p>
 <ul>
-<li>Push a branch or open a pull request and confirm <code>CI / lint and test</code> is green.</li>
+<li>None for 0.5.</li>
+</ul>
+<hr />
+<h2 id="03-journal-2026-10-25--checkpoint-1-1-parser">Checkpoint 1.1 - Parser</h2>
+<p><strong>Goal:</strong> convert each of the 2,500 pinned Markdown files into one stable
+document model, so later stages read structured JSON instead of re-parsing
+Markdown.</p>
+<p><strong>What was built</strong></p>
+<ul>
+<li><code>packages/helix/parsing.py</code>: Pydantic document model plus the native parser</li>
+<li><code>scripts/parse_corpus.py</code>, <code>make parse</code>, and <code>make parse-sample</code></li>
+<li><code>tests/test_parsing.py</code>: 13 cases covering frontmatter, heading tree, code,
+  lists, tables, callouts, shortcodes, HTML, determinism, and warnings</li>
+<li><code>docs/helix-brain/01-Architecture/Parsing.md</code></li>
+<li><code>docs/adr/0001-markdown-parser.md</code></li>
+<li><code>pyyaml</code> and <code>types-PyYAML</code> added as direct dependencies</li>
+</ul>
+<p><strong>Result</strong></p>
+<pre><code class="language-text">Parsed 2500 documents: 37614 sections, 113255 blocks,
+3565493 words, 12408 code blocks, 7280 tables, 26 warnings
+</code></pre>
+<p>All 2,500 files parsed; zero failures. The run takes about 13 seconds and writes
+about 122 MB of pretty-printed JSON to <code>data/parsed</code>. The 26 warnings are pages
+whose entire body is a dynamic shortcode (for example a generated team list), so
+there is no static text to index.</p>
+<p><strong>Manual test</strong></p>
+<pre><code class="language-bash">make parse-sample
+# five evenly spaced documents, one summary line each
+python3 -m json.tool \
+  data/parsed/handbook/content/handbook/business-technology/enterprise-applications/guides/zuora-collect.json \
+  | less
+# title, 36 sections, 86 blocks; headings match the source
+</code></pre>
+<p><strong>Decisions</strong></p>
+<ul>
+<li>Native Markdown parser now; Docling deferred until a non-Markdown source
+  exists. The corpus has no PDFs or HTML files, so Docling would add models and
+  runtime without improving accuracy.</li>
+<li>A heading tree with breadcrumbs, not a flat list, because the chunker needs
+  parent scopes and citations need a readable path.</li>
+<li><code>text</code> is normalized for retrieval and <code>raw</code> keeps the source excerpt. The
+  output is larger, but the next stage never has to guess what the source said.</li>
+<li>Dynamic shortcodes are removed; empty pages produce a warning instead of
+  inventing content.</li>
+<li>The parser allows indented fences so code inside list items stays code. That
+  fixed 53 false "unclosed fence" warnings in the first full run.</li>
+</ul>
+<p><strong>Open</strong></p>
+<ul>
+<li>The golden set still has seven seed cases; parsing does not change it.</li>
+<li>Nested lists are flattened in <code>text</code> (levels remain in <code>meta</code>). Revisit only
+  if chunking quality shows the hierarchy matters.</li>
 <li>User verification remains.</li>
 </ul>
 </div>

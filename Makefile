@@ -2,7 +2,7 @@ COMPOSE_FILE := infra/docker-compose.yml
 ENV_FILE := $(if $(wildcard .env),--env-file .env,)
 COMPOSE := docker compose -f $(COMPOSE_FILE) $(ENV_FILE)
 
-.PHONY: sync dev test test-integration lint fmt ci checklist docs corpus corpus-clean up down reset ps logs ready tools tools-down
+.PHONY: sync dev test test-integration lint fmt ci checklist docs corpus corpus-clean parse parse-sample up down reset ps logs ready tools tools-down
 
 sync:
 	uv sync
@@ -35,6 +35,12 @@ corpus:
 
 corpus-clean:
 	uv run python scripts/prune_corpus.py
+
+parse:
+	uv run python scripts/parse_corpus.py
+
+parse-sample:
+	uv run python scripts/parse_corpus.py --limit 5 --verbose
 
 ci: lint test
 

@@ -17,6 +17,8 @@ make lint
 make ci           # ruff + mypy + pytest
 make checklist    # current checkpoint status
 make docs         # regenerate docs/theory.html from the vault
+make parse        # normalized JSON for every corpus file -> data/parsed
+make parse-sample # five documents, one summary line each
 ```
 
 API docs: http://127.0.0.1:8000/docs
@@ -54,6 +56,19 @@ words, ~19.9k estimated child chunks. The initial checkout is about 1.8 GB;
 Re-fetch with `make corpus` when you need local Git-level tracing. See
 [`Corpus.md`](docs/helix-brain/01-Architecture/Corpus.md) for the selection
 strategy and trade-offs.
+
+## Parsing
+
+```bash
+make parse        # data/corpus + manifest -> data/parsed
+make parse-sample # parse five evenly spaced files and print a summary
+```
+
+Each document becomes one JSON file with frontmatter, a heading tree, typed
+blocks, normalized text, and the source excerpt. The full run parses 2,500
+documents in about 13 seconds with no network access. See
+[`Parsing.md`](docs/helix-brain/01-Architecture/Parsing.md) for the model and
+[ADR 0001](docs/adr/0001-markdown-parser.md) for why Docling is deferred.
 
 `make up` waits for healthchecks. `make down` keeps data; `make reset` deletes
 volumes.

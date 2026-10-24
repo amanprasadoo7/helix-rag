@@ -52,14 +52,14 @@ Goal: turn each pinned Markdown file into a stable document model (metadata,
 heading tree, typed blocks) that the ACL classifier and chunker can consume
 without re-reading the source.
 
-- [ ] Module: `packages/helix/parsing.py` parses frontmatter, heading tree, and blocks
-- [ ] Normalize: fenced code, tables, lists, quotes/callouts, HTML, Hugo shortcodes
-- [ ] CLI: `make parse` writes normalized JSON under `data/parsed`; `--limit` for samples
-- [ ] Tests: frontmatter, heading tree, fences, tables, shortcodes/HTML, determinism
-- [ ] Manual: parse five real documents and inspect the JSON
-- [ ] `make ci` green
-- [ ] Notes: `Parsing.md`, ADR on Docling scope, journal, roadmap row
-- [ ] Commit: `feat(parser): normalize Markdown into structured JSON`
+- [x] Module: `packages/helix/parsing.py` parses frontmatter, heading tree, and blocks
+- [x] Normalize: fenced code, tables, lists, quotes/callouts, HTML, Hugo shortcodes
+- [x] CLI: `make parse` writes normalized JSON under `data/parsed`; `--limit` for samples
+- [x] Tests: frontmatter, heading tree, fences, tables, shortcodes/HTML, determinism
+- [x] Manual: parse five real documents and inspect the JSON
+- [x] `make ci` green
+- [x] Notes: `Parsing.md`, ADR on Docling scope, journal, roadmap row
+- [x] Commit: `feat(parser): normalize Markdown into structured JSON`
 - [ ] User verified (user marks only)
 
 ---

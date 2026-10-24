@@ -3,7 +3,7 @@ type: architecture
 status: active
 day: 2
 tags: [architecture, repo, roadmap, retrieval, security, interview]
-related: ["[[Checklist]]", "[[Foundations]]", "[[Compose-Stack]]", "[[Corpus]]", "[[Storage-Layers]]", "[[Evaluation-101]]", "[[Tracing-a-Document]]"]
+related: ["[[Checklist]]", "[[Foundations]]", "[[Compose-Stack]]", "[[Corpus]]", "[[Parsing]]", "[[Storage-Layers]]", "[[Evaluation-101]]", "[[Tracing-a-Document]]"]
 ---
 
 # Project map: the repo and the architecture behind it
@@ -27,10 +27,11 @@ Think of it as a staffed research library:
 | Quality review after an answer | Evals and security gates |
 
 > [!info] Current state
-> Checkpoint 0.4. The repo has a working API skeleton, local services, a pinned
-> corpus, and a docs/eval seed. It does **not** yet have parsing, chunking,
-> embeddings, retrieval, generation, auth, or a UI. This note explains the
-> target architecture and marks what exists now.
+> Checkpoint 1.1. The repo has a working API skeleton, local services, a pinned
+> corpus, a Markdown parser that emits structured JSON, and a docs/eval seed. It
+> does **not** yet have ACL classification, chunking, embeddings, retrieval,
+> generation, auth, or a UI. This note explains the target architecture and
+> marks what exists now.
 
 ## What lives where
 
@@ -59,8 +60,9 @@ The root files are the interface to the project:
 
 ## The target architecture
 
-The diagram below is the destination, not the current implementation. Today only
-the API health path and the supporting local services exist.
+The diagram below is the destination, not the current implementation. Today the
+API health path, the local services, the corpus, and the parser exist; the
+retrieval and agent layers do not.
 
 ```text
                     Browser / future Next.js UI
@@ -121,7 +123,7 @@ and pushes optional work, such as broad query expansion, behind a bounded budget
 | Layer | Now | Next |
 |---|---|---|
 | API | `/`, `/health/live`, `/health/ready` | Chat, streaming, admin ingest |
-| Ingestion | Pinned corpus and manifest | Parser, ACL classifier, chunker, embedder |
+| Ingestion | Pinned corpus, manifest, Markdown parser | ACL classifier, chunker, embedder |
 | Storage | Four running services, empty | Schemas, collections, buckets |
 | Retrieval | None | Hybrid dense + sparse, RRF, reranker |
 | Agent | None | LangGraph plan/retrieve/grade loop |
@@ -187,7 +189,8 @@ passage the user is not allowed to see.
 
 1. Start with [[Foundations]] for the Python, async, config, and Makefile ideas.
 2. Read [[Compose-Stack]] and [[Storage-Layers]] for the local services.
-3. Read [[Corpus]] for how the source snapshot is pinned and selected.
+3. Read [[Corpus]] for how the source snapshot is pinned and selected, then
+   [[Parsing]] for how Markdown becomes structured JSON.
 4. Read [[Evaluation-101]] for how quality is measured.
 5. Read [[Tracing-a-Document]] for the chain from a manifest entry to a seed
    question.
