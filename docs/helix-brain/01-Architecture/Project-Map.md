@@ -3,7 +3,7 @@ type: architecture
 status: active
 day: 2
 tags: [architecture, repo, roadmap, retrieval, security, interview]
-related: ["[[Checklist]]", "[[Foundations]]", "[[Compose-Stack]]", "[[Corpus]]", "[[Parsing]]", "[[Ingestion-M1]]", "[[Storage-Layers]]", "[[Evaluation-101]]", "[[Tracing-a-Document]]"]
+related: ["[[Start-Here]]", "[[Checklist]]", "[[Foundations]]", "[[Compose-Stack]]", "[[Corpus]]", "[[Parsing]]", "[[Document-Normalization]]", "[[Parser-Lab]]", "[[Ingestion-M1]]", "[[Storage-Layers]]", "[[Evaluation-101]]", "[[Tracing-a-Document]]"]
 ---
 
 # Project map: the repo and the architecture behind it
@@ -187,14 +187,15 @@ passage the user is not allowed to see.
 
 ## How to read the repo
 
-1. Start with [[Foundations]] for the Python, async, config, and Makefile ideas.
-2. Read [[Compose-Stack]] and [[Storage-Layers]] for the local services.
-3. Read [[Corpus]] for how the source snapshot is pinned and selected, then
+1. Start with [[Start-Here]] for the current checkpoint and reading paths.
+2. Read [[Foundations]] for the Python, async, config, and Makefile ideas.
+3. Read [[Compose-Stack]] and [[Storage-Layers]] for the local services.
+4. Read [[Corpus]] for how the source snapshot is pinned and selected, then
    [[Parsing]] for how Markdown becomes structured JSON.
-4. Read [[Evaluation-101]] for how quality is measured.
-5. Read [[Tracing-a-Document]] for the chain from a manifest entry to a seed
+5. Read [[Evaluation-101]] for how quality is measured.
+6. Read [[Tracing-a-Document]] for the chain from a manifest entry to a seed
    question.
-6. Use [[Checklist]] for what is actually in scope right now.
+7. Use [[Checklist]] for what is actually in scope right now.
 
 ## Interview angle
 

@@ -19,6 +19,7 @@ make checklist    # current checkpoint status
 make docs         # regenerate docs/theory.html from the vault
 make parse        # normalized JSON for every corpus file -> data/parsed
 make parse-sample # five documents, one summary line each
+make compare FILE=path/to/file  # native vs Docling vs Unstructured -> data/parser-lab
 ```
 
 API docs: http://127.0.0.1:8000/docs
@@ -67,8 +68,22 @@ make parse-sample # parse five evenly spaced files and print a summary
 Each document becomes one JSON file with frontmatter, a heading tree, typed
 blocks, normalized text, and the source excerpt. The full run parses 2,500
 documents in about 13 seconds with no network access. See
-[`Parsing.md`](docs/helix-brain/01-Architecture/Parsing.md) for the model and
+[`Parsing.md`](docs/helix-brain/01-Architecture/Parsing.md) for the model,
+[`Document-Normalization.md`](docs/helix-brain/01-Architecture/Document-Normalization.md)
+for why we normalize and how correctness is checked, and
 [ADR 0001](docs/adr/0001-markdown-parser.md) for why Docling is deferred.
+
+To compare extractors on one file, run:
+
+```bash
+make compare FILE=data/corpus/gitlab-docs/doc/user/import/third_party_systems/clearcase.md
+```
+
+This writes `native.json`, `docling.json`, `docling.md`, `unstructured.json`, and
+`summary.json` under `data/parser-lab/<file-stem>/`. The optional parser extras
+are not installed by default. See
+[`Parser-Lab.md`](docs/helix-brain/01-Architecture/Parser-Lab.md) for what the
+differences mean and when to use each parser.
 
 `make up` waits for healthchecks. `make down` keeps data; `make reset` deletes
 volumes.
@@ -88,10 +103,12 @@ make docs
 ```
 
 The guide has sidebar navigation, per-note tables of contents, client-side
-search (press `/`), light/dark themes, and print styles. Note templates live in
+search (press `/`), light/dark themes, and print styles. Start at
+[`Start-Here.md`](docs/helix-brain/00-Project/Start-Here.md) for the current
+checkpoint and reading paths. Note templates live in
 `docs/helix-brain/_templates`. See
 [`Study-Guide.md`](docs/helix-brain/00-Project/Study-Guide.md) for the frontmatter
-contract and supported Markdown subset.
+contract, folder policy, and supported Markdown subset.
 
 ## Evaluation
 

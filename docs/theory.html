@@ -341,7 +341,7 @@ footer.page-footer {
 <input id="search" class="search" type="search"
   placeholder="Search notes... (press /)" autocomplete="off">
 <nav class="nav" aria-label="Notes">
-<div class="nav-group"><h2>Project</h2><a href="#00-project-ci-baseline" data-target="00-project-ci-baseline">CI baseline: one gate, local and remote</a><a href="#00-project-checklist" data-target="00-project-checklist">Checkpoint checklist and handoff protocol</a><a href="#00-project-study-guide" data-target="00-project-study-guide">Vault and study-guide pipeline</a></div><div class="nav-group"><h2>Architecture</h2><a href="#01-architecture-compose-stack" data-target="01-architecture-compose-stack">Local stack and readiness</a><a href="#01-architecture-corpus" data-target="01-architecture-corpus">Corpus: pinned GitLab handbook and docs</a><a href="#01-architecture-foundations" data-target="01-architecture-foundations">Foundations: async, Make, environments, logging</a><a href="#01-architecture-ingestion-m1" data-target="01-architecture-ingestion-m1">Ingestion M1: from Markdown to a searchable index</a><a href="#01-architecture-parsing" data-target="01-architecture-parsing">Parsing: Markdown to a stable document model</a><a href="#01-architecture-project-map" data-target="01-architecture-project-map">Project map: the repo and the architecture behind it</a><a href="#01-architecture-storage-layers" data-target="01-architecture-storage-layers">Why four stores? Postgres, Redis, Qdrant, MinIO</a></div><div class="nav-group"><h2>Evaluation</h2><a href="#02-evaluation-evaluation-101" data-target="02-evaluation-evaluation-101">Evaluation 101: how we know RAG is getting better</a><a href="#02-evaluation-tracing-a-document" data-target="02-evaluation-tracing-a-document">Tracing a document and seeding the golden set</a></div><div class="nav-group"><h2>Journal</h2><a href="#03-journal-2026-10-23" data-target="03-journal-2026-10-23">2026-10-23 - Day 1</a><a href="#03-journal-2026-10-24" data-target="03-journal-2026-10-24">2026-10-24 - Day 2</a><a href="#03-journal-2026-10-25" data-target="03-journal-2026-10-25">2026-10-25 - Day 3</a></div>
+<div class="nav-group"><h2>Project</h2><a href="#00-project-ci-baseline" data-target="00-project-ci-baseline">CI baseline: one gate, local and remote</a><a href="#00-project-checklist" data-target="00-project-checklist">Checkpoint checklist and handoff protocol</a><a href="#00-project-start-here" data-target="00-project-start-here">Start here</a><a href="#00-project-study-guide" data-target="00-project-study-guide">Vault and study-guide pipeline</a></div><div class="nav-group"><h2>Architecture</h2><a href="#01-architecture-compose-stack" data-target="01-architecture-compose-stack">Local stack and readiness</a><a href="#01-architecture-corpus" data-target="01-architecture-corpus">Corpus: pinned GitLab handbook and docs</a><a href="#01-architecture-document-normalization" data-target="01-architecture-document-normalization">Document normalization: why and how</a><a href="#01-architecture-foundations" data-target="01-architecture-foundations">Foundations: async, Make, environments, logging</a><a href="#01-architecture-ingestion-m1" data-target="01-architecture-ingestion-m1">Ingestion M1: from Markdown to a searchable index</a><a href="#01-architecture-parser-lab" data-target="01-architecture-parser-lab">Parser lab: native vs Docling vs Unstructured</a><a href="#01-architecture-parsing" data-target="01-architecture-parsing">Parsing: Markdown to a stable document model</a><a href="#01-architecture-project-map" data-target="01-architecture-project-map">Project map: the repo and the architecture behind it</a><a href="#01-architecture-storage-layers" data-target="01-architecture-storage-layers">Why four stores? Postgres, Redis, Qdrant, MinIO</a></div><div class="nav-group"><h2>Evaluation</h2><a href="#02-evaluation-evaluation-101" data-target="02-evaluation-evaluation-101">Evaluation 101: how we know RAG is getting better</a><a href="#02-evaluation-tracing-a-document" data-target="02-evaluation-tracing-a-document">Tracing a document and seeding the golden set</a></div><div class="nav-group"><h2>Journal</h2><a href="#03-journal-2026-10-23" data-target="03-journal-2026-10-23">2026-10-23 - Day 1</a><a href="#03-journal-2026-10-24" data-target="03-journal-2026-10-24">2026-10-24 - Day 2</a><a href="#03-journal-2026-10-25" data-target="03-journal-2026-10-25">2026-10-25 - Day 3</a></div>
 </nav>
 </aside>
 <main id="top">
@@ -350,7 +350,7 @@ footer.page-footer {
 <h1>Helix Study Guide</h1>
 <p>Generated from <code>docs/helix-brain</code>.
 Edit the Markdown, then run <code>make docs</code>.</p>
-<p class="stats">15 notes · 4 sections</p>
+<p class="stats">18 notes · 4 sections</p>
 </header>
 <article class="note" id="00-project-ci-baseline"
 data-title="CI baseline: one gate, local and remote">
@@ -539,7 +539,7 @@ data-title="Checkpoint checklist and handoff protocol">
 <header class="note-header">
 <p class="kicker">Project · process · active</p>
 <h2>Checkpoint checklist and handoff protocol</h2>
-<span class="chip">process</span><span class="chip">checklist</span><span class="chip">roadmap</span><span class="chip">interviews</span>
+<span class="chip">process</span><span class="chip">checklist</span><span class="chip">roadmap</span><span class="chip">interview</span>
 </header>
 <div class="toc"><p class="toctitle">On this page</p><ul><li><a href="#00-project-checklist--the-two-key-rule">The two-key rule</a></li><li><a href="#00-project-checklist--definition-of-done-every-checkpoint">Definition of Done (every checkpoint)</a></li><li><a href="#00-project-checklist--current-checkpoint">Current checkpoint</a><ul><li><a href="#00-project-checklist--1-1-parser">1.1 - Parser</a></li></ul></li><li><a href="#00-project-checklist--roadmap">Roadmap</a></li><li><a href="#00-project-checklist--handoff-template-agent-writes-this-every-checkpoint">Handoff template (agent writes this every checkpoint)</a></li><li><a href="#00-project-checklist--commit-convention">Commit convention</a></li><li><a href="#00-project-checklist--release-gates">Release gates</a></li><li><a href="#00-project-checklist--rules-that-prevent-drift">Rules that prevent drift</a></li></ul></div>
 <div class="content">
@@ -1006,7 +1006,112 @@ of those two replies.</p>
    big.</li>
 </ol>
 </div>
-<div class="related"><strong>Related:</strong> <span class="chip"><a href="#03-journal-2026-10-23">2026-10-23</a></span> <span class="chip"><a href="#03-journal-2026-10-24">2026-10-24</a></span> <span class="chip"><a href="#03-journal-2026-10-25">2026-10-25</a></span> <span class="chip"><a href="#01-architecture-foundations">Foundations</a></span> <span class="chip"><a href="#01-architecture-compose-stack">Compose-Stack</a></span> <span class="chip"><a href="#00-project-ci-baseline">CI-Baseline</a></span></div>
+<div class="related"><strong>Related:</strong> <span class="chip"><a href="#00-project-start-here">Start-Here</a></span> <span class="chip"><a href="#00-project-study-guide">Study-Guide</a></span> <span class="chip"><a href="#03-journal-2026-10-23">2026-10-23</a></span> <span class="chip"><a href="#03-journal-2026-10-24">2026-10-24</a></span> <span class="chip"><a href="#03-journal-2026-10-25">2026-10-25</a></span> <span class="chip"><a href="#01-architecture-foundations">Foundations</a></span> <span class="chip"><a href="#01-architecture-compose-stack">Compose-Stack</a></span> <span class="chip"><a href="#00-project-ci-baseline">CI-Baseline</a></span></div>
+</article>
+<article class="note" id="00-project-start-here"
+data-title="Start here">
+<header class="note-header">
+<p class="kicker">Project · guide · active</p>
+<h2>Start here</h2>
+<span class="chip">process</span><span class="chip">navigation</span><span class="chip">docs</span>
+</header>
+<div class="toc"><p class="toctitle">On this page</p><ul><li><a href="#00-project-start-here--current-state">Current state</a></li><li><a href="#00-project-start-here--read-first">Read first</a></li><li><a href="#00-project-start-here--reading-paths">Reading paths</a><ul><li><a href="#00-project-start-here--new-to-the-project">New to the project</a></li><li><a href="#00-project-start-here--understand-ingestion">Understand ingestion</a></li><li><a href="#00-project-start-here--prepare-for-interviews">Prepare for interviews</a></li><li><a href="#00-project-start-here--continue-implementation">Continue implementation</a></li></ul></li><li><a href="#00-project-start-here--how-the-vault-is-organized">How the vault is organized</a></li><li><a href="#00-project-start-here--working-agreement">Working agreement</a></li></ul></div>
+<div class="content">
+<p><strong>Short answer:</strong> Helix is a permission-aware RAG service over a pinned snapshot
+of the public GitLab handbook and product docs. This note is the entry point to
+the vault: it tells you what is current, what to read first, and where to write.</p>
+<h2 id="00-project-start-here--current-state">Current state</h2>
+<div class="callout info">
+<p class="callout-title">Checkpoint 1.1</p>
+<p>The Markdown parser is implemented and committed. It converts 2,500 pinned
+documents into structured JSON. User verification is still pending, so
+checkpoint 1.2 has not started.</p>
+</div>
+<p>The repo has a working API skeleton, local services, a pinned corpus, and a
+parser. It does not yet have ACL classification, chunking, embeddings, retrieval,
+generation, auth, or a UI.</p>
+<p>Use <code>make checklist</code> for the live status. The checklist, not this note, is the
+source of truth for the active checkpoint.</p>
+<h2 id="00-project-start-here--read-first">Read first</h2>
+<table>
+<thead>
+<tr>
+<th>If you want to...</th>
+<th>Read</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Know what is in scope right now</td>
+<td><a href="#00-project-checklist">Checklist</a></td>
+</tr>
+<tr>
+<td>Understand the whole system</td>
+<td><a href="#01-architecture-project-map">Project-Map</a></td>
+</tr>
+<tr>
+<td>Work on the vault or generated guide</td>
+<td><a href="#00-project-study-guide">Study-Guide</a></td>
+</tr>
+<tr>
+<td>See the latest build log</td>
+<td><a href="#03-journal-2026-10-25">2026-10-25</a></td>
+</tr>
+<tr>
+<td>Understand the next milestone</td>
+<td><a href="#01-architecture-ingestion-m1">Ingestion-M1</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="00-project-start-here--reading-paths">Reading paths</h2>
+<h3 id="00-project-start-here--new-to-the-project">New to the project</h3>
+<ol>
+<li><a href="#00-project-checklist">Checklist</a> for the current checkpoint and handoff rules.</li>
+<li><a href="#01-architecture-project-map">Project-Map</a> for the repo layout and target architecture.</li>
+<li><a href="#01-architecture-foundations">Foundations</a> for the Python, async, config, and Makefile foundations.</li>
+<li><a href="#01-architecture-compose-stack">Compose-Stack</a> and <a href="#01-architecture-storage-layers">Storage-Layers</a> for the local services.</li>
+</ol>
+<h3 id="00-project-start-here--understand-ingestion">Understand ingestion</h3>
+<ol>
+<li><a href="#01-architecture-ingestion-m1">Ingestion-M1</a> for the full M1 pipeline.</li>
+<li><a href="#01-architecture-parsing">Parsing</a> for the document model and parser.</li>
+<li><a href="#01-architecture-document-normalization">Document-Normalization</a> for format adapters and correctness checks.</li>
+<li><a href="#01-architecture-parser-lab">Parser-Lab</a> for the native vs Docling vs Unstructured comparison.</li>
+</ol>
+<h3 id="00-project-start-here--prepare-for-interviews">Prepare for interviews</h3>
+<ol>
+<li><a href="#01-architecture-project-map">Project-Map</a> for the architecture story.</li>
+<li><a href="#01-architecture-foundations">Foundations</a> and <a href="#01-architecture-compose-stack">Compose-Stack</a> for engineering choices.</li>
+<li><a href="#01-architecture-storage-layers">Storage-Layers</a> for why Postgres, Redis, Qdrant, and MinIO each exist.</li>
+<li><a href="#01-architecture-parsing">Parsing</a> and <a href="#01-architecture-document-normalization">Document-Normalization</a> for ingestion trade-offs.</li>
+<li><a href="#02-evaluation-evaluation-101">Evaluation-101</a> for how quality is measured.</li>
+</ol>
+<h3 id="00-project-start-here--continue-implementation">Continue implementation</h3>
+<ol>
+<li><a href="#00-project-checklist">Checklist</a> for the active checkpoint.</li>
+<li><a href="#01-architecture-ingestion-m1">Ingestion-M1</a> for the milestone plan.</li>
+<li>The concept note for the current step.</li>
+<li>The latest journal entry for what changed and what remains.</li>
+</ol>
+<h2 id="00-project-start-here--how-the-vault-is-organized">How the vault is organized</h2>
+<ul>
+<li>Four top-level folders: project, architecture, evaluation, and journal.</li>
+<li>Keep notes flat inside those folders for now. Use links, tags, and maps of
+  content instead of deeper folders.</li>
+<li>Add architecture subfolders only when the folder reaches roughly 15–20 notes
+  or has three stable subdomains.</li>
+<li>See <a href="#00-project-study-guide">Study-Guide</a> for the note contract, tag conventions, generator
+  constraints, and the subfolder rule.</li>
+</ul>
+<h2 id="00-project-start-here--working-agreement">Working agreement</h2>
+<ul>
+<li>The agent implements, tests, documents, and commits.</li>
+<li>The user runs the manual test and replies <code>pass</code>.</li>
+<li>Only the user marks <code>User verified</code>. A checkpoint is not done before that.</li>
+<li>Run <code>make ci</code> before every commit.</li>
+</ul>
+</div>
+<div class="related"><strong>Related:</strong> <span class="chip"><a href="#00-project-checklist">Checklist</a></span> <span class="chip"><a href="#01-architecture-project-map">Project-Map</a></span> <span class="chip"><a href="#00-project-study-guide">Study-Guide</a></span> <span class="chip"><a href="#03-journal-2026-10-25">2026-10-25</a></span> <span class="chip"><a href="#01-architecture-ingestion-m1">Ingestion-M1</a></span> <span class="chip"><a href="#01-architecture-parsing">Parsing</a></span> <span class="chip"><a href="#01-architecture-document-normalization">Document-Normalization</a></span> <span class="chip"><a href="#01-architecture-parser-lab">Parser-Lab</a></span> <span class="chip"><a href="#01-architecture-foundations">Foundations</a></span> <span class="chip"><a href="#01-architecture-compose-stack">Compose-Stack</a></span> <span class="chip"><a href="#01-architecture-storage-layers">Storage-Layers</a></span> <span class="chip"><a href="#02-evaluation-evaluation-101">Evaluation-101</a></span></div>
 </article>
 <article class="note" id="00-project-study-guide"
 data-title="Vault and study-guide pipeline">
@@ -1015,11 +1120,11 @@ data-title="Vault and study-guide pipeline">
 <h2>Vault and study-guide pipeline</h2>
 <span class="chip">docs</span><span class="chip">obsidian</span><span class="chip">markdown</span><span class="chip">tooling</span>
 </header>
-<div class="toc"><p class="toctitle">On this page</p><ul><li><a href="#00-project-study-guide--vault-layout">Vault layout</a></li><li><a href="#00-project-study-guide--note-contract">Note contract</a></li><li><a href="#00-project-study-guide--templates">Templates</a></li><li><a href="#00-project-study-guide--generator">Generator</a></li><li><a href="#00-project-study-guide--what-is-supported">What is supported</a></li><li><a href="#00-project-study-guide--what-is-not-supported">What is not supported</a></li><li><a href="#00-project-study-guide--why-not-a-static-site-framework">Why not a static-site framework?</a></li><li><a href="#00-project-study-guide--add-a-note">Add a note</a></li><li><a href="#00-project-study-guide--interview-angle">Interview angle</a></li></ul></div>
+<div class="toc"><p class="toctitle">On this page</p><ul><li><a href="#00-project-study-guide--vault-layout">Vault layout</a></li><li><a href="#00-project-study-guide--folder-policy">Folder policy</a></li><li><a href="#00-project-study-guide--note-contract">Note contract</a></li><li><a href="#00-project-study-guide--tag-conventions">Tag conventions</a></li><li><a href="#00-project-study-guide--templates">Templates</a></li><li><a href="#00-project-study-guide--generator">Generator</a></li><li><a href="#00-project-study-guide--what-is-supported">What is supported</a></li><li><a href="#00-project-study-guide--what-is-not-supported">What is not supported</a></li><li><a href="#00-project-study-guide--why-not-a-static-site-framework">Why not a static-site framework?</a></li><li><a href="#00-project-study-guide--add-a-note">Add a note</a></li><li><a href="#00-project-study-guide--interview-angle">Interview angle</a></li></ul></div>
 <div class="content">
 <p>The Obsidian vault is the source of truth. <code>docs/theory.html</code> is a generated,
 self-contained study guide for reading, searching, printing, and sharing. Edit
-the Markdown, never the HTML.</p>
+the Markdown, never the HTML. Start at <a href="#00-project-start-here">Start-Here</a>.</p>
 <h2 id="00-project-study-guide--vault-layout">Vault layout</h2>
 <table>
 <thead>
@@ -1031,7 +1136,7 @@ the Markdown, never the HTML.</p>
 <tbody>
 <tr>
 <td><code>00-Project</code></td>
-<td>roadmap, process, vault guide</td>
+<td>roadmap, process, vault guide, entry point</td>
 </tr>
 <tr>
 <td><code>01-Architecture</code></td>
@@ -1051,8 +1156,26 @@ the Markdown, never the HTML.</p>
 </tr>
 </tbody>
 </table>
-<p>The generator skips <code>.obsidian</code>, <code>_templates</code>, and the accidental nested
-<code>Helix/</code> vault. Everything else becomes a section in the guide.</p>
+<p>The generator skips <code>.obsidian</code>, <code>_templates</code>, and the nested <code>Helix/</code> folder as
+a safeguard. Everything else becomes a section in the guide.</p>
+<h2 id="00-project-study-guide--folder-policy">Folder policy</h2>
+<p>Keep notes flat inside the four top-level folders for now. Use links, tags, and
+maps of content instead of deeper folders.</p>
+<p>Add architecture subfolders only when <code>01-Architecture</code> reaches roughly 15–20
+notes or has three stable subdomains. When that happens:</p>
+<ol>
+<li>Introduce subfolders such as <code>Ingestion/</code>, <code>Platform/</code>, and <code>Retrieval/</code>.</li>
+<li>Update the generator so the HTML sidebar still groups notes sensibly.</li>
+<li>Move notes with <code>git mv</code>, update relative links, and run <code>make docs</code> and
+   <code>make ci</code>.</li>
+</ol>
+<p>Two current generator constraints drive that decision:</p>
+<ul>
+<li>Notes are grouped by the first folder only, so a subfolder does not create a
+  new guide section.</li>
+<li>Wikilinks resolve by note stem or title, so duplicate note names across
+  folders are ambiguous.</li>
+</ul>
 <h2 id="00-project-study-guide--note-contract">Note contract</h2>
 <p>Every note starts with YAML frontmatter:</p>
 <pre><code class="language-yaml">---
@@ -1070,7 +1193,17 @@ related: [&quot;[[Corpus]]&quot;, &quot;[[Evaluation-101]]&quot;]
 <li><code>related</code>: rendered as links at the bottom of the note</li>
 </ul>
 <p>The first <code># Heading</code> becomes the page title. The generator removes it from the
-body so the title is not duplicated.</p>
+body so the title is not duplicated. Use descriptive kebab-case filenames and
+avoid duplicate stems across folders.</p>
+<h2 id="00-project-study-guide--tag-conventions">Tag conventions</h2>
+<p>Tags are lowercase, singular, and hyphenated. Prefer a small vocabulary:</p>
+<ul>
+<li>Domain: <code>ingestion</code>, <code>retrieval</code>, <code>security</code>, <code>evaluation</code>, <code>platform</code></li>
+<li>Note kind: <code>process</code>, <code>journal</code>, <code>interview</code>, <code>docs</code>, <code>navigation</code></li>
+<li>Specific tools: <code>postgres</code>, <code>redis</code>, <code>qdrant</code>, <code>minio</code>, <code>docling</code>, <code>unstructured</code></li>
+</ul>
+<p>Avoid synonyms and one-off tags. Normalize an existing tag when you are already
+editing that note; do not mass-rename tags just to make them match.</p>
 <h2 id="00-project-study-guide--templates">Templates</h2>
 <p>Open the command palette in Obsidian and choose <strong>Templates: Insert template</strong>.
 The templates folder is configured in <code>.obsidian/templates.json</code> as
@@ -1128,7 +1261,7 @@ starts using many Obsidian plugins, a real static-site generator becomes the
 better choice.</p>
 <h2 id="00-project-study-guide--add-a-note">Add a note</h2>
 <ol>
-<li>Create the note in the right folder.</li>
+<li>Create the note in the right top-level folder.</li>
 <li>Insert the matching template.</li>
 <li>Fill in frontmatter, title, and links.</li>
 <li>Run <code>make docs</code>.</li>
@@ -1146,7 +1279,7 @@ better choice.</p>
   of silently dropping them."</li>
 </ul>
 </div>
-<div class="related"><strong>Related:</strong> <span class="chip"><a href="#00-project-checklist">Checklist</a></span> <span class="chip"><a href="#03-journal-2026-10-24">2026-10-24</a></span></div>
+<div class="related"><strong>Related:</strong> <span class="chip"><a href="#00-project-start-here">Start-Here</a></span> <span class="chip"><a href="#00-project-checklist">Checklist</a></span> <span class="chip"><a href="#03-journal-2026-10-24">2026-10-24</a></span></div>
 </article>
 <article class="note" id="01-architecture-compose-stack"
 data-title="Local stack and readiness">
@@ -1671,6 +1804,321 @@ for ingestion, not for Git archaeology.</p>
 </ul>
 </div>
 <div class="related"><strong>Related:</strong> <span class="chip"><a href="#00-project-checklist">Checklist</a></span> <span class="chip"><a href="#03-journal-2026-10-23">2026-10-23</a></span> <span class="chip"><a href="#03-journal-2026-10-24">2026-10-24</a></span> <span class="chip"><a href="#01-architecture-storage-layers">Storage-Layers</a></span></div>
+</article>
+<article class="note" id="01-architecture-document-normalization"
+data-title="Document normalization: why and how">
+<header class="note-header">
+<p class="kicker">Architecture · architecture · active</p>
+<h2>Document normalization: why and how</h2>
+<span class="chip">parsing</span><span class="chip">normalization</span><span class="chip">ingestion</span><span class="chip">acl</span><span class="chip">pdf</span><span class="chip">docling</span><span class="chip">unstructured</span><span class="chip">interview</span>
+</header>
+<div class="toc"><p class="toctitle">On this page</p><ul><li><a href="#01-architecture-document-normalization--what-normalize-means-here">What “normalize” means here</a></li><li><a href="#01-architecture-document-normalization--why-normalize-before-chunking">Why normalize before chunking</a><ul><li><a href="#01-architecture-document-normalization--1-one-interpretation-of-structure">1. One interpretation of structure</a></li><li><a href="#01-architecture-document-normalization--2-chunks-are-the-retrieval-unit-but-sections-are-the-context-unit">2. Chunks are the retrieval unit, but sections are the context unit</a></li><li><a href="#01-architecture-document-normalization--3-citations-need-structure">3. Citations need structure</a></li><li><a href="#01-architecture-document-normalization--4-permissions-must-attach-before-storage">4. Permissions must attach before storage</a></li><li><a href="#01-architecture-document-normalization--5-determinism-makes-re-ingestion-cheap">5. Determinism makes re-ingestion cheap</a></li><li><a href="#01-architecture-document-normalization--6-format-independence">6. Format independence</a></li></ul></li><li><a href="#01-architecture-document-normalization--why-a-native-parser-for-this-corpus">Why a native parser for this corpus</a></li><li><a href="#01-architecture-document-normalization--why-json">Why JSON</a></li><li><a href="#01-architecture-document-normalization--how-we-know-parsing-is-correct">How we know parsing is correct</a></li><li><a href="#01-architecture-document-normalization--how-to-handle-pdfs-images-docx-and-other-formats">How to handle PDFs, images, DOCX, and other formats</a></li><li><a href="#01-architecture-document-normalization--trade-offs">Trade-offs</a></li><li><a href="#01-architecture-document-normalization--interview-script">Interview script</a><ul><li><a href="#01-architecture-document-normalization--the-60-second-answer">The 60-second answer</a></li><li><a href="#01-architecture-document-normalization--likely-follow-ups">Likely follow-ups</a></li><li><a href="#01-architecture-document-normalization--things-not-to-say">Things not to say</a></li></ul></li><li><a href="#01-architecture-document-normalization--interview-one-liner">Interview one-liner</a></li><li><a href="#01-architecture-document-normalization--current-state">Current state</a></li></ul></div>
+<div class="content">
+<p><strong>Short answer:</strong> we do not chunk raw files. We parse each source once into one
+internal model — a document, a section tree, typed blocks, normalized text plus
+the raw excerpt, and metadata. Chunking, ACLs, embedding, retrieval, and
+citations all work from that model instead of re-interpreting Markdown, PDF, or
+DOCX syntax.</p>
+<h2 id="01-architecture-document-normalization--what-normalize-means-here">What “normalize” means here</h2>
+<p>It does <strong>not</strong> mean “convert everything to Markdown.” It means “convert every
+source into the same internal shape.”</p>
+<pre><code class="language-text">Markdown / PDF / DOCX / HTML
+             |
+             v
+      Document model
+      ├── Document: source, path, title, frontmatter, warnings
+      ├── Section: heading level, breadcrumb, child sections
+      └── Block: paragraph, list, table, code, quote, callout
+             |
+             v
+   chunker -&gt; ACL -&gt; embedder -&gt; stores
+</code></pre>
+<p>Each block carries:</p>
+<ul>
+<li><code>type</code>: what it is;</li>
+<li><code>text</code>: normalized for retrieval and embedding;</li>
+<li><code>raw</code>: the original excerpt for debugging and citations;</li>
+<li><code>meta</code>: type-specific details such as table headers and rows, list levels, or
+  code language.</li>
+</ul>
+<p>JSON is the serialization format. It is not the database and it is not the
+product. It is an inspectable, deterministic intermediate representation.</p>
+<p>For this repo, the parser is <code>packages/helix/parsing.py</code> and the output is written
+by <code>scripts/parse_corpus.py</code>. See <a href="#01-architecture-parsing">Parsing</a> for the model and <a href="#01-architecture-ingestion-m1">Ingestion-M1</a>
+for where it sits in the full ingest pipeline.</p>
+<h2 id="01-architecture-document-normalization--why-normalize-before-chunking">Why normalize before chunking</h2>
+<h3 id="01-architecture-document-normalization--1-one-interpretation-of-structure">1. One interpretation of structure</h3>
+<p>If the chunker parses Markdown itself, it re-implements fences, headings, tables,
+lists, shortcodes, and HTML. Every consumer then has a slightly different idea of
+what a heading is. A single parser makes the rules explicit and testable.</p>
+<h3 id="01-architecture-document-normalization--2-chunks-are-the-retrieval-unit-but-sections-are-the-context-unit">2. Chunks are the retrieval unit, but sections are the context unit</h3>
+<p>A chunk needs a parent section, a breadcrumb, and a source path. Those are cheap
+to produce during parsing and awkward to reconstruct after splitting raw text.</p>
+<h3 id="01-architecture-document-normalization--3-citations-need-structure">3. Citations need structure</h3>
+<p>A good citation is not “somewhere in this 40 KB file.” It is “this document,
+this section, this path.” The section tree gives the citation its address.</p>
+<h3 id="01-architecture-document-normalization--4-permissions-must-attach-before-storage">4. Permissions must attach before storage</h3>
+<p>Chunks are what get embedded and retrieved. ACL metadata has to exist before the
+first chunk is written. Normalization is where a document gets its identity,
+path, and classification inputs. The ACL step (1.2) then adds classification and
+allowed roles before chunking.</p>
+<h3 id="01-architecture-document-normalization--5-determinism-makes-re-ingestion-cheap">5. Determinism makes re-ingestion cheap</h3>
+<p>The same source produces byte-identical JSON. There are no timestamps, random
+ids, or set iteration in the output. That makes review possible, content hashes
+stable, and a rerun a no-op when nothing changed.</p>
+<h3 id="01-architecture-document-normalization--6-format-independence">6. Format independence</h3>
+<p>Retrieval should not care whether a paragraph came from Markdown, a PDF, or a
+DOCX. Once every adapter produces the same <code>Document</code> model, the chunker and
+embedder stay unchanged. Only the adapters and provenance metadata differ.</p>
+<h2 id="01-architecture-document-normalization--why-a-native-parser-for-this-corpus">Why a native parser for this corpus</h2>
+<p>The pinned corpus is Markdown, not PDF. It also has site-specific conventions:</p>
+<ul>
+<li>YAML frontmatter with the page title;</li>
+<li>Hugo shortcodes such as <code>{{&lt; details &gt;}}</code>;</li>
+<li>tables with escaped pipes and pipes inside shortcodes;</li>
+<li>fenced code inside list items.</li>
+</ul>
+<p>A native parser handles those directly. It is fast (about 13 seconds for 2,500
+documents), deterministic, and has no model download.</p>
+<p>Docling is the right tool for layout-heavy formats, but it is not a Markdown
+semantic parser. In the parser lab, Docling treated frontmatter and shortcodes
+as ordinary text. That is expected: it is solving a different problem. The
+decision is recorded in <a href="../../adr/0001-markdown-parser.md">ADR 0001</a>.</p>
+<h2 id="01-architecture-document-normalization--why-json">Why JSON</h2>
+<p>JSON is not chosen because “RAG needs JSON.” It is chosen because the parser
+output should be:</p>
+<ul>
+<li>inspectable by a human;</li>
+<li>diffable between runs;</li>
+<li>serializable across languages and services;</li>
+<li>easy to validate with Pydantic;</li>
+<li>stable enough for content hashes.</li>
+</ul>
+<p>The model could be stored in Postgres later. The file is just the handoff
+artifact.</p>
+<h2 id="01-architecture-document-normalization--how-we-know-parsing-is-correct">How we know parsing is correct</h2>
+<p>We cannot manually read 2,500 files, and “it ran without crashing” is not
+correctness. The assurance stack is:</p>
+<ol>
+<li><strong>Fixture tests.</strong> <code>tests/test_parsing.py</code> has 13 small Markdown files. Each
+   one pins a rule: fences, headings, tables, lists, shortcodes, HTML, title
+   fallback, duplicate slugs, determinism, warnings.</li>
+<li><strong>Corpus-wide invariants.</strong> I ran a check over all 2,500 parsed documents:
+   stats agree with the tree, section ids are unique, breadcrumbs are consistent,
+   blocks are non-empty, no shortcodes leak into normalized text, and table rows
+   match their header width. Result: <code>docs=2500, errors=0</code>.</li>
+<li><strong>An independent audit.</strong> I counted ATX headings directly from the source,
+   ignoring fenced code, and compared the count with the parsed section tree. One
+   document out of 2,500 differed. The cause was a code fence opened inside a
+   numbered list and an intended closing fence with an info string; under
+   Markdown rules the block stays open, so two visible “headings” were actually
+   code. The parser was following Markdown semantics. The audit did its job by
+   surfacing an ambiguity worth reviewing.</li>
+<li><strong>Warnings and failures.</strong> The full run reports 0 failures and 26 warnings.
+   All 26 are pages whose only content is a dynamic shortcode, so there is no
+   static text to extract. The parser names the problem instead of silently
+   indexing nothing.</li>
+<li><strong>Human sampling.</strong> Read the largest, smallest, table-heavy, and code-heavy
+   files alongside their JSON. This catches output that is structurally valid but
+   semantically useless.</li>
+<li><strong>Determinism.</strong> Re-parsing unchanged input produces identical JSON, so
+   unexpected diffs stand out.</li>
+<li><strong>Downstream eval.</strong> The real test is whether retrieval answers correctly with
+   valid citations. Unit tests and invariants reduce risk; they do not replace
+   end-to-end measurement.</li>
+</ol>
+<p>The honest interview answer is: “I don’t prove every file is perfect. I make the
+rules testable, check invariants over every file, surface anomalies, review a
+sample, and measure retrieval. One anomaly found by the heading audit was a
+malformed fence, not a parser bug.”</p>
+<h2 id="01-architecture-document-normalization--how-to-handle-pdfs-images-docx-and-other-formats">How to handle PDFs, images, DOCX, and other formats</h2>
+<p>Keep the same model and add adapters:</p>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Adapter</th>
+<th>What to preserve</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Markdown, text</td>
+<td>native parser</td>
+<td>headings, lists, tables, code, frontmatter</td>
+</tr>
+<tr>
+<td>Text PDF</td>
+<td>Docling or PyMuPDF</td>
+<td>reading order, pages, tables</td>
+</tr>
+<tr>
+<td>Scanned PDF / image</td>
+<td>OCR + layout, or Docling OCR</td>
+<td>text, confidence, bounding boxes</td>
+</tr>
+<tr>
+<td>DOCX, PPTX, ODT</td>
+<td>Docling or native office parser</td>
+<td>heading styles, lists, tables, notes</td>
+</tr>
+<tr>
+<td>XLSX, CSV</td>
+<td>openpyxl or pandas</td>
+<td>sheets, headers, row ranges</td>
+</tr>
+<tr>
+<td>HTML</td>
+<td>trafilatura or Docling</td>
+<td>main content, headings, tables</td>
+</tr>
+<tr>
+<td>Source code</td>
+<td>tree-sitter</td>
+<td>functions, classes, imports</td>
+</tr>
+</tbody>
+</table>
+<p>The contract stays:</p>
+<pre><code class="language-python">parse_file(path: str) -&gt; Document
+</code></pre>
+<p>A registry picks the adapter by MIME type or extension. All adapters produce the
+same <code>Section</code> and <code>Block</code> types, so chunking and embedding do not change.</p>
+<p>For non-text sources, keep provenance in block metadata:</p>
+<pre><code class="language-json">{
+  &quot;type&quot;: &quot;paragraph&quot;,
+  &quot;text&quot;: &quot;...&quot;,
+  &quot;meta&quot;: {
+    &quot;page&quot;: 3,
+    &quot;bbox&quot;: [72, 144, 520, 210],
+    &quot;ocr_confidence&quot;: 0.91,
+    &quot;extraction_method&quot;: &quot;docling&quot;
+  }
+}
+</code></pre>
+<p>Also:</p>
+<ul>
+<li>keep the raw file in MinIO; parsed JSON is a derivative;</li>
+<li>detect text PDFs vs scanned PDFs before choosing OCR;</li>
+<li>treat tables as structure, not OCR prose;</li>
+<li>do not print DOCX/PPTX to PDF when the native structure is available;</li>
+<li>benchmark each adapter on a format-specific golden set;</li>
+<li>pin parser and model versions per source;</li>
+<li>audio and video are out of scope for now.</li>
+</ul>
+<p>See <a href="#01-architecture-parser-lab">Parser-Lab</a> for the native vs Docling vs Unstructured comparison and the
+detailed Unstructured notes.</p>
+<h2 id="01-architecture-document-normalization--trade-offs">Trade-offs</h2>
+<ul>
+<li><strong>Output size.</strong> Keeping <code>raw</code> and <code>text</code> roughly doubles storage. That is
+  cheap compared with the cost of losing the source excerpt.</li>
+<li><strong>Parser drift.</strong> Upstream format changes and parser version changes can alter
+  output. Determinism and content hashes make the diff visible; pinned versions
+  make it reproducible.</li>
+<li><strong>Per-format quality.</strong> A Markdown invariant suite says little about OCR
+  quality. PDFs need page coverage, table accuracy, and OCR confidence checks.</li>
+<li><strong>Not free text forever.</strong> Normalization is lossy by design. Keep raw files so
+  a better parser can re-run later.</li>
+</ul>
+<h2 id="01-architecture-document-normalization--interview-script">Interview script</h2>
+<h3 id="01-architecture-document-normalization--the-60-second-answer">The 60-second answer</h3>
+<blockquote>
+<p>“We normalize each source into one document model before chunking so the
+chunker and retriever share a single interpretation of headings, tables, code,
+and structure. For this corpus, which is Markdown with Hugo frontmatter and
+shortcodes, I used a native parser instead of Docling because Docling is built
+for layout-heavy formats and treats frontmatter as text. The parser emits a
+section tree, typed blocks, normalized text for retrieval, raw text for
+debugging and citations, and metadata. It is deterministic, so re-ingesting an
+unchanged corpus is a no-op at the file level. I validate it with fixture
+tests, corpus-wide invariants, warnings, sampling, and an independent heading
+audit. The design is adapter-based, so PDFs and DOCX can use Docling or
+Unstructured later while chunking and embedding stay the same.”</p>
+</blockquote>
+<h3 id="01-architecture-document-normalization--likely-follow-ups">Likely follow-ups</h3>
+<p><strong>“Why not chunk raw Markdown directly?”</strong></p>
+<blockquote>
+<p>“Then every consumer re-implements fence, heading, table, and shortcode rules.
+We also lose the parent section and breadcrumb that citations need, and there
+is no clean place to attach ACL metadata before chunks are stored.”</p>
+</blockquote>
+<p><strong>“Why not use Docling for everything?”</strong></p>
+<blockquote>
+<p>“Docling is good at layout-heavy documents. This corpus has no PDFs or HTML,
+and Docling does not understand YAML frontmatter or Hugo shortcodes. Using it
+here adds models and runtime without improving structure. It becomes the PDF
+adapter later.”</p>
+</blockquote>
+<p><strong>“How do you know parsing is correct?”</strong></p>
+<blockquote>
+<p>“I don’t eyeball 2,500 files. I test the rules with small fixtures, check
+structural invariants over every output, make warnings explicit, review a
+stratified sample, and verify determinism. An independent heading count found
+one anomaly in 2,500; it was a malformed fence in the source. The final signal
+is retrieval quality with valid citations.”</p>
+</blockquote>
+<p><strong>“Why JSON?”</strong></p>
+<blockquote>
+<p>“It is a deterministic, inspectable serialization of the internal model. It is
+not the database. It makes diffs, tests, content hashes, and debugging
+straightforward.”</p>
+</blockquote>
+<p><strong>“How would you handle PDFs, scanned pages, and DOCX?”</strong></p>
+<blockquote>
+<p>“Adapters behind the same document model. Docling for layout PDFs, OCR plus
+layout for scans, Docling or native office parsers for DOCX/PPTX,
+openpyxl/pandas for spreadsheets. Keep page, bbox, OCR confidence, and the raw
+file. Benchmark each format instead of assuming one parser wins everywhere.”</p>
+</blockquote>
+<p><strong>“Why not Unstructured?”</strong></p>
+<blockquote>
+<p>“Unstructured is useful for broad format coverage and typed elements, but its
+output is flat and its Markdown path goes through HTML and NLP, so it does not
+understand this site’s frontmatter and shortcodes. It is a candidate for
+DOCX/PDF, not the default for Markdown.”</p>
+</blockquote>
+<p><strong>“Why ACL before chunking?”</strong></p>
+<blockquote>
+<p>“Chunks are what get stored and retrieved. If permissions are attached later,
+there is a window where the index contains unlabeled chunks. ACLs must be part
+of the chunk payload and applied as a pre-filter before vector search.”</p>
+</blockquote>
+<p><strong>“What was the hardest bug?”</strong></p>
+<blockquote>
+<p>“Hugo shortcodes and Markdown edge cases: fences inside list items, table pipes
+inside shortcode attributes, and a trailing <code>#</code> in headings such as <code>C#</code>. Each
+one became a fixture so it cannot regress.”</p>
+</blockquote>
+<p><strong>“What changes at 100x scale?”</strong></p>
+<blockquote>
+<p>“Parse in parallel workers, stream or shard output, cache by content hash,
+reconcile incrementally, store raw files in object storage, version the schema,
+and benchmark adapters per source. The document contract stays the same.”</p>
+</blockquote>
+<h3 id="01-architecture-document-normalization--things-not-to-say">Things not to say</h3>
+<ul>
+<li>“JSON is the database.” It is an intermediate artifact.</li>
+<li>“Docling is bad.” It solves a different problem.</li>
+<li>“The parser is proven correct.” It is tested and measured, not proven.</li>
+<li>“We run three parsers in production.” The lab compares; production routes by
+  format.</li>
+</ul>
+<h2 id="01-architecture-document-normalization--interview-one-liner">Interview one-liner</h2>
+<blockquote>
+<p>“Parse once, normalize to a section tree plus typed blocks, attach permissions
+before chunking, and validate with invariants and retrieval evals.”</p>
+</blockquote>
+<h2 id="01-architecture-document-normalization--current-state">Current state</h2>
+<ul>
+<li>1.1 native Markdown parser: implemented, 2,500 documents, 0 failures, 26
+  warnings.</li>
+<li>Parser lab: native vs Docling vs Unstructured, local CLI only.</li>
+<li>1.2 ACL classifier, 1.3 chunker, 1.4 embedder, 1.5 stores, and 1.6 worker are
+  still ahead.</li>
+<li>The adapter design for PDFs/DOCX/images is a plan, not implemented.</li>
+</ul>
+</div>
+<div class="related"><strong>Related:</strong> <span class="chip"><a href="#01-architecture-parsing">Parsing</a></span> <span class="chip"><a href="#01-architecture-parser-lab">Parser-Lab</a></span> <span class="chip"><a href="#01-architecture-ingestion-m1">Ingestion-M1</a></span> <span class="chip"><a href="#01-architecture-corpus">Corpus</a></span> <span class="chip"><a href="#01-architecture-project-map">Project-Map</a></span> <span class="chip"><a href="#00-project-checklist">Checklist</a></span></div>
 </article>
 <article class="note" id="01-architecture-foundations"
 data-title="Foundations: async, Make, environments, logging">
@@ -2356,7 +2804,339 @@ duplicates data, inflates counts, and makes deletion impossible to reason about.
   no-op, and deletions propagate as tombstones.”</li>
 </ul>
 </div>
-<div class="related"><strong>Related:</strong> <span class="chip"><a href="#01-architecture-parsing">Parsing</a></span> <span class="chip"><a href="#01-architecture-corpus">Corpus</a></span> <span class="chip"><a href="#01-architecture-storage-layers">Storage-Layers</a></span> <span class="chip"><a href="#01-architecture-project-map">Project-Map</a></span> <span class="chip"><a href="#00-project-checklist">Checklist</a></span> <span class="chip"><a href="#03-journal-2026-10-25">2026-10-25</a></span></div>
+<div class="related"><strong>Related:</strong> <span class="chip"><a href="#01-architecture-parsing">Parsing</a></span> <span class="chip"><a href="#01-architecture-document-normalization">Document-Normalization</a></span> <span class="chip"><a href="#01-architecture-parser-lab">Parser-Lab</a></span> <span class="chip"><a href="#01-architecture-corpus">Corpus</a></span> <span class="chip"><a href="#01-architecture-storage-layers">Storage-Layers</a></span> <span class="chip"><a href="#01-architecture-project-map">Project-Map</a></span> <span class="chip"><a href="#00-project-checklist">Checklist</a></span> <span class="chip"><a href="#03-journal-2026-10-25">2026-10-25</a></span></div>
+</article>
+<article class="note" id="01-architecture-parser-lab"
+data-title="Parser lab: native vs Docling vs Unstructured">
+<header class="note-header">
+<p class="kicker">Architecture · architecture · active</p>
+<h2>Parser lab: native vs Docling vs Unstructured</h2>
+<span class="chip">parsing</span><span class="chip">docling</span><span class="chip">unstructured</span><span class="chip">markdown</span><span class="chip">ingestion</span><span class="chip">evaluation</span>
+</header>
+<div class="toc"><p class="toctitle">On this page</p><ul><li><a href="#01-architecture-parser-lab--why-a-cli-instead-of-an-api-route">Why a CLI instead of an API route?</a></li><li><a href="#01-architecture-parser-lab--usage">Usage</a></li><li><a href="#01-architecture-parser-lab--outputs">Outputs</a></li><li><a href="#01-architecture-parser-lab--example-markdown">Example: Markdown</a></li><li><a href="#01-architecture-parser-lab--example-docx">Example: DOCX</a></li><li><a href="#01-architecture-parser-lab--unstructured-in-more-detail">Unstructured in more detail</a><ul><li><a href="#01-architecture-parser-lab--how-it-works-internally">How it works internally</a></li><li><a href="#01-architecture-parser-lab--output-details-that-matter">Output details that matter</a></li><li><a href="#01-architecture-parser-lab--strategies-and-extras">Strategies and extras</a></li><li><a href="#01-architecture-parser-lab--what-it-is-good-and-bad-at">What it is good and bad at</a></li><li><a href="#01-architecture-parser-lab--how-it-would-fit-helix">How it would fit Helix</a></li></ul></li><li><a href="#01-architecture-parser-lab--the-spacy-fallback">The spaCy fallback</a></li><li><a href="#01-architecture-parser-lab--does-this-approach-make-sense-for-many-formats">Does this approach make sense for many formats?</a><ul><li><a href="#01-architecture-parser-lab--what-to-choose-in-the-long-run">What to choose in the long run</a></li><li><a href="#01-architecture-parser-lab--how-to-decide-with-evidence">How to decide with evidence</a></li></ul></li><li><a href="#01-architecture-parser-lab--limits-of-this-lab">Limits of this lab</a></li><li><a href="#01-architecture-parser-lab--interview-angle">Interview angle</a></li></ul></div>
+<div class="content">
+<p><strong>Short answer:</strong> <code>make compare FILE=...</code> parses one file with all three parsers
+and writes their raw JSON plus a side-by-side summary to
+<code>data/parser-lab/&lt;file-stem&gt;/</code>. It is a local experiment, not part of the ingest
+pipeline or CI.</p>
+<h2 id="01-architecture-parser-lab--why-a-cli-instead-of-an-api-route">Why a CLI instead of an API route?</h2>
+<p>A route would be convenient, but the wrong first tool here:</p>
+<ul>
+<li>Docling and Unstructured load models and can take seconds per file;</li>
+<li>a request would block the event loop or need a background worker;</li>
+<li>uploading a file into the API process expands the attack surface for a
+  one-off comparison;</li>
+<li>the output is large JSON that is easier to inspect as files.</li>
+</ul>
+<p>The API should get an upload route later, after ingestion is a background job
+with size limits, type validation, and object storage. For now the CLI gives the
+same answer with less machinery.</p>
+<h2 id="01-architecture-parser-lab--usage">Usage</h2>
+<pre><code class="language-bash">make compare FILE=data/corpus/gitlab-docs/doc/user/import/third_party_systems/clearcase.md
+</code></pre>
+<p>Options:</p>
+<pre><code class="language-bash">make compare FILE=path/to/file \
+  OUT=data/parser-lab/run1 \
+  PARSERS=native,docling \
+  STRATEGY=fast
+</code></pre>
+<p>The first run installs the optional parser dependencies and may download Docling
+models. The base project does not install them, so <code>make ci</code> stays fast.</p>
+<h2 id="01-architecture-parser-lab--outputs">Outputs</h2>
+<p>For <code>FILE=.../clearcase.md</code>, the output directory is
+<code>data/parser-lab/clearcase/</code>:</p>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>native.json</code></td>
+<td>our <code>Document</code> model: sections, breadcrumbs, typed blocks</td>
+</tr>
+<tr>
+<td><code>docling.json</code></td>
+<td>Docling's own <code>DoclingDocument</code> export</td>
+</tr>
+<tr>
+<td><code>docling.md</code></td>
+<td>Docling's Markdown export, useful for human review</td>
+</tr>
+<tr>
+<td><code>unstructured.json</code></td>
+<td>list of Unstructured elements with metadata</td>
+</tr>
+<tr>
+<td><code>summary.json</code></td>
+<td>status, timing, counts, and previews for all parsers</td>
+</tr>
+</tbody>
+</table>
+<p>Counts are not apples-to-apples. Native counts blocks, Docling counts layout
+items, Unstructured counts elements. The summary is for orientation; inspect the
+raw files for the real comparison.</p>
+<h2 id="01-architecture-parser-lab--example-markdown">Example: Markdown</h2>
+<p>On the ClearCase page:</p>
+<table>
+<thead>
+<tr>
+<th>Parser</th>
+<th style="text-align: right;">Items</th>
+<th style="text-align: right;">Tables</th>
+<th style="text-align: right;">Chars</th>
+<th style="text-align: right;">Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>native</td>
+<td style="text-align: right;">6 blocks</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">914</td>
+<td style="text-align: right;">~0.003 s</td>
+</tr>
+<tr>
+<td>Docling</td>
+<td style="text-align: right;">18 layout items</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2,148</td>
+<td style="text-align: right;">~4.9 s</td>
+</tr>
+<tr>
+<td>Unstructured</td>
+<td style="text-align: right;">14 elements</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1,232</td>
+<td style="text-align: right;">~5.5 s</td>
+</tr>
+</tbody>
+</table>
+<p>What the difference looks like:</p>
+<ul>
+<li><strong>Native</strong> uses YAML frontmatter for the title, removes Hugo shortcodes, turns
+  links into labels, and stores the table as headers plus rows. Its output is
+  smaller and already shaped for chunking.</li>
+<li><strong>Docling</strong> treats the frontmatter and <code>{{&lt; details &gt;}}</code> shortcodes as ordinary
+  text. It preserves the table and headings well, but it does not know this
+  site's frontmatter or shortcode semantics.</li>
+<li><strong>Unstructured</strong> also keeps frontmatter and shortcodes as text. It classifies
+  elements as <code>Title</code>, <code>ListItem</code>, <code>Table</code>, <code>NarrativeText</code>, and
+  <code>UncategorizedText</code>. Categories are useful, but the Markdown-specific cleanup
+  is still missing.</li>
+</ul>
+<p>This is why the native parser remains the right default for this corpus. Docling
+and Unstructured are better at layout-heavy formats, not at this site's
+Markdown conventions.</p>
+<h2 id="01-architecture-parser-lab--example-docx">Example: DOCX</h2>
+<p>Run on a small generated DOCX:</p>
+<pre><code class="language-bash">make compare FILE=/tmp/sample.docx
+</code></pre>
+<pre><code class="language-text">native       unsupported
+docling      ok   9 items   1 table
+unstructured ok   9 items   1 table
+</code></pre>
+<p>Docling exports clean Markdown with headings, a table, a numbered list, and a
+code block. Unstructured returns the same content as typed elements. Native is
+correctly marked unsupported because it only handles Markdown/text.</p>
+<h2 id="01-architecture-parser-lab--unstructured-in-more-detail">Unstructured in more detail</h2>
+<p>Unstructured is not a document converter in the Docling sense. It is a
+<strong>document preprocessor that returns a flat list of typed elements</strong>.</p>
+<pre><code class="language-text">PDF / DOCX / MD / HTML / image
+              |
+              v
+       Unstructured partition
+              |
+              v
+[Title, NarrativeText, ListItem, Table, Image, ...]
+</code></pre>
+<p>Each element has a category, text, and metadata. Common categories are <code>Title</code>,
+<code>NarrativeText</code>, <code>ListItem</code>, <code>Table</code>, <code>Image</code>, <code>FigureCaption</code>, <code>Header</code>,
+<code>Footer</code>, <code>PageNumber</code>, <code>Address</code>, <code>Formula</code>, and <code>UncategorizedText</code>.</p>
+<p>The elements are flat. A <code>Title</code> is a label on one element, not a section that
+owns the elements below it. Some partitioners attach a <code>parent_id</code> pointing to
+the nearest title, but that is not a guaranteed section tree.</p>
+<h3 id="01-architecture-parser-lab--how-it-works-internally">How it works internally</h3>
+<p><code>partition(filename=...)</code> detects the file type and routes to a format-specific
+partitioner:</p>
+<ul>
+<li>Markdown → converted to HTML → HTML partitioner → NLP classification;</li>
+<li>HTML → lxml/BeautifulSoup parsing → element classification;</li>
+<li>PDF → <code>fast</code> reads the text layer, <code>hi_res</code> uses layout models and OCR,
+  <code>ocr_only</code> forces OCR;</li>
+<li>DOCX/PPTX/XLSX → python-docx/python-pptx/openpyxl;</li>
+<li>images → OCR plus layout.</li>
+</ul>
+<p>The Markdown path is why frontmatter and Hugo shortcodes show up as ordinary
+text: Unstructured does not parse MD semantics, it converts to HTML and
+classifies the result.</p>
+<h3 id="01-architecture-parser-lab--output-details-that-matter">Output details that matter</h3>
+<ul>
+<li>The <code>Table</code> element’s <code>text</code> is flattened, but
+  <code>metadata.text_as_html</code> contains the full <code>&lt;table&gt;</code> markup. Use that to
+  recover headers and rows.</li>
+<li>PDF elements can carry <code>page_number</code>, coordinates, and languages.</li>
+<li><code>parent_id</code> is a useful hint, not a full hierarchy.</li>
+<li><code>.category</code> in Python is serialized as <code>type</code> by <code>to_dict()</code>.</li>
+</ul>
+<h3 id="01-architecture-parser-lab--strategies-and-extras">Strategies and extras</h3>
+<pre><code class="language-text">fast      text layer only, fastest
+hi_res    layout model + OCR + table detection
+ocr_only  force OCR for scanned documents
+auto      choose based on file type and installed extras
+</code></pre>
+<p>The base package does not include every format. The lab installs
+<code>unstructured[md,pdf,docx,pptx,xlsx]</code>. The PDF/image extras pull
+<code>unstructured-inference</code>, OCR tooling, and model dependencies. <code>all-docs</code> also
+pulls audio/whisper, which is out of scope.</p>
+<p>The OSS library is free to use. The banner shown in the lab advertises the
+commercial hosted API, not a limit of the local library. Model weights and OCR
+binaries may have their own licenses.</p>
+<h3 id="01-architecture-parser-lab--what-it-is-good-and-bad-at">What it is good and bad at</h3>
+<p>Good:</p>
+<ul>
+<li>one API for many formats;</li>
+<li>useful element taxonomy for ingestion;</li>
+<li>table HTML metadata and PDF provenance;</li>
+<li>optional OCR and layout strategies;</li>
+<li><code>chunk_by_title</code> helpers.</li>
+</ul>
+<p>Weak:</p>
+<ul>
+<li>flat output; you reconstruct sections yourself;</li>
+<li>no frontmatter, shortcode, or site-convention awareness;</li>
+<li>heuristic categories that vary by format and version;</li>
+<li>heavy PDF/image dependency stack;</li>
+<li>the Markdown path is slower and less precise than the native parser.</li>
+</ul>
+<h3 id="01-architecture-parser-lab--how-it-would-fit-helix">How it would fit Helix</h3>
+<p>Do not feed raw elements into retrieval. Write an adapter:</p>
+<pre><code class="language-text">Unstructured elements -&gt; Document / Section / Block
+</code></pre>
+<ul>
+<li><code>Title</code> → new section;</li>
+<li><code>NarrativeText</code> / <code>UncategorizedText</code> → paragraph;</li>
+<li><code>ListItem</code> → grouped list block;</li>
+<li><code>Table</code> → table block from <code>text_as_html</code>;</li>
+<li><code>Image</code> / <code>FigureCaption</code> → image metadata plus caption;</li>
+<li>preserve page, coordinates, <code>parent_id</code>, and filename.</li>
+</ul>
+<p>Then the existing chunker and embedder work unchanged. Unstructured is a
+candidate adapter for DOCX/PPTX/HTML and possibly PDFs, not the default for this
+Markdown corpus.</p>
+<h2 id="01-architecture-parser-lab--the-spacy-fallback">The spaCy fallback</h2>
+<p>On this machine, <code>en_core_web_sm</code> fails to deserialize with an <code>OverflowError</code>
+inside spaCy's tokenizer. The lab therefore detects the failure and gives
+Unstructured a blank English pipeline with a sentencizer. The summary records a
+warning. Element categories may differ slightly from a normal Unstructured run;
+do not use this fallback for a quality benchmark.</p>
+<p>The fallback is a lab convenience, not a production decision. For a real
+evaluation, pin a working spaCy/model combination in an isolated environment.</p>
+<h2 id="01-architecture-parser-lab--does-this-approach-make-sense-for-many-formats">Does this approach make sense for many formats?</h2>
+<p>Yes, with one correction: do not build the product around one parser.</p>
+<p>Use <strong>adapters</strong> behind one stable document model:</p>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Adapter</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Markdown, text</td>
+<td>native parser</td>
+<td>fast, deterministic, site conventions</td>
+</tr>
+<tr>
+<td>PDF (text layer)</td>
+<td>Docling</td>
+<td>reading order, tables, page layout</td>
+</tr>
+<tr>
+<td>PDF (scanned), images</td>
+<td>OCR + layout, or Docling OCR</td>
+<td>text needs to be recovered</td>
+</tr>
+<tr>
+<td>DOCX, PPTX, ODT</td>
+<td>Docling or native office parser</td>
+<td>styles, tables, slide structure</td>
+</tr>
+<tr>
+<td>XLSX, CSV</td>
+<td>openpyxl/pandas</td>
+<td>sheets and headers, not prose</td>
+</tr>
+<tr>
+<td>HTML</td>
+<td>trafilatura or Docling</td>
+<td>main content vs navigation</td>
+</tr>
+<tr>
+<td>Source code</td>
+<td>tree-sitter</td>
+<td>functions and classes, not paragraphs</td>
+</tr>
+</tbody>
+</table>
+<p>The common contract stays:</p>
+<pre><code class="language-text">parse_file(path) -&gt; Document
+</code></pre>
+<p>Every adapter produces the same <code>Document</code> / <code>Section</code> / <code>Block</code> types, so the
+chunker and embedder do not care about the original format. Keep provenance in
+block metadata: <code>page</code>, <code>bbox</code>, <code>ocr_confidence</code>, <code>extraction_method</code>.</p>
+<h3 id="01-architecture-parser-lab--what-to-choose-in-the-long-run">What to choose in the long run</h3>
+<ul>
+<li><strong>Native Markdown</strong>: default for this corpus. It is faster, deterministic, and
+  understands frontmatter, shortcodes, and the site's table conventions.</li>
+<li><strong>Docling</strong>: default for PDFs and layout-heavy office files. It preserves
+  reading order, tables, and page provenance. It is slower and model-heavy.</li>
+<li><strong>Unstructured</strong>: useful for broad format coverage and quick element typing,
+  especially DOCX/PPTX/HTML. Its value is the element taxonomy; its Markdown
+  cleanup is weaker than the native parser.</li>
+</ul>
+<p>Do not run all three in production. Use one adapter per source type, then
+normalize the output. Keep the raw file in MinIO for re-parsing.</p>
+<h3 id="01-architecture-parser-lab--how-to-decide-with-evidence">How to decide with evidence</h3>
+<ol>
+<li>Build a small golden set: 10–20 files per format, including tables, code,
+   scanned pages, and multi-column PDFs.</li>
+<li>Compare extraction quality, not just counts: heading recovery, table cell
+   accuracy, reading order, text coverage, OCR confidence.</li>
+<li>Measure cost: seconds per page, memory, model download size, failure rate.</li>
+<li>Run the downstream retrieval eval. A parser that produces prettier JSON but
+   worse retrieval loses.</li>
+<li>Pin the chosen adapter and model versions per source. Parsers change.</li>
+</ol>
+<h2 id="01-architecture-parser-lab--limits-of-this-lab">Limits of this lab</h2>
+<ul>
+<li>It compares raw outputs, not normalized retrieval quality.</li>
+<li>Docling on Markdown is not its intended use; the frontmatter/shortcode result is
+  expected.</li>
+<li>Unstructured here uses the spaCy fallback.</li>
+<li>Images and scanned PDFs are not tested yet; OCR quality is the real bottleneck
+  there.</li>
+<li>No upload UI, size limit, or background job. Those belong in the ingestion
+  service, not this script.</li>
+</ul>
+<h2 id="01-architecture-parser-lab--interview-angle">Interview angle</h2>
+<ul>
+<li>“I keep parsers behind an adapter interface and normalize to one document
+  model, so chunking and retrieval are format-agnostic.”</li>
+<li>“I use the native Markdown parser for this corpus because it understands
+  frontmatter and shortcodes; Docling is for layout-heavy PDFs, not for
+  re-implementing Markdown.”</li>
+<li>“I compare parsers on a golden set using extraction quality and downstream
+  retrieval, not on element counts.”</li>
+<li>“The parser lab is a CLI because model-heavy parsing belongs in a background
+  worker, not inside an HTTP request.”</li>
+</ul>
+</div>
+<div class="related"><strong>Related:</strong> <span class="chip"><a href="#01-architecture-parsing">Parsing</a></span> <span class="chip"><a href="#01-architecture-document-normalization">Document-Normalization</a></span> <span class="chip"><a href="#01-architecture-ingestion-m1">Ingestion-M1</a></span> <span class="chip"><a href="#01-architecture-project-map">Project-Map</a></span> <span class="chip"><a href="#00-project-checklist">Checklist</a></span> <span class="chip"><a href="#03-journal-2026-10-25">2026-10-25</a></span></div>
 </article>
 <article class="note" id="01-architecture-parsing"
 data-title="Parsing: Markdown to a stable document model">
@@ -2613,7 +3393,7 @@ parser itself does no reconciliation.</p>
   shortcode. I surface that as a warning instead of silently indexing nothing."</li>
 </ul>
 </div>
-<div class="related"><strong>Related:</strong> <span class="chip"><a href="#01-architecture-corpus">Corpus</a></span> <span class="chip"><a href="#01-architecture-ingestion-m1">Ingestion-M1</a></span> <span class="chip"><a href="#01-architecture-project-map">Project-Map</a></span> <span class="chip"><a href="#00-project-checklist">Checklist</a></span> <span class="chip"><a href="#03-journal-2026-10-25">2026-10-25</a></span></div>
+<div class="related"><strong>Related:</strong> <span class="chip"><a href="#01-architecture-corpus">Corpus</a></span> <span class="chip"><a href="#01-architecture-ingestion-m1">Ingestion-M1</a></span> <span class="chip"><a href="#01-architecture-document-normalization">Document-Normalization</a></span> <span class="chip"><a href="#01-architecture-parser-lab">Parser-Lab</a></span> <span class="chip"><a href="#01-architecture-project-map">Project-Map</a></span> <span class="chip"><a href="#00-project-checklist">Checklist</a></span> <span class="chip"><a href="#03-journal-2026-10-25">2026-10-25</a></span></div>
 </article>
 <article class="note" id="01-architecture-project-map"
 data-title="Project map: the repo and the architecture behind it">
@@ -3015,7 +3795,8 @@ answer can still be unsupported, and a perfect citation can still come from a
 passage the user is not allowed to see.</p>
 <h2 id="01-architecture-project-map--how-to-read-the-repo">How to read the repo</h2>
 <ol>
-<li>Start with <a href="#01-architecture-foundations">Foundations</a> for the Python, async, config, and Makefile ideas.</li>
+<li>Start with <a href="#00-project-start-here">Start-Here</a> for the current checkpoint and reading paths.</li>
+<li>Read <a href="#01-architecture-foundations">Foundations</a> for the Python, async, config, and Makefile ideas.</li>
 <li>Read <a href="#01-architecture-compose-stack">Compose-Stack</a> and <a href="#01-architecture-storage-layers">Storage-Layers</a> for the local services.</li>
 <li>Read <a href="#01-architecture-corpus">Corpus</a> for how the source snapshot is pinned and selected, then
    <a href="#01-architecture-parsing">Parsing</a> for how Markdown becomes structured JSON.</li>
@@ -3037,7 +3818,7 @@ passage the user is not allowed to see.</p>
 <li>"I add complexity only when an ablation shows a measurable gain."</li>
 </ul>
 </div>
-<div class="related"><strong>Related:</strong> <span class="chip"><a href="#00-project-checklist">Checklist</a></span> <span class="chip"><a href="#01-architecture-foundations">Foundations</a></span> <span class="chip"><a href="#01-architecture-compose-stack">Compose-Stack</a></span> <span class="chip"><a href="#01-architecture-corpus">Corpus</a></span> <span class="chip"><a href="#01-architecture-parsing">Parsing</a></span> <span class="chip"><a href="#01-architecture-ingestion-m1">Ingestion-M1</a></span> <span class="chip"><a href="#01-architecture-storage-layers">Storage-Layers</a></span> <span class="chip"><a href="#02-evaluation-evaluation-101">Evaluation-101</a></span> <span class="chip"><a href="#02-evaluation-tracing-a-document">Tracing-a-Document</a></span></div>
+<div class="related"><strong>Related:</strong> <span class="chip"><a href="#00-project-start-here">Start-Here</a></span> <span class="chip"><a href="#00-project-checklist">Checklist</a></span> <span class="chip"><a href="#01-architecture-foundations">Foundations</a></span> <span class="chip"><a href="#01-architecture-compose-stack">Compose-Stack</a></span> <span class="chip"><a href="#01-architecture-corpus">Corpus</a></span> <span class="chip"><a href="#01-architecture-parsing">Parsing</a></span> <span class="chip"><a href="#01-architecture-document-normalization">Document-Normalization</a></span> <span class="chip"><a href="#01-architecture-parser-lab">Parser-Lab</a></span> <span class="chip"><a href="#01-architecture-ingestion-m1">Ingestion-M1</a></span> <span class="chip"><a href="#01-architecture-storage-layers">Storage-Layers</a></span> <span class="chip"><a href="#02-evaluation-evaluation-101">Evaluation-101</a></span> <span class="chip"><a href="#02-evaluation-tracing-a-document">Tracing-a-Document</a></span></div>
 </article>
 <article class="note" id="01-architecture-storage-layers"
 data-title="Why four stores? Postgres, Redis, Qdrant, MinIO">

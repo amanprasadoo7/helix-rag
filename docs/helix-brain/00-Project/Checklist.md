@@ -2,8 +2,8 @@
 type: process
 status: active
 day: 2
-tags: [process, checklist, roadmap, interviews]
-related: ["[[2026-10-23]]", "[[2026-10-24]]", "[[2026-10-25]]", "[[Foundations]]", "[[Compose-Stack]]", "[[CI-Baseline]]"]
+tags: [process, checklist, roadmap, interview]
+related: ["[[Start-Here]]", "[[Study-Guide]]", "[[2026-10-23]]", "[[2026-10-24]]", "[[2026-10-25]]", "[[Foundations]]", "[[Compose-Stack]]", "[[CI-Baseline]]"]
 ---
 
 # Checkpoint checklist and handoff protocol

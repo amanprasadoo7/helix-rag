@@ -3,27 +3,47 @@ type: guide
 status: active
 day: 2
 tags: [docs, obsidian, markdown, tooling]
-related: ["[[Checklist]]", "[[2026-10-24]]"]
+related: ["[[Start-Here]]", "[[Checklist]]", "[[2026-10-24]]"]
 ---
 
 # Vault and study-guide pipeline
 
 The Obsidian vault is the source of truth. `docs/theory.html` is a generated,
 self-contained study guide for reading, searching, printing, and sharing. Edit
-the Markdown, never the HTML.
+the Markdown, never the HTML. Start at [[Start-Here]].
 
 ## Vault layout
 
 | Folder | Purpose |
 |---|---|
-| `00-Project` | roadmap, process, vault guide |
+| `00-Project` | roadmap, process, vault guide, entry point |
 | `01-Architecture` | concepts and architecture decisions |
 | `02-Evaluation` | evals, tracing, golden-set notes |
 | `03-Journal` | dated build log |
 | `_templates` | Obsidian note templates |
 
-The generator skips `.obsidian`, `_templates`, and the accidental nested
-`Helix/` vault. Everything else becomes a section in the guide.
+The generator skips `.obsidian`, `_templates`, and the nested `Helix/` folder as
+a safeguard. Everything else becomes a section in the guide.
+
+## Folder policy
+
+Keep notes flat inside the four top-level folders for now. Use links, tags, and
+maps of content instead of deeper folders.
+
+Add architecture subfolders only when `01-Architecture` reaches roughly 15–20
+notes or has three stable subdomains. When that happens:
+
+1. Introduce subfolders such as `Ingestion/`, `Platform/`, and `Retrieval/`.
+2. Update the generator so the HTML sidebar still groups notes sensibly.
+3. Move notes with `git mv`, update relative links, and run `make docs` and
+   `make ci`.
+
+Two current generator constraints drive that decision:
+
+- Notes are grouped by the first folder only, so a subfolder does not create a
+  new guide section.
+- Wikilinks resolve by note stem or title, so duplicate note names across
+  folders are ambiguous.
 
 ## Note contract
 
@@ -45,7 +65,19 @@ related: ["[[Corpus]]", "[[Evaluation-101]]"]
 - `related`: rendered as links at the bottom of the note
 
 The first `# Heading` becomes the page title. The generator removes it from the
-body so the title is not duplicated.
+body so the title is not duplicated. Use descriptive kebab-case filenames and
+avoid duplicate stems across folders.
+
+## Tag conventions
+
+Tags are lowercase, singular, and hyphenated. Prefer a small vocabulary:
+
+- Domain: `ingestion`, `retrieval`, `security`, `evaluation`, `platform`
+- Note kind: `process`, `journal`, `interview`, `docs`, `navigation`
+- Specific tools: `postgres`, `redis`, `qdrant`, `minio`, `docling`, `unstructured`
+
+Avoid synonyms and one-off tags. Normalize an existing tag when you are already
+editing that note; do not mass-rename tags just to make them match.
 
 ## Templates
 
@@ -115,7 +147,7 @@ better choice.
 
 ## Add a note
 
-1. Create the note in the right folder.
+1. Create the note in the right top-level folder.
 2. Insert the matching template.
 3. Fill in frontmatter, title, and links.
 4. Run `make docs`.

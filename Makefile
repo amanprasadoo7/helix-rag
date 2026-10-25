@@ -2,7 +2,10 @@ COMPOSE_FILE := infra/docker-compose.yml
 ENV_FILE := $(if $(wildcard .env),--env-file .env,)
 COMPOSE := docker compose -f $(COMPOSE_FILE) $(ENV_FILE)
 
-.PHONY: sync dev test test-integration lint fmt ci checklist docs corpus corpus-clean parse parse-sample up down reset ps logs ready tools tools-down
+.PHONY: sync dev test test-integration lint fmt ci checklist docs corpus corpus-clean parse parse-sample compare up down reset ps logs ready tools tools-down
+
+PARSERS ?= native,docling,unstructured
+STRATEGY ?= fast
 
 sync:
 	uv sync
@@ -41,6 +44,13 @@ parse:
 
 parse-sample:
 	uv run python scripts/parse_corpus.py --limit 5 --verbose
+
+compare:
+	@test -n "$(FILE)" || (echo "usage: make compare FILE=path/to/file [OUT=dir] [PARSERS=native,docling,unstructured] [STRATEGY=fast]"; exit 1)
+	uv run --extra parsers python scripts/compare_parsers.py "$(FILE)" \
+		--parsers "$(PARSERS)" \
+		--unstructured-strategy "$(STRATEGY)" \
+		$(if $(OUT),--out "$(OUT)",)
 
 ci: lint test
 

@@ -3,7 +3,7 @@ type: architecture
 status: active
 day: 3
 tags: [ingestion, roadmap, parsing, acl, chunking, embeddings, qdrant, interview]
-related: ["[[Parsing]]", "[[Corpus]]", "[[Storage-Layers]]", "[[Project-Map]]", "[[Checklist]]", "[[2026-10-25]]"]
+related: ["[[Parsing]]", "[[Document-Normalization]]", "[[Parser-Lab]]", "[[Corpus]]", "[[Storage-Layers]]", "[[Project-Map]]", "[[Checklist]]", "[[2026-10-25]]"]
 ---
 
 # Ingestion M1: from Markdown to a searchable index
