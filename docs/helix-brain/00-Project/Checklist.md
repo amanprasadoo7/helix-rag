@@ -3,7 +3,7 @@ type: process
 status: active
 day: 2
 tags: [process, checklist, roadmap, interview]
-related: ["[[Start-Here]]", "[[Study-Guide]]", "[[2026-10-23]]", "[[2026-10-24]]", "[[2026-10-25]]", "[[Foundations]]", "[[Compose-Stack]]", "[[CI-Baseline]]"]
+related: ["[[Start-Here]]", "[[Study-Guide]]", "[[Roadmap-Review]]", "[[ACL-Classification]]", "[[2026-10-23]]", "[[2026-10-24]]", "[[2026-10-25]]", "[[2026-10-27]]", "[[Foundations]]", "[[Compose-Stack]]", "[[CI-Baseline]]"]
 ---
 
 # Checkpoint checklist and handoff protocol
@@ -46,20 +46,25 @@ its own `fix(...)` commit and the DoD is repeated.
 
 ## Current checkpoint
 
-### 1.1 - Parser
+### 1.2 - ACL classifier
 
-Goal: turn each pinned Markdown file into a stable document model (metadata,
-heading tree, typed blocks) that the ACL classifier and chunker can consume
-without re-reading the source.
+Goal: label every parsed document with a sensitivity classification and the roles
+allowed to retrieve it, using a deterministic source-and-path policy that defaults
+to deny.
 
-- [x] Module: `packages/helix/parsing.py` parses frontmatter, heading tree, and blocks
-- [x] Normalize: fenced code, tables, lists, quotes/callouts, HTML, Hugo shortcodes
-- [x] CLI: `make parse` writes normalized JSON under `data/parsed`; `--limit` for samples
-- [x] Tests: frontmatter, heading tree, fences, tables, shortcodes/HTML, determinism
-- [x] Manual: parse five real documents and inspect the JSON
-- [x] `make ci` green
-- [x] Notes: `Parsing.md`, ADR on Docling scope, journal, roadmap row
-- [x] Commit: `feat(parser): normalize Markdown into structured JSON`
+- [ ] Module: `packages/helix/acl.py` with roles, rules, matcher, and decisions
+- [ ] Taxonomy: expanded path table plus the five previously unmatched paths
+- [ ] Roles: additive sets, `employee` baseline, `authenticated` sentinel, `billing` -> `finance` alias
+- [ ] Output: sidecar `data/acl/index.json` and `summary.json` with audit fields
+- [ ] Matching: source-aware, boundary-safe, longest-prefix wins, unknown deny
+- [ ] Idempotency: reject duplicate `(source, path)` keys; deterministic output
+- [x] Decision: `business-technology` -> `internal:company`; `billing` aliases `finance`
+- [ ] CLI: `make classify` and `make classify-sample`
+- [ ] Tests: prefix boundaries, role matrix, source distinction, alias, unknown deny
+- [ ] Manual: classify all 2,500 files, inspect summary, confirm zero unknown
+- [ ] Docs: ACL note, M1, storage, roadmap, journal
+- [ ] `make ci` green
+- [ ] Commit: `feat(acl): classify corpus by source and path`
 - [ ] User verified (user marks only)
 
 ---
@@ -76,17 +81,20 @@ Status values: `pending`, `in progress`, `done`, `blocked`.
 | 0.3b | Corpus cleanup (selected-only, no `.git`) | done | 1.8 GB -> 32 MB; [[2026-10-24]] |
 | 0.4 | Vault, note templates, doc generator | done | 11 notes; [[Project-Map]] |
 | 0.5 | CI baseline | done | [[CI-Baseline]]; ruff, mypy, pytest |
-| 1.1 | Parser | in progress | Markdown -> JSON; Docling deferred (ADR) |
-| 1.2 | ACL classifier | pending | path to classification |
+| 1.1 | Parser | done | Markdown -> JSON; Docling deferred (ADR) |
+| 1.2 | ACL classifier | in progress | source/path rules, sidecar index |
 | 1.3 | Chunker | pending | structure-aware, parent/child |
 | 1.4 | Embedder | pending | BGE-M3 dense + sparse |
-| 1.5 | Qdrant + Postgres metadata | pending | deterministic point IDs |
-| 1.6 | Worker + full ingest + reconcile | pending | ARQ, tombstones |
-| 2.1 | Hybrid retrieval | pending | dense + sparse + RRF |
-| 2.2 | ACL pre-filter | pending | security checkpoint |
+| 1.5 | Qdrant + Postgres metadata | pending | Alembic, constraints, model version |
+| 1.5b | MinIO raw + manifest snapshot | pending | immutable keys, SHA-256, idempotent |
+| 1.6 | Worker + full ingest + reconcile | pending | ARQ, tombstones, retries, dead-letter |
+| 1.7 | Eval seed expansion | pending | 25-30 cases before retrieval tuning |
+| 2.0 | Identity context + dev role resolver | pending | localhost-only trusted roles until 4.1 |
+| 2.1 | Hybrid retrieval | pending | dense + sparse + RRF; query embedder |
+| 2.2 | ACL pre-filter | pending | security checkpoint; uses 2.0 identity |
 | 2.3 | Reranker + parent expansion | pending | cross-encoder |
 | 2.4 | Context assembly | pending | token budget, citations |
-| 2.5 | Chat API | pending | non-streaming first |
+| 2.5 | Chat API | pending | non-streaming; errors, CORS, dev role header |
 | 2.6 | Next.js chat | pending | citations, source drawer |
 | 3.1 | LangGraph skeleton | pending | state + trace |
 | 3.2 | Intent classifier | pending | small local model |
@@ -95,13 +103,13 @@ Status values: `pending`, `in progress`, `done`, `blocked`.
 | 3.5 | Grade + corrective loop | pending | max 2 iterations |
 | 3.6 | Generation + SSE | pending | structured citations |
 | 3.7 | Citation verify + guard + fallback | pending | llama-guard3 |
-| 4.1 | JWT auth | pending | Argon2, refresh rotation |
-| 4.2 | RBAC/ABAC | pending | server-side claims |
+| 4.1 | JWT auth | pending | Argon2, refresh rotation; replace 2.0 resolver |
+| 4.2 | RBAC/ABAC | pending | server-side claims; tenant reserved |
 | 4.3 | Audit log | pending | append-only |
 | 4.4 | Admin ingest API/UI | pending | jobs, documents |
 | 4.5 | Rate limits + security headers | pending | per user/IP |
 | 4.6 | Security test suite | pending | ACL matrix, injection |
-| 5.1 | Golden set | pending | ~110 cases |
+| 5.1 | Golden set | pending | ~110 cases; start at 1.7 |
 | 5.2 | Retrieval metrics | pending | recall@k, MRR, nDCG |
 | 5.3 | Generation metrics | pending | Ragas, citation validity |
 | 5.4 | Ablation runner | pending | the interview table |
@@ -112,9 +120,9 @@ Status values: `pending`, `in progress`, `done`, `blocked`.
 | 6.3 | MCP HTTP + auth | pending | bearer token, audit |
 | 6.4 | MCP client demo | pending | agent consumes tickets |
 | 6.5 | MCP security tests | pending | ACL, no writes |
-| 7.1 | Load test + failure injection | pending | k6, outages |
+| 7.1 | Load test + failure injection | pending | k6, outages, backup/restore drill |
 | 7.2 | Final HTML guide | pending | tabs, checklist, flashcards |
-| 7.3 | ADRs + notes | pending | decisions complete |
+| 7.3 | ADRs + notes | pending | decisions, runbooks, re-index/DR |
 | 7.4 | Demo script | pending | 10 minutes |
 | 7.5 | Mock interview | pending | 20 questions |
 

@@ -3,7 +3,7 @@ type: architecture
 status: active
 day: 2
 tags: [architecture, repo, roadmap, retrieval, security, interview]
-related: ["[[Start-Here]]", "[[Checklist]]", "[[Foundations]]", "[[Compose-Stack]]", "[[Corpus]]", "[[Parsing]]", "[[Document-Normalization]]", "[[Parser-Lab]]", "[[Ingestion-M1]]", "[[Storage-Layers]]", "[[Evaluation-101]]", "[[Tracing-a-Document]]"]
+related: ["[[Start-Here]]", "[[Checklist]]", "[[Roadmap-Review]]", "[[ACL-Classification]]", "[[Foundations]]", "[[Compose-Stack]]", "[[Corpus]]", "[[Parsing]]", "[[Document-Normalization]]", "[[Parser-Lab]]", "[[Ingestion-M1]]", "[[Storage-Layers]]", "[[Evaluation-101]]", "[[Tracing-a-Document]]"]
 ---
 
 # Project map: the repo and the architecture behind it
@@ -27,11 +27,12 @@ Think of it as a staffed research library:
 | Quality review after an answer | Evals and security gates |
 
 > [!info] Current state
-> Checkpoint 1.1. The repo has a working API skeleton, local services, a pinned
-> corpus, a Markdown parser that emits structured JSON, and a docs/eval seed. It
-> does **not** yet have ACL classification, chunking, embeddings, retrieval,
-> generation, auth, or a UI. This note explains the target architecture and
-> marks what exists now.
+> Checkpoint 1.1 is verified; 1.2 ACL classification is next. The repo has a
+> working API skeleton, local services, a pinned corpus, a Markdown parser that
+> emits structured JSON, and a docs/eval seed. It does **not** yet have ACL
+> classification, chunking, embeddings, retrieval, generation, auth, or a UI.
+> MinIO is running but its archive checkpoint is 1.5b. This note explains the
+> target architecture and marks what exists now.
 
 ## What lives where
 
@@ -118,12 +119,16 @@ user question
 The query path is latency-sensitive. The design keeps network-bound work async
 and pushes optional work, such as broad query expansion, behind a bounded budget.
 
+Until 4.1 adds JWT auth, checkpoint 2.0 supplies a localhost-only trusted role
+header and a typed identity object. The ACL pre-filter uses that interface; 4.1
+replaces the resolver with JWT claims without changing retrieval code.
+
 ## What exists now vs what comes next
 
 | Layer | Now | Next |
 |---|---|---|
 | API | `/`, `/health/live`, `/health/ready` | Chat, streaming, admin ingest |
-| Ingestion | Pinned corpus, manifest, Markdown parser | ACL classifier, chunker, embedder |
+| Ingestion | Pinned corpus, manifest, Markdown parser | ACL classifier, chunker, embedder, MinIO archive |
 | Storage | Four running services, empty | Schemas, collections, buckets |
 | Retrieval | None | Hybrid dense + sparse, RRF, reranker |
 | Agent | None | LangGraph plan/retrieve/grade loop |

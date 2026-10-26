@@ -3,7 +3,7 @@ type: guide
 status: active
 day: 2
 tags: [docs, obsidian, markdown, tooling]
-related: ["[[Start-Here]]", "[[Checklist]]", "[[2026-10-24]]"]
+related: ["[[Start-Here]]", "[[Checklist]]", "[[2026-10-24]]", "[[2026-10-27]]"]
 ---
 
 # Vault and study-guide pipeline
@@ -22,8 +22,8 @@ the Markdown, never the HTML. Start at [[Start-Here]].
 | `03-Journal` | dated build log |
 | `_templates` | Obsidian note templates |
 
-The generator skips `.obsidian`, `_templates`, and the nested `Helix/` folder as
-a safeguard. Everything else becomes a section in the guide.
+The generator skips `.obsidian` and `_templates`. Everything else becomes a
+section in the guide.
 
 ## Folder policy
 

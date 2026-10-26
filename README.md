@@ -2,7 +2,7 @@
 
 Permission-aware agentic RAG over the GitLab public handbook and product docs.
 
-**Status:** Checkpoint 1.1 - Markdown parser (in progress).
+**Status:** Checkpoint 1.1 verified; checkpoint 1.2 - ACL classifier is next.
 
 ## Quickstart
 
@@ -114,7 +114,8 @@ contract, folder policy, and supported Markdown subset.
 
 `evals/seed_questions.jsonl` contains seven manually verified seed cases from
 the Zuora Collect page, including an unanswerable question for abstention. These
-are seeds, not the final golden set. See
+are seeds, not the final golden set; checkpoint 1.7 expands them before retrieval
+tuning. See
 [`Evaluation-101.md`](docs/helix-brain/02-Evaluation/Evaluation-101.md) for the
 metric families, security gates, and ablation plan.
 

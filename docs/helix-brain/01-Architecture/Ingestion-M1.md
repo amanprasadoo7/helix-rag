@@ -1,9 +1,9 @@
 ---
 type: architecture
 status: active
-day: 3
+day: 4
 tags: [ingestion, roadmap, parsing, acl, chunking, embeddings, qdrant, interview]
-related: ["[[Parsing]]", "[[Document-Normalization]]", "[[Parser-Lab]]", "[[Corpus]]", "[[Storage-Layers]]", "[[Project-Map]]", "[[Checklist]]", "[[2026-10-25]]"]
+related: ["[[Parsing]]", "[[Document-Normalization]]", "[[Parser-Lab]]", "[[ACL-Classification]]", "[[Corpus]]", "[[Storage-Layers]]", "[[Project-Map]]", "[[Checklist]]", "[[Roadmap-Review]]", "[[2026-10-27]]"]
 ---
 
 # Ingestion M1: from Markdown to a searchable index
@@ -14,8 +14,9 @@ stores those chunks in Qdrant and Postgres, and automates the whole flow with an
 idempotent worker.
 
 > [!info] Status
-> Checkpoint 1.1 is implemented and awaiting user verification. Checkpoints
-> 1.2–1.6 are the plan, not built yet. This note is updated as each one lands.
+> Checkpoint 1.1 is verified. Checkpoints 1.2–1.6 are the plan, not built yet.
+> The 1.2 design conversation is in [[ACL-Classification]]; 1.5b adds the MinIO
+> snapshot. This note is updated as each checkpoint lands.
 
 ## The library analogy
 
@@ -28,6 +29,7 @@ You have 2,500 books and no librarian.
 | 1.3 Chunker | Cut each book into index cards small enough to search | Sections → parent/child chunks |
 | 1.4 Embedder | Turn each card into a numeric fingerprint of its meaning | BGE-M3 dense + sparse vectors |
 | 1.5 Storage | Put fingerprints in the smart index and card details in the catalog | Qdrant + Postgres |
+| 1.5b Archive | Photograph the original shelves so they can be rebuilt later | MinIO raw + manifest |
 | 1.6 Worker | Build the assembly line, and remove cards when a book is deleted | ARQ + reconcile |
 
 The order is deliberate. Permissions must be known before chunks are stored, and
@@ -56,6 +58,9 @@ manifest
    |
    v
 1.5 stores ------> Qdrant payload + Postgres chunk map
+   |
+   v
+1.5b snapshot ---> MinIO raw + manifest, SHA-256
    |
    v
 1.6 worker ------> add/update/delete, rerun is a no-op
@@ -90,27 +95,47 @@ More detail: [[Parsing]]. The choice of a native parser over Docling is in
 ## 1.2 ACL classifier
 
 **In plain language.** Decide who may see each document based on where it came
-from. Examples:
+from. A public product page is open to any logged-in user; an engineering runbook
+needs an engineering badge; HR, finance, legal, and security each have their own
+locked room. An unknown path gets no badge at all.
 
-| Path | Classification | Allowed roles |
+| Source and path | Classification | Allowed roles |
 |---|---|---|
-| `handbook/people-group`, `people-policies`, `finance`, `legal` | `confidential:hr` | hr, security, admin |
-| `handbook/security` | `restricted:security` | security, admin |
-| `handbook/engineering`, `support`, `it` | `internal:eng` | engineer, support, security, admin |
-| `doc/**` | `public:docs` | all authenticated |
-| tagged `project:atlas` | `project:atlas` | contractor, admin |
+| `gitlab-docs:doc/**` | `public:docs` | `authenticated` |
+| `handbook:content/handbook/security/**` | `restricted:security` | `security`, `admin` |
+| `handbook:.../people-group/**`, `people-policies/**`, `hiring/**`, `total-rewards/**`, `labor-and-employment-notices/**` | `confidential:hr` | `hr`, `legal`, `security`, `admin` |
+| `handbook:.../finance/**`, `acquisitions/**` | `confidential:finance` | `finance`, `legal`, `security`, `admin` |
+| `handbook:.../legal/**`, `board-meetings/**` | `confidential:legal` | `legal`, `security`, `admin` |
+| `handbook:.../engineering/**`, `support/**`, `product/**`, `product-development/**`, `solutions-architects/**`, `it/**`, `tools-and-tips/**` | `internal:eng` | `engineer`, `support`, `security`, `admin` |
+| `handbook:.../marketing/**`, `sales/**`, `customer-experience/**`, `eta/**`, `company/**`, `leadership/**`, `communication/**`, `upstream-studios/**`, `enterprise-data/**`, `resellers/**`, `about/**`, `entity/**`, `values/**`, `business-technology/**`, `_index.md` | `internal:company` | `employee`, `admin` |
+| anything unmatched | `restricted:unknown` | none, deny |
+
+Roles are additive sets. `authenticated` is the public sentinel, `employee` is
+the internal baseline, and functional roles are added on top. A user can have
+several roles, and the document is allowed if any role intersects the allow list.
+`billing` is an alias for `finance`; the matcher always sees `finance`.
 
 These permissions are synthetic. The source content is public; the demo layers a
-plausible organisation and sensitivity model on top.
+plausible organisation and sensitivity model on top. `project:atlas` is deferred:
+there are no tag overrides in v1.
 
-**Technically.** A deterministic path-and-tag rule table maps each parsed
-document to `classification` and `allowed_roles`. Unknown paths default to deny,
-never public. Tests cover the full path × role matrix. The result is stored as
-document metadata and later copied into the Qdrant payload, where it becomes a
-**pre-filter applied before vector search**, not a prompt instruction.
+**Technically.** A deterministic source-and-path rule table maps each parsed
+document to `classification` and `allowed_roles`. Matching is boundary-safe and
+longest-prefix first; unknown paths default to deny, never public. Each decision
+records `rule_id`, `matched_prefix`, and `reason`, plus a top-level
+`policy_version`. The output is a sidecar index under `data/acl`, not a mutation
+of the parsed JSON, so the corpus can be reclassified without re-parsing.
+
+Tests cover source distinction, prefix boundaries, longest-prefix precedence, the
+path × role matrix, unknown deny, duplicate `(source, path)` keys, and full
+corpus coverage. The result is later copied into the Qdrant payload, where it
+becomes a **pre-filter applied before vector search**, not a prompt instruction.
 
 **Why here.** Permissions must exist before chunks are written. Retrofitting ACLs
 after indexing means every stored chunk is temporarily unsafe.
+
+The full explanation, role model, and the `business-technology` correction are in
+[[ACL-Classification]].
 
 ---
 
@@ -160,30 +185,65 @@ section, what hash, what parent, when was it ingested?”
 
 **Technically.**
 
-- Qdrant collection `chunks_v1` with named vectors `dense` and `sparse`;
+- Qdrant collection `chunks_bge_m3_v1` with named vectors `dense` and `sparse`;
 - payload: tenant, document, chunk, parent, classification, roles, source/path,
-  section path, content hash;
+  section path, content hash, embedding model/version/dimension;
 - deterministic point ids, for example UUID5 of `document:ordinal:content_hash`;
-- Postgres holds the document/chunk map and parent-child relationships;
+- Postgres holds the document/chunk map and parent-child relationships, managed
+  by Alembic from the first table;
+- unique constraints on `(source, path)` for documents and
+  `(document_id, ordinal)` for chunks, plus foreign keys and a content-hash index;
+- `tenant` is a reserved field with the local value `default`; the system is
+  single-tenant until a tenant table and isolation test exist;
 - verify counts and fetch 100 chunks by id.
 
 **Why both.** The vector database is an index, not the source of truth. Postgres
-is where you join, audit, and explain.
+is where you join, audit, and explain. The collection name includes the embedding
+model version because vectors from different models must never be mixed.
+
+---
+
+## 1.5b MinIO raw + manifest snapshot
+
+**In plain language.** Take a photograph of the exact shelves that were indexed.
+If the source repository disappears, or a parser change needs the original bytes,
+the snapshot is still there. The raw corpus and manifest are small enough to
+archive; parsed output is optional because it can be regenerated.
+
+**Technically.**
+
+- bucket `helix-corpus`;
+- keys `raw/<source>/<commit>/<path>` and
+  `manifests/<source>/<commit>.json`;
+- optional `parsed/<source>/<commit>/<parser_version>/<path>.json`;
+- record SHA-256 in object metadata and reject a different payload under the same
+  immutable key;
+- re-uploading the same commit and checksum is a no-op;
+- verify by downloading one raw file and one manifest and comparing hashes.
+
+**Why after 1.5.** MinIO is not required to make retrieval work, so it must not
+block the first searchable index. It is still a real S3-compatible archive, and
+the same code works against AWS S3 or Cloudflare R2. The checkpoint is `1.5b`
+rather than a new phase because it is one focused concern.
 
 ---
 
 ## 1.6 Worker + full ingest + reconcile
 
-**In plain language.** Build the assembly line that runs all six steps over all
-2,500 documents in the background. If nothing changed, a second run should do
+**In plain language.** Build the assembly line that runs the whole pipeline over
+all 2,500 documents in the background. If nothing changed, a second run should do
 nothing. If a document is deleted upstream, its chunks must disappear.
 
 **Technically.**
 
 - ARQ worker backed by Redis;
 - job key = source + commit + config hash;
+- config hash includes parser, ACL policy, chunker, and embedding-model versions,
+  so a policy or model change forces the right work;
 - content-hash diff detects added, changed, and deleted documents;
 - add/update/delete, with tombstones for removals;
+- bounded retries with backoff, a dead-letter queue, a job record in Postgres, and
+  a lock per ingest run;
 - idempotent rerun: the second run reports zero work;
 - verify counts, sample retrieval, and the ACL invariant after each run;
 - integration test against the live stack.
@@ -198,10 +258,11 @@ that can prove the whole pipeline is correct and repeatable.
 | Step | Input → output | Main technology | Main failure to test |
 |---|---|---|---|
 | 1.1 | Markdown → structured document JSON | Pydantic, native parser | lost headings, tables, or code |
-| 1.2 | document → classification + roles | path rule table | unknown path leaking as public |
+| 1.2 | document → classification + roles | source/path rule table | unknown path leaking as public |
 | 1.3 | document → parent/child chunks | structure-aware chunker | chunk crosses a heading or splits a table |
 | 1.4 | chunk → dense + sparse vectors | BGE-M3 | wrong dimensions, slow batches |
 | 1.5 | chunks → Qdrant points + Postgres rows | Qdrant, Postgres | id/count drift, missing payload |
+| 1.5b | raw corpus + manifest → S3 objects | MinIO, SHA-256 | duplicate keys, checksum drift |
 | 1.6 | corpus → indexed, reconciled store | ARQ, Redis, hashes | rerun duplicates, deletes not propagating |
 
 ## End-to-end example
@@ -216,15 +277,17 @@ Question: “When does an account move to Collections?”
 4. **Embedder** turns the child into one dense vector and one sparse vector.
 5. **Storage** writes the vectors plus ACL, path, section, and hash to Qdrant,
    and the document/chunk rows to Postgres.
-6. **Worker** performs those steps for the whole corpus, then a second run
+6. **Snapshot** archives the raw Markdown and manifest in MinIO with checksums.
+7. **Worker** performs those steps for the whole corpus, then a second run
    reports no changes.
-7. **Query time** applies the `public:docs` filter before search, retrieves the
+8. **Query time** applies the `public:docs` filter before search, retrieves the
    child, expands to the parent, and cites the source path and section.
 
 ## M1 exit criteria
 
 - 2,500 documents parsed and indexed.
 - Every stored chunk carries classification and allowed roles.
+- The raw corpus and manifest are archived in MinIO with matching SHA-256 values.
 - A second full ingest is a no-op.
 - Deleting one upstream document removes its chunks from both stores.
 - Qdrant and Postgres counts agree.
@@ -305,6 +368,13 @@ Qdrant finds nearest vectors; Postgres stores truth, joins, hashes, and audit
 data. Treating the vector store as the database of record makes reconciliation
 and auditing much harder.
 
+### Why MinIO if the corpus can be re-fetched?
+
+Re-fetching depends on the upstream repository still serving the pinned commit.
+The snapshot makes the demo self-contained, gives us original bytes for a parser
+change, and exercises the same S3 interface used in production. It is a
+convenience and a recovery path, not a replacement for Postgres truth.
+
 ### Why must a second ingest be a no-op?
 
 Real pipelines rerun. Without content hashes and idempotent writes, every rerun
@@ -316,9 +386,14 @@ duplicates data, inflates counts, and makes deletion impossible to reason about.
   one interpretation of headings, lists, code, and tables.”
 - “ACLs are metadata applied before vector search, not a sentence in the prompt.
   The security invariant is zero unauthorized chunks in the context.”
+- “The ACL rule is deterministic and source-aware. It records which rule and
+  prefix matched, so a misclassification is auditable.”
 - “I use parent/child chunking: small children for retrieval, the parent section
   for generation, and a breadcrumb for both context and citations.”
 - “BGE-M3 gives me dense and sparse vectors from one model, so hybrid retrieval
   does not need a separate BM25 pipeline.”
 - “The ingest worker is hash-based and idempotent: rerunning unchanged data is a
   no-op, and deletions propagate as tombstones.”
+- “I archive the exact raw commit and manifest in S3-compatible storage with
+  checksums, so a parser or embedding change can rebuild without depending on the
+  upstream repository.”

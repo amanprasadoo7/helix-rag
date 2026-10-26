@@ -341,7 +341,7 @@ footer.page-footer {
 <input id="search" class="search" type="search"
   placeholder="Search notes... (press /)" autocomplete="off">
 <nav class="nav" aria-label="Notes">
-<div class="nav-group"><h2>Project</h2><a href="#00-project-ci-baseline" data-target="00-project-ci-baseline">CI baseline: one gate, local and remote</a><a href="#00-project-checklist" data-target="00-project-checklist">Checkpoint checklist and handoff protocol</a><a href="#00-project-start-here" data-target="00-project-start-here">Start here</a><a href="#00-project-study-guide" data-target="00-project-study-guide">Vault and study-guide pipeline</a></div><div class="nav-group"><h2>Architecture</h2><a href="#01-architecture-compose-stack" data-target="01-architecture-compose-stack">Local stack and readiness</a><a href="#01-architecture-corpus" data-target="01-architecture-corpus">Corpus: pinned GitLab handbook and docs</a><a href="#01-architecture-document-normalization" data-target="01-architecture-document-normalization">Document normalization: why and how</a><a href="#01-architecture-foundations" data-target="01-architecture-foundations">Foundations: async, Make, environments, logging</a><a href="#01-architecture-ingestion-m1" data-target="01-architecture-ingestion-m1">Ingestion M1: from Markdown to a searchable index</a><a href="#01-architecture-parser-lab" data-target="01-architecture-parser-lab">Parser lab: native vs Docling vs Unstructured</a><a href="#01-architecture-parsing" data-target="01-architecture-parsing">Parsing: Markdown to a stable document model</a><a href="#01-architecture-project-map" data-target="01-architecture-project-map">Project map: the repo and the architecture behind it</a><a href="#01-architecture-storage-layers" data-target="01-architecture-storage-layers">Why four stores? Postgres, Redis, Qdrant, MinIO</a></div><div class="nav-group"><h2>Evaluation</h2><a href="#02-evaluation-evaluation-101" data-target="02-evaluation-evaluation-101">Evaluation 101: how we know RAG is getting better</a><a href="#02-evaluation-tracing-a-document" data-target="02-evaluation-tracing-a-document">Tracing a document and seeding the golden set</a></div><div class="nav-group"><h2>Journal</h2><a href="#03-journal-2026-10-23" data-target="03-journal-2026-10-23">2026-10-23 - Day 1</a><a href="#03-journal-2026-10-24" data-target="03-journal-2026-10-24">2026-10-24 - Day 2</a><a href="#03-journal-2026-10-25" data-target="03-journal-2026-10-25">2026-10-25 - Day 3</a></div>
+<div class="nav-group"><h2>Project</h2><a href="#00-project-ci-baseline" data-target="00-project-ci-baseline">CI baseline: one gate, local and remote</a><a href="#00-project-checklist" data-target="00-project-checklist">Checkpoint checklist and handoff protocol</a><a href="#00-project-roadmap-review" data-target="00-project-roadmap-review">Roadmap review: gaps and ordering fixes</a><a href="#00-project-start-here" data-target="00-project-start-here">Start here</a><a href="#00-project-study-guide" data-target="00-project-study-guide">Vault and study-guide pipeline</a></div><div class="nav-group"><h2>Architecture</h2><a href="#01-architecture-acl-classification" data-target="01-architecture-acl-classification">ACL classification: who may see each document</a><a href="#01-architecture-compose-stack" data-target="01-architecture-compose-stack">Local stack and readiness</a><a href="#01-architecture-corpus" data-target="01-architecture-corpus">Corpus: pinned GitLab handbook and docs</a><a href="#01-architecture-document-normalization" data-target="01-architecture-document-normalization">Document normalization: why and how</a><a href="#01-architecture-foundations" data-target="01-architecture-foundations">Foundations: async, Make, environments, logging</a><a href="#01-architecture-ingestion-m1" data-target="01-architecture-ingestion-m1">Ingestion M1: from Markdown to a searchable index</a><a href="#01-architecture-parser-lab" data-target="01-architecture-parser-lab">Parser lab: native vs Docling vs Unstructured</a><a href="#01-architecture-parsing" data-target="01-architecture-parsing">Parsing: Markdown to a stable document model</a><a href="#01-architecture-project-map" data-target="01-architecture-project-map">Project map: the repo and the architecture behind it</a><a href="#01-architecture-storage-layers" data-target="01-architecture-storage-layers">Why four stores? Postgres, Redis, Qdrant, MinIO</a></div><div class="nav-group"><h2>Evaluation</h2><a href="#02-evaluation-evaluation-101" data-target="02-evaluation-evaluation-101">Evaluation 101: how we know RAG is getting better</a><a href="#02-evaluation-tracing-a-document" data-target="02-evaluation-tracing-a-document">Tracing a document and seeding the golden set</a></div><div class="nav-group"><h2>Journal</h2><a href="#03-journal-2026-10-23" data-target="03-journal-2026-10-23">2026-10-23 - Day 1</a><a href="#03-journal-2026-10-24" data-target="03-journal-2026-10-24">2026-10-24 - Day 2</a><a href="#03-journal-2026-10-25" data-target="03-journal-2026-10-25">2026-10-25 - Day 3</a><a href="#03-journal-2026-10-27" data-target="03-journal-2026-10-27">2026-10-27 - Day 4</a></div>
 </nav>
 </aside>
 <main id="top">
@@ -350,7 +350,7 @@ footer.page-footer {
 <h1>Helix Study Guide</h1>
 <p>Generated from <code>docs/helix-brain</code>.
 Edit the Markdown, then run <code>make docs</code>.</p>
-<p class="stats">18 notes · 4 sections</p>
+<p class="stats">21 notes · 4 sections</p>
 </header>
 <article class="note" id="00-project-ci-baseline"
 data-title="CI baseline: one gate, local and remote">
@@ -541,7 +541,7 @@ data-title="Checkpoint checklist and handoff protocol">
 <h2>Checkpoint checklist and handoff protocol</h2>
 <span class="chip">process</span><span class="chip">checklist</span><span class="chip">roadmap</span><span class="chip">interview</span>
 </header>
-<div class="toc"><p class="toctitle">On this page</p><ul><li><a href="#00-project-checklist--the-two-key-rule">The two-key rule</a></li><li><a href="#00-project-checklist--definition-of-done-every-checkpoint">Definition of Done (every checkpoint)</a></li><li><a href="#00-project-checklist--current-checkpoint">Current checkpoint</a><ul><li><a href="#00-project-checklist--1-1-parser">1.1 - Parser</a></li></ul></li><li><a href="#00-project-checklist--roadmap">Roadmap</a></li><li><a href="#00-project-checklist--handoff-template-agent-writes-this-every-checkpoint">Handoff template (agent writes this every checkpoint)</a></li><li><a href="#00-project-checklist--commit-convention">Commit convention</a></li><li><a href="#00-project-checklist--release-gates">Release gates</a></li><li><a href="#00-project-checklist--rules-that-prevent-drift">Rules that prevent drift</a></li></ul></div>
+<div class="toc"><p class="toctitle">On this page</p><ul><li><a href="#00-project-checklist--the-two-key-rule">The two-key rule</a></li><li><a href="#00-project-checklist--definition-of-done-every-checkpoint">Definition of Done (every checkpoint)</a></li><li><a href="#00-project-checklist--current-checkpoint">Current checkpoint</a><ul><li><a href="#00-project-checklist--1-2-acl-classifier">1.2 - ACL classifier</a></li></ul></li><li><a href="#00-project-checklist--roadmap">Roadmap</a></li><li><a href="#00-project-checklist--handoff-template-agent-writes-this-every-checkpoint">Handoff template (agent writes this every checkpoint)</a></li><li><a href="#00-project-checklist--commit-convention">Commit convention</a></li><li><a href="#00-project-checklist--release-gates">Release gates</a></li><li><a href="#00-project-checklist--rules-that-prevent-drift">Rules that prevent drift</a></li></ul></div>
 <div class="content">
 <p>This is the contract for how we build Helix. It exists so neither the agent nor
 the human forgets a step, and so every checkpoint ends in the same verifiable
@@ -589,19 +589,24 @@ its own <code>fix(...)</code> commit and the DoD is repeated.</p>
 </ul>
 <hr />
 <h2 id="00-project-checklist--current-checkpoint">Current checkpoint</h2>
-<h3 id="00-project-checklist--1-1-parser">1.1 - Parser</h3>
-<p>Goal: turn each pinned Markdown file into a stable document model (metadata,
-heading tree, typed blocks) that the ACL classifier and chunker can consume
-without re-reading the source.</p>
+<h3 id="00-project-checklist--1-2-acl-classifier">1.2 - ACL classifier</h3>
+<p>Goal: label every parsed document with a sensitivity classification and the roles
+allowed to retrieve it, using a deterministic source-and-path policy that defaults
+to deny.</p>
 <ul>
-<li>[x] Module: <code>packages/helix/parsing.py</code> parses frontmatter, heading tree, and blocks</li>
-<li>[x] Normalize: fenced code, tables, lists, quotes/callouts, HTML, Hugo shortcodes</li>
-<li>[x] CLI: <code>make parse</code> writes normalized JSON under <code>data/parsed</code>; <code>--limit</code> for samples</li>
-<li>[x] Tests: frontmatter, heading tree, fences, tables, shortcodes/HTML, determinism</li>
-<li>[x] Manual: parse five real documents and inspect the JSON</li>
-<li>[x] <code>make ci</code> green</li>
-<li>[x] Notes: <code>Parsing.md</code>, ADR on Docling scope, journal, roadmap row</li>
-<li>[x] Commit: <code>feat(parser): normalize Markdown into structured JSON</code></li>
+<li>[ ] Module: <code>packages/helix/acl.py</code> with roles, rules, matcher, and decisions</li>
+<li>[ ] Taxonomy: expanded path table plus the five previously unmatched paths</li>
+<li>[ ] Roles: additive sets, <code>employee</code> baseline, <code>authenticated</code> sentinel, <code>billing</code> -&gt; <code>finance</code> alias</li>
+<li>[ ] Output: sidecar <code>data/acl/index.json</code> and <code>summary.json</code> with audit fields</li>
+<li>[ ] Matching: source-aware, boundary-safe, longest-prefix wins, unknown deny</li>
+<li>[ ] Idempotency: reject duplicate <code>(source, path)</code> keys; deterministic output</li>
+<li>[x] Decision: <code>business-technology</code> -&gt; <code>internal:company</code>; <code>billing</code> aliases <code>finance</code></li>
+<li>[ ] CLI: <code>make classify</code> and <code>make classify-sample</code></li>
+<li>[ ] Tests: prefix boundaries, role matrix, source distinction, alias, unknown deny</li>
+<li>[ ] Manual: classify all 2,500 files, inspect summary, confirm zero unknown</li>
+<li>[ ] Docs: ACL note, M1, storage, roadmap, journal</li>
+<li>[ ] <code>make ci</code> green</li>
+<li>[ ] Commit: <code>feat(acl): classify corpus by source and path</code></li>
 <li>[ ] User verified (user marks only)</li>
 </ul>
 <hr />
@@ -656,14 +661,14 @@ without re-reading the source.</p>
 <tr>
 <td>1.1</td>
 <td>Parser</td>
-<td>in progress</td>
+<td>done</td>
 <td>Markdown -&gt; JSON; Docling deferred (ADR)</td>
 </tr>
 <tr>
 <td>1.2</td>
 <td>ACL classifier</td>
-<td>pending</td>
-<td>path to classification</td>
+<td>in progress</td>
+<td>source/path rules, sidecar index</td>
 </tr>
 <tr>
 <td>1.3</td>
@@ -681,25 +686,43 @@ without re-reading the source.</p>
 <td>1.5</td>
 <td>Qdrant + Postgres metadata</td>
 <td>pending</td>
-<td>deterministic point IDs</td>
+<td>Alembic, constraints, model version</td>
+</tr>
+<tr>
+<td>1.5b</td>
+<td>MinIO raw + manifest snapshot</td>
+<td>pending</td>
+<td>immutable keys, SHA-256, idempotent</td>
 </tr>
 <tr>
 <td>1.6</td>
 <td>Worker + full ingest + reconcile</td>
 <td>pending</td>
-<td>ARQ, tombstones</td>
+<td>ARQ, tombstones, retries, dead-letter</td>
+</tr>
+<tr>
+<td>1.7</td>
+<td>Eval seed expansion</td>
+<td>pending</td>
+<td>25-30 cases before retrieval tuning</td>
+</tr>
+<tr>
+<td>2.0</td>
+<td>Identity context + dev role resolver</td>
+<td>pending</td>
+<td>localhost-only trusted roles until 4.1</td>
 </tr>
 <tr>
 <td>2.1</td>
 <td>Hybrid retrieval</td>
 <td>pending</td>
-<td>dense + sparse + RRF</td>
+<td>dense + sparse + RRF; query embedder</td>
 </tr>
 <tr>
 <td>2.2</td>
 <td>ACL pre-filter</td>
 <td>pending</td>
-<td>security checkpoint</td>
+<td>security checkpoint; uses 2.0 identity</td>
 </tr>
 <tr>
 <td>2.3</td>
@@ -717,7 +740,7 @@ without re-reading the source.</p>
 <td>2.5</td>
 <td>Chat API</td>
 <td>pending</td>
-<td>non-streaming first</td>
+<td>non-streaming; errors, CORS, dev role header</td>
 </tr>
 <tr>
 <td>2.6</td>
@@ -771,13 +794,13 @@ without re-reading the source.</p>
 <td>4.1</td>
 <td>JWT auth</td>
 <td>pending</td>
-<td>Argon2, refresh rotation</td>
+<td>Argon2, refresh rotation; replace 2.0 resolver</td>
 </tr>
 <tr>
 <td>4.2</td>
 <td>RBAC/ABAC</td>
 <td>pending</td>
-<td>server-side claims</td>
+<td>server-side claims; tenant reserved</td>
 </tr>
 <tr>
 <td>4.3</td>
@@ -807,7 +830,7 @@ without re-reading the source.</p>
 <td>5.1</td>
 <td>Golden set</td>
 <td>pending</td>
-<td>~110 cases</td>
+<td>~110 cases; start at 1.7</td>
 </tr>
 <tr>
 <td>5.2</td>
@@ -873,7 +896,7 @@ without re-reading the source.</p>
 <td>7.1</td>
 <td>Load test + failure injection</td>
 <td>pending</td>
-<td>k6, outages</td>
+<td>k6, outages, backup/restore drill</td>
 </tr>
 <tr>
 <td>7.2</td>
@@ -885,7 +908,7 @@ without re-reading the source.</p>
 <td>7.3</td>
 <td>ADRs + notes</td>
 <td>pending</td>
-<td>decisions complete</td>
+<td>decisions, runbooks, re-index/DR</td>
 </tr>
 <tr>
 <td>7.4</td>
@@ -1006,7 +1029,189 @@ of those two replies.</p>
    big.</li>
 </ol>
 </div>
-<div class="related"><strong>Related:</strong> <span class="chip"><a href="#00-project-start-here">Start-Here</a></span> <span class="chip"><a href="#00-project-study-guide">Study-Guide</a></span> <span class="chip"><a href="#03-journal-2026-10-23">2026-10-23</a></span> <span class="chip"><a href="#03-journal-2026-10-24">2026-10-24</a></span> <span class="chip"><a href="#03-journal-2026-10-25">2026-10-25</a></span> <span class="chip"><a href="#01-architecture-foundations">Foundations</a></span> <span class="chip"><a href="#01-architecture-compose-stack">Compose-Stack</a></span> <span class="chip"><a href="#00-project-ci-baseline">CI-Baseline</a></span></div>
+<div class="related"><strong>Related:</strong> <span class="chip"><a href="#00-project-start-here">Start-Here</a></span> <span class="chip"><a href="#00-project-study-guide">Study-Guide</a></span> <span class="chip"><a href="#00-project-roadmap-review">Roadmap-Review</a></span> <span class="chip"><a href="#01-architecture-acl-classification">ACL-Classification</a></span> <span class="chip"><a href="#03-journal-2026-10-23">2026-10-23</a></span> <span class="chip"><a href="#03-journal-2026-10-24">2026-10-24</a></span> <span class="chip"><a href="#03-journal-2026-10-25">2026-10-25</a></span> <span class="chip"><a href="#03-journal-2026-10-27">2026-10-27</a></span> <span class="chip"><a href="#01-architecture-foundations">Foundations</a></span> <span class="chip"><a href="#01-architecture-compose-stack">Compose-Stack</a></span> <span class="chip"><a href="#00-project-ci-baseline">CI-Baseline</a></span></div>
+</article>
+<article class="note" id="00-project-roadmap-review"
+data-title="Roadmap review: gaps and ordering fixes">
+<header class="note-header">
+<p class="kicker">Project · process · active</p>
+<h2>Roadmap review: gaps and ordering fixes</h2>
+<span class="chip">process</span><span class="chip">roadmap</span><span class="chip">planning</span><span class="chip">security</span><span class="chip">evaluation</span>
+</header>
+<div class="toc"><p class="toctitle">On this page</p><ul><li><a href="#00-project-roadmap-review--current-shape">Current shape</a></li><li><a href="#00-project-roadmap-review--gaps-found">Gaps found</a><ul><li><a href="#00-project-roadmap-review--1-minio-had-no-owner">1. MinIO had no owner</a></li><li><a href="#00-project-roadmap-review--2-acl-filtering-came-before-identity">2. ACL filtering came before identity</a></li><li><a href="#00-project-roadmap-review--3-the-golden-set-was-too-late">3. The golden set was too late</a></li><li><a href="#00-project-roadmap-review--4-seed-roles-and-the-acl-taxonomy-disagree">4. Seed roles and the ACL taxonomy disagree</a></li><li><a href="#00-project-roadmap-review--5-postgres-schema-and-migrations-were-implicit">5. Postgres schema and migrations were implicit</a></li><li><a href="#00-project-roadmap-review--6-embedding-model-version-was-not-tracked">6. Embedding model version was not tracked</a></li><li><a href="#00-project-roadmap-review--7-worker-reliability-was-underspecified">7. Worker reliability was underspecified</a></li><li><a href="#00-project-roadmap-review--8-tenant-was-a-payload-field-without-a-tenant-model">8. Tenant was a payload field without a tenant model</a></li><li><a href="#00-project-roadmap-review--9-frontend-auth-integration-was-not-explicit">9. Frontend auth integration was not explicit</a></li><li><a href="#00-project-roadmap-review--10-operational-recovery-was-thin">10. Operational recovery was thin</a></li><li><a href="#00-project-roadmap-review--11-api-contract-details-were-implicit">11. API contract details were implicit</a></li></ul></li><li><a href="#00-project-roadmap-review--revised-sequence">Revised sequence</a></li><li><a href="#00-project-roadmap-review--decisions">Decisions</a></li><li><a href="#00-project-roadmap-review--open-questions">Open questions</a></li></ul></div>
+<div class="content">
+<p><strong>Short answer:</strong> The roadmap is sound in shape, but three things were missing or
+misordered: MinIO had no owning checkpoint, ACL filtering was planned before the
+identity that supplies roles, and retrieval tuning was planned before the eval set
+was large enough to tune against. This note records the fixes and the remaining
+open questions.</p>
+<h2 id="00-project-roadmap-review--current-shape">Current shape</h2>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Checkpoints</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>M0</td>
+<td>0.1–0.5</td>
+<td>Foundations, local stack, corpus, docs, CI</td>
+</tr>
+<tr>
+<td>M1</td>
+<td>1.1–1.6</td>
+<td>Markdown to a searchable, permission-labelled index</td>
+</tr>
+<tr>
+<td>M2</td>
+<td>2.1–2.6</td>
+<td>Retrieval, ACL pre-filter, generation context, chat</td>
+</tr>
+<tr>
+<td>M3</td>
+<td>3.1–3.7</td>
+<td>Agent loop, query rewriting, grading, citations</td>
+</tr>
+<tr>
+<td>M4</td>
+<td>4.1–4.6</td>
+<td>Real auth, RBAC/ABAC, audit, admin, hardening</td>
+</tr>
+<tr>
+<td>M5</td>
+<td>5.1–5.6</td>
+<td>Golden set, metrics, ablations, tracing, gates</td>
+</tr>
+<tr>
+<td>M6</td>
+<td>6.1–6.5</td>
+<td>MCP server and client</td>
+</tr>
+<tr>
+<td>M7</td>
+<td>7.1–7.5</td>
+<td>Load/failure tests, final guide, ADRs, demo</td>
+</tr>
+</tbody>
+</table>
+<p>The M0 and M1 order is still correct: parse, classify, chunk, embed, store, then
+automate. The fixes below preserve that order.</p>
+<h2 id="00-project-roadmap-review--gaps-found">Gaps found</h2>
+<h3 id="00-project-roadmap-review--1-minio-had-no-owner">1. MinIO had no owner</h3>
+<p>The stack runs MinIO, and <a href="#01-architecture-storage-layers">Storage-Layers</a> explains why object storage exists,
+but no checkpoint created a bucket or uploaded anything. The raw corpus and
+manifest are reproducible, but a realistic pipeline should still archive the
+exact snapshot it indexed.</p>
+<p><strong>Fix:</strong> add <code>1.5b MinIO raw + manifest snapshot</code> after 1.5. It stores immutable
+keys, records SHA-256 checksums, and treats a re-upload of the same commit as a
+no-op.</p>
+<h3 id="00-project-roadmap-review--2-acl-filtering-came-before-identity">2. ACL filtering came before identity</h3>
+<p>Checkpoint 2.2 applies an ACL pre-filter, but roles arrive with JWT auth at 4.1.
+Without a role source, 2.2 cannot be tested honestly.</p>
+<p><strong>Fix:</strong> add <code>2.0 Identity context + trusted dev role resolver</code> before 2.1. The
+development resolver reads a role header from a localhost-only request and
+returns a typed identity. Checkpoint 4.1 replaces it with JWT claims without
+changing the retrieval interface. The API must not be exposed beyond localhost
+while the trusted header exists.</p>
+<h3 id="00-project-roadmap-review--3-the-golden-set-was-too-late">3. The golden set was too late</h3>
+<p>2.1 tunes hybrid retrieval, but 5.1 expands the golden set to roughly 110 cases.
+Seven seed cases are enough to prove the pipeline runs, not enough to tune
+recall@k or compare ablations.</p>
+<p><strong>Fix:</strong> add <code>1.7 Eval seed expansion</code> before M2. Grow the set to at least 25–30
+cases covering lookup, procedural, conditional, multi-hop, unanswerable, and
+permission cases. M5 still owns the full ~110-case set, LLM-judge validation, and
+CI gates. Do not tune retrieval on the seven seeds.</p>
+<h3 id="00-project-roadmap-review--4-seed-roles-and-the-acl-taxonomy-disagree">4. Seed roles and the ACL taxonomy disagree</h3>
+<p>The seven seeds use <code>billing</code> (five cases) and <code>finance</code> (two cases) on the Zuora
+guide under <code>content/handbook/business-technology/</code>. <code>billing</code> was not in the
+role model, and <code>business-technology</code> sat under <code>internal:eng</code>, which did not
+include finance.</p>
+<p><strong>Resolved on 2026-10-27:</strong> <code>billing</code> is an alias for <code>finance</code>, and
+<code>business-technology</code> moves to <code>internal:company</code>. The seed file can keep
+<code>billing</code> until 1.7 normalizes it, but the classifier and matcher use <code>finance</code>.
+See <a href="#01-architecture-acl-classification">ACL-Classification</a> for the final role and count tables.</p>
+<h3 id="00-project-roadmap-review--5-postgres-schema-and-migrations-were-implicit">5. Postgres schema and migrations were implicit</h3>
+<p>1.5 says "Postgres holds the document/chunk map", but does not name a migration
+tool, constraints, or uniqueness rules.</p>
+<p><strong>Fix, inside 1.5:</strong> use Alembic from the first table. Add a unique constraint on
+<code>(source, path)</code> for documents and <code>(document_id, ordinal)</code> for chunks, plus
+foreign keys and an index on content hash. No separate checkpoint.</p>
+<h3 id="00-project-roadmap-review--6-embedding-model-version-was-not-tracked">6. Embedding model version was not tracked</h3>
+<p>1.4 embeds chunks, but a model change means vectors from different spaces cannot
+be mixed. The roadmap did not say how to detect or migrate that.</p>
+<p><strong>Fix, inside 1.4/1.5:</strong> store <code>embedding_model</code>, <code>embedding_model_version</code>, and
+<code>embedding_dim</code> in Postgres and the Qdrant payload. Name the collection with the
+model version, for example <code>chunks_bge_m3_v1</code>. A model change creates a new
+collection and triggers a re-index; it never writes into the old one.</p>
+<h3 id="00-project-roadmap-review--7-worker-reliability-was-underspecified">7. Worker reliability was underspecified</h3>
+<p>1.6 covers idempotency and tombstones, but not retries, poison jobs, or scheduled
+refresh.</p>
+<p><strong>Fix, inside 1.6:</strong> bounded retries with backoff, a dead-letter queue, a job
+record in Postgres, a lock per ingest run, and a documented refresh command. The
+config hash includes parser, ACL policy, chunker, and embedding-model versions so
+a policy change forces the right work.</p>
+<h3 id="00-project-roadmap-review--8-tenant-was-a-payload-field-without-a-tenant-model">8. Tenant was a payload field without a tenant model</h3>
+<p>Qdrant payload includes <code>tenant</code>, but the product is single-user and there is no
+tenant table, header, or isolation rule.</p>
+<p><strong>Fix, inside 1.5/4.2:</strong> keep <code>tenant</code> as a reserved field with the local value
+<code>default</code>; document single-tenant scope. Do not imply multi-tenancy until there
+is a tenant table, claim, and isolation test. If multi-tenancy is added, it needs
+its own checkpoint and security review.</p>
+<h3 id="00-project-roadmap-review--9-frontend-auth-integration-was-not-explicit">9. Frontend auth integration was not explicit</h3>
+<p>4.1 covers JWT issuance and rotation, but the Next.js app at 2.6 needs to send
+the token, handle refresh, and show permission-denied states.</p>
+<p><strong>Fix, inside 4.1:</strong> include the UI login/token-refresh path and a permission
+denial state. 2.6 can use the trusted dev role header until then.</p>
+<h3 id="00-project-roadmap-review--10-operational-recovery-was-thin">10. Operational recovery was thin</h3>
+<p>7.1 covers load and failure injection, but not backup/restore of Postgres,
+Qdrant, and MinIO, or a re-index runbook.</p>
+<p><strong>Fix, inside 7.1/7.3:</strong> add a backup/restore drill for all durable stores, a
+"restore then re-index" runbook, and a documented recovery time. This is a
+portfolio project, not a production SLO, but the failure story should be real.</p>
+<h3 id="00-project-roadmap-review--11-api-contract-details-were-implicit">11. API contract details were implicit</h3>
+<p>2.5 says "chat API" without naming the error model, request IDs, CORS, or the
+development identity header.</p>
+<p><strong>Fix, inside 2.5:</strong> define the error envelope, request ID, CORS allowlist,
+OpenAPI examples, and the temporary dev role header. Keep streaming for 3.6.</p>
+<h2 id="00-project-roadmap-review--revised-sequence">Revised sequence</h2>
+<pre><code class="language-text">1.1 parser
+  -&gt; 1.2 ACL classifier
+  -&gt; 1.3 chunker
+  -&gt; 1.4 embedder
+  -&gt; 1.5 Qdrant + Postgres
+  -&gt; 1.5b MinIO raw + manifest snapshot
+  -&gt; 1.6 worker + reconcile
+  -&gt; 1.7 eval seed expansion
+  -&gt; 2.0 identity context + dev role resolver
+  -&gt; 2.1 hybrid retrieval
+  -&gt; 2.2 ACL pre-filter
+  -&gt; ...
+</code></pre>
+<p>1.7 and 2.0 are small checkpoints. They exist because M2 cannot be evaluated or
+secured without them.</p>
+<h2 id="00-project-roadmap-review--decisions">Decisions</h2>
+<ul>
+<li>Add <code>1.5b</code>, <code>1.7</code>, and <code>2.0</code> to <a href="#00-project-checklist">Checklist</a>.</li>
+<li>Fold migrations, model versioning, worker reliability, tenant scope, frontend
+  auth, and recovery into the existing checkpoints rather than creating a row for
+  every concern.</li>
+<li>Keep the local stack single-tenant and localhost-only.</li>
+<li>Start the golden set before retrieval tuning, not after the agent is built.</li>
+<li>Treat <code>billing</code> as an alias for <code>finance</code> and move <code>business-technology</code> to
+  <code>internal:company</code>; 1.2 can proceed with the corrected table.</li>
+</ul>
+<h2 id="00-project-roadmap-review--open-questions">Open questions</h2>
+<ol>
+<li>Is <code>legal</code> access to all HR and finance documents too broad for the demo? If
+   so, split labor/acquisition documents into narrower rules.</li>
+<li>Is single-tenant scope acceptable for the portfolio, or is tenant isolation a
+   planned checkpoint? Recommended single-tenant for now.</li>
+</ol>
+</div>
+<div class="related"><strong>Related:</strong> <span class="chip"><a href="#00-project-start-here">Start-Here</a></span> <span class="chip"><a href="#00-project-checklist">Checklist</a></span> <span class="chip"><a href="#01-architecture-project-map">Project-Map</a></span> <span class="chip"><a href="#01-architecture-acl-classification">ACL-Classification</a></span> <span class="chip"><a href="#02-evaluation-evaluation-101">Evaluation-101</a></span> <span class="chip"><a href="#01-architecture-storage-layers">Storage-Layers</a></span> <span class="chip"><a href="#03-journal-2026-10-27">2026-10-27</a></span></div>
 </article>
 <article class="note" id="00-project-start-here"
 data-title="Start here">
@@ -1022,14 +1227,14 @@ of the public GitLab handbook and product docs. This note is the entry point to
 the vault: it tells you what is current, what to read first, and where to write.</p>
 <h2 id="00-project-start-here--current-state">Current state</h2>
 <div class="callout info">
-<p class="callout-title">Checkpoint 1.1</p>
-<p>The Markdown parser is implemented and committed. It converts 2,500 pinned
-documents into structured JSON. User verification is still pending, so
-checkpoint 1.2 has not started.</p>
+<p class="callout-title">Checkpoint 1.2</p>
+<p>The parser (1.1) is verified. The ACL classifier design is documented in
+<a href="#01-architecture-acl-classification">ACL-Classification</a>; implementation has not started. The roadmap review adds
+1.5b MinIO archive, 1.7 eval seed expansion, and 2.0 identity context.</p>
 </div>
 <p>The repo has a working API skeleton, local services, a pinned corpus, and a
 parser. It does not yet have ACL classification, chunking, embeddings, retrieval,
-generation, auth, or a UI.</p>
+generation, auth, or a UI. MinIO is running but its archive checkpoint is 1.5b.</p>
 <p>Use <code>make checklist</code> for the live status. The checklist, not this note, is the
 source of truth for the active checkpoint.</p>
 <h2 id="00-project-start-here--read-first">Read first</h2>
@@ -1055,11 +1260,19 @@ source of truth for the active checkpoint.</p>
 </tr>
 <tr>
 <td>See the latest build log</td>
-<td><a href="#03-journal-2026-10-25">2026-10-25</a></td>
+<td><a href="#03-journal-2026-10-27">2026-10-27</a></td>
 </tr>
 <tr>
 <td>Understand the next milestone</td>
 <td><a href="#01-architecture-ingestion-m1">Ingestion-M1</a></td>
+</tr>
+<tr>
+<td>Review roadmap gaps and ordering</td>
+<td><a href="#00-project-roadmap-review">Roadmap-Review</a></td>
+</tr>
+<tr>
+<td>Understand who may see each document</td>
+<td><a href="#01-architecture-acl-classification">ACL-Classification</a></td>
 </tr>
 </tbody>
 </table>
@@ -1075,6 +1288,7 @@ source of truth for the active checkpoint.</p>
 <ol>
 <li><a href="#01-architecture-ingestion-m1">Ingestion-M1</a> for the full M1 pipeline.</li>
 <li><a href="#01-architecture-parsing">Parsing</a> for the document model and parser.</li>
+<li><a href="#01-architecture-acl-classification">ACL-Classification</a> for the permission model and 1.2 design.</li>
 <li><a href="#01-architecture-document-normalization">Document-Normalization</a> for format adapters and correctness checks.</li>
 <li><a href="#01-architecture-parser-lab">Parser-Lab</a> for the native vs Docling vs Unstructured comparison.</li>
 </ol>
@@ -1083,8 +1297,10 @@ source of truth for the active checkpoint.</p>
 <li><a href="#01-architecture-project-map">Project-Map</a> for the architecture story.</li>
 <li><a href="#01-architecture-foundations">Foundations</a> and <a href="#01-architecture-compose-stack">Compose-Stack</a> for engineering choices.</li>
 <li><a href="#01-architecture-storage-layers">Storage-Layers</a> for why Postgres, Redis, Qdrant, and MinIO each exist.</li>
-<li><a href="#01-architecture-parsing">Parsing</a> and <a href="#01-architecture-document-normalization">Document-Normalization</a> for ingestion trade-offs.</li>
+<li><a href="#01-architecture-parsing">Parsing</a>, <a href="#01-architecture-acl-classification">ACL-Classification</a>, and <a href="#01-architecture-document-normalization">Document-Normalization</a> for
+   ingestion trade-offs.</li>
 <li><a href="#02-evaluation-evaluation-101">Evaluation-101</a> for how quality is measured.</li>
+<li><a href="#00-project-roadmap-review">Roadmap-Review</a> for the gaps and ordering decisions.</li>
 </ol>
 <h3 id="00-project-start-here--continue-implementation">Continue implementation</h3>
 <ol>
@@ -1111,7 +1327,7 @@ source of truth for the active checkpoint.</p>
 <li>Run <code>make ci</code> before every commit.</li>
 </ul>
 </div>
-<div class="related"><strong>Related:</strong> <span class="chip"><a href="#00-project-checklist">Checklist</a></span> <span class="chip"><a href="#01-architecture-project-map">Project-Map</a></span> <span class="chip"><a href="#00-project-study-guide">Study-Guide</a></span> <span class="chip"><a href="#03-journal-2026-10-25">2026-10-25</a></span> <span class="chip"><a href="#01-architecture-ingestion-m1">Ingestion-M1</a></span> <span class="chip"><a href="#01-architecture-parsing">Parsing</a></span> <span class="chip"><a href="#01-architecture-document-normalization">Document-Normalization</a></span> <span class="chip"><a href="#01-architecture-parser-lab">Parser-Lab</a></span> <span class="chip"><a href="#01-architecture-foundations">Foundations</a></span> <span class="chip"><a href="#01-architecture-compose-stack">Compose-Stack</a></span> <span class="chip"><a href="#01-architecture-storage-layers">Storage-Layers</a></span> <span class="chip"><a href="#02-evaluation-evaluation-101">Evaluation-101</a></span></div>
+<div class="related"><strong>Related:</strong> <span class="chip"><a href="#00-project-checklist">Checklist</a></span> <span class="chip"><a href="#01-architecture-project-map">Project-Map</a></span> <span class="chip"><a href="#00-project-study-guide">Study-Guide</a></span> <span class="chip"><a href="#00-project-roadmap-review">Roadmap-Review</a></span> <span class="chip"><a href="#01-architecture-acl-classification">ACL-Classification</a></span> <span class="chip"><a href="#03-journal-2026-10-25">2026-10-25</a></span> <span class="chip"><a href="#03-journal-2026-10-27">2026-10-27</a></span> <span class="chip"><a href="#01-architecture-ingestion-m1">Ingestion-M1</a></span> <span class="chip"><a href="#01-architecture-parsing">Parsing</a></span> <span class="chip"><a href="#01-architecture-document-normalization">Document-Normalization</a></span> <span class="chip"><a href="#01-architecture-parser-lab">Parser-Lab</a></span> <span class="chip"><a href="#01-architecture-foundations">Foundations</a></span> <span class="chip"><a href="#01-architecture-compose-stack">Compose-Stack</a></span> <span class="chip"><a href="#01-architecture-storage-layers">Storage-Layers</a></span> <span class="chip"><a href="#02-evaluation-evaluation-101">Evaluation-101</a></span></div>
 </article>
 <article class="note" id="00-project-study-guide"
 data-title="Vault and study-guide pipeline">
@@ -1156,8 +1372,8 @@ the Markdown, never the HTML. Start at <a href="#00-project-start-here">Start-He
 </tr>
 </tbody>
 </table>
-<p>The generator skips <code>.obsidian</code>, <code>_templates</code>, and the nested <code>Helix/</code> folder as
-a safeguard. Everything else becomes a section in the guide.</p>
+<p>The generator skips <code>.obsidian</code> and <code>_templates</code>. Everything else becomes a
+section in the guide.</p>
 <h2 id="00-project-study-guide--folder-policy">Folder policy</h2>
 <p>Keep notes flat inside the four top-level folders for now. Use links, tags, and
 maps of content instead of deeper folders.</p>
@@ -1279,7 +1495,321 @@ better choice.</p>
   of silently dropping them."</li>
 </ul>
 </div>
-<div class="related"><strong>Related:</strong> <span class="chip"><a href="#00-project-start-here">Start-Here</a></span> <span class="chip"><a href="#00-project-checklist">Checklist</a></span> <span class="chip"><a href="#03-journal-2026-10-24">2026-10-24</a></span></div>
+<div class="related"><strong>Related:</strong> <span class="chip"><a href="#00-project-start-here">Start-Here</a></span> <span class="chip"><a href="#00-project-checklist">Checklist</a></span> <span class="chip"><a href="#03-journal-2026-10-24">2026-10-24</a></span> <span class="chip"><a href="#03-journal-2026-10-27">2026-10-27</a></span></div>
+</article>
+<article class="note" id="01-architecture-acl-classification"
+data-title="ACL classification: who may see each document">
+<header class="note-header">
+<p class="kicker">Architecture · architecture · active</p>
+<h2>ACL classification: who may see each document</h2>
+<span class="chip">acl</span><span class="chip">security</span><span class="chip">rbac</span><span class="chip">ingestion</span><span class="chip">interview</span>
+</header>
+<div class="toc"><p class="toctitle">On this page</p><ul><li><a href="#01-architecture-acl-classification--the-simple-picture">The simple picture</a></li><li><a href="#01-architecture-acl-classification--classification-and-roles-are-different">Classification and roles are different</a></li><li><a href="#01-architecture-acl-classification--role-model">Role model</a></li><li><a href="#01-architecture-acl-classification--path-rules">Path rules</a></li><li><a href="#01-architecture-acl-classification--matching-and-precedence">Matching and precedence</a></li><li><a href="#01-architecture-acl-classification--output-contract">Output contract</a></li><li><a href="#01-architecture-acl-classification--why-not-classify-another-way">Why not classify another way?</a><ul><li><a href="#01-architecture-acl-classification--why-not-ask-an-llm">Why not ask an LLM?</a></li><li><a href="#01-architecture-acl-classification--why-not-tag-frontmatter">Why not tag frontmatter?</a></li><li><a href="#01-architecture-acl-classification--why-not-copy-the-source-acl">Why not copy the source ACL?</a></li><li><a href="#01-architecture-acl-classification--why-not-classify-manually">Why not classify manually?</a></li></ul></li><li><a href="#01-architecture-acl-classification--corpus-coverage">Corpus coverage</a></li><li><a href="#01-architecture-acl-classification--doubts-and-answers">Doubts and answers</a><ul><li><a href="#01-architecture-acl-classification--should-minio-come-after-1-5">Should MinIO come after 1.5?</a></li><li><a href="#01-architecture-acl-classification--why-prefix-the-classification-with-public-internal-confidential-or-restricted">Why prefix the classification with public, internal, confidential, or restricted?</a></li><li><a href="#01-architecture-acl-classification--why-store-three-audit-fields-instead-of-one-reason-string">Why store three audit fields instead of one reason string?</a></li><li><a href="#01-architecture-acl-classification--why-can-a-user-have-multiple-roles">Why can a user have multiple roles?</a></li><li><a href="#01-architecture-acl-classification--what-about-duplicate-documents">What about duplicate documents?</a></li><li><a href="#01-architecture-acl-classification--why-not-store-the-acl-inside-the-parsed-document">Why not store the ACL inside the parsed document?</a></li></ul></li><li><a href="#01-architecture-acl-classification--confirmed-correction">Confirmed correction</a></li><li><a href="#01-architecture-acl-classification--implementation-plan-for-1-2">Implementation plan for 1.2</a></li></ul></div>
+<div class="content">
+<p><strong>Short answer:</strong> Before a document is chunked, Helix assigns it a
+<code>classification</code> and a list of <code>allowed_roles</code>. The rule is based on the
+document's source and path, not on its content or tags. At query time the same
+metadata becomes a Qdrant payload filter, so forbidden chunks never enter the
+candidate set.</p>
+<p>This note records the 1.2 design conversation. The classifier is <strong>not
+implemented yet</strong>; the code lands only after the user says <code>go</code>.</p>
+<h2 id="01-architecture-acl-classification--the-simple-picture">The simple picture</h2>
+<p>Think of a company library:</p>
+<ul>
+<li>The public product manuals are on the open shelf.</li>
+<li>The engineering runbooks need an engineering badge.</li>
+<li>HR, finance, legal, and security each have a locked room.</li>
+<li>An unknown box does not get a label that says "public". It stays locked until
+  someone classifies it.</li>
+</ul>
+<p>The classifier is the librarian writing the label. It does not decide whether a
+particular person is trustworthy; it only says which badges open which room.
+Authentication later proves the badge.</p>
+<h2 id="01-architecture-acl-classification--classification-and-roles-are-different">Classification and roles are different</h2>
+<table>
+<thead>
+<tr>
+<th>Idea</th>
+<th>Question it answers</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Classification</td>
+<td>How sensitive is this document?</td>
+<td><code>confidential:hr</code></td>
+</tr>
+<tr>
+<td>Allowed roles</td>
+<td>Which badges may open it?</td>
+<td><code>hr</code>, <code>legal</code>, <code>security</code>, <code>admin</code></td>
+</tr>
+</tbody>
+</table>
+<p>A classification is a human-readable label. The role list is the machine-checked
+permission. Keeping both makes the audit trail readable and the authorization
+check simple.</p>
+<h2 id="01-architecture-acl-classification--role-model">Role model</h2>
+<p>Roles are <strong>additive sets</strong>, not a hierarchy with one winner:</p>
+<ul>
+<li><code>authenticated</code> is a sentinel for any logged-in user. It is how public docs are
+  expressed without special-casing "anonymous".</li>
+<li><code>employee</code> is the baseline for internal staff. Every employee identity receives
+  it; functional roles are added on top.</li>
+<li><code>engineer</code>, <code>support</code>, <code>hr</code>, <code>finance</code>, <code>legal</code>, <code>security</code> are functional
+  roles.</li>
+<li><code>contractor</code> is deliberately not an employee by default. It can be granted
+  specific project access later.</li>
+<li><code>admin</code> is a break-glass role. It appears in every allow list so local
+  administration is possible, but every admin read should still be audited.</li>
+</ul>
+<p><code>billing</code> is an alias for <code>finance</code>, not a separate ACL role. Identity resolution
+normalizes it before the matcher runs. The seed data can keep <code>billing</code> until 1.7
+normalizes the file, but the authorization decision always uses <code>finance</code>.</p>
+<p>A user can have several roles. For example, a finance employee might be
+<code>["authenticated", "employee", "finance"]</code>. The matcher allows the document if
+the user's roles intersect the document's <code>allowed_roles</code>.</p>
+<p>There is no "highest role wins" rule. If an engineer also has <code>security</code>, they
+get the union of both sets. That is simpler to reason about and avoids a role
+hierarchy that nobody can audit.</p>
+<h2 id="01-architecture-acl-classification--path-rules">Path rules</h2>
+<p>The source is part of the rule. A path that looks the same in two different
+repositories should not accidentally inherit the other repository's policy.</p>
+<table>
+<thead>
+<tr>
+<th>Source and path</th>
+<th>Classification</th>
+<th>Allowed roles</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>gitlab-docs:doc/**</code></td>
+<td><code>public:docs</code></td>
+<td><code>authenticated</code></td>
+</tr>
+<tr>
+<td><code>handbook:content/handbook/security/**</code></td>
+<td><code>restricted:security</code></td>
+<td><code>security</code>, <code>admin</code></td>
+</tr>
+<tr>
+<td><code>handbook:.../people-group/**</code>, <code>people-policies/**</code>, <code>hiring/**</code>, <code>total-rewards/**</code>, <code>labor-and-employment-notices/**</code></td>
+<td><code>confidential:hr</code></td>
+<td><code>hr</code>, <code>legal</code>, <code>security</code>, <code>admin</code></td>
+</tr>
+<tr>
+<td><code>handbook:.../finance/**</code>, <code>acquisitions/**</code></td>
+<td><code>confidential:finance</code></td>
+<td><code>finance</code>, <code>legal</code>, <code>security</code>, <code>admin</code></td>
+</tr>
+<tr>
+<td><code>handbook:.../legal/**</code>, <code>board-meetings/**</code></td>
+<td><code>confidential:legal</code></td>
+<td><code>legal</code>, <code>security</code>, <code>admin</code></td>
+</tr>
+<tr>
+<td><code>handbook:.../engineering/**</code>, <code>support/**</code>, <code>product/**</code>, <code>product-development/**</code>, <code>solutions-architects/**</code>, <code>it/**</code>, <code>tools-and-tips/**</code></td>
+<td><code>internal:eng</code></td>
+<td><code>engineer</code>, <code>support</code>, <code>security</code>, <code>admin</code></td>
+</tr>
+<tr>
+<td><code>handbook:.../marketing/**</code>, <code>sales/**</code>, <code>customer-experience/**</code>, <code>eta/**</code>, <code>company/**</code>, <code>leadership/**</code>, <code>communication/**</code>, <code>upstream-studios/**</code>, <code>enterprise-data/**</code>, <code>resellers/**</code>, <code>about/**</code>, <code>entity/**</code>, <code>values/**</code>, <code>business-technology/**</code>, <code>_index.md</code></td>
+<td><code>internal:company</code></td>
+<td><code>employee</code>, <code>admin</code></td>
+</tr>
+<tr>
+<td>anything unmatched</td>
+<td><code>restricted:unknown</code></td>
+<td>none, deny</td>
+</tr>
+</tbody>
+</table>
+<p>The five paths that the first draft missed are now explicit:
+<code>content/handbook/_index.md</code>, <code>acquisitions/</code>, <code>board-meetings/_index.md</code>,
+<code>labor-and-employment-notices/_index.md</code>, and <code>values/_index.md</code>.</p>
+<p><code>project:atlas</code> is <strong>not</strong> a 1.2 rule. It stays a future example of a tag-based
+override until a real project collection needs it.</p>
+<h2 id="01-architecture-acl-classification--matching-and-precedence">Matching and precedence</h2>
+<p>The matcher is deliberately boring:</p>
+<ol>
+<li>Filter rules by <code>source</code>.</li>
+<li>Compare the document path against each rule's prefix using a boundary-safe
+   check. <code>content/handbook/legal</code> matches <code>content/handbook/legal/x.md</code> but not
+   <code>content/handbook/legalish/x.md</code>.</li>
+<li>The longest matching prefix wins. This lets a future narrow rule override a
+   broad one without reordering the table.</li>
+<li>Ties use rule order, which is fixed in code and recorded as <code>rule_id</code>.</li>
+<li>No match means <code>restricted:unknown</code> with <code>allowed_roles: []</code>. Never default to
+   public.</li>
+</ol>
+<p>Boundary safety matters. A naive <code>startswith("content/handbook/legal")</code> would
+also match a path such as <code>content/handbook/legal-ops/</code>, which may have a
+different policy.</p>
+<h2 id="01-architecture-acl-classification--output-contract">Output contract</h2>
+<p>The classifier writes a sidecar index, not a mutation of the parsed JSON:</p>
+<pre><code class="language-text">data/acl/index.json
+data/acl/summary.json
+</code></pre>
+<p>Each index entry looks like this:</p>
+<pre><code class="language-json">{
+  &quot;source&quot;: &quot;handbook&quot;,
+  &quot;path&quot;: &quot;content/handbook/engineering/architecture/_index.md&quot;,
+  &quot;classification&quot;: &quot;internal:eng&quot;,
+  &quot;allowed_roles&quot;: [&quot;engineer&quot;, &quot;support&quot;, &quot;security&quot;, &quot;admin&quot;],
+  &quot;rule_id&quot;: &quot;acl-path-engineering-v1&quot;,
+  &quot;matched_prefix&quot;: &quot;content/handbook/engineering&quot;,
+  &quot;reason&quot;: &quot;source=handbook path starts with content/handbook/engineering&quot;
+}
+</code></pre>
+<p><code>policy_version</code> is stored once at the top of the file, for example <code>acl-v1</code>.
+<code>summary.json</code> records counts by classification and by rule, the unknown count,
+and the manifest hash the run used. It does <strong>not</strong> contain a wall-clock
+timestamp, because two runs over the same manifest should produce identical
+files.</p>
+<p>Two fields are more useful than they look:</p>
+<ul>
+<li><code>rule_id</code> answers "which policy made this decision?"</li>
+<li><code>matched_prefix</code> answers "which part of the path triggered it?"</li>
+</ul>
+<p>Without those, a permission bug is hard to debug after the fact.</p>
+<p>The sidecar design also means we can reclassify the corpus without re-parsing it.
+Parsed JSON stays a pure parsing artifact.</p>
+<h2 id="01-architecture-acl-classification--why-not-classify-another-way">Why not classify another way?</h2>
+<h3 id="01-architecture-acl-classification--why-not-ask-an-llm">Why not ask an LLM?</h3>
+<p>The rule is cheap, deterministic, testable, and has no model cost. An LLM might
+be useful later for suggesting a label on a genuinely ambiguous document, but it
+must not be the enforcement path. A probabilistic classifier is not an ACL.</p>
+<h3 id="01-architecture-acl-classification--why-not-tag-frontmatter">Why not tag frontmatter?</h3>
+<p>Most selected documents have no owner or sensitivity tag. Tags are free-form,
+easy to forget, and easy to spoof. They are a good future override for a specific
+project collection, not the baseline. This is why <code>project:atlas</code> is deferred.</p>
+<h3 id="01-architecture-acl-classification--why-not-copy-the-source-acl">Why not copy the source ACL?</h3>
+<p>That would be the best answer if the source repository exposed the same
+permissions. It does not expose a usable per-document ACL for this synthetic
+corpus. The path table is a stand-in that makes the security behavior real and
+testable.</p>
+<h3 id="01-architecture-acl-classification--why-not-classify-manually">Why not classify manually?</h3>
+<p>2,500 documents would drift immediately, and a manual spreadsheet is not a
+policy. The path table is the reviewed policy; the classifier applies it.</p>
+<h2 id="01-architecture-acl-classification--corpus-coverage">Corpus coverage</h2>
+<p>With <code>business-technology</code> under <code>internal:company</code>, the final table classifies
+all 2,500 selected files:</p>
+<table>
+<thead>
+<tr>
+<th>Classification</th>
+<th style="text-align: right;">Documents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public:docs</code></td>
+<td style="text-align: right;">1,500</td>
+</tr>
+<tr>
+<td><code>internal:eng</code></td>
+<td style="text-align: right;">439</td>
+</tr>
+<tr>
+<td><code>internal:company</code></td>
+<td style="text-align: right;">383</td>
+</tr>
+<tr>
+<td><code>restricted:security</code></td>
+<td style="text-align: right;">103</td>
+</tr>
+<tr>
+<td><code>confidential:hr</code></td>
+<td style="text-align: right;">28</td>
+</tr>
+<tr>
+<td><code>confidential:legal</code></td>
+<td style="text-align: right;">28</td>
+</tr>
+<tr>
+<td><code>confidential:finance</code></td>
+<td style="text-align: right;">19</td>
+</tr>
+<tr>
+<td><code>restricted:unknown</code></td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td style="text-align: right;"><strong>2,500</strong></td>
+</tr>
+</tbody>
+</table>
+<p>No unknown paths remain. The unknown branch still exists and is tested because a
+future corpus refresh will add paths.</p>
+<h2 id="01-architecture-acl-classification--doubts-and-answers">Doubts and answers</h2>
+<h3 id="01-architecture-acl-classification--should-minio-come-after-1-5">Should MinIO come after 1.5?</h3>
+<p>Yes. The checkpoint is <code>1.5b</code>, after Qdrant and Postgres are working. MinIO is
+useful but not on the critical path to a searchable index. Moving it after 1.5
+keeps 1.5 focused on retrieval storage and gives 1.5b a clear job: archive the
+raw corpus and manifest with checksums.</p>
+<p>See <a href="#01-architecture-storage-layers">Storage-Layers</a> for the bucket layout.</p>
+<h3 id="01-architecture-acl-classification--why-prefix-the-classification-with-public-internal-confidential-or-restricted">Why prefix the classification with <code>public</code>, <code>internal</code>, <code>confidential</code>, or <code>restricted</code>?</h3>
+<p>The prefix makes the sensitivity obvious at a glance and gives the UI a stable
+color/label. It also avoids a flat vocabulary where <code>hr</code> and <code>internal:hr</code> look
+like the same kind of thing.</p>
+<h3 id="01-architecture-acl-classification--why-store-three-audit-fields-instead-of-one-reason-string">Why store three audit fields instead of one <code>reason</code> string?</h3>
+<p><code>rule_id</code> identifies the policy, <code>matched_prefix</code> identifies the path that
+matched, and <code>reason</code> explains the decision in words. If a document is
+misclassified, you can tell whether the cause was rule order, a bad prefix, or a
+missing rule. A single prose string loses that structure.</p>
+<h3 id="01-architecture-acl-classification--why-can-a-user-have-multiple-roles">Why can a user have multiple roles?</h3>
+<p>People wear several hats. A finance employee may also be an admin; a security
+engineer may also be an engineer. Additive sets model that without inventing a
+role hierarchy. The authorization check is a set intersection, which is easy to
+test.</p>
+<h3 id="01-architecture-acl-classification--what-about-duplicate-documents">What about duplicate documents?</h3>
+<p>The parser writes one deterministic path per source document, so a duplicate
+input path overwrites the same parsed file. There is no content-level dedup in
+1.1 or 1.2. If the same bytes appear at two different paths, they are two
+documents until 1.6 adds content hashes and tombstones. The ACL index rejects
+duplicate <code>(source, path)</code> keys rather than merging them silently.</p>
+<h3 id="01-architecture-acl-classification--why-not-store-the-acl-inside-the-parsed-document">Why not store the ACL inside the parsed document?</h3>
+<p>Separation of concerns. Parsing and classification have different inputs and
+different reasons to change. A sidecar lets us reclassify without re-parsing, and
+it keeps the parser's output stable for tests and future formats.</p>
+<h2 id="01-architecture-acl-classification--confirmed-correction">Confirmed correction</h2>
+<p>The seed questions use roles <code>billing</code> and <code>finance</code> on the Zuora guide under
+<code>content/handbook/business-technology/</code>. The first taxonomy draft put that path
+under <code>internal:eng</code>, whose roles did not include either role. The user resolved
+the conflict on 2026-10-27:</p>
+<ol>
+<li><code>billing</code> is an alias for <code>finance</code>. Identity resolution normalizes it before
+   matching; the canonical ACL role stays <code>finance</code>.</li>
+<li><code>business-technology/**</code> moves from <code>internal:eng</code> to <code>internal:company</code>,
+   because its enterprise-application guides are used by finance, HR, and
+   support, not only engineers. Employees still reach it through the <code>employee</code>
+   baseline.</li>
+</ol>
+<p>The resulting counts are <code>internal:eng</code> 439 and <code>internal:company</code> 383. The seed
+file can keep <code>billing</code> until 1.7 normalizes it, but the classifier and matcher
+use <code>finance</code>.</p>
+<h2 id="01-architecture-acl-classification--implementation-plan-for-1-2">Implementation plan for 1.2</h2>
+<ul>
+<li><code>packages/helix/acl.py</code>: <code>Role</code>, <code>Classification</code>, <code>Rule</code>, <code>AclPolicy</code>, and
+  <code>AclDecision</code>.</li>
+<li><code>scripts/classify_corpus.py</code>: read <code>data/manifest.json</code>, write the sidecar
+  files, and support a sample limit.</li>
+<li><code>make classify</code> and <code>make classify-sample</code>.</li>
+<li>Unit tests for source distinction, prefix boundaries, longest-prefix
+  precedence, role intersection, <code>billing</code> -&gt; <code>finance</code> normalization, unknown
+  deny, duplicate keys, and full corpus coverage.</li>
+<li>Manual check: classify all 2,500 files, inspect the summary, and confirm zero
+  unknown paths.</li>
+<li>Docs: update <a href="#01-architecture-ingestion-m1">Ingestion-M1</a>, <a href="#00-project-checklist">Checklist</a>, <a href="#01-architecture-storage-layers">Storage-Layers</a>, the journal,
+  and this note.</li>
+</ul>
+<p>The implementation is intentionally waiting for the user's <code>go</code>.</p>
+</div>
+<div class="related"><strong>Related:</strong> <span class="chip"><a href="#01-architecture-ingestion-m1">Ingestion-M1</a></span> <span class="chip"><a href="#00-project-checklist">Checklist</a></span> <span class="chip"><a href="#01-architecture-project-map">Project-Map</a></span> <span class="chip"><a href="#01-architecture-storage-layers">Storage-Layers</a></span> <span class="chip"><a href="#02-evaluation-evaluation-101">Evaluation-101</a></span> <span class="chip"><a href="#00-project-roadmap-review">Roadmap-Review</a></span> <span class="chip"><a href="#03-journal-2026-10-27">2026-10-27</a></span></div>
 </article>
 <article class="note" id="01-architecture-compose-stack"
 data-title="Local stack and readiness">
@@ -2438,7 +2968,7 @@ data-title="Ingestion M1: from Markdown to a searchable index">
 <h2>Ingestion M1: from Markdown to a searchable index</h2>
 <span class="chip">ingestion</span><span class="chip">roadmap</span><span class="chip">parsing</span><span class="chip">acl</span><span class="chip">chunking</span><span class="chip">embeddings</span><span class="chip">qdrant</span><span class="chip">interview</span>
 </header>
-<div class="toc"><p class="toctitle">On this page</p><ul><li><a href="#01-architecture-ingestion-m1--the-library-analogy">The library analogy</a></li><li><a href="#01-architecture-ingestion-m1--the-pipeline-at-a-glance">The pipeline at a glance</a></li><li><a href="#01-architecture-ingestion-m1--1-1-parser">1.1 Parser</a></li><li><a href="#01-architecture-ingestion-m1--1-2-acl-classifier">1.2 ACL classifier</a></li><li><a href="#01-architecture-ingestion-m1--1-3-chunker">1.3 Chunker</a></li><li><a href="#01-architecture-ingestion-m1--1-4-embedder">1.4 Embedder</a></li><li><a href="#01-architecture-ingestion-m1--1-5-qdrant-postgres-metadata">1.5 Qdrant + Postgres metadata</a></li><li><a href="#01-architecture-ingestion-m1--1-6-worker-full-ingest-reconcile">1.6 Worker + full ingest + reconcile</a></li><li><a href="#01-architecture-ingestion-m1--technical-summary">Technical summary</a></li><li><a href="#01-architecture-ingestion-m1--end-to-end-example">End-to-end example</a></li><li><a href="#01-architecture-ingestion-m1--m1-exit-criteria">M1 exit criteria</a></li><li><a href="#01-architecture-ingestion-m1--what-was-built-in-1-1-step-by-step">What was built in 1.1, step by step</a></li><li><a href="#01-architecture-ingestion-m1--common-doubts">Common doubts</a><ul><li><a href="#01-architecture-ingestion-m1--why-not-let-the-chunker-parse-markdown">Why not let the chunker parse Markdown?</a></li><li><a href="#01-architecture-ingestion-m1--why-acl-before-chunking">Why ACL before chunking?</a></li><li><a href="#01-architecture-ingestion-m1--why-parent-and-child-chunks">Why parent and child chunks?</a></li><li><a href="#01-architecture-ingestion-m1--why-use-qdrant-and-postgres">Why use Qdrant and Postgres?</a></li><li><a href="#01-architecture-ingestion-m1--why-must-a-second-ingest-be-a-no-op">Why must a second ingest be a no-op?</a></li></ul></li><li><a href="#01-architecture-ingestion-m1--interview-angle">Interview angle</a></li></ul></div>
+<div class="toc"><p class="toctitle">On this page</p><ul><li><a href="#01-architecture-ingestion-m1--the-library-analogy">The library analogy</a></li><li><a href="#01-architecture-ingestion-m1--the-pipeline-at-a-glance">The pipeline at a glance</a></li><li><a href="#01-architecture-ingestion-m1--1-1-parser">1.1 Parser</a></li><li><a href="#01-architecture-ingestion-m1--1-2-acl-classifier">1.2 ACL classifier</a></li><li><a href="#01-architecture-ingestion-m1--1-3-chunker">1.3 Chunker</a></li><li><a href="#01-architecture-ingestion-m1--1-4-embedder">1.4 Embedder</a></li><li><a href="#01-architecture-ingestion-m1--1-5-qdrant-postgres-metadata">1.5 Qdrant + Postgres metadata</a></li><li><a href="#01-architecture-ingestion-m1--1-5b-minio-raw-manifest-snapshot">1.5b MinIO raw + manifest snapshot</a></li><li><a href="#01-architecture-ingestion-m1--1-6-worker-full-ingest-reconcile">1.6 Worker + full ingest + reconcile</a></li><li><a href="#01-architecture-ingestion-m1--technical-summary">Technical summary</a></li><li><a href="#01-architecture-ingestion-m1--end-to-end-example">End-to-end example</a></li><li><a href="#01-architecture-ingestion-m1--m1-exit-criteria">M1 exit criteria</a></li><li><a href="#01-architecture-ingestion-m1--what-was-built-in-1-1-step-by-step">What was built in 1.1, step by step</a></li><li><a href="#01-architecture-ingestion-m1--common-doubts">Common doubts</a><ul><li><a href="#01-architecture-ingestion-m1--why-not-let-the-chunker-parse-markdown">Why not let the chunker parse Markdown?</a></li><li><a href="#01-architecture-ingestion-m1--why-acl-before-chunking">Why ACL before chunking?</a></li><li><a href="#01-architecture-ingestion-m1--why-parent-and-child-chunks">Why parent and child chunks?</a></li><li><a href="#01-architecture-ingestion-m1--why-use-qdrant-and-postgres">Why use Qdrant and Postgres?</a></li><li><a href="#01-architecture-ingestion-m1--why-minio-if-the-corpus-can-be-re-fetched">Why MinIO if the corpus can be re-fetched?</a></li><li><a href="#01-architecture-ingestion-m1--why-must-a-second-ingest-be-a-no-op">Why must a second ingest be a no-op?</a></li></ul></li><li><a href="#01-architecture-ingestion-m1--interview-angle">Interview angle</a></li></ul></div>
 <div class="content">
 <p><strong>Short answer:</strong> M0 built the building and the shelves. M1 fills them. It turns
 the frozen Markdown corpus into structured, permission-labelled, embedded chunks,
@@ -2446,8 +2976,9 @@ stores those chunks in Qdrant and Postgres, and automates the whole flow with an
 idempotent worker.</p>
 <div class="callout info">
 <p class="callout-title">Status</p>
-<p>Checkpoint 1.1 is implemented and awaiting user verification. Checkpoints
-1.2–1.6 are the plan, not built yet. This note is updated as each one lands.</p>
+<p>Checkpoint 1.1 is verified. Checkpoints 1.2–1.6 are the plan, not built yet.
+The 1.2 design conversation is in <a href="#01-architecture-acl-classification">ACL-Classification</a>; 1.5b adds the MinIO
+snapshot. This note is updated as each checkpoint lands.</p>
 </div>
 <h2 id="01-architecture-ingestion-m1--the-library-analogy">The library analogy</h2>
 <p>You have 2,500 books and no librarian.</p>
@@ -2486,6 +3017,11 @@ idempotent worker.</p>
 <td>Qdrant + Postgres</td>
 </tr>
 <tr>
+<td>1.5b Archive</td>
+<td>Photograph the original shelves so they can be rebuilt later</td>
+<td>MinIO raw + manifest</td>
+</tr>
+<tr>
 <td>1.6 Worker</td>
 <td>Build the assembly line, and remove cards when a book is deleted</td>
 <td>ARQ + reconcile</td>
@@ -2515,6 +3051,9 @@ chunks must exist before they can be embedded or indexed.</p>
 1.5 stores ------&gt; Qdrant payload + Postgres chunk map
    |
    v
+1.5b snapshot ---&gt; MinIO raw + manifest, SHA-256
+   |
+   v
 1.6 worker ------&gt; add/update/delete, rerun is a no-op
 </code></pre>
 <hr />
@@ -2537,52 +3076,81 @@ stored as a typed table block rather than prose.</p>
 <hr />
 <h2 id="01-architecture-ingestion-m1--1-2-acl-classifier">1.2 ACL classifier</h2>
 <p><strong>In plain language.</strong> Decide who may see each document based on where it came
-from. Examples:</p>
+from. A public product page is open to any logged-in user; an engineering runbook
+needs an engineering badge; HR, finance, legal, and security each have their own
+locked room. An unknown path gets no badge at all.</p>
 <table>
 <thead>
 <tr>
-<th>Path</th>
+<th>Source and path</th>
 <th>Classification</th>
 <th>Allowed roles</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>handbook/people-group</code>, <code>people-policies</code>, <code>finance</code>, <code>legal</code></td>
-<td><code>confidential:hr</code></td>
-<td>hr, security, admin</td>
-</tr>
-<tr>
-<td><code>handbook/security</code></td>
-<td><code>restricted:security</code></td>
-<td>security, admin</td>
-</tr>
-<tr>
-<td><code>handbook/engineering</code>, <code>support</code>, <code>it</code></td>
-<td><code>internal:eng</code></td>
-<td>engineer, support, security, admin</td>
-</tr>
-<tr>
-<td><code>doc/**</code></td>
+<td><code>gitlab-docs:doc/**</code></td>
 <td><code>public:docs</code></td>
-<td>all authenticated</td>
+<td><code>authenticated</code></td>
 </tr>
 <tr>
-<td>tagged <code>project:atlas</code></td>
-<td><code>project:atlas</code></td>
-<td>contractor, admin</td>
+<td><code>handbook:content/handbook/security/**</code></td>
+<td><code>restricted:security</code></td>
+<td><code>security</code>, <code>admin</code></td>
+</tr>
+<tr>
+<td><code>handbook:.../people-group/**</code>, <code>people-policies/**</code>, <code>hiring/**</code>, <code>total-rewards/**</code>, <code>labor-and-employment-notices/**</code></td>
+<td><code>confidential:hr</code></td>
+<td><code>hr</code>, <code>legal</code>, <code>security</code>, <code>admin</code></td>
+</tr>
+<tr>
+<td><code>handbook:.../finance/**</code>, <code>acquisitions/**</code></td>
+<td><code>confidential:finance</code></td>
+<td><code>finance</code>, <code>legal</code>, <code>security</code>, <code>admin</code></td>
+</tr>
+<tr>
+<td><code>handbook:.../legal/**</code>, <code>board-meetings/**</code></td>
+<td><code>confidential:legal</code></td>
+<td><code>legal</code>, <code>security</code>, <code>admin</code></td>
+</tr>
+<tr>
+<td><code>handbook:.../engineering/**</code>, <code>support/**</code>, <code>product/**</code>, <code>product-development/**</code>, <code>solutions-architects/**</code>, <code>it/**</code>, <code>tools-and-tips/**</code></td>
+<td><code>internal:eng</code></td>
+<td><code>engineer</code>, <code>support</code>, <code>security</code>, <code>admin</code></td>
+</tr>
+<tr>
+<td><code>handbook:.../marketing/**</code>, <code>sales/**</code>, <code>customer-experience/**</code>, <code>eta/**</code>, <code>company/**</code>, <code>leadership/**</code>, <code>communication/**</code>, <code>upstream-studios/**</code>, <code>enterprise-data/**</code>, <code>resellers/**</code>, <code>about/**</code>, <code>entity/**</code>, <code>values/**</code>, <code>business-technology/**</code>, <code>_index.md</code></td>
+<td><code>internal:company</code></td>
+<td><code>employee</code>, <code>admin</code></td>
+</tr>
+<tr>
+<td>anything unmatched</td>
+<td><code>restricted:unknown</code></td>
+<td>none, deny</td>
 </tr>
 </tbody>
 </table>
+<p>Roles are additive sets. <code>authenticated</code> is the public sentinel, <code>employee</code> is
+the internal baseline, and functional roles are added on top. A user can have
+several roles, and the document is allowed if any role intersects the allow list.
+<code>billing</code> is an alias for <code>finance</code>; the matcher always sees <code>finance</code>.</p>
 <p>These permissions are synthetic. The source content is public; the demo layers a
-plausible organisation and sensitivity model on top.</p>
-<p><strong>Technically.</strong> A deterministic path-and-tag rule table maps each parsed
-document to <code>classification</code> and <code>allowed_roles</code>. Unknown paths default to deny,
-never public. Tests cover the full path × role matrix. The result is stored as
-document metadata and later copied into the Qdrant payload, where it becomes a
-<strong>pre-filter applied before vector search</strong>, not a prompt instruction.</p>
+plausible organisation and sensitivity model on top. <code>project:atlas</code> is deferred:
+there are no tag overrides in v1.</p>
+<p><strong>Technically.</strong> A deterministic source-and-path rule table maps each parsed
+document to <code>classification</code> and <code>allowed_roles</code>. Matching is boundary-safe and
+longest-prefix first; unknown paths default to deny, never public. Each decision
+records <code>rule_id</code>, <code>matched_prefix</code>, and <code>reason</code>, plus a top-level
+<code>policy_version</code>. The output is a sidecar index under <code>data/acl</code>, not a mutation
+of the parsed JSON, so the corpus can be reclassified without re-parsing.</p>
+<p>Tests cover source distinction, prefix boundaries, longest-prefix precedence, the
+path × role matrix, unknown deny, duplicate <code>(source, path)</code> keys, and full
+corpus coverage. The result is later copied into the Qdrant payload, where it
+becomes a <strong>pre-filter applied before vector search</strong>, not a prompt instruction.</p>
 <p><strong>Why here.</strong> Permissions must exist before chunks are written. Retrofitting ACLs
 after indexing means every stored chunk is temporarily unsafe.</p>
+<p>The full explanation, role model, and the <code>business-technology</code> correction are in
+<a href="#01-architecture-acl-classification">ACL-Classification</a>.</p>
 <hr />
 <h2 id="01-architecture-ingestion-m1--1-3-chunker">1.3 Chunker</h2>
 <p><strong>In plain language.</strong> Split a long page into index cards of roughly 200–400
@@ -2619,26 +3187,57 @@ semantically near this question?” Postgres answers “which document is this, 
 section, what hash, what parent, when was it ingested?”</p>
 <p><strong>Technically.</strong></p>
 <ul>
-<li>Qdrant collection <code>chunks_v1</code> with named vectors <code>dense</code> and <code>sparse</code>;</li>
+<li>Qdrant collection <code>chunks_bge_m3_v1</code> with named vectors <code>dense</code> and <code>sparse</code>;</li>
 <li>payload: tenant, document, chunk, parent, classification, roles, source/path,
-  section path, content hash;</li>
+  section path, content hash, embedding model/version/dimension;</li>
 <li>deterministic point ids, for example UUID5 of <code>document:ordinal:content_hash</code>;</li>
-<li>Postgres holds the document/chunk map and parent-child relationships;</li>
+<li>Postgres holds the document/chunk map and parent-child relationships, managed
+  by Alembic from the first table;</li>
+<li>unique constraints on <code>(source, path)</code> for documents and
+  <code>(document_id, ordinal)</code> for chunks, plus foreign keys and a content-hash index;</li>
+<li><code>tenant</code> is a reserved field with the local value <code>default</code>; the system is
+  single-tenant until a tenant table and isolation test exist;</li>
 <li>verify counts and fetch 100 chunks by id.</li>
 </ul>
 <p><strong>Why both.</strong> The vector database is an index, not the source of truth. Postgres
-is where you join, audit, and explain.</p>
+is where you join, audit, and explain. The collection name includes the embedding
+model version because vectors from different models must never be mixed.</p>
+<hr />
+<h2 id="01-architecture-ingestion-m1--1-5b-minio-raw-manifest-snapshot">1.5b MinIO raw + manifest snapshot</h2>
+<p><strong>In plain language.</strong> Take a photograph of the exact shelves that were indexed.
+If the source repository disappears, or a parser change needs the original bytes,
+the snapshot is still there. The raw corpus and manifest are small enough to
+archive; parsed output is optional because it can be regenerated.</p>
+<p><strong>Technically.</strong></p>
+<ul>
+<li>bucket <code>helix-corpus</code>;</li>
+<li>keys <code>raw/&lt;source&gt;/&lt;commit&gt;/&lt;path&gt;</code> and
+  <code>manifests/&lt;source&gt;/&lt;commit&gt;.json</code>;</li>
+<li>optional <code>parsed/&lt;source&gt;/&lt;commit&gt;/&lt;parser_version&gt;/&lt;path&gt;.json</code>;</li>
+<li>record SHA-256 in object metadata and reject a different payload under the same
+  immutable key;</li>
+<li>re-uploading the same commit and checksum is a no-op;</li>
+<li>verify by downloading one raw file and one manifest and comparing hashes.</li>
+</ul>
+<p><strong>Why after 1.5.</strong> MinIO is not required to make retrieval work, so it must not
+block the first searchable index. It is still a real S3-compatible archive, and
+the same code works against AWS S3 or Cloudflare R2. The checkpoint is <code>1.5b</code>
+rather than a new phase because it is one focused concern.</p>
 <hr />
 <h2 id="01-architecture-ingestion-m1--1-6-worker-full-ingest-reconcile">1.6 Worker + full ingest + reconcile</h2>
-<p><strong>In plain language.</strong> Build the assembly line that runs all six steps over all
-2,500 documents in the background. If nothing changed, a second run should do
+<p><strong>In plain language.</strong> Build the assembly line that runs the whole pipeline over
+all 2,500 documents in the background. If nothing changed, a second run should do
 nothing. If a document is deleted upstream, its chunks must disappear.</p>
 <p><strong>Technically.</strong></p>
 <ul>
 <li>ARQ worker backed by Redis;</li>
 <li>job key = source + commit + config hash;</li>
+<li>config hash includes parser, ACL policy, chunker, and embedding-model versions,
+  so a policy or model change forces the right work;</li>
 <li>content-hash diff detects added, changed, and deleted documents;</li>
 <li>add/update/delete, with tombstones for removals;</li>
+<li>bounded retries with backoff, a dead-letter queue, a job record in Postgres, and
+  a lock per ingest run;</li>
 <li>idempotent rerun: the second run reports zero work;</li>
 <li>verify counts, sample retrieval, and the ACL invariant after each run;</li>
 <li>integration test against the live stack.</li>
@@ -2666,7 +3265,7 @@ that can prove the whole pipeline is correct and repeatable.</p>
 <tr>
 <td>1.2</td>
 <td>document → classification + roles</td>
-<td>path rule table</td>
+<td>source/path rule table</td>
 <td>unknown path leaking as public</td>
 </tr>
 <tr>
@@ -2688,6 +3287,12 @@ that can prove the whole pipeline is correct and repeatable.</p>
 <td>id/count drift, missing payload</td>
 </tr>
 <tr>
+<td>1.5b</td>
+<td>raw corpus + manifest → S3 objects</td>
+<td>MinIO, SHA-256</td>
+<td>duplicate keys, checksum drift</td>
+</tr>
+<tr>
 <td>1.6</td>
 <td>corpus → indexed, reconciled store</td>
 <td>ARQ, Redis, hashes</td>
@@ -2706,6 +3311,7 @@ that can prove the whole pipeline is correct and repeatable.</p>
 <li><strong>Embedder</strong> turns the child into one dense vector and one sparse vector.</li>
 <li><strong>Storage</strong> writes the vectors plus ACL, path, section, and hash to Qdrant,
    and the document/chunk rows to Postgres.</li>
+<li><strong>Snapshot</strong> archives the raw Markdown and manifest in MinIO with checksums.</li>
 <li><strong>Worker</strong> performs those steps for the whole corpus, then a second run
    reports no changes.</li>
 <li><strong>Query time</strong> applies the <code>public:docs</code> filter before search, retrieves the
@@ -2715,6 +3321,7 @@ that can prove the whole pipeline is correct and repeatable.</p>
 <ul>
 <li>2,500 documents parsed and indexed.</li>
 <li>Every stored chunk carries classification and allowed roles.</li>
+<li>The raw corpus and manifest are archived in MinIO with matching SHA-256 values.</li>
 <li>A second full ingest is a no-op.</li>
 <li>Deleting one upstream document removes its chunks from both stores.</li>
 <li>Qdrant and Postgres counts agree.</li>
@@ -2787,6 +3394,11 @@ precision and answer quality.</p>
 <p>Qdrant finds nearest vectors; Postgres stores truth, joins, hashes, and audit
 data. Treating the vector store as the database of record makes reconciliation
 and auditing much harder.</p>
+<h3 id="01-architecture-ingestion-m1--why-minio-if-the-corpus-can-be-re-fetched">Why MinIO if the corpus can be re-fetched?</h3>
+<p>Re-fetching depends on the upstream repository still serving the pinned commit.
+The snapshot makes the demo self-contained, gives us original bytes for a parser
+change, and exercises the same S3 interface used in production. It is a
+convenience and a recovery path, not a replacement for Postgres truth.</p>
 <h3 id="01-architecture-ingestion-m1--why-must-a-second-ingest-be-a-no-op">Why must a second ingest be a no-op?</h3>
 <p>Real pipelines rerun. Without content hashes and idempotent writes, every rerun
 duplicates data, inflates counts, and makes deletion impossible to reason about.</p>
@@ -2796,15 +3408,20 @@ duplicates data, inflates counts, and makes deletion impossible to reason about.
   one interpretation of headings, lists, code, and tables.”</li>
 <li>“ACLs are metadata applied before vector search, not a sentence in the prompt.
   The security invariant is zero unauthorized chunks in the context.”</li>
+<li>“The ACL rule is deterministic and source-aware. It records which rule and
+  prefix matched, so a misclassification is auditable.”</li>
 <li>“I use parent/child chunking: small children for retrieval, the parent section
   for generation, and a breadcrumb for both context and citations.”</li>
 <li>“BGE-M3 gives me dense and sparse vectors from one model, so hybrid retrieval
   does not need a separate BM25 pipeline.”</li>
 <li>“The ingest worker is hash-based and idempotent: rerunning unchanged data is a
   no-op, and deletions propagate as tombstones.”</li>
+<li>“I archive the exact raw commit and manifest in S3-compatible storage with
+  checksums, so a parser or embedding change can rebuild without depending on the
+  upstream repository.”</li>
 </ul>
 </div>
-<div class="related"><strong>Related:</strong> <span class="chip"><a href="#01-architecture-parsing">Parsing</a></span> <span class="chip"><a href="#01-architecture-document-normalization">Document-Normalization</a></span> <span class="chip"><a href="#01-architecture-parser-lab">Parser-Lab</a></span> <span class="chip"><a href="#01-architecture-corpus">Corpus</a></span> <span class="chip"><a href="#01-architecture-storage-layers">Storage-Layers</a></span> <span class="chip"><a href="#01-architecture-project-map">Project-Map</a></span> <span class="chip"><a href="#00-project-checklist">Checklist</a></span> <span class="chip"><a href="#03-journal-2026-10-25">2026-10-25</a></span></div>
+<div class="related"><strong>Related:</strong> <span class="chip"><a href="#01-architecture-parsing">Parsing</a></span> <span class="chip"><a href="#01-architecture-document-normalization">Document-Normalization</a></span> <span class="chip"><a href="#01-architecture-parser-lab">Parser-Lab</a></span> <span class="chip"><a href="#01-architecture-acl-classification">ACL-Classification</a></span> <span class="chip"><a href="#01-architecture-corpus">Corpus</a></span> <span class="chip"><a href="#01-architecture-storage-layers">Storage-Layers</a></span> <span class="chip"><a href="#01-architecture-project-map">Project-Map</a></span> <span class="chip"><a href="#00-project-checklist">Checklist</a></span> <span class="chip"><a href="#00-project-roadmap-review">Roadmap-Review</a></span> <span class="chip"><a href="#03-journal-2026-10-27">2026-10-27</a></span></div>
 </article>
 <article class="note" id="01-architecture-parser-lab"
 data-title="Parser lab: native vs Docling vs Unstructured">
@@ -3450,11 +4067,12 @@ person to understand and run.</p>
 </table>
 <div class="callout info">
 <p class="callout-title">Current state</p>
-<p>Checkpoint 1.1. The repo has a working API skeleton, local services, a pinned
-corpus, a Markdown parser that emits structured JSON, and a docs/eval seed. It
-does <strong>not</strong> yet have ACL classification, chunking, embeddings, retrieval,
-generation, auth, or a UI. This note explains the target architecture and
-marks what exists now.</p>
+<p>Checkpoint 1.1 is verified; 1.2 ACL classification is next. The repo has a
+working API skeleton, local services, a pinned corpus, a Markdown parser that
+emits structured JSON, and a docs/eval seed. It does <strong>not</strong> yet have ACL
+classification, chunking, embeddings, retrieval, generation, auth, or a UI.
+MinIO is running but its archive checkpoint is 1.5b. This note explains the
+target architecture and marks what exists now.</p>
 </div>
 <h2 id="01-architecture-project-map--what-lives-where">What lives where</h2>
 <table>
@@ -3596,6 +4214,9 @@ loop.</p>
 </code></pre>
 <p>The query path is latency-sensitive. The design keeps network-bound work async
 and pushes optional work, such as broad query expansion, behind a bounded budget.</p>
+<p>Until 4.1 adds JWT auth, checkpoint 2.0 supplies a localhost-only trusted role
+header and a typed identity object. The ACL pre-filter uses that interface; 4.1
+replaces the resolver with JWT claims without changing retrieval code.</p>
 <h2 id="01-architecture-project-map--what-exists-now-vs-what-comes-next">What exists now vs what comes next</h2>
 <table>
 <thead>
@@ -3614,7 +4235,7 @@ and pushes optional work, such as broad query expansion, behind a bounded budget
 <tr>
 <td>Ingestion</td>
 <td>Pinned corpus, manifest, Markdown parser</td>
-<td>ACL classifier, chunker, embedder</td>
+<td>ACL classifier, chunker, embedder, MinIO archive</td>
 </tr>
 <tr>
 <td>Storage</td>
@@ -3818,12 +4439,12 @@ passage the user is not allowed to see.</p>
 <li>"I add complexity only when an ablation shows a measurable gain."</li>
 </ul>
 </div>
-<div class="related"><strong>Related:</strong> <span class="chip"><a href="#00-project-start-here">Start-Here</a></span> <span class="chip"><a href="#00-project-checklist">Checklist</a></span> <span class="chip"><a href="#01-architecture-foundations">Foundations</a></span> <span class="chip"><a href="#01-architecture-compose-stack">Compose-Stack</a></span> <span class="chip"><a href="#01-architecture-corpus">Corpus</a></span> <span class="chip"><a href="#01-architecture-parsing">Parsing</a></span> <span class="chip"><a href="#01-architecture-document-normalization">Document-Normalization</a></span> <span class="chip"><a href="#01-architecture-parser-lab">Parser-Lab</a></span> <span class="chip"><a href="#01-architecture-ingestion-m1">Ingestion-M1</a></span> <span class="chip"><a href="#01-architecture-storage-layers">Storage-Layers</a></span> <span class="chip"><a href="#02-evaluation-evaluation-101">Evaluation-101</a></span> <span class="chip"><a href="#02-evaluation-tracing-a-document">Tracing-a-Document</a></span></div>
+<div class="related"><strong>Related:</strong> <span class="chip"><a href="#00-project-start-here">Start-Here</a></span> <span class="chip"><a href="#00-project-checklist">Checklist</a></span> <span class="chip"><a href="#00-project-roadmap-review">Roadmap-Review</a></span> <span class="chip"><a href="#01-architecture-acl-classification">ACL-Classification</a></span> <span class="chip"><a href="#01-architecture-foundations">Foundations</a></span> <span class="chip"><a href="#01-architecture-compose-stack">Compose-Stack</a></span> <span class="chip"><a href="#01-architecture-corpus">Corpus</a></span> <span class="chip"><a href="#01-architecture-parsing">Parsing</a></span> <span class="chip"><a href="#01-architecture-document-normalization">Document-Normalization</a></span> <span class="chip"><a href="#01-architecture-parser-lab">Parser-Lab</a></span> <span class="chip"><a href="#01-architecture-ingestion-m1">Ingestion-M1</a></span> <span class="chip"><a href="#01-architecture-storage-layers">Storage-Layers</a></span> <span class="chip"><a href="#02-evaluation-evaluation-101">Evaluation-101</a></span> <span class="chip"><a href="#02-evaluation-tracing-a-document">Tracing-a-Document</a></span></div>
 </article>
 <article class="note" id="01-architecture-storage-layers"
 data-title="Why four stores? Postgres, Redis, Qdrant, MinIO">
 <header class="note-header">
-<p class="kicker">Architecture · concept · verified</p>
+<p class="kicker">Architecture · concept · active</p>
 <h2>Why four stores? Postgres, Redis, Qdrant, MinIO</h2>
 <span class="chip">postgres</span><span class="chip">redis</span><span class="chip">qdrant</span><span class="chip">minio</span><span class="chip">gui</span><span class="chip">storage</span><span class="chip">interview</span>
 </header>
@@ -3932,8 +4553,9 @@ constraints, and foreign keys.</p>
 <p>CLI alternative:</p>
 <pre><code class="language-bash">docker exec -it helix-postgres psql -U helix -d helix
 </code></pre>
-<p><strong>At checkpoint 0.2 the database is empty</strong> — no tables yet. The schema arrives
-with ingestion in M1. An empty GUI is expected, not a bug.</p>
+<p><strong>At checkpoint 0.2 the database is empty</strong> — no tables yet. The schema and
+Alembic migrations arrive with 1.5, together with the document/chunk map and
+uniqueness constraints. An empty GUI is expected before then.</p>
 <p><strong>GUI options:</strong> Adminer (web, included, lightweight), DBeaver (desktop, best
 for exploring), pgAdmin (heavier), TablePlus (paid), <code>psql</code> (CLI).</p>
 <hr />
@@ -4047,8 +4669,9 @@ is for filtering and display, not for being the source of truth.</p>
 </code></pre>
 <p>The actual UI is at:</p>
 <p><strong>http://127.0.0.1:6333/dashboard</strong></p>
-<p>At 0.2 there are no collections yet, so the dashboard is empty. Collections are
-created during ingestion (M1).</p>
+<p>At 0.2 there are no collections yet, so the dashboard is empty. The first
+collection is created at 1.5, named with the embedding model version so vectors
+from different models never mix.</p>
 <p><strong>GUI options:</strong> the built-in dashboard (official), the REST API, the Python
 client. There is no separate official desktop app.</p>
 <hr />
@@ -4069,7 +4692,43 @@ client. There is no separate official desktop app.</p>
 presigned URLs, multipart uploads, versioning, or a clean path to cloud
 storage. MinIO gives the realistic interface without cloud cost.</p>
 <p><strong>See it visually:</strong> <code>http://127.0.0.1:9101</code> (MinIO Console), user <code>helix</code>,
-password <code>helix_minio_dev_password</code>. At 0.2 there are no buckets yet.</p>
+password <code>helix_minio_dev_password</code>.</p>
+<p><strong>Checkpoint 1.5b creates the first bucket.</strong> Before then, MinIO is running but
+empty, which is expected. The archive is deliberately after 1.5 because it is not
+required to make retrieval work.</p>
+<p><strong>Bucket layout</strong></p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>What it holds</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>raw/&lt;source&gt;/&lt;commit&gt;/&lt;path&gt;</code></td>
+<td>exact raw Markdown bytes</td>
+</tr>
+<tr>
+<td><code>manifests/&lt;source&gt;/&lt;commit&gt;.json</code></td>
+<td>the manifest for that snapshot</td>
+</tr>
+<tr>
+<td><code>parsed/&lt;source&gt;/&lt;commit&gt;/&lt;parser_version&gt;/&lt;path&gt;.json</code></td>
+<td>optional parsed JSON for debugging</td>
+</tr>
+</tbody>
+</table>
+<p>The commit is part of the key, so a snapshot is immutable. A second upload of
+the same key with the same SHA-256 is a no-op. A different payload under the same
+immutable key is an error, not an overwrite. Object metadata records <code>sha256</code>,
+<code>source</code>, <code>commit</code>, and <code>path</code>.</p>
+<p>Parsed output is optional because it can be regenerated from raw bytes and the
+parser version. Raw bytes and the manifest are the recovery-critical pair.</p>
+<p><strong>Versioning and retention:</strong> the commit prefix already makes snapshots
+immutable, so local bucket versioning is off at first. Production can enable
+versioning or lifecycle rules; the local demo keeps one snapshot per pinned
+commit and documents cleanup rather than deleting silently.</p>
 <p><strong>Caveat:</strong> MinIO's official public images are currently unavailable, so local
 dev uses a pinned community mirror (<code>pgsty/minio</code>). Production would use the
 official MinIO distribution/operator or managed S3.</p>
@@ -4157,11 +4816,13 @@ would collapse them.</p>
 <li>"Qdrant's root URL is the API; the UI is <code>/dashboard</code>."</li>
 <li>"We store originals in S3-compatible storage so we can re-index without
   re-crawling, and the same code works against AWS S3."</li>
+<li>"The MinIO key includes the source commit. Re-uploading the same key and
+  checksum is a no-op; a different payload under that key is a corruption."</li>
 <li>"At small scale I could use pgvector + a Postgres queue + local disk; I would
   collapse the stack until the access pattern justifies the extra component."</li>
 </ul>
 </div>
-<div class="related"><strong>Related:</strong> <span class="chip"><a href="#01-architecture-compose-stack">Compose-Stack</a></span> <span class="chip"><a href="#01-architecture-foundations">Foundations</a></span> <span class="chip"><a href="#03-journal-2026-10-23">2026-10-23</a></span></div>
+<div class="related"><strong>Related:</strong> <span class="chip"><a href="#01-architecture-compose-stack">Compose-Stack</a></span> <span class="chip"><a href="#01-architecture-foundations">Foundations</a></span> <span class="chip"><a href="#01-architecture-acl-classification">ACL-Classification</a></span> <span class="chip"><a href="#01-architecture-ingestion-m1">Ingestion-M1</a></span> <span class="chip"><a href="#00-project-roadmap-review">Roadmap-Review</a></span> <span class="chip"><a href="#03-journal-2026-10-23">2026-10-23</a></span> <span class="chip"><a href="#03-journal-2026-10-27">2026-10-27</a></span></div>
 </article>
 <article class="note" id="02-evaluation-evaluation-101"
 data-title="Evaluation 101: how we know RAG is getting better">
@@ -4240,11 +4901,20 @@ wrong, every score is wrong.</p>
 <code>Accounts</code> section of the Zuora page, and marks the asking role as <code>billing</code>.
 That one record drives three checks: retrieval must find the <code>Accounts</code> chunk,
 generation must include both the balance and days-overdue conditions, and a
-later ACL test can confirm that a role without billing access cannot retrieve
+later ACL test can confirm that a role without finance access cannot retrieve
 it.</p>
+<div class="callout info">
+<p class="callout-title">Resolved role mismatch</p>
+<p><code>billing</code> is an alias for <code>finance</code>, and <code>business-technology</code> is classified as
+<code>internal:company</code>, so the Zuora page is available to employees. The seed file
+can keep <code>billing</code> until 1.7 normalizes it, but the ACL matcher uses <code>finance</code>.
+See <a href="#01-architecture-acl-classification">ACL-Classification</a> and <a href="#00-project-roadmap-review">Roadmap-Review</a>.</p>
+</div>
 <p>The current file, <code>evals/seed_questions.jsonl</code>, has seven seed cases from the
 Zuora Collect page. It is deliberately small. The goal is to agree on what
-"correct" means before scaling to roughly 110 cases in M5.</p>
+"correct" means before scaling. Checkpoint 1.7 grows it to 25–30 cases before
+retrieval tuning starts; M5 finishes the roughly 110-case set with LLM-judge
+validation and CI gates.</p>
 <h3 id="02-evaluation-evaluation-101--why-manual-first">Why manual first</h3>
 <p>If an LLM generates both the question and the answer, it can generate a
 hallucinated answer and then grade itself against it. Read the source, write the
@@ -4686,7 +5356,7 @@ the current numbers as smoke tests, not a release decision.</p>
 <li>"Every ablation row is a complexity claim with a measured delta."</li>
 </ul>
 </div>
-<div class="related"><strong>Related:</strong> <span class="chip"><a href="#01-architecture-project-map">Project-Map</a></span> <span class="chip"><a href="#02-evaluation-tracing-a-document">Tracing-a-Document</a></span> <span class="chip"><a href="#00-project-checklist">Checklist</a></span> <span class="chip"><a href="#03-journal-2026-10-24">2026-10-24</a></span></div>
+<div class="related"><strong>Related:</strong> <span class="chip"><a href="#01-architecture-project-map">Project-Map</a></span> <span class="chip"><a href="#02-evaluation-tracing-a-document">Tracing-a-Document</a></span> <span class="chip"><a href="#00-project-checklist">Checklist</a></span> <span class="chip"><a href="#01-architecture-acl-classification">ACL-Classification</a></span> <span class="chip"><a href="#00-project-roadmap-review">Roadmap-Review</a></span> <span class="chip"><a href="#03-journal-2026-10-24">2026-10-24</a></span> <span class="chip"><a href="#03-journal-2026-10-27">2026-10-27</a></span></div>
 </article>
 <article class="note" id="02-evaluation-tracing-a-document"
 data-title="Tracing a document and seeding the golden set">
@@ -5420,10 +6090,88 @@ python3 -m json.tool \
 <li>The golden set still has seven seed cases; parsing does not change it.</li>
 <li>Nested lists are flattened in <code>text</code> (levels remain in <code>meta</code>). Revisit only
   if chunking quality shows the hierarchy matters.</li>
-<li>User verification remains.</li>
+<li>User verification was pending on this day; the user replied <code>pass</code> on
+  2026-10-27. See <a href="#03-journal-2026-10-27">2026-10-27</a>.</li>
 </ul>
 </div>
-<div class="related"><strong>Related:</strong> <span class="chip"><a href="#03-journal-2026-10-24">2026-10-24</a></span> <span class="chip"><a href="#00-project-ci-baseline">CI-Baseline</a></span> <span class="chip"><a href="#00-project-checklist">Checklist</a></span> <span class="chip"><a href="#01-architecture-project-map">Project-Map</a></span></div>
+<div class="related"><strong>Related:</strong> <span class="chip"><a href="#03-journal-2026-10-24">2026-10-24</a></span> <span class="chip"><a href="#03-journal-2026-10-27">2026-10-27</a></span> <span class="chip"><a href="#00-project-ci-baseline">CI-Baseline</a></span> <span class="chip"><a href="#00-project-checklist">Checklist</a></span> <span class="chip"><a href="#01-architecture-project-map">Project-Map</a></span></div>
+</article>
+<article class="note" id="03-journal-2026-10-27"
+data-title="2026-10-27 - Day 4">
+<header class="note-header">
+<p class="kicker">Journal · journal · in-progress</p>
+<h2>2026-10-27 - Day 4</h2>
+<span class="chip">helix</span><span class="chip">journal</span><span class="chip">acl</span><span class="chip">roadmap</span><span class="chip">minio</span>
+</header>
+<div class="toc"><p class="toctitle">On this page</p><ul><li><a href="#03-journal-2026-10-27--checkpoint-1-1-closed">Checkpoint 1.1 - closed</a></li><li><a href="#03-journal-2026-10-27--checkpoint-1-2-design-conversation">Checkpoint 1.2 - design conversation</a></li><li><a href="#03-journal-2026-10-27--decisions">Decisions</a></li><li><a href="#03-journal-2026-10-27--doubts-answered">Doubts answered</a></li><li><a href="#03-journal-2026-10-27--roadmap-review">Roadmap review</a></li><li><a href="#03-journal-2026-10-27--next">Next</a></li></ul></div>
+<div class="content">
+<p>Previous day: <a href="#03-journal-2026-10-25">2026-10-25</a></p>
+<h2 id="03-journal-2026-10-27--checkpoint-1-1-closed">Checkpoint 1.1 - closed</h2>
+<p>The user replied <code>pass</code> for the parser. The 1.1 manual test, 2,500-document run,
+and CI were accepted. The roadmap row moves to <code>done</code>; the current checkpoint
+becomes 1.2.</p>
+<h2 id="03-journal-2026-10-27--checkpoint-1-2-design-conversation">Checkpoint 1.2 - design conversation</h2>
+<p>The ACL classifier was explained in plain language and then at the rule level.
+The important correction was that permissions are attached to <strong>documents</strong>, not
+chunks: if every chunk from a document inherits the document's label, there is no
+way for one chunk to leak while its sibling is protected.</p>
+<p>The role model is an additive set, not a hierarchy. <code>authenticated</code> is the public
+sentinel, <code>employee</code> is the internal baseline, functional roles are added on top,
+and <code>admin</code> is break-glass.</p>
+<h2 id="03-journal-2026-10-27--decisions">Decisions</h2>
+<ul>
+<li>Classify by source and path, not by content or tags.</li>
+<li>Use the expanded taxonomy: public, internal engineering, internal company,
+  restricted security, confidential HR, confidential finance, confidential legal.</li>
+<li>Unknown paths default to <code>restricted:unknown</code> with no roles.</li>
+<li>Longest matching prefix wins, with boundary-safe matching.</li>
+<li>Store <code>rule_id</code>, <code>matched_prefix</code>, and <code>reason</code> for audit, plus a top-level
+  <code>policy_version</code>.</li>
+<li>Write a sidecar ACL index under <code>data/acl</code>; leave parsed JSON untouched.</li>
+<li>Add <code>1.5b</code> MinIO raw + manifest snapshot after 1.5.</li>
+<li>Defer tag overrides such as <code>project:atlas</code>.</li>
+<li>Add <code>1.7</code> eval seed expansion before retrieval tuning.</li>
+<li>Add <code>2.0</code> identity context and a localhost-only trusted role resolver before
+  the 2.2 ACL pre-filter.</li>
+<li>Move <code>business-technology</code> to <code>internal:company</code>; treat <code>billing</code> as an alias
+  for <code>finance</code>.</li>
+</ul>
+<h2 id="03-journal-2026-10-27--doubts-answered">Doubts answered</h2>
+<ul>
+<li><strong>Why MinIO after 1.5?</strong> It is useful but not required to make search work.
+  Archiving raw bytes and the manifest is a snapshot concern, so it gets its own
+  small checkpoint after the retrieval stores exist.</li>
+<li><strong>Why not a simple <code>internal</code> label?</strong> The demo needs visibly different access
+  outcomes. The four sensitivity prefixes make the security behavior legible in
+  the UI and in evals.</li>
+<li><strong>Why not one <code>reason</code> string?</strong> The structured fields separate policy identity,
+  matched path, and prose explanation. That is what makes a misclassification
+  debuggable.</li>
+<li><strong>Why can a user have multiple roles?</strong> People wear several hats. A set
+  intersection is easier to test than a role hierarchy.</li>
+<li><strong>What about duplicates?</strong> The parser overwrites a deterministic path; the ACL
+  index rejects duplicate <code>(source, path)</code> keys. Content-level dedup waits for
+  1.6 hashes and tombstones.</li>
+</ul>
+<h2 id="03-journal-2026-10-27--roadmap-review">Roadmap review</h2>
+<p>Created <a href="#00-project-roadmap-review">Roadmap-Review</a>. The main findings were the missing MinIO owner, the
+ACL-before-identity ordering problem, the late golden set, and several implicit
+concerns that can be folded into existing checkpoints: Postgres migrations,
+embedding model versioning, worker retries/dead-letter, tenant scope, frontend
+auth, and backup/restore.</p>
+<p>The seed/ACL conflict is resolved: <code>content/handbook/business-technology/</code> moves
+to <code>internal:company</code>, and <code>billing</code> becomes an alias for <code>finance</code>. This keeps
+the Zuora seed cases reachable for employees and gives the matcher one canonical
+finance role. The corrected corpus counts are 439 engineering and 383 company
+documents.</p>
+<h2 id="03-journal-2026-10-27--next">Next</h2>
+<ul>
+<li>Implement 1.2: <code>packages/helix/acl.py</code>, <code>scripts/classify_corpus.py</code>, tests,
+  <code>make classify</code>, and full-corpus manual check.</li>
+<li>Then 1.3 chunking.</li>
+</ul>
+</div>
+<div class="related"><strong>Related:</strong> <span class="chip"><a href="#03-journal-2026-10-25">2026-10-25</a></span> <span class="chip"><a href="#01-architecture-acl-classification">ACL-Classification</a></span> <span class="chip"><a href="#00-project-roadmap-review">Roadmap-Review</a></span> <span class="chip"><a href="#00-project-checklist">Checklist</a></span> <span class="chip"><a href="#00-project-start-here">Start-Here</a></span> <span class="chip"><a href="#01-architecture-ingestion-m1">Ingestion-M1</a></span></div>
 </article>
 <footer class="page-footer">
 Source of truth: the Obsidian vault. This file is generated; do not edit it by hand.

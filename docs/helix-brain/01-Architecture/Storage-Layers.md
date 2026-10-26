@@ -1,9 +1,9 @@
 ---
 type: concept
-status: verified
+status: active
 day: 1
 tags: [postgres, redis, qdrant, minio, gui, storage, interview]
-related: ["[[Compose-Stack]]", "[[Foundations]]", "[[2026-10-23]]"]
+related: ["[[Compose-Stack]]", "[[Foundations]]", "[[ACL-Classification]]", "[[Ingestion-M1]]", "[[Roadmap-Review]]", "[[2026-10-23]]", "[[2026-10-27]]"]
 ---
 
 # Why four stores? Postgres, Redis, Qdrant, MinIO
@@ -66,8 +66,9 @@ CLI alternative:
 docker exec -it helix-postgres psql -U helix -d helix
 ```
 
-**At checkpoint 0.2 the database is empty** — no tables yet. The schema arrives
-with ingestion in M1. An empty GUI is expected, not a bug.
+**At checkpoint 0.2 the database is empty** — no tables yet. The schema and
+Alembic migrations arrive with 1.5, together with the document/chunk map and
+uniqueness constraints. An empty GUI is expected before then.
 
 **GUI options:** Adminer (web, included, lightweight), DBeaver (desktop, best
 for exploring), pgAdmin (heavier), TablePlus (paid), `psql` (CLI).
@@ -167,8 +168,9 @@ The actual UI is at:
 
 **http://127.0.0.1:6333/dashboard**
 
-At 0.2 there are no collections yet, so the dashboard is empty. Collections are
-created during ingestion (M1).
+At 0.2 there are no collections yet, so the dashboard is empty. The first
+collection is created at 1.5, named with the embedding model version so vectors
+from different models never mix.
 
 **GUI options:** the built-in dashboard (official), the REST API, the Python
 client. There is no separate official desktop app.
@@ -195,7 +197,32 @@ presigned URLs, multipart uploads, versioning, or a clean path to cloud
 storage. MinIO gives the realistic interface without cloud cost.
 
 **See it visually:** `http://127.0.0.1:9101` (MinIO Console), user `helix`,
-password `helix_minio_dev_password`. At 0.2 there are no buckets yet.
+password `helix_minio_dev_password`.
+
+**Checkpoint 1.5b creates the first bucket.** Before then, MinIO is running but
+empty, which is expected. The archive is deliberately after 1.5 because it is not
+required to make retrieval work.
+
+**Bucket layout**
+
+| Key | What it holds |
+|---|---|
+| `raw/<source>/<commit>/<path>` | exact raw Markdown bytes |
+| `manifests/<source>/<commit>.json` | the manifest for that snapshot |
+| `parsed/<source>/<commit>/<parser_version>/<path>.json` | optional parsed JSON for debugging |
+
+The commit is part of the key, so a snapshot is immutable. A second upload of
+the same key with the same SHA-256 is a no-op. A different payload under the same
+immutable key is an error, not an overwrite. Object metadata records `sha256`,
+`source`, `commit`, and `path`.
+
+Parsed output is optional because it can be regenerated from raw bytes and the
+parser version. Raw bytes and the manifest are the recovery-critical pair.
+
+**Versioning and retention:** the commit prefix already makes snapshots
+immutable, so local bucket versioning is off at first. Production can enable
+versioning or lifecycle rules; the local demo keeps one snapshot per pinned
+commit and documents cleanup rather than deleting silently.
 
 **Caveat:** MinIO's official public images are currently unavailable, so local
 dev uses a pinned community mirror (`pgsty/minio`). Production would use the
@@ -255,5 +282,7 @@ make tools-down
 - "Qdrant's root URL is the API; the UI is `/dashboard`."
 - "We store originals in S3-compatible storage so we can re-index without
   re-crawling, and the same code works against AWS S3."
+- "The MinIO key includes the source commit. Re-uploading the same key and
+  checksum is a no-op; a different payload under that key is a corruption."
 - "At small scale I could use pgvector + a Postgres queue + local disk; I would
   collapse the stack until the access pattern justifies the extra component."

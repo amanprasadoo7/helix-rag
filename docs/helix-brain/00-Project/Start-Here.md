@@ -1,9 +1,9 @@
 ---
 type: guide
 status: active
-day: 3
+day: 4
 tags: [process, navigation, docs]
-related: ["[[Checklist]]", "[[Project-Map]]", "[[Study-Guide]]", "[[2026-10-25]]", "[[Ingestion-M1]]", "[[Parsing]]", "[[Document-Normalization]]", "[[Parser-Lab]]", "[[Foundations]]", "[[Compose-Stack]]", "[[Storage-Layers]]", "[[Evaluation-101]]"]
+related: ["[[Checklist]]", "[[Project-Map]]", "[[Study-Guide]]", "[[Roadmap-Review]]", "[[ACL-Classification]]", "[[2026-10-25]]", "[[2026-10-27]]", "[[Ingestion-M1]]", "[[Parsing]]", "[[Document-Normalization]]", "[[Parser-Lab]]", "[[Foundations]]", "[[Compose-Stack]]", "[[Storage-Layers]]", "[[Evaluation-101]]"]
 ---
 
 # Start here
@@ -14,14 +14,14 @@ the vault: it tells you what is current, what to read first, and where to write.
 
 ## Current state
 
-> [!info] Checkpoint 1.1
-> The Markdown parser is implemented and committed. It converts 2,500 pinned
-> documents into structured JSON. User verification is still pending, so
-> checkpoint 1.2 has not started.
+> [!info] Checkpoint 1.2
+> The parser (1.1) is verified. The ACL classifier design is documented in
+> [[ACL-Classification]]; implementation has not started. The roadmap review adds
+> 1.5b MinIO archive, 1.7 eval seed expansion, and 2.0 identity context.
 
 The repo has a working API skeleton, local services, a pinned corpus, and a
 parser. It does not yet have ACL classification, chunking, embeddings, retrieval,
-generation, auth, or a UI.
+generation, auth, or a UI. MinIO is running but its archive checkpoint is 1.5b.
 
 Use `make checklist` for the live status. The checklist, not this note, is the
 source of truth for the active checkpoint.
@@ -33,8 +33,10 @@ source of truth for the active checkpoint.
 | Know what is in scope right now | [[Checklist]] |
 | Understand the whole system | [[Project-Map]] |
 | Work on the vault or generated guide | [[Study-Guide]] |
-| See the latest build log | [[2026-10-25]] |
+| See the latest build log | [[2026-10-27]] |
 | Understand the next milestone | [[Ingestion-M1]] |
+| Review roadmap gaps and ordering | [[Roadmap-Review]] |
+| Understand who may see each document | [[ACL-Classification]] |
 
 ## Reading paths
 
@@ -49,16 +51,19 @@ source of truth for the active checkpoint.
 
 1. [[Ingestion-M1]] for the full M1 pipeline.
 2. [[Parsing]] for the document model and parser.
-3. [[Document-Normalization]] for format adapters and correctness checks.
-4. [[Parser-Lab]] for the native vs Docling vs Unstructured comparison.
+3. [[ACL-Classification]] for the permission model and 1.2 design.
+4. [[Document-Normalization]] for format adapters and correctness checks.
+5. [[Parser-Lab]] for the native vs Docling vs Unstructured comparison.
 
 ### Prepare for interviews
 
 1. [[Project-Map]] for the architecture story.
 2. [[Foundations]] and [[Compose-Stack]] for engineering choices.
 3. [[Storage-Layers]] for why Postgres, Redis, Qdrant, and MinIO each exist.
-4. [[Parsing]] and [[Document-Normalization]] for ingestion trade-offs.
+4. [[Parsing]], [[ACL-Classification]], and [[Document-Normalization]] for
+   ingestion trade-offs.
 5. [[Evaluation-101]] for how quality is measured.
+6. [[Roadmap-Review]] for the gaps and ordering decisions.
 
 ### Continue implementation
 

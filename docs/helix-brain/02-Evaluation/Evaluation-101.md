@@ -3,7 +3,7 @@ type: concept
 status: active
 day: 2
 tags: [evaluation, golden-set, retrieval, metrics, generation, security]
-related: ["[[Project-Map]]", "[[Tracing-a-Document]]", "[[Checklist]]", "[[2026-10-24]]"]
+related: ["[[Project-Map]]", "[[Tracing-a-Document]]", "[[Checklist]]", "[[ACL-Classification]]", "[[Roadmap-Review]]", "[[2026-10-24]]", "[[2026-10-27]]"]
 ---
 
 # Evaluation 101: how we know RAG is getting better
@@ -54,12 +54,20 @@ Concretely, `zuora-003` asks when an account is "In Collections", points at the
 `Accounts` section of the Zuora page, and marks the asking role as `billing`.
 That one record drives three checks: retrieval must find the `Accounts` chunk,
 generation must include both the balance and days-overdue conditions, and a
-later ACL test can confirm that a role without billing access cannot retrieve
+later ACL test can confirm that a role without finance access cannot retrieve
 it.
+
+> [!info] Resolved role mismatch
+> `billing` is an alias for `finance`, and `business-technology` is classified as
+> `internal:company`, so the Zuora page is available to employees. The seed file
+> can keep `billing` until 1.7 normalizes it, but the ACL matcher uses `finance`.
+> See [[ACL-Classification]] and [[Roadmap-Review]].
 
 The current file, `evals/seed_questions.jsonl`, has seven seed cases from the
 Zuora Collect page. It is deliberately small. The goal is to agree on what
-"correct" means before scaling to roughly 110 cases in M5.
+"correct" means before scaling. Checkpoint 1.7 grows it to 25–30 cases before
+retrieval tuning starts; M5 finishes the roughly 110-case set with LLM-judge
+validation and CI gates.
 
 ### Why manual first
 
