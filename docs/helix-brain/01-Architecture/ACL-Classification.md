@@ -14,8 +14,8 @@ document's source and path, not on its content or tags. At query time the same
 metadata becomes a Qdrant payload filter, so forbidden chunks never enter the
 candidate set.
 
-This note records the 1.2 design conversation. The classifier is **not
-implemented yet**; the code lands only after the user says `go`.
+The classifier is implemented in `packages/helix/acl.py`. This note records the
+1.2 design conversation and the behavior that shipped.
 
 ## The simple picture
 
@@ -258,19 +258,29 @@ The resulting counts are `internal:eng` 439 and `internal:company` 383. The seed
 file can keep `billing` until 1.7 normalizes it, but the classifier and matcher
 use `finance`.
 
-## Implementation plan for 1.2
+## Implementation in 1.2
+
+Built as designed:
 
 - `packages/helix/acl.py`: `Role`, `Classification`, `Rule`, `AclPolicy`, and
-  `AclDecision`.
-- `scripts/classify_corpus.py`: read `data/manifest.json`, write the sidecar
-  files, and support a sample limit.
-- `make classify` and `make classify-sample`.
-- Unit tests for source distinction, prefix boundaries, longest-prefix
-  precedence, role intersection, `billing` -> `finance` normalization, unknown
-  deny, duplicate keys, and full corpus coverage.
-- Manual check: classify all 2,500 files, inspect the summary, and confirm zero
-  unknown paths.
-- Docs: update [[Ingestion-M1]], [[Checklist]], [[Storage-Layers]], the journal,
-  and this note.
+  `AclDecision`, plus `normalize_role` and `DEFAULT_POLICY`.
+- `scripts/classify_corpus.py`: reads `data/manifest.json`, classifies each
+  `(source, path)` pair, rejects duplicate keys, and writes the sidecar files.
+- `make classify` for the full manifest and `make classify-sample` for five
+  evenly spaced entries with verbose output.
+- Tests for source distinction, prefix boundaries, longest-prefix precedence,
+  tie order, the role matrix, `billing` -> `finance` normalization, unknown
+  deny, duplicate keys, deterministic output, and full-corpus coverage when the
+  manifest is present.
+- Manual check: all 2,500 files classified, summary inspected, zero unknown
+  paths, and the classification counts match the table above.
+- Docs: [[Ingestion-M1]], [[Checklist]], [[Storage-Layers]], the journal, and
+  this note.
 
-The implementation is intentionally waiting for the user's `go`.
+The run is deterministic. The index and summary contain no wall-clock
+timestamp, record the manifest SHA-256, and sort entries by `(source, path)`.
+Two consecutive full runs produced identical SHA-256 hashes for both files.
+
+`AclDecision.allows` canonicalizes the user's roles and intersects them with the
+document's allow list. That is the function the retrieval layer will call before
+applying the Qdrant payload filter at 2.2.

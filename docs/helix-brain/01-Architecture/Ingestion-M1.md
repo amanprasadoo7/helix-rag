@@ -14,9 +14,10 @@ stores those chunks in Qdrant and Postgres, and automates the whole flow with an
 idempotent worker.
 
 > [!info] Status
-> Checkpoint 1.1 is verified. Checkpoints 1.2–1.6 are the plan, not built yet.
-> The 1.2 design conversation is in [[ACL-Classification]]; 1.5b adds the MinIO
-> snapshot. This note is updated as each checkpoint lands.
+> Checkpoint 1.1 is verified. Checkpoint 1.2 is implemented and awaiting user
+> verification. Checkpoints 1.3–1.6 are the plan, not built yet. The 1.2 design
+> and implementation are in [[ACL-Classification]]; 1.5b adds the MinIO snapshot.
+> This note is updated as each checkpoint lands.
 
 ## The library analogy
 
@@ -130,6 +131,13 @@ Tests cover source distinction, prefix boundaries, longest-prefix precedence, th
 path × role matrix, unknown deny, duplicate `(source, path)` keys, and full
 corpus coverage. The result is later copied into the Qdrant payload, where it
 becomes a **pre-filter applied before vector search**, not a prompt instruction.
+
+**Built.** `packages/helix/acl.py` holds the policy and matcher;
+`scripts/classify_corpus.py` writes `data/acl/index.json` and
+`data/acl/summary.json`; `make classify` and `make classify-sample` run it. The
+full run classified 2,500 documents with zero unknown paths, and the output is
+deterministic across runs because it records the manifest SHA-256 instead of a
+timestamp.
 
 **Why here.** Permissions must exist before chunks are written. Retrofitting ACLs
 after indexing means every stored chunk is temporarily unsafe.
@@ -270,7 +278,7 @@ that can prove the whole pipeline is correct and repeatable.
 Question: “When does an account move to Collections?”
 
 1. **Parser** finds the `Accounts` section and the status table.
-2. **ACL** labels the page `public:docs`, visible to all authenticated users.
+2. **ACL** labels the page `internal:company`, visible to employees and admins.
 3. **Chunker** creates a child chunk such as “An account is moved to Collections
    when the total invoice balance is more than zero and at least one invoice is
    past due.” The child points to the `Accounts` parent.
@@ -280,8 +288,8 @@ Question: “When does an account move to Collections?”
 6. **Snapshot** archives the raw Markdown and manifest in MinIO with checksums.
 7. **Worker** performs those steps for the whole corpus, then a second run
    reports no changes.
-8. **Query time** applies the `public:docs` filter before search, retrieves the
-   child, expands to the parent, and cites the source path and section.
+8. **Query time** applies the `internal:company` filter before search, retrieves
+   the child, expands to the parent, and cites the source path and section.
 
 ## M1 exit criteria
 

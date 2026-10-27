@@ -52,19 +52,19 @@ Goal: label every parsed document with a sensitivity classification and the role
 allowed to retrieve it, using a deterministic source-and-path policy that defaults
 to deny.
 
-- [ ] Module: `packages/helix/acl.py` with roles, rules, matcher, and decisions
-- [ ] Taxonomy: expanded path table plus the five previously unmatched paths
-- [ ] Roles: additive sets, `employee` baseline, `authenticated` sentinel, `billing` -> `finance` alias
-- [ ] Output: sidecar `data/acl/index.json` and `summary.json` with audit fields
-- [ ] Matching: source-aware, boundary-safe, longest-prefix wins, unknown deny
-- [ ] Idempotency: reject duplicate `(source, path)` keys; deterministic output
+- [x] Module: `packages/helix/acl.py` with roles, rules, matcher, and decisions
+- [x] Taxonomy: expanded path table plus the five previously unmatched paths
+- [x] Roles: additive sets, `employee` baseline, `authenticated` sentinel, `billing` -> `finance` alias
+- [x] Output: sidecar `data/acl/index.json` and `summary.json` with audit fields
+- [x] Matching: source-aware, boundary-safe, longest-prefix wins, unknown deny
+- [x] Idempotency: reject duplicate `(source, path)` keys; deterministic output
 - [x] Decision: `business-technology` -> `internal:company`; `billing` aliases `finance`
-- [ ] CLI: `make classify` and `make classify-sample`
-- [ ] Tests: prefix boundaries, role matrix, source distinction, alias, unknown deny
-- [ ] Manual: classify all 2,500 files, inspect summary, confirm zero unknown
-- [ ] Docs: ACL note, M1, storage, roadmap, journal
-- [ ] `make ci` green
-- [ ] Commit: `feat(acl): classify corpus by source and path`
+- [x] CLI: `make classify` and `make classify-sample`
+- [x] Tests: prefix boundaries, role matrix, source distinction, alias, unknown deny
+- [x] Manual: classify all 2,500 files, inspect summary, confirm zero unknown
+- [x] Docs: ACL note, M1, storage, roadmap, journal
+- [x] `make ci` green
+- [x] Commit: `feat(acl): classify corpus by source and path`
 - [ ] User verified (user marks only)
 
 ---
@@ -82,7 +82,7 @@ Status values: `pending`, `in progress`, `done`, `blocked`.
 | 0.4 | Vault, note templates, doc generator | done | 11 notes; [[Project-Map]] |
 | 0.5 | CI baseline | done | [[CI-Baseline]]; ruff, mypy, pytest |
 | 1.1 | Parser | done | Markdown -> JSON; Docling deferred (ADR) |
-| 1.2 | ACL classifier | in progress | source/path rules, sidecar index |
+| 1.2 | ACL classifier | in progress | implemented; awaiting user verification |
 | 1.3 | Chunker | pending | structure-aware, parent/child |
 | 1.4 | Embedder | pending | BGE-M3 dense + sparse |
 | 1.5 | Qdrant + Postgres metadata | pending | Alembic, constraints, model version |

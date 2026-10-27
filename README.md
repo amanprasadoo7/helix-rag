@@ -2,7 +2,8 @@
 
 Permission-aware agentic RAG over the GitLab public handbook and product docs.
 
-**Status:** Checkpoint 1.1 verified; checkpoint 1.2 - ACL classifier is next.
+**Status:** Checkpoint 1.1 verified; checkpoint 1.2 - ACL classifier implemented
+and awaiting user verification.
 
 ## Quickstart
 
@@ -19,6 +20,8 @@ make checklist    # current checkpoint status
 make docs         # regenerate docs/theory.html from the vault
 make parse        # normalized JSON for every corpus file -> data/parsed
 make parse-sample # five documents, one summary line each
+make classify     # ACL sidecar for every corpus file -> data/acl
+make classify-sample # five documents with their decisions
 make compare FILE=path/to/file  # native vs Docling vs Unstructured -> data/parser-lab
 ```
 
@@ -84,6 +87,23 @@ This writes `native.json`, `docling.json`, `docling.md`, `unstructured.json`, an
 are not installed by default. See
 [`Parser-Lab.md`](docs/helix-brain/01-Architecture/Parser-Lab.md) for what the
 differences mean and when to use each parser.
+
+## ACL classification
+
+```bash
+make classify        # data/manifest.json -> data/acl/index.json + summary.json
+make classify-sample # classify five evenly spaced files and print decisions
+```
+
+Each manifest `(source, path)` pair gets a classification, an allow list, and
+three audit fields: `rule_id`, `matched_prefix`, and `reason`. Matching is
+source-aware, boundary-safe, and longest-prefix first; unmatched paths are
+`restricted:unknown` with no roles. `billing` normalizes to `finance`. The full
+run labels all 2,500 documents with zero unknown paths, and repeated runs produce
+identical files because the output records the manifest SHA-256 instead of a
+timestamp. See
+[`ACL-Classification.md`](docs/helix-brain/01-Architecture/ACL-Classification.md)
+for the policy table and role model.
 
 `make up` waits for healthchecks. `make down` keeps data; `make reset` deletes
 volumes.

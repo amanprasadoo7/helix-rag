@@ -15,13 +15,15 @@ the vault: it tells you what is current, what to read first, and where to write.
 ## Current state
 
 > [!info] Checkpoint 1.2
-> The parser (1.1) is verified. The ACL classifier design is documented in
-> [[ACL-Classification]]; implementation has not started. The roadmap review adds
-> 1.5b MinIO archive, 1.7 eval seed expansion, and 2.0 identity context.
+> The parser (1.1) is verified. The ACL classifier (1.2) is implemented and
+> awaiting user verification; the design and results are in
+> [[ACL-Classification]]. The roadmap review adds 1.5b MinIO archive, 1.7 eval
+> seed expansion, and 2.0 identity context.
 
-The repo has a working API skeleton, local services, a pinned corpus, and a
-parser. It does not yet have ACL classification, chunking, embeddings, retrieval,
-generation, auth, or a UI. MinIO is running but its archive checkpoint is 1.5b.
+The repo has a working API skeleton, local services, a pinned corpus, a parser,
+and a deterministic ACL sidecar. It does not yet have chunking, embeddings,
+retrieval, generation, auth, or a UI. MinIO is running but its archive checkpoint
+is 1.5b.
 
 Use `make checklist` for the live status. The checklist, not this note, is the
 source of truth for the active checkpoint.

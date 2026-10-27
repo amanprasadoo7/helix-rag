@@ -156,6 +156,13 @@ index (HNSW).
 **It is not a general database:** no joins, no multi-row transactions. Payload
 is for filtering and display, not for being the source of truth.
 
+**Where the ACLs come from:** checkpoint 1.2 writes a deterministic sidecar at
+`data/acl/index.json`, mapping each `(source, path)` to a classification and
+allowed roles. It is not stored in Qdrant yet; 1.5 copies those fields into each
+chunk's payload, and 2.2 turns them into a filter applied before vector search.
+Keeping the ACL in a sidecar means a policy change reclassifies without
+re-parsing or re-embedding.
+
 **Why the root URL looked empty**
 
 `http://127.0.0.1:6333/` is the API metadata endpoint. It returns JSON like:
