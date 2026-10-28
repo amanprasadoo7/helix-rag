@@ -310,6 +310,6 @@ detailed Unstructured notes.
 - 1.1 native Markdown parser: implemented, 2,500 documents, 0 failures, 26
   warnings.
 - Parser lab: native vs Docling vs Unstructured, local CLI only.
-- 1.2 ACL classifier, 1.3 chunker, 1.4 embedder, 1.5 stores, and 1.6 worker are
-  still ahead.
+- 1.2 ACL classifier is implemented and verified; 1.3 chunker is in progress;
+  1.4 embedder, 1.5 stores, and 1.6 worker are still ahead.
 - The adapter design for PDFs/DOCX/images is a plan, not implemented.

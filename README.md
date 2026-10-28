@@ -2,8 +2,7 @@
 
 Permission-aware agentic RAG over the GitLab public handbook and product docs.
 
-**Status:** Checkpoint 1.1 verified; checkpoint 1.2 - ACL classifier implemented
-and awaiting user verification.
+**Status:** Checkpoint 1.2 verified; checkpoint 1.3 - chunker in progress.
 
 ## Quickstart
 

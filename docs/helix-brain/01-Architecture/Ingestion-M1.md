@@ -3,7 +3,7 @@ type: architecture
 status: active
 day: 4
 tags: [ingestion, roadmap, parsing, acl, chunking, embeddings, qdrant, interview]
-related: ["[[Parsing]]", "[[Document-Normalization]]", "[[Parser-Lab]]", "[[ACL-Classification]]", "[[Corpus]]", "[[Storage-Layers]]", "[[Project-Map]]", "[[Checklist]]", "[[Roadmap-Review]]", "[[2026-10-27]]"]
+related: ["[[Parsing]]", "[[Document-Normalization]]", "[[Parser-Lab]]", "[[ACL-Classification]]", "[[Chunking]]", "[[Corpus]]", "[[Storage-Layers]]", "[[Project-Map]]", "[[Checklist]]", "[[Roadmap-Review]]", "[[2026-10-27]]"]
 ---
 
 # Ingestion M1: from Markdown to a searchable index
@@ -14,9 +14,9 @@ stores those chunks in Qdrant and Postgres, and automates the whole flow with an
 idempotent worker.
 
 > [!info] Status
-> Checkpoint 1.1 is verified. Checkpoint 1.2 is implemented and awaiting user
-> verification. Checkpoints 1.3–1.6 are the plan, not built yet. The 1.2 design
-> and implementation are in [[ACL-Classification]]; 1.5b adds the MinIO snapshot.
+> Checkpoints 1.1 and 1.2 are verified. Checkpoint 1.3 is in progress;
+> checkpoints 1.4–1.6 are the plan, not built yet. The 1.2 design and
+> implementation are in [[ACL-Classification]]; 1.5b adds the MinIO snapshot.
 > This note is updated as each checkpoint lands.
 
 ## The library analogy
@@ -165,6 +165,11 @@ is kept so the model gets enough context.
 
 **Why here.** The parser gives sections; the chunker chooses the actual retrieval
 unit. Parent/child keeps retrieval precise without starving generation of context.
+
+**Decided.** One small card per section; short sections stay small rather than
+being merged with their neighbours. The median parsed section is 55 words, so
+the 200-400 token target is an upper bound, not a floor. The full design,
+examples, and validation plan are in [[Chunking]].
 
 ---
 

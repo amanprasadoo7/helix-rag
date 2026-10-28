@@ -341,7 +341,7 @@ footer.page-footer {
 <input id="search" class="search" type="search"
   placeholder="Search notes... (press /)" autocomplete="off">
 <nav class="nav" aria-label="Notes">
-<div class="nav-group"><h2>Project</h2><a href="#00-project-ci-baseline" data-target="00-project-ci-baseline">CI baseline: one gate, local and remote</a><a href="#00-project-checklist" data-target="00-project-checklist">Checkpoint checklist and handoff protocol</a><a href="#00-project-roadmap-review" data-target="00-project-roadmap-review">Roadmap review: gaps and ordering fixes</a><a href="#00-project-start-here" data-target="00-project-start-here">Start here</a><a href="#00-project-study-guide" data-target="00-project-study-guide">Vault and study-guide pipeline</a></div><div class="nav-group"><h2>Architecture</h2><a href="#01-architecture-acl-classification" data-target="01-architecture-acl-classification">ACL classification: who may see each document</a><a href="#01-architecture-compose-stack" data-target="01-architecture-compose-stack">Local stack and readiness</a><a href="#01-architecture-corpus" data-target="01-architecture-corpus">Corpus: pinned GitLab handbook and docs</a><a href="#01-architecture-document-normalization" data-target="01-architecture-document-normalization">Document normalization: why and how</a><a href="#01-architecture-foundations" data-target="01-architecture-foundations">Foundations: async, Make, environments, logging</a><a href="#01-architecture-ingestion-m1" data-target="01-architecture-ingestion-m1">Ingestion M1: from Markdown to a searchable index</a><a href="#01-architecture-parser-lab" data-target="01-architecture-parser-lab">Parser lab: native vs Docling vs Unstructured</a><a href="#01-architecture-parsing" data-target="01-architecture-parsing">Parsing: Markdown to a stable document model</a><a href="#01-architecture-project-map" data-target="01-architecture-project-map">Project map: the repo and the architecture behind it</a><a href="#01-architecture-storage-layers" data-target="01-architecture-storage-layers">Why four stores? Postgres, Redis, Qdrant, MinIO</a></div><div class="nav-group"><h2>Evaluation</h2><a href="#02-evaluation-evaluation-101" data-target="02-evaluation-evaluation-101">Evaluation 101: how we know RAG is getting better</a><a href="#02-evaluation-tracing-a-document" data-target="02-evaluation-tracing-a-document">Tracing a document and seeding the golden set</a></div><div class="nav-group"><h2>Journal</h2><a href="#03-journal-2026-10-23" data-target="03-journal-2026-10-23">2026-10-23 - Day 1</a><a href="#03-journal-2026-10-24" data-target="03-journal-2026-10-24">2026-10-24 - Day 2</a><a href="#03-journal-2026-10-25" data-target="03-journal-2026-10-25">2026-10-25 - Day 3</a><a href="#03-journal-2026-10-27" data-target="03-journal-2026-10-27">2026-10-27 - Day 4</a></div>
+<div class="nav-group"><h2>Project</h2><a href="#00-project-ci-baseline" data-target="00-project-ci-baseline">CI baseline: one gate, local and remote</a><a href="#00-project-checklist" data-target="00-project-checklist">Checkpoint checklist and handoff protocol</a><a href="#00-project-roadmap-review" data-target="00-project-roadmap-review">Roadmap review: gaps and ordering fixes</a><a href="#00-project-start-here" data-target="00-project-start-here">Start here</a><a href="#00-project-study-guide" data-target="00-project-study-guide">Vault and study-guide pipeline</a></div><div class="nav-group"><h2>Architecture</h2><a href="#01-architecture-acl-classification" data-target="01-architecture-acl-classification">ACL classification: who may see each document</a><a href="#01-architecture-chunking" data-target="01-architecture-chunking">Chunking: cutting documents into searchable cards</a><a href="#01-architecture-compose-stack" data-target="01-architecture-compose-stack">Local stack and readiness</a><a href="#01-architecture-corpus" data-target="01-architecture-corpus">Corpus: pinned GitLab handbook and docs</a><a href="#01-architecture-document-normalization" data-target="01-architecture-document-normalization">Document normalization: why and how</a><a href="#01-architecture-foundations" data-target="01-architecture-foundations">Foundations: async, Make, environments, logging</a><a href="#01-architecture-ingestion-m1" data-target="01-architecture-ingestion-m1">Ingestion M1: from Markdown to a searchable index</a><a href="#01-architecture-parser-lab" data-target="01-architecture-parser-lab">Parser lab: native vs Docling vs Unstructured</a><a href="#01-architecture-parsing" data-target="01-architecture-parsing">Parsing: Markdown to a stable document model</a><a href="#01-architecture-project-map" data-target="01-architecture-project-map">Project map: the repo and the architecture behind it</a><a href="#01-architecture-storage-layers" data-target="01-architecture-storage-layers">Why four stores? Postgres, Redis, Qdrant, MinIO</a></div><div class="nav-group"><h2>Evaluation</h2><a href="#02-evaluation-evaluation-101" data-target="02-evaluation-evaluation-101">Evaluation 101: how we know RAG is getting better</a><a href="#02-evaluation-tracing-a-document" data-target="02-evaluation-tracing-a-document">Tracing a document and seeding the golden set</a></div><div class="nav-group"><h2>Journal</h2><a href="#03-journal-2026-10-23" data-target="03-journal-2026-10-23">2026-10-23 - Day 1</a><a href="#03-journal-2026-10-24" data-target="03-journal-2026-10-24">2026-10-24 - Day 2</a><a href="#03-journal-2026-10-25" data-target="03-journal-2026-10-25">2026-10-25 - Day 3</a><a href="#03-journal-2026-10-27" data-target="03-journal-2026-10-27">2026-10-27 - Day 4</a><a href="#03-journal-2026-10-29" data-target="03-journal-2026-10-29">2026-10-29 - Day 5</a></div>
 </nav>
 </aside>
 <main id="top">
@@ -350,7 +350,7 @@ footer.page-footer {
 <h1>Helix Study Guide</h1>
 <p>Generated from <code>docs/helix-brain</code>.
 Edit the Markdown, then run <code>make docs</code>.</p>
-<p class="stats">21 notes · 4 sections</p>
+<p class="stats">23 notes · 4 sections</p>
 </header>
 <article class="note" id="00-project-ci-baseline"
 data-title="CI baseline: one gate, local and remote">
@@ -541,7 +541,7 @@ data-title="Checkpoint checklist and handoff protocol">
 <h2>Checkpoint checklist and handoff protocol</h2>
 <span class="chip">process</span><span class="chip">checklist</span><span class="chip">roadmap</span><span class="chip">interview</span>
 </header>
-<div class="toc"><p class="toctitle">On this page</p><ul><li><a href="#00-project-checklist--the-two-key-rule">The two-key rule</a></li><li><a href="#00-project-checklist--definition-of-done-every-checkpoint">Definition of Done (every checkpoint)</a></li><li><a href="#00-project-checklist--current-checkpoint">Current checkpoint</a><ul><li><a href="#00-project-checklist--1-2-acl-classifier">1.2 - ACL classifier</a></li></ul></li><li><a href="#00-project-checklist--roadmap">Roadmap</a></li><li><a href="#00-project-checklist--handoff-template-agent-writes-this-every-checkpoint">Handoff template (agent writes this every checkpoint)</a></li><li><a href="#00-project-checklist--commit-convention">Commit convention</a></li><li><a href="#00-project-checklist--release-gates">Release gates</a></li><li><a href="#00-project-checklist--rules-that-prevent-drift">Rules that prevent drift</a></li></ul></div>
+<div class="toc"><p class="toctitle">On this page</p><ul><li><a href="#00-project-checklist--the-two-key-rule">The two-key rule</a></li><li><a href="#00-project-checklist--definition-of-done-every-checkpoint">Definition of Done (every checkpoint)</a></li><li><a href="#00-project-checklist--current-checkpoint">Current checkpoint</a><ul><li><a href="#00-project-checklist--1-3-chunker">1.3 - Chunker</a></li></ul></li><li><a href="#00-project-checklist--roadmap">Roadmap</a></li><li><a href="#00-project-checklist--handoff-template-agent-writes-this-every-checkpoint">Handoff template (agent writes this every checkpoint)</a></li><li><a href="#00-project-checklist--commit-convention">Commit convention</a></li><li><a href="#00-project-checklist--release-gates">Release gates</a></li><li><a href="#00-project-checklist--rules-that-prevent-drift">Rules that prevent drift</a></li></ul></div>
 <div class="content">
 <p>This is the contract for how we build Helix. It exists so neither the agent nor
 the human forgets a step, and so every checkpoint ends in the same verifiable
@@ -589,24 +589,22 @@ its own <code>fix(...)</code> commit and the DoD is repeated.</p>
 </ul>
 <hr />
 <h2 id="00-project-checklist--current-checkpoint">Current checkpoint</h2>
-<h3 id="00-project-checklist--1-2-acl-classifier">1.2 - ACL classifier</h3>
-<p>Goal: label every parsed document with a sensitivity classification and the roles
-allowed to retrieve it, using a deterministic source-and-path policy that defaults
-to deny.</p>
+<h3 id="00-project-checklist--1-3-chunker">1.3 - Chunker</h3>
+<p>Goal: split each parsed section into deterministic parent/child chunks that are
+small enough to retrieve precisely but still carry enough context to generate an
+answer, without cutting tables, code, or headings in half.</p>
 <ul>
-<li>[x] Module: <code>packages/helix/acl.py</code> with roles, rules, matcher, and decisions</li>
-<li>[x] Taxonomy: expanded path table plus the five previously unmatched paths</li>
-<li>[x] Roles: additive sets, <code>employee</code> baseline, <code>authenticated</code> sentinel, <code>billing</code> -&gt; <code>finance</code> alias</li>
-<li>[x] Output: sidecar <code>data/acl/index.json</code> and <code>summary.json</code> with audit fields</li>
-<li>[x] Matching: source-aware, boundary-safe, longest-prefix wins, unknown deny</li>
-<li>[x] Idempotency: reject duplicate <code>(source, path)</code> keys; deterministic output</li>
-<li>[x] Decision: <code>business-technology</code> -&gt; <code>internal:company</code>; <code>billing</code> aliases <code>finance</code></li>
-<li>[x] CLI: <code>make classify</code> and <code>make classify-sample</code></li>
-<li>[x] Tests: prefix boundaries, role matrix, source distinction, alias, unknown deny</li>
-<li>[x] Manual: classify all 2,500 files, inspect summary, confirm zero unknown</li>
-<li>[x] Docs: ACL note, M1, storage, roadmap, journal</li>
-<li>[x] <code>make ci</code> green</li>
-<li>[x] Commit: <code>feat(acl): classify corpus by source and path</code></li>
+<li>[ ] Module: <code>packages/helix/chunking.py</code> with parent sections and child chunks</li>
+<li>[ ] Sizing: section-scoped children on a token budget with 10-15% overlap</li>
+<li>[ ] Structure: breadcrumb-prefixed embedding text; tables and code kept whole</li>
+<li>[ ] Parents: keep section text and child ids for later context expansion</li>
+<li>[ ] Output: deterministic per-document JSON under <code>data/chunks</code> plus <code>summary.json</code></li>
+<li>[ ] CLI: <code>make chunk</code> and <code>make chunk-sample</code></li>
+<li>[ ] Tests: size bounds, overlap, atomic blocks, section boundaries, ids, determinism</li>
+<li>[ ] Manual: chunk all 2,500 documents and inspect the size distribution</li>
+<li>[ ] Docs: chunking note, M1, journal, roadmap row</li>
+<li>[ ] <code>make ci</code> green</li>
+<li>[ ] Commit: <code>feat(chunk): split parsed sections into parent/child chunks</code></li>
 <li>[ ] User verified (user marks only)</li>
 </ul>
 <hr />
@@ -667,13 +665,13 @@ to deny.</p>
 <tr>
 <td>1.2</td>
 <td>ACL classifier</td>
-<td>in progress</td>
-<td>implemented; awaiting user verification</td>
+<td>done</td>
+<td>source/path -&gt; classification + roles</td>
 </tr>
 <tr>
 <td>1.3</td>
 <td>Chunker</td>
-<td>pending</td>
+<td>in progress</td>
 <td>structure-aware, parent/child</td>
 </tr>
 <tr>
@@ -1227,11 +1225,11 @@ of the public GitLab handbook and product docs. This note is the entry point to
 the vault: it tells you what is current, what to read first, and where to write.</p>
 <h2 id="00-project-start-here--current-state">Current state</h2>
 <div class="callout info">
-<p class="callout-title">Checkpoint 1.2</p>
-<p>The parser (1.1) is verified. The ACL classifier (1.2) is implemented and
-awaiting user verification; the design and results are in
-<a href="#01-architecture-acl-classification">ACL-Classification</a>. The roadmap review adds 1.5b MinIO archive, 1.7 eval
-seed expansion, and 2.0 identity context.</p>
+<p class="callout-title">Checkpoint 1.3</p>
+<p>The parser (1.1) and ACL classifier (1.2) are verified; the ACL design and
+results are in <a href="#01-architecture-acl-classification">ACL-Classification</a>. The chunker (1.3) is now in progress.
+The roadmap review adds 1.5b MinIO archive, 1.7 eval seed expansion, and 2.0
+identity context.</p>
 </div>
 <p>The repo has a working API skeleton, local services, a pinned corpus, a parser,
 and a deterministic ACL sidecar. It does not yet have chunking, embeddings,
@@ -1262,7 +1260,7 @@ source of truth for the active checkpoint.</p>
 </tr>
 <tr>
 <td>See the latest build log</td>
-<td><a href="#03-journal-2026-10-27">2026-10-27</a></td>
+<td><a href="#03-journal-2026-10-29">2026-10-29</a></td>
 </tr>
 <tr>
 <td>Understand the next milestone</td>
@@ -1275,6 +1273,10 @@ source of truth for the active checkpoint.</p>
 <tr>
 <td>Understand who may see each document</td>
 <td><a href="#01-architecture-acl-classification">ACL-Classification</a></td>
+</tr>
+<tr>
+<td>Understand how documents become searchable pieces</td>
+<td><a href="#01-architecture-chunking">Chunking</a></td>
 </tr>
 </tbody>
 </table>
@@ -1291,6 +1293,7 @@ source of truth for the active checkpoint.</p>
 <li><a href="#01-architecture-ingestion-m1">Ingestion-M1</a> for the full M1 pipeline.</li>
 <li><a href="#01-architecture-parsing">Parsing</a> for the document model and parser.</li>
 <li><a href="#01-architecture-acl-classification">ACL-Classification</a> for the permission model and 1.2 design.</li>
+<li><a href="#01-architecture-chunking">Chunking</a> for the retrieval unit and the 1.3 design.</li>
 <li><a href="#01-architecture-document-normalization">Document-Normalization</a> for format adapters and correctness checks.</li>
 <li><a href="#01-architecture-parser-lab">Parser-Lab</a> for the native vs Docling vs Unstructured comparison.</li>
 </ol>
@@ -1299,8 +1302,8 @@ source of truth for the active checkpoint.</p>
 <li><a href="#01-architecture-project-map">Project-Map</a> for the architecture story.</li>
 <li><a href="#01-architecture-foundations">Foundations</a> and <a href="#01-architecture-compose-stack">Compose-Stack</a> for engineering choices.</li>
 <li><a href="#01-architecture-storage-layers">Storage-Layers</a> for why Postgres, Redis, Qdrant, and MinIO each exist.</li>
-<li><a href="#01-architecture-parsing">Parsing</a>, <a href="#01-architecture-acl-classification">ACL-Classification</a>, and <a href="#01-architecture-document-normalization">Document-Normalization</a> for
-   ingestion trade-offs.</li>
+<li><a href="#01-architecture-parsing">Parsing</a>, <a href="#01-architecture-acl-classification">ACL-Classification</a>, <a href="#01-architecture-chunking">Chunking</a>, and
+   <a href="#01-architecture-document-normalization">Document-Normalization</a> for ingestion trade-offs.</li>
 <li><a href="#02-evaluation-evaluation-101">Evaluation-101</a> for how quality is measured.</li>
 <li><a href="#00-project-roadmap-review">Roadmap-Review</a> for the gaps and ordering decisions.</li>
 </ol>
@@ -1329,7 +1332,7 @@ source of truth for the active checkpoint.</p>
 <li>Run <code>make ci</code> before every commit.</li>
 </ul>
 </div>
-<div class="related"><strong>Related:</strong> <span class="chip"><a href="#00-project-checklist">Checklist</a></span> <span class="chip"><a href="#01-architecture-project-map">Project-Map</a></span> <span class="chip"><a href="#00-project-study-guide">Study-Guide</a></span> <span class="chip"><a href="#00-project-roadmap-review">Roadmap-Review</a></span> <span class="chip"><a href="#01-architecture-acl-classification">ACL-Classification</a></span> <span class="chip"><a href="#03-journal-2026-10-25">2026-10-25</a></span> <span class="chip"><a href="#03-journal-2026-10-27">2026-10-27</a></span> <span class="chip"><a href="#01-architecture-ingestion-m1">Ingestion-M1</a></span> <span class="chip"><a href="#01-architecture-parsing">Parsing</a></span> <span class="chip"><a href="#01-architecture-document-normalization">Document-Normalization</a></span> <span class="chip"><a href="#01-architecture-parser-lab">Parser-Lab</a></span> <span class="chip"><a href="#01-architecture-foundations">Foundations</a></span> <span class="chip"><a href="#01-architecture-compose-stack">Compose-Stack</a></span> <span class="chip"><a href="#01-architecture-storage-layers">Storage-Layers</a></span> <span class="chip"><a href="#02-evaluation-evaluation-101">Evaluation-101</a></span></div>
+<div class="related"><strong>Related:</strong> <span class="chip"><a href="#00-project-checklist">Checklist</a></span> <span class="chip"><a href="#01-architecture-project-map">Project-Map</a></span> <span class="chip"><a href="#00-project-study-guide">Study-Guide</a></span> <span class="chip"><a href="#00-project-roadmap-review">Roadmap-Review</a></span> <span class="chip"><a href="#01-architecture-acl-classification">ACL-Classification</a></span> <span class="chip"><a href="#01-architecture-chunking">Chunking</a></span> <span class="chip"><a href="#03-journal-2026-10-25">2026-10-25</a></span> <span class="chip"><a href="#03-journal-2026-10-27">2026-10-27</a></span> <span class="chip"><a href="#03-journal-2026-10-29">2026-10-29</a></span> <span class="chip"><a href="#01-architecture-ingestion-m1">Ingestion-M1</a></span> <span class="chip"><a href="#01-architecture-parsing">Parsing</a></span> <span class="chip"><a href="#01-architecture-document-normalization">Document-Normalization</a></span> <span class="chip"><a href="#01-architecture-parser-lab">Parser-Lab</a></span> <span class="chip"><a href="#01-architecture-foundations">Foundations</a></span> <span class="chip"><a href="#01-architecture-compose-stack">Compose-Stack</a></span> <span class="chip"><a href="#01-architecture-storage-layers">Storage-Layers</a></span> <span class="chip"><a href="#02-evaluation-evaluation-101">Evaluation-101</a></span></div>
 </article>
 <article class="note" id="00-project-study-guide"
 data-title="Vault and study-guide pipeline">
@@ -1820,6 +1823,416 @@ document's allow list. That is the function the retrieval layer will call before
 applying the Qdrant payload filter at 2.2.</p>
 </div>
 <div class="related"><strong>Related:</strong> <span class="chip"><a href="#01-architecture-ingestion-m1">Ingestion-M1</a></span> <span class="chip"><a href="#00-project-checklist">Checklist</a></span> <span class="chip"><a href="#01-architecture-project-map">Project-Map</a></span> <span class="chip"><a href="#01-architecture-storage-layers">Storage-Layers</a></span> <span class="chip"><a href="#02-evaluation-evaluation-101">Evaluation-101</a></span> <span class="chip"><a href="#00-project-roadmap-review">Roadmap-Review</a></span> <span class="chip"><a href="#03-journal-2026-10-27">2026-10-27</a></span></div>
+</article>
+<article class="note" id="01-architecture-chunking"
+data-title="Chunking: cutting documents into searchable cards">
+<header class="note-header">
+<p class="kicker">Architecture · architecture · active</p>
+<h2>Chunking: cutting documents into searchable cards</h2>
+<span class="chip">chunking</span><span class="chip">ingestion</span><span class="chip">retrieval</span><span class="chip">architecture</span><span class="chip">interview</span>
+</header>
+<div class="toc"><p class="toctitle">On this page</p><ul><li><a href="#01-architecture-chunking--where-chunking-fits">Where chunking fits</a></li><li><a href="#01-architecture-chunking--the-index-card-analogy">The index-card analogy</a></li><li><a href="#01-architecture-chunking--why-not-cut-every-500-words">Why not cut every 500 words?</a></li><li><a href="#01-architecture-chunking--what-makes-a-good-chunk">What makes a good chunk</a></li><li><a href="#01-architecture-chunking--chunking-strategies">Chunking strategies</a></li><li><a href="#01-architecture-chunking--the-corpus-is-already-finely-sectioned">The corpus is already finely sectioned</a></li><li><a href="#01-architecture-chunking--how-the-chunker-works">How the chunker works</a></li><li><a href="#01-architecture-chunking--technical-contract">Technical contract</a></li><li><a href="#01-architecture-chunking--worked-examples">Worked examples</a><ul><li><a href="#01-architecture-chunking--a-good-short-section">A good short section</a></li><li><a href="#01-architecture-chunking--a-very-small-section">A very small section</a></li><li><a href="#01-architecture-chunking--a-long-section-that-must-be-split">A long section that must be split</a></li><li><a href="#01-architecture-chunking--what-a-bad-split-would-look-like">What a bad split would look like</a></li></ul></li><li><a href="#01-architecture-chunking--how-retrieval-uses-the-cards">How retrieval uses the cards</a></li><li><a href="#01-architecture-chunking--validation">Validation</a></li><li><a href="#01-architecture-chunking--what-the-chunker-does-not-do">What the chunker does not do</a></li><li><a href="#01-architecture-chunking--why-rule-a-instead-of-merging-small-sections">Why rule A instead of merging small sections</a></li><li><a href="#01-architecture-chunking--interview-angle">Interview angle</a></li></ul></div>
+<div class="content">
+<p><strong>Short answer:</strong> The chunker cuts each parsed section into small cards that can
+be searched independently. Each card keeps its heading path, never crosses into
+another section, and never splits a table or code block. The section itself is
+kept as a larger <strong>parent</strong> so the answer step still has enough context.</p>
+<p>This note is the 1.3 design. The chosen rule is <strong>one small card per section</strong>;
+short sections are allowed to stay small.</p>
+<h2 id="01-architecture-chunking--where-chunking-fits">Where chunking fits</h2>
+<pre><code class="language-text">raw Markdown
+   -&gt; parser: headings, paragraphs, tables, code
+   -&gt; ACL: who may see the document
+   -&gt; chunker: small searchable cards          &lt;-- this note
+   -&gt; embedder: numeric fingerprints
+   -&gt; vector store: searchable index
+   -&gt; chat: retrieve cards, then answer
+</code></pre>
+<p>The parser already understands the document. The chunker decides the <strong>unit of
+retrieval</strong>. If that unit is wrong, no amount of prompt engineering fixes it.</p>
+<h2 id="01-architecture-chunking--the-index-card-analogy">The index-card analogy</h2>
+<p>You have 2,500 books and one librarian. You cannot hand a visitor the whole
+library, so you write index cards:</p>
+<ul>
+<li>one card per topic, not one card per book;</li>
+<li>enough text to be useful on its own;</li>
+<li>the chapter name written at the top;</li>
+<li>no card cut through the middle of a table.</li>
+</ul>
+<p>When a question arrives, the librarian finds the best cards and puts them on the
+desk. The visitor never sees the rest of the library.</p>
+<p>A <strong>chunk</strong> is one card. The <strong>breadcrumb</strong> is the chapter name at the top.</p>
+<h2 id="01-architecture-chunking--why-not-cut-every-500-words">Why not cut every 500 words?</h2>
+<p>Fixed-size cutting ignores meaning. It produces cards that:</p>
+<ul>
+<li>start in the middle of a sentence;</li>
+<li>contain the end of one topic and the start of another;</li>
+<li>cut a table or command in half;</li>
+<li>forget which heading they belong to.</li>
+</ul>
+<p>Those cards are hard to match and hard to cite. We cut along the document's own
+structure instead.</p>
+<h2 id="01-architecture-chunking--what-makes-a-good-chunk">What makes a good chunk</h2>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Focused</td>
+<td>One topic, not three</td>
+</tr>
+<tr>
+<td>Self-contained</td>
+<td>Understandable without the previous page</td>
+</tr>
+<tr>
+<td>Unbroken</td>
+<td>Tables and code are not cut</td>
+</tr>
+<tr>
+<td>Traceable</td>
+<td>Source path and heading are known</td>
+</tr>
+<tr>
+<td>Right-sized</td>
+<td>Not one sentence, not a whole chapter</td>
+</tr>
+</tbody>
+</table>
+<h2 id="01-architecture-chunking--chunking-strategies">Chunking strategies</h2>
+<table>
+<thead>
+<tr>
+<th>Strategy</th>
+<th>How it cuts</th>
+<th>Good</th>
+<th>Weakness here</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Fixed size</td>
+<td>Every N characters or tokens</td>
+<td>Simple and predictable</td>
+<td>Cuts sentences, tables, and code; ignores headings</td>
+</tr>
+<tr>
+<td>Sliding window</td>
+<td>Fixed size, repeating the tail</td>
+<td>Keeps continuity</td>
+<td>Still ignores structure; more storage</td>
+</tr>
+<tr>
+<td>Paragraph or sentence</td>
+<td>At blank lines or full stops</td>
+<td>Natural boundaries</td>
+<td>A long table stays huge; tiny paragraphs stay tiny</td>
+</tr>
+<tr>
+<td>Recursive character</td>
+<td>Tries large separators, then smaller ones</td>
+<td>General-purpose; common default</td>
+<td>Does not know typed blocks or the heading tree</td>
+</tr>
+<tr>
+<td>Heading or structure-aware</td>
+<td>At headings, keeping blocks together</td>
+<td>Fits documentation</td>
+<td>Very short sections become small chunks</td>
+</tr>
+<tr>
+<td>Semantic</td>
+<td>Embeds sentences and cuts where meaning changes</td>
+<td>Adapts to content</td>
+<td>Costly, non-deterministic, unnecessary when headings exist</td>
+</tr>
+<tr>
+<td>Parent-child</td>
+<td>Searches small children, returns the parent</td>
+<td>Precise search plus context</td>
+<td>More storage and a little more complexity</td>
+</tr>
+<tr>
+<td>LLM or agentic</td>
+<td>Asks a model where to cut</td>
+<td>Flexible</td>
+<td>Slow, costly, non-deterministic; not enforceable</td>
+</tr>
+</tbody>
+</table>
+<p>Helix uses <strong>structure-aware chunking with parent and child records</strong>:</p>
+<ul>
+<li>the <strong>parent</strong> is the parsed section, kept for context;</li>
+<li>the <strong>child</strong> is the card that is embedded and searched;</li>
+<li>retrieval finds a child, then expands to the parent section.</li>
+</ul>
+<h2 id="01-architecture-chunking--the-corpus-is-already-finely-sectioned">The corpus is already finely sectioned</h2>
+<p>The parsed corpus has 37,610 sections. Their own text, excluding child sections,
+is distributed like this:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Sections</th>
+<th style="text-align: right;">Median</th>
+<th style="text-align: right;">p75</th>
+<th style="text-align: right;">p90</th>
+<th style="text-align: right;">p95</th>
+<th style="text-align: right;">p99</th>
+<th style="text-align: right;">Over 300 words</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">37,610</td>
+<td style="text-align: right;">55 words</td>
+<td style="text-align: right;">114</td>
+<td style="text-align: right;">203</td>
+<td style="text-align: right;">290</td>
+<td style="text-align: right;">567</td>
+<td style="text-align: right;">4.6%</td>
+</tr>
+</tbody>
+</table>
+<p>Most sections are already smaller than a target card. That changes the job:</p>
+<ul>
+<li>the chunker is mostly <strong>packing blocks and preserving structure</strong>;</li>
+<li>splitting only happens for the long tail;</li>
+<li>a strict minimum size would force unrelated sections together, which hurts
+  citation precision.</li>
+</ul>
+<p>This is why the chosen rule is one card per section, not merge-until-large.</p>
+<h2 id="01-architecture-chunking--how-the-chunker-works">How the chunker works</h2>
+<ol>
+<li>Load one parsed document.</li>
+<li>Walk its sections in order.</li>
+<li>Collect each section's own blocks. Child sections get their own cards.</li>
+<li>If the section fits the budget, emit one child. No overlap.</li>
+<li>If it does not fit, pack whole blocks into children up to the target size.</li>
+<li>Split a paragraph, list, or quote only at sentence or item boundaries.</li>
+<li>Keep tables and code whole. If one is too large, keep it whole and flag it
+   <code>oversize</code> rather than cutting it.</li>
+<li>When a section is split, repeat the last sentence or block from the previous
+   child at the start of the next one. This is the overlap.</li>
+<li>Prepend the breadcrumb and section title to the embedding text.</li>
+<li>Write the parent record with its child ids, and the children with their
+    parent id.</li>
+<li>Save deterministic JSON under <code>data/chunks</code> plus a <code>summary.json</code>.</li>
+</ol>
+<h2 id="01-architecture-chunking--technical-contract">Technical contract</h2>
+<table>
+<thead>
+<tr>
+<th>Decision</th>
+<th>Value</th>
+<th>Reason</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Child scope</td>
+<td>Inside one section only</td>
+<td>Keeps topics separate and citations precise</td>
+</tr>
+<tr>
+<td>Target size</td>
+<td>200-400 tokens, about 150-300 English words</td>
+<td>Small enough to search, large enough to mean something</td>
+</tr>
+<tr>
+<td>Hard maximum</td>
+<td>About 400 words per child</td>
+<td>Avoids oversized embeddings</td>
+</tr>
+<tr>
+<td>Overlap</td>
+<td>10-15%, about 20-40 words</td>
+<td>The next card knows what came before</td>
+</tr>
+<tr>
+<td>Overlap boundary</td>
+<td>Sentence or block boundary</td>
+<td>Avoids cutting mid-sentence</td>
+</tr>
+<tr>
+<td>Tables</td>
+<td>Whole</td>
+<td>Half a table is useless</td>
+</tr>
+<tr>
+<td>Code</td>
+<td>Whole</td>
+<td>Half a command is dangerous</td>
+</tr>
+<tr>
+<td>Oversized block</td>
+<td>Keep and flag <code>oversize</code></td>
+<td>Better a large card than a broken one</td>
+</tr>
+<tr>
+<td>Breadcrumb</td>
+<td>Included in embedding text</td>
+<td>"Accounts" is ambiguous; "Zuora &gt; Accounts" is not</td>
+</tr>
+<tr>
+<td>Chunk id</td>
+<td>UUID5 of source, path, section id, content hash</td>
+<td>Unchanged text keeps a stable id</td>
+</tr>
+<tr>
+<td>Ordinal</td>
+<td>Position in the document</td>
+<td>Keeps output ordered and inspectable</td>
+</tr>
+<tr>
+<td>Output</td>
+<td><code>data/chunks/&lt;source&gt;/&lt;path&gt;.json</code> plus <code>summary.json</code></td>
+<td>Mirrors the parser and is easy to inspect</td>
+</tr>
+<tr>
+<td>ACL</td>
+<td>Not copied in the chunker</td>
+<td>The document owns permissions; storage attaches them later</td>
+</tr>
+<tr>
+<td>Timestamp</td>
+<td>None</td>
+<td>Two runs over the same input must be identical</td>
+</tr>
+</tbody>
+</table>
+<p>Token counts are estimated from words in 1.3. The BGE-M3 tokenizer is available
+in 1.4, before anything is stored, so the estimate can be validated there
+without re-indexing.</p>
+<h2 id="01-architecture-chunking--worked-examples">Worked examples</h2>
+<p>These examples come from the parsed Zuora Collect guide in the real corpus.</p>
+<h3 id="01-architecture-chunking--a-good-short-section">A good short section</h3>
+<p>Heading: <code>How to assign Agents to an account?</code></p>
+<p>The section is 77 words and becomes one child:</p>
+<pre><code class="language-text">breadcrumb: Zuora Collect module &gt; FAQ &gt; How to assign Agents to an account?
+
+For a video tutorial, click here.
+Open the Collections Window and click on the Accounts tab.
+Search for the account that needs to be assigned and open it...
+The collections agent for the account is displayed on the top left...
+Click the agent name or Unassigned.
+Select an agent from the dropdown list.
+Click Update to save the settings.
+Refresh the page to see the changes.
+</code></pre>
+<p>It is focused on one procedure, self-contained, and directly answers "How do you
+assign a collections agent?". Splitting it would make both halves worse.</p>
+<h3 id="01-architecture-chunking--a-very-small-section">A very small section</h3>
+<p>Heading: <code>How to edit a comment?</code></p>
+<p>The section is 8 words and becomes one child:</p>
+<pre><code class="language-text">breadcrumb: Zuora Collect module &gt; FAQ &gt; How to edit a comment?
+text: Comments cannot be edited or deleted by design.
+</code></pre>
+<p>This is far below the target, but it is the correct answer to "Can comments be
+edited or deleted?". The breadcrumb supplies the topic. That is the accepted
+trade-off of rule A.</p>
+<h3 id="01-architecture-chunking--a-long-section-that-must-be-split">A long section that must be split</h3>
+<p>Heading: <code>Accounts</code></p>
+<p>The section is 356 words, about 460 tokens, so it becomes two children:</p>
+<p><strong>Child 1</strong>, about 156 words, ends with:</p>
+<pre><code class="language-text">Manage accounts in collections
+Click on an account name to view the details of the account...
+On this page, the user can perform the following operations:
+</code></pre>
+<p><strong>Child 2</strong>, about 200 words, starts with the overlap and keeps the long list
+whole:</p>
+<pre><code class="language-text">On this page, the user can perform the following operations:   &lt;-- overlap
+Assign collections agents to accounts...
+View contact details of the account...
+Update the collection status of this account...
+View invoice details, payments, or retry status...
+Enter comments regarding the particular account...
+The user can add or reply to comments... Comments cannot be edited or deleted by design.
+</code></pre>
+<p>Both children keep the breadcrumb:</p>
+<pre><code class="language-text">Zuora Collect module &gt; Business Solution &gt; How to use Zuora Collect &gt; Collections Window &gt; Accounts
+</code></pre>
+<p>The <strong>parent</strong> is the whole <code>Accounts</code> section, so a search that finds child 1
+can still return the full section to the answer step.</p>
+<h3 id="01-architecture-chunking--what-a-bad-split-would-look-like">What a bad split would look like</h3>
+<p>A fixed 250-word cutter might produce a card containing the end of "Business
+Solution" and the start of "Collections Window", followed by a card that starts
+inside the 163-word Accounts list and ends in "Invoices". That card is about two
+topics and is cut mid-list. Structure-aware chunking avoids it.</p>
+<h2 id="01-architecture-chunking--how-retrieval-uses-the-cards">How retrieval uses the cards</h2>
+<table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Matching child</th>
+<th>What is returned</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>How do you assign an agent to an account?</td>
+<td>The 77-word procedure card</td>
+<td>That section</td>
+</tr>
+<tr>
+<td>When is an account considered "In Collections"?</td>
+<td>Child 1 of <code>Accounts</code></td>
+<td>The full <code>Accounts</code> parent</td>
+</tr>
+<tr>
+<td>Can comments be edited or deleted?</td>
+<td>The 8-word FAQ card</td>
+<td>That card</td>
+</tr>
+</tbody>
+</table>
+<p>This is the point of parent and child records: search stays precise, while the
+model still receives enough context.</p>
+<h2 id="01-architecture-chunking--validation">Validation</h2>
+<p>Before moving to 1.4, the full-corpus run should report:</p>
+<ul>
+<li>child count and parent count;</li>
+<li>p50, p90, p95, and p99 child sizes;</li>
+<li>how many children are under 100 tokens;</li>
+<li>how many blocks are flagged <code>oversize</code>;</li>
+<li>zero children that cross a section boundary;</li>
+<li>zero split tables or code blocks;</li>
+<li>byte-identical output across two runs;</li>
+<li>manual inspection of the Zuora guide and one long engineering page.</li>
+</ul>
+<h2 id="01-architecture-chunking--what-the-chunker-does-not-do">What the chunker does not do</h2>
+<ul>
+<li>It does not call an LLM.</li>
+<li>It does not use semantic chunking; the headings already carry structure.</li>
+<li>It does not split tables or code.</li>
+<li>It does not assign ACLs; permissions belong to the document.</li>
+<li>It does not embed anything; that is 1.4.</li>
+<li>It does not merge small sections; that was option B and was rejected for now.</li>
+</ul>
+<h2 id="01-architecture-chunking--why-rule-a-instead-of-merging-small-sections">Why rule A instead of merging small sections</h2>
+<p>Merging adjacent small sections would produce denser embeddings, but the card
+would span several headings. A citation would then point at a card covering
+multiple FAQ answers, which is harder to verify and explain. The corpus is
+documentation with meaningful headings, so precision is worth more than uniform
+card size. If retrieval evaluation later shows that tiny cards are being missed,
+merging can be revisited with evidence.</p>
+<h2 id="01-architecture-chunking--interview-angle">Interview angle</h2>
+<ul>
+<li>"I chunk along the document's own heading tree so retrieval units match topics,
+  not arbitrary token counts."</li>
+<li>"The corpus median section is 55 words, so I do not force a 300-token floor;
+  I preserve citations and validate the size distribution instead."</li>
+<li>"Tables and code are atomic. I would rather flag an oversized chunk than cut a
+  command in half."</li>
+<li>"Child chunks are for matching; parent sections are for generation context."</li>
+<li>"Chunk ids are content-addressed, so an unchanged chunk keeps its id when its
+  neighbours change."</li>
+</ul>
+</div>
+<div class="related"><strong>Related:</strong> <span class="chip"><a href="#01-architecture-ingestion-m1">Ingestion-M1</a></span> <span class="chip"><a href="#01-architecture-parsing">Parsing</a></span> <span class="chip"><a href="#01-architecture-acl-classification">ACL-Classification</a></span> <span class="chip"><a href="#02-evaluation-evaluation-101">Evaluation-101</a></span> <span class="chip"><a href="#00-project-checklist">Checklist</a></span> <span class="chip"><a href="#01-architecture-project-map">Project-Map</a></span> <span class="chip"><a href="#03-journal-2026-10-29">2026-10-29</a></span></div>
 </article>
 <article class="note" id="01-architecture-compose-stack"
 data-title="Local stack and readiness">
@@ -2653,8 +3066,8 @@ before chunking, and validate with invariants and retrieval evals.”</p>
 <li>1.1 native Markdown parser: implemented, 2,500 documents, 0 failures, 26
   warnings.</li>
 <li>Parser lab: native vs Docling vs Unstructured, local CLI only.</li>
-<li>1.2 ACL classifier, 1.3 chunker, 1.4 embedder, 1.5 stores, and 1.6 worker are
-  still ahead.</li>
+<li>1.2 ACL classifier is implemented and verified; 1.3 chunker is in progress;
+  1.4 embedder, 1.5 stores, and 1.6 worker are still ahead.</li>
 <li>The adapter design for PDFs/DOCX/images is a plan, not implemented.</li>
 </ul>
 </div>
@@ -2986,9 +3399,9 @@ stores those chunks in Qdrant and Postgres, and automates the whole flow with an
 idempotent worker.</p>
 <div class="callout info">
 <p class="callout-title">Status</p>
-<p>Checkpoint 1.1 is verified. Checkpoint 1.2 is implemented and awaiting user
-verification. Checkpoints 1.3–1.6 are the plan, not built yet. The 1.2 design
-and implementation are in <a href="#01-architecture-acl-classification">ACL-Classification</a>; 1.5b adds the MinIO snapshot.
+<p>Checkpoints 1.1 and 1.2 are verified. Checkpoint 1.3 is in progress;
+checkpoints 1.4–1.6 are the plan, not built yet. The 1.2 design and
+implementation are in <a href="#01-architecture-acl-classification">ACL-Classification</a>; 1.5b adds the MinIO snapshot.
 This note is updated as each checkpoint lands.</p>
 </div>
 <h2 id="01-architecture-ingestion-m1--the-library-analogy">The library analogy</h2>
@@ -3185,6 +3598,10 @@ is kept so the model gets enough context.</p>
 </ul>
 <p><strong>Why here.</strong> The parser gives sections; the chunker chooses the actual retrieval
 unit. Parent/child keeps retrieval precise without starving generation of context.</p>
+<p><strong>Decided.</strong> One small card per section; short sections stay small rather than
+being merged with their neighbours. The median parsed section is 55 words, so
+the 200-400 token target is an upper bound, not a floor. The full design,
+examples, and validation plan are in <a href="#01-architecture-chunking">Chunking</a>.</p>
 <hr />
 <h2 id="01-architecture-ingestion-m1--1-4-embedder">1.4 Embedder</h2>
 <p><strong>In plain language.</strong> Turn each chunk into a numeric fingerprint so that “reset
@@ -3438,7 +3855,7 @@ duplicates data, inflates counts, and makes deletion impossible to reason about.
   upstream repository.”</li>
 </ul>
 </div>
-<div class="related"><strong>Related:</strong> <span class="chip"><a href="#01-architecture-parsing">Parsing</a></span> <span class="chip"><a href="#01-architecture-document-normalization">Document-Normalization</a></span> <span class="chip"><a href="#01-architecture-parser-lab">Parser-Lab</a></span> <span class="chip"><a href="#01-architecture-acl-classification">ACL-Classification</a></span> <span class="chip"><a href="#01-architecture-corpus">Corpus</a></span> <span class="chip"><a href="#01-architecture-storage-layers">Storage-Layers</a></span> <span class="chip"><a href="#01-architecture-project-map">Project-Map</a></span> <span class="chip"><a href="#00-project-checklist">Checklist</a></span> <span class="chip"><a href="#00-project-roadmap-review">Roadmap-Review</a></span> <span class="chip"><a href="#03-journal-2026-10-27">2026-10-27</a></span></div>
+<div class="related"><strong>Related:</strong> <span class="chip"><a href="#01-architecture-parsing">Parsing</a></span> <span class="chip"><a href="#01-architecture-document-normalization">Document-Normalization</a></span> <span class="chip"><a href="#01-architecture-parser-lab">Parser-Lab</a></span> <span class="chip"><a href="#01-architecture-acl-classification">ACL-Classification</a></span> <span class="chip"><a href="#01-architecture-chunking">Chunking</a></span> <span class="chip"><a href="#01-architecture-corpus">Corpus</a></span> <span class="chip"><a href="#01-architecture-storage-layers">Storage-Layers</a></span> <span class="chip"><a href="#01-architecture-project-map">Project-Map</a></span> <span class="chip"><a href="#00-project-checklist">Checklist</a></span> <span class="chip"><a href="#00-project-roadmap-review">Roadmap-Review</a></span> <span class="chip"><a href="#03-journal-2026-10-27">2026-10-27</a></span></div>
 </article>
 <article class="note" id="01-architecture-parser-lab"
 data-title="Parser lab: native vs Docling vs Unstructured">
@@ -4027,7 +4444,7 @@ parser itself does no reconciliation.</p>
   shortcode. I surface that as a warning instead of silently indexing nothing."</li>
 </ul>
 </div>
-<div class="related"><strong>Related:</strong> <span class="chip"><a href="#01-architecture-corpus">Corpus</a></span> <span class="chip"><a href="#01-architecture-ingestion-m1">Ingestion-M1</a></span> <span class="chip"><a href="#01-architecture-document-normalization">Document-Normalization</a></span> <span class="chip"><a href="#01-architecture-parser-lab">Parser-Lab</a></span> <span class="chip"><a href="#01-architecture-project-map">Project-Map</a></span> <span class="chip"><a href="#00-project-checklist">Checklist</a></span> <span class="chip"><a href="#03-journal-2026-10-25">2026-10-25</a></span></div>
+<div class="related"><strong>Related:</strong> <span class="chip"><a href="#01-architecture-corpus">Corpus</a></span> <span class="chip"><a href="#01-architecture-ingestion-m1">Ingestion-M1</a></span> <span class="chip"><a href="#01-architecture-chunking">Chunking</a></span> <span class="chip"><a href="#01-architecture-document-normalization">Document-Normalization</a></span> <span class="chip"><a href="#01-architecture-parser-lab">Parser-Lab</a></span> <span class="chip"><a href="#01-architecture-project-map">Project-Map</a></span> <span class="chip"><a href="#00-project-checklist">Checklist</a></span> <span class="chip"><a href="#03-journal-2026-10-25">2026-10-25</a></span></div>
 </article>
 <article class="note" id="01-architecture-project-map"
 data-title="Project map: the repo and the architecture behind it">
@@ -4084,13 +4501,12 @@ person to understand and run.</p>
 </table>
 <div class="callout info">
 <p class="callout-title">Current state</p>
-<p>Checkpoint 1.1 is verified; 1.2 ACL classification is implemented and awaiting
-user verification. The repo has a working API skeleton, local services, a
-pinned corpus, a Markdown parser that emits structured JSON, a deterministic
-ACL sidecar, and a docs/eval seed. It does <strong>not</strong> yet have chunking,
-embeddings, retrieval, generation, auth, or a UI. MinIO is running but its
-archive checkpoint is 1.5b. This note explains the target architecture and
-marks what exists now.</p>
+<p>Checkpoints 1.1 and 1.2 are verified; 1.3 chunking is in progress. The repo has
+a working API skeleton, local services, a pinned corpus, a Markdown parser that
+emits structured JSON, and a deterministic ACL sidecar. It does <strong>not</strong> yet
+have chunking implemented, embeddings, retrieval, generation, auth, or a UI.
+MinIO is running but its archive checkpoint is 1.5b. This note explains the
+target architecture and marks what exists now.</p>
 </div>
 <h2 id="01-architecture-project-map--what-lives-where">What lives where</h2>
 <table>
@@ -4438,7 +4854,8 @@ passage the user is not allowed to see.</p>
 <li>Read <a href="#01-architecture-foundations">Foundations</a> for the Python, async, config, and Makefile ideas.</li>
 <li>Read <a href="#01-architecture-compose-stack">Compose-Stack</a> and <a href="#01-architecture-storage-layers">Storage-Layers</a> for the local services.</li>
 <li>Read <a href="#01-architecture-corpus">Corpus</a> for how the source snapshot is pinned and selected, then
-   <a href="#01-architecture-parsing">Parsing</a> for how Markdown becomes structured JSON.</li>
+   <a href="#01-architecture-parsing">Parsing</a> for how Markdown becomes structured JSON, then <a href="#01-architecture-chunking">Chunking</a> for
+   how sections become searchable children.</li>
 <li>Read <a href="#02-evaluation-evaluation-101">Evaluation-101</a> for how quality is measured.</li>
 <li>Read <a href="#02-evaluation-tracing-a-document">Tracing-a-Document</a> for the chain from a manifest entry to a seed
    question.</li>
@@ -4457,7 +4874,7 @@ passage the user is not allowed to see.</p>
 <li>"I add complexity only when an ablation shows a measurable gain."</li>
 </ul>
 </div>
-<div class="related"><strong>Related:</strong> <span class="chip"><a href="#00-project-start-here">Start-Here</a></span> <span class="chip"><a href="#00-project-checklist">Checklist</a></span> <span class="chip"><a href="#00-project-roadmap-review">Roadmap-Review</a></span> <span class="chip"><a href="#01-architecture-acl-classification">ACL-Classification</a></span> <span class="chip"><a href="#01-architecture-foundations">Foundations</a></span> <span class="chip"><a href="#01-architecture-compose-stack">Compose-Stack</a></span> <span class="chip"><a href="#01-architecture-corpus">Corpus</a></span> <span class="chip"><a href="#01-architecture-parsing">Parsing</a></span> <span class="chip"><a href="#01-architecture-document-normalization">Document-Normalization</a></span> <span class="chip"><a href="#01-architecture-parser-lab">Parser-Lab</a></span> <span class="chip"><a href="#01-architecture-ingestion-m1">Ingestion-M1</a></span> <span class="chip"><a href="#01-architecture-storage-layers">Storage-Layers</a></span> <span class="chip"><a href="#02-evaluation-evaluation-101">Evaluation-101</a></span> <span class="chip"><a href="#02-evaluation-tracing-a-document">Tracing-a-Document</a></span></div>
+<div class="related"><strong>Related:</strong> <span class="chip"><a href="#00-project-start-here">Start-Here</a></span> <span class="chip"><a href="#00-project-checklist">Checklist</a></span> <span class="chip"><a href="#00-project-roadmap-review">Roadmap-Review</a></span> <span class="chip"><a href="#01-architecture-acl-classification">ACL-Classification</a></span> <span class="chip"><a href="#01-architecture-chunking">Chunking</a></span> <span class="chip"><a href="#01-architecture-foundations">Foundations</a></span> <span class="chip"><a href="#01-architecture-compose-stack">Compose-Stack</a></span> <span class="chip"><a href="#01-architecture-corpus">Corpus</a></span> <span class="chip"><a href="#01-architecture-parsing">Parsing</a></span> <span class="chip"><a href="#01-architecture-document-normalization">Document-Normalization</a></span> <span class="chip"><a href="#01-architecture-parser-lab">Parser-Lab</a></span> <span class="chip"><a href="#01-architecture-ingestion-m1">Ingestion-M1</a></span> <span class="chip"><a href="#01-architecture-storage-layers">Storage-Layers</a></span> <span class="chip"><a href="#02-evaluation-evaluation-101">Evaluation-101</a></span> <span class="chip"><a href="#02-evaluation-tracing-a-document">Tracing-a-Document</a></span></div>
 </article>
 <article class="note" id="01-architecture-storage-layers"
 data-title="Why four stores? Postgres, Redis, Qdrant, MinIO">
@@ -6232,6 +6649,61 @@ for both sidecar files.</p>
 </ul>
 </div>
 <div class="related"><strong>Related:</strong> <span class="chip"><a href="#03-journal-2026-10-25">2026-10-25</a></span> <span class="chip"><a href="#01-architecture-acl-classification">ACL-Classification</a></span> <span class="chip"><a href="#00-project-roadmap-review">Roadmap-Review</a></span> <span class="chip"><a href="#00-project-checklist">Checklist</a></span> <span class="chip"><a href="#00-project-start-here">Start-Here</a></span> <span class="chip"><a href="#01-architecture-ingestion-m1">Ingestion-M1</a></span></div>
+</article>
+<article class="note" id="03-journal-2026-10-29"
+data-title="2026-10-29 - Day 5">
+<header class="note-header">
+<p class="kicker">Journal · journal · in-progress</p>
+<h2>2026-10-29 - Day 5</h2>
+<span class="chip">helix</span><span class="chip">journal</span><span class="chip">chunking</span><span class="chip">roadmap</span>
+</header>
+<div class="toc"><p class="toctitle">On this page</p><ul><li><a href="#03-journal-2026-10-29--checkpoint-1-2-closed">Checkpoint 1.2 - closed</a></li><li><a href="#03-journal-2026-10-29--checkpoint-1-3-design-conversation">Checkpoint 1.3 - design conversation</a></li><li><a href="#03-journal-2026-10-29--decisions">Decisions</a></li><li><a href="#03-journal-2026-10-29--open">Open</a></li><li><a href="#03-journal-2026-10-29--next">Next</a></li></ul></div>
+<div class="content">
+<p>Previous day: <a href="#03-journal-2026-10-27">2026-10-27</a></p>
+<h2 id="03-journal-2026-10-29--checkpoint-1-2-closed">Checkpoint 1.2 - closed</h2>
+<p>The user replied <code>pass</code> for the ACL classifier. The full-corpus run, zero-unknown
+result, deterministic sidecars, and CI were accepted. The roadmap row moves to
+<code>done</code>; the current checkpoint becomes 1.3.</p>
+<h2 id="03-journal-2026-10-29--checkpoint-1-3-design-conversation">Checkpoint 1.3 - design conversation</h2>
+<p>The chunker was explained in plain language before implementation: what a chunk
+is, why fixed-size cutting fails, the common strategies, and how the corpus
+actually looks. The full explanation, worked examples, and the technical
+contract are now in <a href="#01-architecture-chunking">Chunking</a>.</p>
+<p>The key finding is that the corpus is already finely sectioned: median section
+55 words, p75 114, p95 290, p99 567. Only about 4.6% of sections exceed 300
+words. Most sections therefore produce one child; chunking is mostly block
+packing and long-tail splitting, not uniform 200-400 token windows.</p>
+<h2 id="03-journal-2026-10-29--decisions">Decisions</h2>
+<ul>
+<li><strong>Rule A: one small card per section.</strong> Short sections stay small instead of
+  being merged with their neighbours. This keeps citations precise; the
+  breadcrumb supplies context. Revisit only if retrieval evals show a problem.</li>
+<li>Parent = the parser section; child = a window inside that section, never
+  crossing a heading boundary.</li>
+<li>Children target roughly 200-400 tokens (about 150-300 words) with 10-15%
+  overlap, taken at sentence boundaries.</li>
+<li>Pack typed blocks, not raw text. Tables and code stay whole; an oversized
+  table or code block is flagged instead of cut.</li>
+<li>Prepend the breadcrumb and section title to the embedding text.</li>
+<li>Chunk ids are content-addressed; ordinals are stored separately.</li>
+<li>Per-document JSON under <code>data/chunks</code> plus a summary with the size
+  distribution. No timestamps.</li>
+<li>ACLs are inherited from the document at storage time, not recomputed here.</li>
+</ul>
+<h2 id="03-journal-2026-10-29--open">Open</h2>
+<ul>
+<li>Fix the token-counting proxy for 1.3 and validate it against the BGE-M3
+  tokenizer in 1.4.</li>
+<li>Decide the exact oversize threshold for atomic tables and code during
+  implementation.</li>
+</ul>
+<h2 id="03-journal-2026-10-29--next">Next</h2>
+<ul>
+<li>Implement 1.3 from <a href="#01-architecture-chunking">Chunking</a>: module, CLI, tests, full-corpus distribution,
+  then <code>make ci</code>.</li>
+</ul>
+</div>
+<div class="related"><strong>Related:</strong> <span class="chip"><a href="#03-journal-2026-10-27">2026-10-27</a></span> <span class="chip"><a href="#00-project-checklist">Checklist</a></span> <span class="chip"><a href="#01-architecture-ingestion-m1">Ingestion-M1</a></span> <span class="chip"><a href="#01-architecture-chunking">Chunking</a></span> <span class="chip"><a href="#01-architecture-parsing">Parsing</a></span> <span class="chip"><a href="#01-architecture-acl-classification">ACL-Classification</a></span> <span class="chip"><a href="#01-architecture-project-map">Project-Map</a></span></div>
 </article>
 <footer class="page-footer">
 Source of truth: the Obsidian vault. This file is generated; do not edit it by hand.

@@ -3,7 +3,7 @@ type: architecture
 status: active
 day: 2
 tags: [architecture, repo, roadmap, retrieval, security, interview]
-related: ["[[Start-Here]]", "[[Checklist]]", "[[Roadmap-Review]]", "[[ACL-Classification]]", "[[Foundations]]", "[[Compose-Stack]]", "[[Corpus]]", "[[Parsing]]", "[[Document-Normalization]]", "[[Parser-Lab]]", "[[Ingestion-M1]]", "[[Storage-Layers]]", "[[Evaluation-101]]", "[[Tracing-a-Document]]"]
+related: ["[[Start-Here]]", "[[Checklist]]", "[[Roadmap-Review]]", "[[ACL-Classification]]", "[[Chunking]]", "[[Foundations]]", "[[Compose-Stack]]", "[[Corpus]]", "[[Parsing]]", "[[Document-Normalization]]", "[[Parser-Lab]]", "[[Ingestion-M1]]", "[[Storage-Layers]]", "[[Evaluation-101]]", "[[Tracing-a-Document]]"]
 ---
 
 # Project map: the repo and the architecture behind it
@@ -27,13 +27,12 @@ Think of it as a staffed research library:
 | Quality review after an answer | Evals and security gates |
 
 > [!info] Current state
-> Checkpoint 1.1 is verified; 1.2 ACL classification is implemented and awaiting
-> user verification. The repo has a working API skeleton, local services, a
-> pinned corpus, a Markdown parser that emits structured JSON, a deterministic
-> ACL sidecar, and a docs/eval seed. It does **not** yet have chunking,
-> embeddings, retrieval, generation, auth, or a UI. MinIO is running but its
-> archive checkpoint is 1.5b. This note explains the target architecture and
-> marks what exists now.
+> Checkpoints 1.1 and 1.2 are verified; 1.3 chunking is in progress. The repo has
+> a working API skeleton, local services, a pinned corpus, a Markdown parser that
+> emits structured JSON, and a deterministic ACL sidecar. It does **not** yet
+> have chunking implemented, embeddings, retrieval, generation, auth, or a UI.
+> MinIO is running but its archive checkpoint is 1.5b. This note explains the
+> target architecture and marks what exists now.
 
 ## What lives where
 
@@ -197,7 +196,8 @@ passage the user is not allowed to see.
 2. Read [[Foundations]] for the Python, async, config, and Makefile ideas.
 3. Read [[Compose-Stack]] and [[Storage-Layers]] for the local services.
 4. Read [[Corpus]] for how the source snapshot is pinned and selected, then
-   [[Parsing]] for how Markdown becomes structured JSON.
+   [[Parsing]] for how Markdown becomes structured JSON, then [[Chunking]] for
+   how sections become searchable children.
 5. Read [[Evaluation-101]] for how quality is measured.
 6. Read [[Tracing-a-Document]] for the chain from a manifest entry to a seed
    question.

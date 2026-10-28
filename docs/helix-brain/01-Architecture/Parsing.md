@@ -3,7 +3,7 @@ type: architecture
 status: implemented
 day: 3
 tags: [parsing, markdown, ingestion, structure]
-related: ["[[Corpus]]", "[[Ingestion-M1]]", "[[Document-Normalization]]", "[[Parser-Lab]]", "[[Project-Map]]", "[[Checklist]]", "[[2026-10-25]]"]
+related: ["[[Corpus]]", "[[Ingestion-M1]]", "[[Chunking]]", "[[Document-Normalization]]", "[[Parser-Lab]]", "[[Project-Map]]", "[[Checklist]]", "[[2026-10-25]]"]
 ---
 
 # Parsing: Markdown to a stable document model

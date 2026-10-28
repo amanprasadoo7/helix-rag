@@ -46,25 +46,23 @@ its own `fix(...)` commit and the DoD is repeated.
 
 ## Current checkpoint
 
-### 1.2 - ACL classifier
+### 1.3 - Chunker
 
-Goal: label every parsed document with a sensitivity classification and the roles
-allowed to retrieve it, using a deterministic source-and-path policy that defaults
-to deny.
+Goal: split each parsed section into deterministic parent/child chunks that are
+small enough to retrieve precisely but still carry enough context to generate an
+answer, without cutting tables, code, or headings in half.
 
-- [x] Module: `packages/helix/acl.py` with roles, rules, matcher, and decisions
-- [x] Taxonomy: expanded path table plus the five previously unmatched paths
-- [x] Roles: additive sets, `employee` baseline, `authenticated` sentinel, `billing` -> `finance` alias
-- [x] Output: sidecar `data/acl/index.json` and `summary.json` with audit fields
-- [x] Matching: source-aware, boundary-safe, longest-prefix wins, unknown deny
-- [x] Idempotency: reject duplicate `(source, path)` keys; deterministic output
-- [x] Decision: `business-technology` -> `internal:company`; `billing` aliases `finance`
-- [x] CLI: `make classify` and `make classify-sample`
-- [x] Tests: prefix boundaries, role matrix, source distinction, alias, unknown deny
-- [x] Manual: classify all 2,500 files, inspect summary, confirm zero unknown
-- [x] Docs: ACL note, M1, storage, roadmap, journal
-- [x] `make ci` green
-- [x] Commit: `feat(acl): classify corpus by source and path`
+- [ ] Module: `packages/helix/chunking.py` with parent sections and child chunks
+- [ ] Sizing: section-scoped children on a token budget with 10-15% overlap
+- [ ] Structure: breadcrumb-prefixed embedding text; tables and code kept whole
+- [ ] Parents: keep section text and child ids for later context expansion
+- [ ] Output: deterministic per-document JSON under `data/chunks` plus `summary.json`
+- [ ] CLI: `make chunk` and `make chunk-sample`
+- [ ] Tests: size bounds, overlap, atomic blocks, section boundaries, ids, determinism
+- [ ] Manual: chunk all 2,500 documents and inspect the size distribution
+- [ ] Docs: chunking note, M1, journal, roadmap row
+- [ ] `make ci` green
+- [ ] Commit: `feat(chunk): split parsed sections into parent/child chunks`
 - [ ] User verified (user marks only)
 
 ---
@@ -82,8 +80,8 @@ Status values: `pending`, `in progress`, `done`, `blocked`.
 | 0.4 | Vault, note templates, doc generator | done | 11 notes; [[Project-Map]] |
 | 0.5 | CI baseline | done | [[CI-Baseline]]; ruff, mypy, pytest |
 | 1.1 | Parser | done | Markdown -> JSON; Docling deferred (ADR) |
-| 1.2 | ACL classifier | in progress | implemented; awaiting user verification |
-| 1.3 | Chunker | pending | structure-aware, parent/child |
+| 1.2 | ACL classifier | done | source/path -> classification + roles |
+| 1.3 | Chunker | in progress | structure-aware, parent/child |
 | 1.4 | Embedder | pending | BGE-M3 dense + sparse |
 | 1.5 | Qdrant + Postgres metadata | pending | Alembic, constraints, model version |
 | 1.5b | MinIO raw + manifest snapshot | pending | immutable keys, SHA-256, idempotent |
