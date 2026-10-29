@@ -27,12 +27,13 @@ Think of it as a staffed research library:
 | Quality review after an answer | Evals and security gates |
 
 > [!info] Current state
-> Checkpoints 1.1 and 1.2 are verified; 1.3 chunking is in progress. The repo has
-> a working API skeleton, local services, a pinned corpus, a Markdown parser that
-> emits structured JSON, and a deterministic ACL sidecar. It does **not** yet
-> have chunking implemented, embeddings, retrieval, generation, auth, or a UI.
-> MinIO is running but its archive checkpoint is 1.5b. This note explains the
-> target architecture and marks what exists now.
+> Checkpoints 1.1 and 1.2 are verified; 1.3 chunking is implemented and awaiting
+> user verification. The repo has a working API skeleton, local services, a
+> pinned corpus, a Markdown parser that emits structured JSON, a deterministic
+> ACL sidecar, and a chunker that writes parent/child records. It does **not**
+> yet have embeddings, retrieval, generation, auth, or a UI. MinIO is running but
+> its archive checkpoint is 1.5b. This note explains the target architecture and
+> marks what exists now.
 
 ## What lives where
 

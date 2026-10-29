@@ -1,6 +1,6 @@
 ---
 type: architecture
-status: active
+status: implemented
 day: 5
 tags: [chunking, ingestion, retrieval, architecture, interview]
 related: ["[[Ingestion-M1]]", "[[Parsing]]", "[[ACL-Classification]]", "[[Evaluation-101]]", "[[Checklist]]", "[[Project-Map]]", "[[2026-10-29]]"]
@@ -10,11 +10,13 @@ related: ["[[Ingestion-M1]]", "[[Parsing]]", "[[ACL-Classification]]", "[[Evalua
 
 **Short answer:** The chunker cuts each parsed section into small cards that can
 be searched independently. Each card keeps its heading path, never crosses into
-another section, and never splits a table or code block. The section itself is
-kept as a larger **parent** so the answer step still has enough context.
+another section, and never splits a code block. Tables stay whole while they fit;
+a table larger than the budget is split by rows with the header repeated. The
+section itself is kept as a larger **parent** so the answer step still has enough
+context.
 
-This note is the 1.3 design. The chosen rule is **one small card per section**;
-short sections are allowed to stay small.
+This note is the 1.3 design and implementation. The chosen rule is **one small
+card per section**; short sections are allowed to stay small.
 
 ## Where chunking fits
 
@@ -64,7 +66,7 @@ structure instead.
 |---|---|
 | Focused | One topic, not three |
 | Self-contained | Understandable without the previous page |
-| Unbroken | Tables and code are not cut |
+| Unbroken | Table rows and code are not cut |
 | Traceable | Source path and heading are known |
 | Right-sized | Not one sentence, not a whole chapter |
 
@@ -113,14 +115,16 @@ This is why the chosen rule is one card per section, not merge-until-large.
 4. If the section fits the budget, emit one child. No overlap.
 5. If it does not fit, pack whole blocks into children up to the target size.
 6. Split a paragraph, list, or quote only at sentence or item boundaries.
-7. Keep tables and code whole. If one is too large, keep it whole and flag it
-   `oversize` rather than cutting it.
-8. When a section is split, repeat the last sentence or block from the previous
+7. Keep code whole. Keep a table whole while it fits; a larger table is split by
+   rows with the header repeated, so no row or field name is lost.
+8. If one table row is itself over the hard maximum, keep that row whole and flag
+   it `oversize`.
+9. When a section is split, repeat the last sentence or block from the previous
    child at the start of the next one. This is the overlap.
-9. Prepend the breadcrumb and section title to the embedding text.
-10. Write the parent record with its child ids, and the children with their
+10. Prepend the breadcrumb and section title to the embedding text.
+11. Write the parent record with its child ids, and the children with their
     parent id.
-11. Save deterministic JSON under `data/chunks` plus a `summary.json`.
+12. Save deterministic JSON under `data/chunks` plus a `summary.json`.
 
 ## Technical contract
 
@@ -128,10 +132,10 @@ This is why the chosen rule is one card per section, not merge-until-large.
 |---|---|---|
 | Child scope | Inside one section only | Keeps topics separate and citations precise |
 | Target size | 200-400 tokens, about 150-300 English words | Small enough to search, large enough to mean something |
-| Hard maximum | About 400 words per child | Avoids oversized embeddings |
+| Hard maximum | About 400 words per prose child | Avoids oversized embeddings |
 | Overlap | 10-15%, about 20-40 words | The next card knows what came before |
 | Overlap boundary | Sentence or block boundary | Avoids cutting mid-sentence |
-| Tables | Whole | Half a table is useless |
+| Tables | Whole while they fit; row groups with a repeated header after that | A large table is still searchable; a half row is not |
 | Code | Whole | Half a command is dangerous |
 | Oversized block | Keep and flag `oversize` | Better a large card than a broken one |
 | Breadcrumb | Included in embedding text | "Accounts" is ambiguous; "Zuora > Accounts" is not |
@@ -141,9 +145,19 @@ This is why the chosen rule is one card per section, not merge-until-large.
 | ACL | Not copied in the chunker | The document owns permissions; storage attaches them later |
 | Timestamp | None | Two runs over the same input must be identical |
 
-Token counts are estimated from words in 1.3. The BGE-M3 tokenizer is available
-in 1.4, before anything is stored, so the estimate can be validated there
-without re-indexing.
+Word counts are the proxy for tokens in 1.3: one English word is about 1.3
+BGE-M3 tokens. The real tokenizer is available in 1.4, before anything is
+stored, so the estimate can be validated there without re-indexing.
+
+## Implementation
+
+| Piece | Purpose |
+|---|---|
+| `packages/helix/chunking.py` | Models, block packing, ordering, overlap, ids |
+| `scripts/chunk_corpus.py` | Manifest -> parsed JSON -> `data/chunks` + summary |
+| `make chunk` | Full corpus |
+| `make chunk-sample` | Five evenly spaced documents, one line each |
+| `tests/test_chunking.py` | 14 tests for size, overlap, tables, code, ids, determinism |
 
 ## Worked examples
 
@@ -240,24 +254,55 @@ topics and is cut mid-list. Structure-aware chunking avoids it.
 This is the point of parent and child records: search stays precise, while the
 model still receives enough context.
 
+## Current result
+
+| Measure | Value |
+|---|---:|
+| Documents | 2,500 |
+| Sections / parents | 37,614 |
+| Children | 38,165 |
+| Source words | 3,447,243 |
+| Child words | 3,475,366 |
+| Overlap words | 25,092 |
+| Size p50 / p90 / p95 / p99 | 66 / 213 / 244 / 384 words |
+| Children under 100 words | 25,040 (66%) |
+| Oversize children | 78 (34 code blocks, 44 single-row tables) |
+| Largest child | 2,174 words, a code block (~2,800 tokens) |
+| Documents without chunks | 26 (empty pages) |
+| Runtime | ~8 seconds |
+| Output size | ~137 MB |
+| Deterministic rerun | Yes, identical SHA-256 tree |
+
+The median child is 66 words, not 250. That is the expected consequence of rule
+A: the corpus has many short FAQ and reference sections, and they stay small so
+their citations remain exact. The large sections still split; the `Accounts`
+example below is 156 and 210 words with a 10-word overlap.
+
+The 78 oversize children are all under the BGE-M3 context window. Code blocks are
+kept whole by design, and the large tables are ones where a single row (usually
+a field plus a long description) exceeds 400 words. Splitting that row would
+separate the field name from its description, so it stays whole and is flagged.
+
 ## Validation
 
-Before moving to 1.4, the full-corpus run should report:
+The full-corpus run reports:
 
-- child count and parent count;
-- p50, p90, p95, and p99 child sizes;
-- how many children are under 100 tokens;
-- how many blocks are flagged `oversize`;
-- zero children that cross a section boundary;
-- zero split tables or code blocks;
+- 2,500 documents, 37,614 parents, 38,165 children;
+- p50 66, p90 213, p95 244, p99 384, max 2,174 words;
+- 25,040 children under 100 words;
+- 78 oversize children, all from code blocks or single giant table rows;
+- zero children crossing a section boundary;
+- zero split code blocks; every split table repeats its header and keeps rows
+  whole;
 - byte-identical output across two runs;
-- manual inspection of the Zuora guide and one long engineering page.
+- manual inspection of the Zuora guide and the long engineering/reference pages.
 
 ## What the chunker does not do
 
 - It does not call an LLM.
 - It does not use semantic chunking; the headings already carry structure.
-- It does not split tables or code.
+- It does not split code blocks.
+- It does not split a table row; a giant row is kept whole and flagged.
 - It does not assign ACLs; permissions belong to the document.
 - It does not embed anything; that is 1.4.
 - It does not merge small sections; that was option B and was rejected for now.
@@ -277,8 +322,8 @@ merging can be revisited with evidence.
   not arbitrary token counts."
 - "The corpus median section is 55 words, so I do not force a 300-token floor;
   I preserve citations and validate the size distribution instead."
-- "Tables and code are atomic. I would rather flag an oversized chunk than cut a
-  command in half."
+- "Code is atomic, and tables split only by whole rows with the header repeated.
+  I would rather flag one oversized row than lose the field name."
 - "Child chunks are for matching; parent sections are for generation context."
 - "Chunk ids are content-addressed, so an unchanged chunk keeps its id when its
   neighbours change."

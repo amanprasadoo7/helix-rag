@@ -14,10 +14,11 @@ stores those chunks in Qdrant and Postgres, and automates the whole flow with an
 idempotent worker.
 
 > [!info] Status
-> Checkpoints 1.1 and 1.2 are verified. Checkpoint 1.3 is in progress;
-> checkpoints 1.4–1.6 are the plan, not built yet. The 1.2 design and
-> implementation are in [[ACL-Classification]]; 1.5b adds the MinIO snapshot.
-> This note is updated as each checkpoint lands.
+> Checkpoints 1.1 and 1.2 are verified. Checkpoint 1.3 is implemented and
+> awaiting user verification; checkpoints 1.4–1.6 are the plan, not built yet.
+> The 1.2 design and implementation are in [[ACL-Classification]]; 1.3 is in
+> [[Chunking]]; 1.5b adds the MinIO snapshot. This note is updated as each
+> checkpoint lands.
 
 ## The library analogy
 
@@ -159,7 +160,7 @@ is kept so the model gets enough context.
 - parent = a section from the parser;
 - child = 200–400 tokens with 10–15% overlap;
 - breadcrumb (`Handbook > Finance > Zuora > Accounts`) prepended to embedding text;
-- tables and code kept whole;
+- code kept whole; tables split by rows with a repeated header only when huge;
 - deterministic chunk ids and ordinals;
 - inspect the chunk-size distribution before moving on.
 
@@ -170,6 +171,13 @@ unit. Parent/child keeps retrieval precise without starving generation of contex
 being merged with their neighbours. The median parsed section is 55 words, so
 the 200-400 token target is an upper bound, not a floor. The full design,
 examples, and validation plan are in [[Chunking]].
+
+**Built.** `packages/helix/chunking.py` holds the models and packer;
+`scripts/chunk_corpus.py` writes `data/chunks`; `make chunk` and `make
+chunk-sample` run it. The full run produced 38,165 children from 37,614
+sections: p50 66, p90 213, p95 244, p99 384 words. Two runs produced an
+identical output tree. Only 78 children are flagged oversize: 34 whole code
+blocks and 44 tables where a single row exceeds the budget.
 
 ---
 

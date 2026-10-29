@@ -2,7 +2,7 @@ COMPOSE_FILE := infra/docker-compose.yml
 ENV_FILE := $(if $(wildcard .env),--env-file .env,)
 COMPOSE := docker compose -f $(COMPOSE_FILE) $(ENV_FILE)
 
-.PHONY: sync dev test test-integration lint fmt ci checklist docs corpus corpus-clean parse parse-sample classify classify-sample compare up down reset ps logs ready tools tools-down
+.PHONY: sync dev test test-integration lint fmt ci checklist docs corpus corpus-clean parse parse-sample classify classify-sample chunk chunk-sample compare up down reset ps logs ready tools tools-down
 
 PARSERS ?= native,docling,unstructured
 STRATEGY ?= fast
@@ -50,6 +50,12 @@ classify:
 
 classify-sample:
 	uv run python scripts/classify_corpus.py --limit 5 --verbose
+
+chunk:
+	uv run python scripts/chunk_corpus.py
+
+chunk-sample:
+	uv run python scripts/chunk_corpus.py --limit 5 --verbose
 
 compare:
 	@test -n "$(FILE)" || (echo "usage: make compare FILE=path/to/file [OUT=dir] [PARSERS=native,docling,unstructured] [STRATEGY=fast]"; exit 1)

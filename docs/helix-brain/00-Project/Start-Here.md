@@ -16,8 +16,9 @@ the vault: it tells you what is current, what to read first, and where to write.
 
 > [!info] Checkpoint 1.3
 > The parser (1.1) and ACL classifier (1.2) are verified; the ACL design and
-> results are in [[ACL-Classification]]. The chunker (1.3) is now in progress.
-> The roadmap review adds 1.5b MinIO archive, 1.7 eval seed expansion, and 2.0
+> results are in [[ACL-Classification]]. The chunker (1.3) is implemented and
+> awaiting user verification; the design and results are in [[Chunking]]. The
+> roadmap review adds 1.5b MinIO archive, 1.7 eval seed expansion, and 2.0
 > identity context.
 
 The repo has a working API skeleton, local services, a pinned corpus, a parser,

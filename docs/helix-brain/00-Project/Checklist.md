@@ -50,18 +50,18 @@ its own `fix(...)` commit and the DoD is repeated.
 
 Goal: split each parsed section into deterministic parent/child chunks that are
 small enough to retrieve precisely but still carry enough context to generate an
-answer, without cutting tables, code, or headings in half.
+answer, without cutting code or headings in half.
 
-- [ ] Module: `packages/helix/chunking.py` with parent sections and child chunks
-- [ ] Sizing: section-scoped children on a token budget with 10-15% overlap
-- [ ] Structure: breadcrumb-prefixed embedding text; tables and code kept whole
-- [ ] Parents: keep section text and child ids for later context expansion
-- [ ] Output: deterministic per-document JSON under `data/chunks` plus `summary.json`
-- [ ] CLI: `make chunk` and `make chunk-sample`
-- [ ] Tests: size bounds, overlap, atomic blocks, section boundaries, ids, determinism
-- [ ] Manual: chunk all 2,500 documents and inspect the size distribution
-- [ ] Docs: chunking note, M1, journal, roadmap row
-- [ ] `make ci` green
+- [x] Module: `packages/helix/chunking.py` with parent sections and child chunks
+- [x] Sizing: section-scoped children on a word budget with 10-15% overlap
+- [x] Structure: breadcrumb-prefixed embedding text; code whole, huge tables split by rows
+- [x] Parents: keep section text and child ids for later context expansion
+- [x] Output: deterministic per-document JSON under `data/chunks` plus `summary.json`
+- [x] CLI: `make chunk` and `make chunk-sample`
+- [x] Tests: size bounds, overlap, atomic blocks, section boundaries, ids, determinism
+- [x] Manual: chunk all 2,500 documents and inspect the size distribution
+- [x] Docs: chunking note, M1, journal, roadmap row
+- [x] `make ci` green
 - [ ] Commit: `feat(chunk): split parsed sections into parent/child chunks`
 - [ ] User verified (user marks only)
 

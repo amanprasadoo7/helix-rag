@@ -2,7 +2,8 @@
 
 Permission-aware agentic RAG over the GitLab public handbook and product docs.
 
-**Status:** Checkpoint 1.2 verified; checkpoint 1.3 - chunker in progress.
+**Status:** Checkpoint 1.2 verified; checkpoint 1.3 - chunker implemented and
+awaiting user verification.
 
 ## Quickstart
 
@@ -21,6 +22,8 @@ make parse        # normalized JSON for every corpus file -> data/parsed
 make parse-sample # five documents, one summary line each
 make classify     # ACL sidecar for every corpus file -> data/acl
 make classify-sample # five documents with their decisions
+make chunk        # parent/child chunks for every parsed file -> data/chunks
+make chunk-sample # five documents with their chunk counts
 make compare FILE=path/to/file  # native vs Docling vs Unstructured -> data/parser-lab
 ```
 

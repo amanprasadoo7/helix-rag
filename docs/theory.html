@@ -592,18 +592,18 @@ its own <code>fix(...)</code> commit and the DoD is repeated.</p>
 <h3 id="00-project-checklist--1-3-chunker">1.3 - Chunker</h3>
 <p>Goal: split each parsed section into deterministic parent/child chunks that are
 small enough to retrieve precisely but still carry enough context to generate an
-answer, without cutting tables, code, or headings in half.</p>
+answer, without cutting code or headings in half.</p>
 <ul>
-<li>[ ] Module: <code>packages/helix/chunking.py</code> with parent sections and child chunks</li>
-<li>[ ] Sizing: section-scoped children on a token budget with 10-15% overlap</li>
-<li>[ ] Structure: breadcrumb-prefixed embedding text; tables and code kept whole</li>
-<li>[ ] Parents: keep section text and child ids for later context expansion</li>
-<li>[ ] Output: deterministic per-document JSON under <code>data/chunks</code> plus <code>summary.json</code></li>
-<li>[ ] CLI: <code>make chunk</code> and <code>make chunk-sample</code></li>
-<li>[ ] Tests: size bounds, overlap, atomic blocks, section boundaries, ids, determinism</li>
-<li>[ ] Manual: chunk all 2,500 documents and inspect the size distribution</li>
-<li>[ ] Docs: chunking note, M1, journal, roadmap row</li>
-<li>[ ] <code>make ci</code> green</li>
+<li>[x] Module: <code>packages/helix/chunking.py</code> with parent sections and child chunks</li>
+<li>[x] Sizing: section-scoped children on a word budget with 10-15% overlap</li>
+<li>[x] Structure: breadcrumb-prefixed embedding text; code whole, huge tables split by rows</li>
+<li>[x] Parents: keep section text and child ids for later context expansion</li>
+<li>[x] Output: deterministic per-document JSON under <code>data/chunks</code> plus <code>summary.json</code></li>
+<li>[x] CLI: <code>make chunk</code> and <code>make chunk-sample</code></li>
+<li>[x] Tests: size bounds, overlap, atomic blocks, section boundaries, ids, determinism</li>
+<li>[x] Manual: chunk all 2,500 documents and inspect the size distribution</li>
+<li>[x] Docs: chunking note, M1, journal, roadmap row</li>
+<li>[x] <code>make ci</code> green</li>
 <li>[ ] Commit: <code>feat(chunk): split parsed sections into parent/child chunks</code></li>
 <li>[ ] User verified (user marks only)</li>
 </ul>
@@ -1227,8 +1227,9 @@ the vault: it tells you what is current, what to read first, and where to write.
 <div class="callout info">
 <p class="callout-title">Checkpoint 1.3</p>
 <p>The parser (1.1) and ACL classifier (1.2) are verified; the ACL design and
-results are in <a href="#01-architecture-acl-classification">ACL-Classification</a>. The chunker (1.3) is now in progress.
-The roadmap review adds 1.5b MinIO archive, 1.7 eval seed expansion, and 2.0
+results are in <a href="#01-architecture-acl-classification">ACL-Classification</a>. The chunker (1.3) is implemented and
+awaiting user verification; the design and results are in <a href="#01-architecture-chunking">Chunking</a>. The
+roadmap review adds 1.5b MinIO archive, 1.7 eval seed expansion, and 2.0
 identity context.</p>
 </div>
 <p>The repo has a working API skeleton, local services, a pinned corpus, a parser,
@@ -1827,18 +1828,20 @@ applying the Qdrant payload filter at 2.2.</p>
 <article class="note" id="01-architecture-chunking"
 data-title="Chunking: cutting documents into searchable cards">
 <header class="note-header">
-<p class="kicker">Architecture · architecture · active</p>
+<p class="kicker">Architecture · architecture · implemented</p>
 <h2>Chunking: cutting documents into searchable cards</h2>
 <span class="chip">chunking</span><span class="chip">ingestion</span><span class="chip">retrieval</span><span class="chip">architecture</span><span class="chip">interview</span>
 </header>
-<div class="toc"><p class="toctitle">On this page</p><ul><li><a href="#01-architecture-chunking--where-chunking-fits">Where chunking fits</a></li><li><a href="#01-architecture-chunking--the-index-card-analogy">The index-card analogy</a></li><li><a href="#01-architecture-chunking--why-not-cut-every-500-words">Why not cut every 500 words?</a></li><li><a href="#01-architecture-chunking--what-makes-a-good-chunk">What makes a good chunk</a></li><li><a href="#01-architecture-chunking--chunking-strategies">Chunking strategies</a></li><li><a href="#01-architecture-chunking--the-corpus-is-already-finely-sectioned">The corpus is already finely sectioned</a></li><li><a href="#01-architecture-chunking--how-the-chunker-works">How the chunker works</a></li><li><a href="#01-architecture-chunking--technical-contract">Technical contract</a></li><li><a href="#01-architecture-chunking--worked-examples">Worked examples</a><ul><li><a href="#01-architecture-chunking--a-good-short-section">A good short section</a></li><li><a href="#01-architecture-chunking--a-very-small-section">A very small section</a></li><li><a href="#01-architecture-chunking--a-long-section-that-must-be-split">A long section that must be split</a></li><li><a href="#01-architecture-chunking--what-a-bad-split-would-look-like">What a bad split would look like</a></li></ul></li><li><a href="#01-architecture-chunking--how-retrieval-uses-the-cards">How retrieval uses the cards</a></li><li><a href="#01-architecture-chunking--validation">Validation</a></li><li><a href="#01-architecture-chunking--what-the-chunker-does-not-do">What the chunker does not do</a></li><li><a href="#01-architecture-chunking--why-rule-a-instead-of-merging-small-sections">Why rule A instead of merging small sections</a></li><li><a href="#01-architecture-chunking--interview-angle">Interview angle</a></li></ul></div>
+<div class="toc"><p class="toctitle">On this page</p><ul><li><a href="#01-architecture-chunking--where-chunking-fits">Where chunking fits</a></li><li><a href="#01-architecture-chunking--the-index-card-analogy">The index-card analogy</a></li><li><a href="#01-architecture-chunking--why-not-cut-every-500-words">Why not cut every 500 words?</a></li><li><a href="#01-architecture-chunking--what-makes-a-good-chunk">What makes a good chunk</a></li><li><a href="#01-architecture-chunking--chunking-strategies">Chunking strategies</a></li><li><a href="#01-architecture-chunking--the-corpus-is-already-finely-sectioned">The corpus is already finely sectioned</a></li><li><a href="#01-architecture-chunking--how-the-chunker-works">How the chunker works</a></li><li><a href="#01-architecture-chunking--technical-contract">Technical contract</a></li><li><a href="#01-architecture-chunking--implementation">Implementation</a></li><li><a href="#01-architecture-chunking--worked-examples">Worked examples</a><ul><li><a href="#01-architecture-chunking--a-good-short-section">A good short section</a></li><li><a href="#01-architecture-chunking--a-very-small-section">A very small section</a></li><li><a href="#01-architecture-chunking--a-long-section-that-must-be-split">A long section that must be split</a></li><li><a href="#01-architecture-chunking--what-a-bad-split-would-look-like">What a bad split would look like</a></li></ul></li><li><a href="#01-architecture-chunking--how-retrieval-uses-the-cards">How retrieval uses the cards</a></li><li><a href="#01-architecture-chunking--current-result">Current result</a></li><li><a href="#01-architecture-chunking--validation">Validation</a></li><li><a href="#01-architecture-chunking--what-the-chunker-does-not-do">What the chunker does not do</a></li><li><a href="#01-architecture-chunking--why-rule-a-instead-of-merging-small-sections">Why rule A instead of merging small sections</a></li><li><a href="#01-architecture-chunking--interview-angle">Interview angle</a></li></ul></div>
 <div class="content">
 <p><strong>Short answer:</strong> The chunker cuts each parsed section into small cards that can
 be searched independently. Each card keeps its heading path, never crosses into
-another section, and never splits a table or code block. The section itself is
-kept as a larger <strong>parent</strong> so the answer step still has enough context.</p>
-<p>This note is the 1.3 design. The chosen rule is <strong>one small card per section</strong>;
-short sections are allowed to stay small.</p>
+another section, and never splits a code block. Tables stay whole while they fit;
+a table larger than the budget is split by rows with the header repeated. The
+section itself is kept as a larger <strong>parent</strong> so the answer step still has enough
+context.</p>
+<p>This note is the 1.3 design and implementation. The chosen rule is <strong>one small
+card per section</strong>; short sections are allowed to stay small.</p>
 <h2 id="01-architecture-chunking--where-chunking-fits">Where chunking fits</h2>
 <pre><code class="language-text">raw Markdown
    -&gt; parser: headings, paragraphs, tables, code
@@ -1891,7 +1894,7 @@ structure instead.</p>
 </tr>
 <tr>
 <td>Unbroken</td>
-<td>Tables and code are not cut</td>
+<td>Table rows and code are not cut</td>
 </tr>
 <tr>
 <td>Traceable</td>
@@ -2013,8 +2016,10 @@ is distributed like this:</p>
 <li>If the section fits the budget, emit one child. No overlap.</li>
 <li>If it does not fit, pack whole blocks into children up to the target size.</li>
 <li>Split a paragraph, list, or quote only at sentence or item boundaries.</li>
-<li>Keep tables and code whole. If one is too large, keep it whole and flag it
-   <code>oversize</code> rather than cutting it.</li>
+<li>Keep code whole. Keep a table whole while it fits; a larger table is split by
+   rows with the header repeated, so no row or field name is lost.</li>
+<li>If one table row is itself over the hard maximum, keep that row whole and flag
+   it <code>oversize</code>.</li>
 <li>When a section is split, repeat the last sentence or block from the previous
    child at the start of the next one. This is the overlap.</li>
 <li>Prepend the breadcrumb and section title to the embedding text.</li>
@@ -2044,7 +2049,7 @@ is distributed like this:</p>
 </tr>
 <tr>
 <td>Hard maximum</td>
-<td>About 400 words per child</td>
+<td>About 400 words per prose child</td>
 <td>Avoids oversized embeddings</td>
 </tr>
 <tr>
@@ -2059,8 +2064,8 @@ is distributed like this:</p>
 </tr>
 <tr>
 <td>Tables</td>
-<td>Whole</td>
-<td>Half a table is useless</td>
+<td>Whole while they fit; row groups with a repeated header after that</td>
+<td>A large table is still searchable; a half row is not</td>
 </tr>
 <tr>
 <td>Code</td>
@@ -2104,9 +2109,40 @@ is distributed like this:</p>
 </tr>
 </tbody>
 </table>
-<p>Token counts are estimated from words in 1.3. The BGE-M3 tokenizer is available
-in 1.4, before anything is stored, so the estimate can be validated there
-without re-indexing.</p>
+<p>Word counts are the proxy for tokens in 1.3: one English word is about 1.3
+BGE-M3 tokens. The real tokenizer is available in 1.4, before anything is
+stored, so the estimate can be validated there without re-indexing.</p>
+<h2 id="01-architecture-chunking--implementation">Implementation</h2>
+<table>
+<thead>
+<tr>
+<th>Piece</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>packages/helix/chunking.py</code></td>
+<td>Models, block packing, ordering, overlap, ids</td>
+</tr>
+<tr>
+<td><code>scripts/chunk_corpus.py</code></td>
+<td>Manifest -&gt; parsed JSON -&gt; <code>data/chunks</code> + summary</td>
+</tr>
+<tr>
+<td><code>make chunk</code></td>
+<td>Full corpus</td>
+</tr>
+<tr>
+<td><code>make chunk-sample</code></td>
+<td>Five evenly spaced documents, one line each</td>
+</tr>
+<tr>
+<td><code>tests/test_chunking.py</code></td>
+<td>14 tests for size, overlap, tables, code, ids, determinism</td>
+</tr>
+</tbody>
+</table>
 <h2 id="01-architecture-chunking--worked-examples">Worked examples</h2>
 <p>These examples come from the parsed Zuora Collect guide in the real corpus.</p>
 <h3 id="01-architecture-chunking--a-good-short-section">A good short section</h3>
@@ -2191,23 +2227,100 @@ topics and is cut mid-list. Structure-aware chunking avoids it.</p>
 </table>
 <p>This is the point of parent and child records: search stays precise, while the
 model still receives enough context.</p>
+<h2 id="01-architecture-chunking--current-result">Current result</h2>
+<table>
+<thead>
+<tr>
+<th>Measure</th>
+<th style="text-align: right;">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Documents</td>
+<td style="text-align: right;">2,500</td>
+</tr>
+<tr>
+<td>Sections / parents</td>
+<td style="text-align: right;">37,614</td>
+</tr>
+<tr>
+<td>Children</td>
+<td style="text-align: right;">38,165</td>
+</tr>
+<tr>
+<td>Source words</td>
+<td style="text-align: right;">3,447,243</td>
+</tr>
+<tr>
+<td>Child words</td>
+<td style="text-align: right;">3,475,366</td>
+</tr>
+<tr>
+<td>Overlap words</td>
+<td style="text-align: right;">25,092</td>
+</tr>
+<tr>
+<td>Size p50 / p90 / p95 / p99</td>
+<td style="text-align: right;">66 / 213 / 244 / 384 words</td>
+</tr>
+<tr>
+<td>Children under 100 words</td>
+<td style="text-align: right;">25,040 (66%)</td>
+</tr>
+<tr>
+<td>Oversize children</td>
+<td style="text-align: right;">78 (34 code blocks, 44 single-row tables)</td>
+</tr>
+<tr>
+<td>Largest child</td>
+<td style="text-align: right;">2,174 words, a code block (~2,800 tokens)</td>
+</tr>
+<tr>
+<td>Documents without chunks</td>
+<td style="text-align: right;">26 (empty pages)</td>
+</tr>
+<tr>
+<td>Runtime</td>
+<td style="text-align: right;">~8 seconds</td>
+</tr>
+<tr>
+<td>Output size</td>
+<td style="text-align: right;">~137 MB</td>
+</tr>
+<tr>
+<td>Deterministic rerun</td>
+<td style="text-align: right;">Yes, identical SHA-256 tree</td>
+</tr>
+</tbody>
+</table>
+<p>The median child is 66 words, not 250. That is the expected consequence of rule
+A: the corpus has many short FAQ and reference sections, and they stay small so
+their citations remain exact. The large sections still split; the <code>Accounts</code>
+example below is 156 and 210 words with a 10-word overlap.</p>
+<p>The 78 oversize children are all under the BGE-M3 context window. Code blocks are
+kept whole by design, and the large tables are ones where a single row (usually
+a field plus a long description) exceeds 400 words. Splitting that row would
+separate the field name from its description, so it stays whole and is flagged.</p>
 <h2 id="01-architecture-chunking--validation">Validation</h2>
-<p>Before moving to 1.4, the full-corpus run should report:</p>
+<p>The full-corpus run reports:</p>
 <ul>
-<li>child count and parent count;</li>
-<li>p50, p90, p95, and p99 child sizes;</li>
-<li>how many children are under 100 tokens;</li>
-<li>how many blocks are flagged <code>oversize</code>;</li>
-<li>zero children that cross a section boundary;</li>
-<li>zero split tables or code blocks;</li>
+<li>2,500 documents, 37,614 parents, 38,165 children;</li>
+<li>p50 66, p90 213, p95 244, p99 384, max 2,174 words;</li>
+<li>25,040 children under 100 words;</li>
+<li>78 oversize children, all from code blocks or single giant table rows;</li>
+<li>zero children crossing a section boundary;</li>
+<li>zero split code blocks; every split table repeats its header and keeps rows
+  whole;</li>
 <li>byte-identical output across two runs;</li>
-<li>manual inspection of the Zuora guide and one long engineering page.</li>
+<li>manual inspection of the Zuora guide and the long engineering/reference pages.</li>
 </ul>
 <h2 id="01-architecture-chunking--what-the-chunker-does-not-do">What the chunker does not do</h2>
 <ul>
 <li>It does not call an LLM.</li>
 <li>It does not use semantic chunking; the headings already carry structure.</li>
-<li>It does not split tables or code.</li>
+<li>It does not split code blocks.</li>
+<li>It does not split a table row; a giant row is kept whole and flagged.</li>
 <li>It does not assign ACLs; permissions belong to the document.</li>
 <li>It does not embed anything; that is 1.4.</li>
 <li>It does not merge small sections; that was option B and was rejected for now.</li>
@@ -2225,8 +2338,8 @@ merging can be revisited with evidence.</p>
   not arbitrary token counts."</li>
 <li>"The corpus median section is 55 words, so I do not force a 300-token floor;
   I preserve citations and validate the size distribution instead."</li>
-<li>"Tables and code are atomic. I would rather flag an oversized chunk than cut a
-  command in half."</li>
+<li>"Code is atomic, and tables split only by whole rows with the header repeated.
+  I would rather flag one oversized row than lose the field name."</li>
 <li>"Child chunks are for matching; parent sections are for generation context."</li>
 <li>"Chunk ids are content-addressed, so an unchanged chunk keeps its id when its
   neighbours change."</li>
@@ -3066,8 +3179,9 @@ before chunking, and validate with invariants and retrieval evals.”</p>
 <li>1.1 native Markdown parser: implemented, 2,500 documents, 0 failures, 26
   warnings.</li>
 <li>Parser lab: native vs Docling vs Unstructured, local CLI only.</li>
-<li>1.2 ACL classifier is implemented and verified; 1.3 chunker is in progress;
-  1.4 embedder, 1.5 stores, and 1.6 worker are still ahead.</li>
+<li>1.2 ACL classifier is implemented and verified; 1.3 chunker is implemented and
+  awaiting verification; 1.4 embedder, 1.5 stores, and 1.6 worker are still
+  ahead.</li>
 <li>The adapter design for PDFs/DOCX/images is a plan, not implemented.</li>
 </ul>
 </div>
@@ -3399,10 +3513,11 @@ stores those chunks in Qdrant and Postgres, and automates the whole flow with an
 idempotent worker.</p>
 <div class="callout info">
 <p class="callout-title">Status</p>
-<p>Checkpoints 1.1 and 1.2 are verified. Checkpoint 1.3 is in progress;
-checkpoints 1.4–1.6 are the plan, not built yet. The 1.2 design and
-implementation are in <a href="#01-architecture-acl-classification">ACL-Classification</a>; 1.5b adds the MinIO snapshot.
-This note is updated as each checkpoint lands.</p>
+<p>Checkpoints 1.1 and 1.2 are verified. Checkpoint 1.3 is implemented and
+awaiting user verification; checkpoints 1.4–1.6 are the plan, not built yet.
+The 1.2 design and implementation are in <a href="#01-architecture-acl-classification">ACL-Classification</a>; 1.3 is in
+<a href="#01-architecture-chunking">Chunking</a>; 1.5b adds the MinIO snapshot. This note is updated as each
+checkpoint lands.</p>
 </div>
 <h2 id="01-architecture-ingestion-m1--the-library-analogy">The library analogy</h2>
 <p>You have 2,500 books and no librarian.</p>
@@ -3592,7 +3707,7 @@ is kept so the model gets enough context.</p>
 <li>parent = a section from the parser;</li>
 <li>child = 200–400 tokens with 10–15% overlap;</li>
 <li>breadcrumb (<code>Handbook &gt; Finance &gt; Zuora &gt; Accounts</code>) prepended to embedding text;</li>
-<li>tables and code kept whole;</li>
+<li>code kept whole; tables split by rows with a repeated header only when huge;</li>
 <li>deterministic chunk ids and ordinals;</li>
 <li>inspect the chunk-size distribution before moving on.</li>
 </ul>
@@ -3602,6 +3717,12 @@ unit. Parent/child keeps retrieval precise without starving generation of contex
 being merged with their neighbours. The median parsed section is 55 words, so
 the 200-400 token target is an upper bound, not a floor. The full design,
 examples, and validation plan are in <a href="#01-architecture-chunking">Chunking</a>.</p>
+<p><strong>Built.</strong> <code>packages/helix/chunking.py</code> holds the models and packer;
+<code>scripts/chunk_corpus.py</code> writes <code>data/chunks</code>; <code>make chunk</code> and <code>make
+chunk-sample</code> run it. The full run produced 38,165 children from 37,614
+sections: p50 66, p90 213, p95 244, p99 384 words. Two runs produced an
+identical output tree. Only 78 children are flagged oversize: 34 whole code
+blocks and 44 tables where a single row exceeds the budget.</p>
 <hr />
 <h2 id="01-architecture-ingestion-m1--1-4-embedder">1.4 Embedder</h2>
 <p><strong>In plain language.</strong> Turn each chunk into a numeric fingerprint so that “reset
@@ -4501,12 +4622,13 @@ person to understand and run.</p>
 </table>
 <div class="callout info">
 <p class="callout-title">Current state</p>
-<p>Checkpoints 1.1 and 1.2 are verified; 1.3 chunking is in progress. The repo has
-a working API skeleton, local services, a pinned corpus, a Markdown parser that
-emits structured JSON, and a deterministic ACL sidecar. It does <strong>not</strong> yet
-have chunking implemented, embeddings, retrieval, generation, auth, or a UI.
-MinIO is running but its archive checkpoint is 1.5b. This note explains the
-target architecture and marks what exists now.</p>
+<p>Checkpoints 1.1 and 1.2 are verified; 1.3 chunking is implemented and awaiting
+user verification. The repo has a working API skeleton, local services, a
+pinned corpus, a Markdown parser that emits structured JSON, a deterministic
+ACL sidecar, and a chunker that writes parent/child records. It does <strong>not</strong>
+yet have embeddings, retrieval, generation, auth, or a UI. MinIO is running but
+its archive checkpoint is 1.5b. This note explains the target architecture and
+marks what exists now.</p>
 </div>
 <h2 id="01-architecture-project-map--what-lives-where">What lives where</h2>
 <table>
@@ -6657,7 +6779,7 @@ data-title="2026-10-29 - Day 5">
 <h2>2026-10-29 - Day 5</h2>
 <span class="chip">helix</span><span class="chip">journal</span><span class="chip">chunking</span><span class="chip">roadmap</span>
 </header>
-<div class="toc"><p class="toctitle">On this page</p><ul><li><a href="#03-journal-2026-10-29--checkpoint-1-2-closed">Checkpoint 1.2 - closed</a></li><li><a href="#03-journal-2026-10-29--checkpoint-1-3-design-conversation">Checkpoint 1.3 - design conversation</a></li><li><a href="#03-journal-2026-10-29--decisions">Decisions</a></li><li><a href="#03-journal-2026-10-29--open">Open</a></li><li><a href="#03-journal-2026-10-29--next">Next</a></li></ul></div>
+<div class="toc"><p class="toctitle">On this page</p><ul><li><a href="#03-journal-2026-10-29--checkpoint-1-2-closed">Checkpoint 1.2 - closed</a></li><li><a href="#03-journal-2026-10-29--checkpoint-1-3-design-conversation">Checkpoint 1.3 - design conversation</a></li><li><a href="#03-journal-2026-10-29--decisions">Decisions</a></li><li><a href="#03-journal-2026-10-29--checkpoint-1-3-implementation">Checkpoint 1.3 - implementation</a></li><li><a href="#03-journal-2026-10-29--open">Open</a></li><li><a href="#03-journal-2026-10-29--next">Next</a></li></ul></div>
 <div class="content">
 <p>Previous day: <a href="#03-journal-2026-10-27">2026-10-27</a></p>
 <h2 id="03-journal-2026-10-29--checkpoint-1-2-closed">Checkpoint 1.2 - closed</h2>
@@ -6682,25 +6804,59 @@ packing and long-tail splitting, not uniform 200-400 token windows.</p>
   crossing a heading boundary.</li>
 <li>Children target roughly 200-400 tokens (about 150-300 words) with 10-15%
   overlap, taken at sentence boundaries.</li>
-<li>Pack typed blocks, not raw text. Tables and code stay whole; an oversized
-  table or code block is flagged instead of cut.</li>
+<li>Pack typed blocks, not raw text. Code stays whole. A table stays whole while it
+  fits; a larger table splits by rows with the header repeated. A single row over
+  the hard maximum is kept whole and flagged.</li>
 <li>Prepend the breadcrumb and section title to the embedding text.</li>
 <li>Chunk ids are content-addressed; ordinals are stored separately.</li>
 <li>Per-document JSON under <code>data/chunks</code> plus a summary with the size
   distribution. No timestamps.</li>
 <li>ACLs are inherited from the document at storage time, not recomputed here.</li>
 </ul>
+<h2 id="03-journal-2026-10-29--checkpoint-1-3-implementation">Checkpoint 1.3 - implementation</h2>
+<p><strong>Goal:</strong> split each parsed section into deterministic parent/child chunks
+without crossing headings or breaking code.</p>
+<p><strong>What was built</strong></p>
+<ul>
+<li><code>packages/helix/chunking.py</code>: <code>ChildChunk</code>, <code>ParentSection</code>,
+  <code>ChunkedDocument</code>, <code>ChunkerConfig</code>, and <code>chunk_document</code>.</li>
+<li><code>scripts/chunk_corpus.py</code>: manifest -&gt; <code>data/parsed</code> -&gt; <code>data/chunks</code>, with
+  deterministic per-document JSON and a distribution summary.</li>
+<li><code>make chunk</code> and <code>make chunk-sample</code>.</li>
+<li><code>tests/test_chunking.py</code>: 14 tests for section boundaries, overlap, list
+  splitting, table rows, whole code blocks, stable ids, duplicates, empty
+  sections, descendants, and determinism.</li>
+</ul>
+<p><strong>Verified manually</strong></p>
+<pre><code class="language-bash">make chunk-sample
+make chunk
+</code></pre>
+<p>Result: 2,500 documents, 37,614 parents, 38,165 children. Size p50 66, p90 213,
+p95 244, p99 384, max 2,174 words. 25,040 children are under 100 words, which is
+expected for this heading-heavy corpus. 78 children are oversize: 34 code blocks
+and 44 single-row tables. Two runs produced an identical SHA-256 tree. The Zuora
+<code>Accounts</code> section split into 156 and 210 words with a 10-word overlap.</p>
+<p><strong>Decisions</strong></p>
+<ul>
+<li>The first full run exposed a 15,065-word GraphQL table. Keeping every table
+  whole would overflow the embedding window and be useless for retrieval, so
+  tables now split by rows with the header repeated. A single giant row still
+  stays whole and is flagged.</li>
+<li>The 2,174-word code block (~2,800 BGE-M3 tokens) is within the model context,
+  so code remains atomic.</li>
+<li>Word budgets are the 1.3 proxy; validate against the BGE-M3 tokenizer in 1.4.</li>
+</ul>
 <h2 id="03-journal-2026-10-29--open">Open</h2>
 <ul>
-<li>Fix the token-counting proxy for 1.3 and validate it against the BGE-M3
-  tokenizer in 1.4.</li>
-<li>Decide the exact oversize threshold for atomic tables and code during
-  implementation.</li>
+<li>Validate the word-to-token estimate against the BGE-M3 tokenizer in 1.4.</li>
+<li>Check retrieval quality of the 66% sub-100-word children in 1.7/M2; merge
+  siblings only if the evals justify it.</li>
 </ul>
 <h2 id="03-journal-2026-10-29--next">Next</h2>
 <ul>
-<li>Implement 1.3 from <a href="#01-architecture-chunking">Chunking</a>: module, CLI, tests, full-corpus distribution,
-  then <code>make ci</code>.</li>
+<li>User verifies 1.3 with <code>make chunk</code>, inspects <code>data/chunks/summary.json</code>, and
+  replies <code>pass</code>.</li>
+<li>Then start 1.4 embeddings from <a href="#01-architecture-chunking">Chunking</a> and <a href="#01-architecture-ingestion-m1">Ingestion-M1</a>.</li>
 </ul>
 </div>
 <div class="related"><strong>Related:</strong> <span class="chip"><a href="#03-journal-2026-10-27">2026-10-27</a></span> <span class="chip"><a href="#00-project-checklist">Checklist</a></span> <span class="chip"><a href="#01-architecture-ingestion-m1">Ingestion-M1</a></span> <span class="chip"><a href="#01-architecture-chunking">Chunking</a></span> <span class="chip"><a href="#01-architecture-parsing">Parsing</a></span> <span class="chip"><a href="#01-architecture-acl-classification">ACL-Classification</a></span> <span class="chip"><a href="#01-architecture-project-map">Project-Map</a></span></div>
